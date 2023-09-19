@@ -37,7 +37,7 @@ class RestClient {
     );
   }
 
-  Future<TResponse> request<TResponse extends BaseResponseModel<TResponse>,
+  Future<TResponse> request<TResponse extends BaseResponseModel,
       TRequest extends BaseRequestModel>(
     MethodType methodType,
     String path, {

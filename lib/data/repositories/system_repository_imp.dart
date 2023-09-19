@@ -1,17 +1,18 @@
 import 'package:fiven/data/local/preferences.dart';
 import 'package:fiven/domain/repositories/system_repository.dart';
 
-import '../../di/locator_service.dart';
-
 class SystemRepositoryImp implements SystemRepository {
-  final _preferences = locator<Preferences>();
+  final Preferences preferences;
+  SystemRepositoryImp(
+    this.preferences,
+  );
   @override
   int getTheme() {
-    return _preferences.getTheme();
+    return preferences.getTheme();
   }
 
   @override
   Future<void> setTheme(int theme) async {
-    return _preferences.setTheme(theme);
+    return preferences.setTheme(theme);
   }
 }

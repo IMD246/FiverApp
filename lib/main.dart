@@ -1,6 +1,6 @@
 import 'package:fiven/app/app_config.dart';
 import 'package:fiven/constant/enum.dart';
-import 'package:fiven/domain/viewModel/app_model.dart';
+import 'package:fiven/domain/provider/app_model.dart';
 import 'package:fiven/di/locator_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

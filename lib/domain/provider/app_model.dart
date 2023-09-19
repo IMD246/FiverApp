@@ -1,5 +1,5 @@
 import 'package:fiven/data/local/preferences.dart';
-import 'package:fiven/domain/viewModel/user_model.dart';
+import 'package:fiven/domain/provider/user_model.dart';
 import 'package:fiven/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 

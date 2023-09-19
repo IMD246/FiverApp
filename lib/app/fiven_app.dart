@@ -1,4 +1,4 @@
-import 'package:fiven/domain/viewModel/app_model.dart';
+import 'package:fiven/domain/provider/app_model.dart';
 import 'package:fiven/di/locator_service.dart';
 import 'package:fiven/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
@@ -33,11 +33,16 @@ class FivenApp extends StatelessWidget {
               ChangeNotifierProvider.value(value: locator<ThemeManager>()),
             ],
             builder: (context, child) {
-              return MaterialApp.router(
-                title: 'Fiven',
-                scaffoldMessengerKey: NavigationService.scaffoldKey,
-                builder: EasyLoading.init(),
-                routerConfig: AppRouter.router,
+              return Consumer<ThemeManager>(
+                builder: (context, theme, child) {
+                  return MaterialApp.router(
+                    title: 'Fiven',
+                    scaffoldMessengerKey: NavigationService.scaffoldKey,
+                    builder: EasyLoading.init(),
+                    theme: theme.themeData,
+                    routerConfig: AppRouter.router,
+                  );
+                },
               );
             },
           ),
