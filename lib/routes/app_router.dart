@@ -1,4 +1,4 @@
-import 'package:fiven/di/locator_service.dart';
+import 'package:fiven/core/di/locator_service.dart';
 import 'package:fiven/domain/provider/user_model.dart';
 import 'package:go_router/go_router.dart';
 

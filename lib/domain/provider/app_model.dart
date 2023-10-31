@@ -1,10 +1,10 @@
 import 'package:fiven/data/local/preferences.dart';
 import 'package:fiven/domain/provider/user_model.dart';
-import 'package:fiven/res/theme/theme_manager.dart';
+import 'package:fiven/core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 
-import '../../constant/enum.dart';
-import '../../di/locator_service.dart';
+import '../../core/enum.dart';
+import '../../core/di/locator_service.dart';
 
 class AppModel extends ChangeNotifier {
   late final Environment environment;

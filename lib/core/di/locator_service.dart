@@ -6,7 +6,7 @@ import 'package:fiven/data/repositories/system_repository_imp.dart';
 import 'package:fiven/domain/repositories/system_repository.dart';
 import 'package:fiven/domain/provider/user_model.dart';
 import 'package:fiven/domain/services/student_service.dart';
-import 'package:fiven/res/theme/theme_manager.dart';
+import 'package:fiven/core/res/theme/theme_manager.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator = GetIt.instance;

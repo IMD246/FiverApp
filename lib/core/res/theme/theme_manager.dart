@@ -1,8 +1,8 @@
-import 'package:fiven/constant/enum.dart';
-import 'package:fiven/di/locator_service.dart';
+import 'package:fiven/core/enum.dart';
+import 'package:fiven/core/di/locator_service.dart';
 import 'package:fiven/domain/repositories/system_repository.dart';
-import 'package:fiven/res/colors.dart';
-import 'package:fiven/res/theme/text_theme.dart';
+import 'package:fiven/core/res/colors.dart';
+import 'package:fiven/core/res/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

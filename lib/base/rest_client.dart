@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:fiven/base/handle_error.dart';
-import 'package:fiven/constant/enum.dart';
+import 'package:fiven/core/enum.dart';
 import 'package:fiven/data/model/base_model.dart';
 import 'package:get_it/get_it.dart';
 
-import '../constant/constants.dart';
+import '../core/constant/constants.dart';
 
 class RestClient {
   late final Dio dio;

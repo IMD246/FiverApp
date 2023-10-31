@@ -1,6 +1,6 @@
 import 'package:fiven/base/rest_client.dart';
-import 'package:fiven/constant/enum.dart';
-import 'package:fiven/di/locator_service.dart';
+import 'package:fiven/core/enum.dart';
+import 'package:fiven/core/di/locator_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/remote/network/network_url.dart';

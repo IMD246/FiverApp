@@ -1,13 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:fiven/constant/enum.dart';
-import 'package:fiven/res/theme/theme_manager.dart';
+import 'package:fiven/core/enum.dart';
+import 'package:fiven/core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../di/locator_service.dart';
+import '../core/di/locator_service.dart';
 import 'base_model.dart';
 
 abstract class BaseState<M extends BaseViewModel, W extends StatefulWidget>

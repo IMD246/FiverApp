@@ -14,3 +14,15 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## run files .sh
+  ./images-gen.sh
+  ./icons-gen.sh
+
+
+## flutter cli run project
+   flutter clean
+   flutter pub get
+
+## flutter build apk release
+    flutter build apk --release

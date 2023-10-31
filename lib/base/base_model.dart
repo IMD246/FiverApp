@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:fiven/constant/enum.dart';
+import 'package:fiven/core/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
