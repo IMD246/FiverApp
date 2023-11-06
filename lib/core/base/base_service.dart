@@ -1,4 +1,4 @@
-import 'package:fiven/base/rest_client.dart';
+import 'package:fiven/core/base/rest_client.dart';
 
 abstract class BaseSerivce {
   late RestClient restClient;

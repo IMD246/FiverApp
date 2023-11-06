@@ -1,22 +1,22 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:fiven/base/handle_error.dart';
+import 'package:fiven/core/base/handle_error.dart';
 import 'package:fiven/core/enum.dart';
 import 'package:fiven/data/model/base_model.dart';
 import 'package:get_it/get_it.dart';
 
-import '../core/constant/constants.dart';
+import '../constant/constants.dart';
 
 class RestClient {
   late final Dio dio;
 
-  init(
+  Future<void> init(
     String baseUrl, {
     Duration? connectTimeOut,
     Duration? sendTimeOut,
     Duration? receiveTimeOut,
     String? token,
-  }) {
+  }) async {
     BaseOptions baseOptions = BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: connectTimeOut ?? Constants.connectTimeOut,

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../core/di/locator_service.dart';
+import '../di/locator_service.dart';
 import 'base_model.dart';
 
 abstract class BaseState<M extends BaseViewModel, W extends StatefulWidget>

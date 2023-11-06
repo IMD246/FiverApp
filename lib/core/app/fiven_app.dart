@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../routes/app_router.dart';
 import '../utils/navigation_service.dart';
 
@@ -36,7 +36,10 @@ class FivenApp extends StatelessWidget {
               return Consumer<ThemeManager>(
                 builder: (context, theme, child) {
                   return MaterialApp.router(
-                    title: 'Fiven',
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                    title: 'Fiver',
                     scaffoldMessengerKey: NavigationService.scaffoldKey,
                     builder: EasyLoading.init(),
                     theme: theme.themeData,
