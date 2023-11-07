@@ -5,6 +5,7 @@
     "loading": "Loading...",
     "already_have_an_account": "Already have an account?",
     "or_login_with_social_account": "Or login with social account",
+    "or_sign_up_with_social_account": "Or sign up with social account",
     "something_went_wrong": "Something went wrong, please try again!",
     "email_verification_notifcation": "Check your email: {email} for verification!",
     "@email_verification_notifcation": {
@@ -23,7 +24,9 @@
         }
     },
     "format_password_notice" : "The length of password must be at least 6 characters",
-    "format_email_notice" : "Email should be look like abc@gmail.com",
+    "format_email_notice" : "Not a valid email address. Should be your@email.com",
     "format_name_notice" : "The length of name must be at least 2 characters",
-    "password" : "Password"
+    "password" : "Password",
+    "forgot_your_password" : "Forgot your password?",
+    "login" : "Login"
 }

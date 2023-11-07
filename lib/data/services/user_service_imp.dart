@@ -3,15 +3,15 @@ import 'package:fiver/data/remote/network/network_url.dart';
 import 'package:fiver/domain/services/user_service.dart';
 
 import '../../core/di/locator_service.dart';
-import '../model/register_info_model.dart';
 
 class UserServiceImp extends UserService {
   final _pref = locator<Preferences>();
+
   @override
-  Future<bool> register({required RegisterInfoModel registerInfoModel}) async {
+  Future<bool> register({required Map<String, dynamic> postData}) async {
     final response = await post(
       REGISTER,
-      data: registerInfoModel.toJson(),
+      data: postData,
     );
     return response.success;
   }
@@ -19,5 +19,20 @@ class UserServiceImp extends UserService {
   @override
   Future<String> getAccessToken() async {
     return _pref.getAccessToken();
+  }
+
+  @override
+  Future<bool> login({required Map<String, String> postData}) async {
+    final response = await post(
+      LOGIN,
+      data: postData,
+    );
+    return response.success;
+  }
+
+  @override
+  Future<bool> loginWithAccessToken({required String accessToken}) {
+    // TODO: implement loginWithAccessToken
+    throw UnimplementedError();
   }
 }

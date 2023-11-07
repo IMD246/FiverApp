@@ -9,3 +9,4 @@ const String UPLOAD_PHOTO_URL = "";
 
 // endpoints
 const String REGISTER = "register";
+const String LOGIN = "login";

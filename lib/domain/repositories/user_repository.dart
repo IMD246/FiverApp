@@ -1,6 +1,6 @@
-import '../../data/model/register_info_model.dart';
-
 abstract class UserRepository {
-  Future<bool> register({required RegisterInfoModel registerInfoModel});
+  Future<bool> register({required Map<String, dynamic> postData});
   Future<String> getAccessToken();
+  Future<bool> login({required Map<String, String> postData});
+  Future<bool> loginWithAccessToken({required String accessToken});
 }
