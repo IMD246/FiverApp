@@ -7,13 +7,14 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../utils/navigation_service.dart';
 import 'handle_error.dart';
 
-abstract class BaseViewModel extends ChangeNotifier {
+abstract class BaseModel extends ChangeNotifier {
   ViewState? _viewState;
   ViewState get viewState => _viewState ?? ViewState.loaded;
   bool isDisposed = false;
   bool onWillPop = true;
   final GlobalKey<ScaffoldMessengerState> appKey =
       NavigationService.scaffoldKey;
+  BuildContext get currentContext => appKey.currentContext!;
   initData() {}
 
   setState(ViewState newState, {forceUpdate = false, dynamic error}) {

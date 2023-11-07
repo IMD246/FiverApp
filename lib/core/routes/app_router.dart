@@ -1,5 +1,6 @@
 import 'package:fiven/core/di/locator_service.dart';
 import 'package:fiven/domain/provider/user_model.dart';
+import 'package:fiven/presentation/auth/register/register_page.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -12,23 +13,26 @@ class AppRouter {
   static String homeName = "homeName";
   static String homePath = "/homeName";
 
+  static const String registerName = 'register';
+  static const String registerPath = '/register';
+
   static GoRouter get router => _router;
   static final _router = GoRouter(
     redirectLimit: 8,
     routes: [
-      // GoRoute(
-      //   path: homePath,
-      //   name: homeName,
-      //   builder: (context, state) {
-      //     // return HomePage();
-      //   },
-      // )
+      GoRoute(
+        path: registerPath,
+        name: registerName,
+        builder: (context, state) {
+          return const RegisterPage();
+        },
+      )
     ],
     redirect: (context, state) {
       // handle redirect when userModel changes
       final userModel = locator<UserModel>();
     },
     refreshListenable: locator<UserModel>(),
-    initialLocation: mainPath,
+    initialLocation: registerPath,
   );
 }

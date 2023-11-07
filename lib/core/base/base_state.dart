@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import '../di/locator_service.dart';
 import 'base_model.dart';
 
-abstract class BaseState<M extends BaseViewModel, W extends StatefulWidget>
+abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
     extends State<W> {
   late M model;
   @override
@@ -54,7 +54,9 @@ abstract class BaseState<M extends BaseViewModel, W extends StatefulWidget>
       width: 1.sw,
       height: 1.sh,
       color: backgroundLoadingColor,
-      child: const Center(child: CircularProgressIndicator()),
+      child: const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 

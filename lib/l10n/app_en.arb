@@ -1,3 +1,29 @@
 {
-    
+    "sign_up": "Sign up",
+    "name": "Name",
+    "email": "Email",
+    "loading": "Loading...",
+    "already_have_an_account": "Already have an account?",
+    "or_login_with_social_account": "Or login with social account",
+    "something_went_wrong": "Something went wrong, please try again!",
+    "email_verification_notifcation": "Check your email: {email} for verification!",
+    "@email_verification_notifcation": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            }
+        }
+    },
+    "field_required" : "{field} is required",
+    "@field_required": {
+        "placeholders": {
+            "field": {
+                "type": "String"
+            }
+        }
+    },
+    "format_password_notice" : "The length of password must be at least 6 characters",
+    "format_email_notice" : "Email should be look like abc@gmail.com",
+    "format_name_notice" : "The length of name must be at least 2 characters",
+    "password" : "Password"
 }
