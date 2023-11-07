@@ -20,7 +20,7 @@ class LoginModel extends BaseModel {
   }
 
   void onMoveToForgotPassword() async {
-    // AppRouter.router.goNamed(AppRouter.);
+    AppRouter.router.push(AppRouter.forgotPasswordPath);
   }
 
   void onMoveToRegister() async {

@@ -35,4 +35,9 @@ class UserServiceImp extends UserService {
     // TODO: implement loginWithAccessToken
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool> forgotPassword({required String email}) async {
+    throw UnimplementedError();
+  }
 }

@@ -26,4 +26,8 @@ class UserRepositoryImp implements UserRepository {
     // TODO: implement loginWithAccessToken
     throw UnimplementedError();
   }
+  @override
+  Future<bool> forgotPassword({required String email}) async {
+    throw UnimplementedError();
+  }
 }

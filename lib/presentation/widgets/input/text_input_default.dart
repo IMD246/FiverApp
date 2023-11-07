@@ -32,6 +32,8 @@ class TextInputDefault extends StatefulWidget {
 class _TextInputDefaultState extends State<TextInputDefault> {
   String _errorText = "";
   bool firstInit = false;
+  final FocusNode _focusNode = FocusNode();
+  bool focused = false;
   final _deboucer = Debouncer();
   void _onChanged(String value) {
     _deboucer.run(
@@ -51,12 +53,20 @@ class _TextInputDefaultState extends State<TextInputDefault> {
 
   @override
   void initState() {
-    _errorText = widget.validator!(widget.controller.text);
+    if (widget.validator != null) {
+      _errorText = widget.validator!(widget.controller.text);
+    }
+    _focusNode.addListener(() {
+      setState(() {
+        focused = _focusNode.hasFocus;
+      });
+    });
     super.initState();
   }
 
   @override
   void dispose() {
+    _focusNode.dispose();
     _deboucer.timer?.cancel();
     super.dispose();
   }
@@ -84,6 +94,7 @@ class _TextInputDefaultState extends State<TextInputDefault> {
             vertical: 14.w,
           ),
           child: TextField(
+            focusNode: _focusNode,
             textAlignVertical: TextAlignVertical.center,
             controller: widget.controller,
             inputFormatters: widget.inputFormatters,
@@ -118,7 +129,9 @@ class _TextInputDefaultState extends State<TextInputDefault> {
                   ? _errorText.isEmpty
                       ? Icon(
                           Icons.check,
-                          color: getColor().themeColorGreen,
+                          color: focused
+                              ? getColor().themeColorGreen
+                              : Colors.transparent,
                         )
                       : Icon(
                           Icons.close,
