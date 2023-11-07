@@ -7,4 +7,5 @@ abstract class UserService extends BaseSerivce {
   Future<bool> loginWithAccessToken({
     required String accessToken,
   });
+  Future<bool> forgotPassword({required String email});
 }

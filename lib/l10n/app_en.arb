@@ -28,5 +28,8 @@
     "format_name_notice" : "The length of name must be at least 2 characters",
     "password" : "Password",
     "forgot_your_password" : "Forgot your password?",
-    "login" : "Login"
+    "login" : "Login",
+    "send" : "Send",
+    "forgot_password" : "Forgot password",
+    "notice_forgot_password" : "Please, enter your email address. You will receive a link to create a new password via email."
 }

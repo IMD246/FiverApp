@@ -8,6 +8,7 @@ import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:fiver/domain/services/user_service.dart';
+import 'package:fiver/presentation/auth/forgot_password/forgot_password_model.dart';
 import 'package:fiver/presentation/auth/register/register_model.dart';
 import 'package:get_it/get_it.dart';
 
@@ -33,4 +34,5 @@ void initLocatorSerivce() {
   // ViewModels
   locator.registerFactory(() => RegisterModel());
   locator.registerFactory(() => LoginModel());
+  locator.registerFactory(() => ForgotPasswordModel());
 }

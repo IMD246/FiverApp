@@ -3,4 +3,5 @@ abstract class UserRepository {
   Future<String> getAccessToken();
   Future<bool> login({required Map<String, String> postData});
   Future<bool> loginWithAccessToken({required String accessToken});
+  Future<bool> forgotPassword({required String email});
 }

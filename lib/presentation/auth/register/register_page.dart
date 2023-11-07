@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../widgets/default_button.dart';
 import '../../widgets/social_button.dart';
 import 'components/components.dart';
 
@@ -110,25 +111,11 @@ class _RegisterPageState extends BaseState<RegisterModel, RegisterPage> {
   }
 
   Widget _signUpButton(RegisterModel model, BuildContext context) {
-    return InkWell(
+    return DefaultButton(
+      title: context.loc.sign_up.toUpperCase(),
       onTap: () async {
         await model.onRegister();
       },
-      child: Container(
-        width: 1.sw,
-        height: 48,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25.r),
-          color: getColor().themeColorRed,
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          context.loc.sign_up.toUpperCase(),
-          style: text14.medium.copyWith(
-            color: getColor().themeColorWhiteBlack,
-          ),
-        ),
-      ),
     );
   }
 }
