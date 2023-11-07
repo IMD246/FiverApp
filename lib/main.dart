@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'core/app/fiven_app.dart';
-import 'core/res/icons.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

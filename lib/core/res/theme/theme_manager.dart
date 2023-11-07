@@ -10,7 +10,7 @@ final appThemeData = {
   AppTheme.white: ThemeData(
     primaryColor: colorPrimary,
     primaryColorDark: colorWhite,
-    scaffoldBackgroundColor: colorWhite,
+    scaffoldBackgroundColor: colorPrimary,
     fontFamily: fontFamily,
     brightness: Brightness.light,
     appBarTheme: AppBarTheme(
@@ -25,8 +25,8 @@ final appThemeData = {
   ),
   AppTheme.dark: ThemeData(
     primaryColor: colorPrimary,
-    primaryColorDark: colorBlack,
-    scaffoldBackgroundColor: colorBlack,
+    primaryColorDark: colorPrimaryBlack,
+    scaffoldBackgroundColor: colorPrimaryBlack,
     brightness: Brightness.dark,
     fontFamily: fontFamily,
     appBarTheme: AppBarTheme(
@@ -89,11 +89,24 @@ extension ColorSchemeExtension on ColorScheme {
 
   Color get textColorPrimary => getColorTheme(colorPrimary, colorPrimary);
 
+  Color get textColorGray => getColorTheme(color9B9B9B, color9B9B9B);
+
+  Color get textColorBlackWhiteInput => getColorTheme(color2D2D2D, colorF5F5F5);
+
   // Theme colors
 
   Color get themeColorWhiteBlack => getColorTheme(colorWhite, colorBlack);
 
-  Color get themeColorPrimary => getColorTheme(colorPrimary, colorPrimary);
+  Color get themeColorBlack => getColorTheme(colorBlack, colorWhite);
+
+  Color get themeColorGreen => getColorTheme(color2AA952, color2AA952);
+
+  Color get themeColorBlackWhite => getColorTheme(colorBlack, colorWhite);
+
+
+  Color get themeColorPrimary => getColorTheme(colorPrimary, colorPrimaryBlack);
+
+  Color get themeColorRed => getColorTheme(colorEF3651, colorEF3651);
 
   // Background colors
 

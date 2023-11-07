@@ -2,17 +2,22 @@ import 'package:fiven/data/local/preferences.dart';
 import 'package:fiven/domain/repositories/system_repository.dart';
 
 class SystemRepositoryImp implements SystemRepository {
-  final Preferences preferences;
+  final Preferences _preferences;
   SystemRepositoryImp(
-    this.preferences,
+    this._preferences,
   );
   @override
   int getTheme() {
-    return preferences.getTheme();
+    return _preferences.getTheme();
   }
 
   @override
   Future<void> setTheme(int theme) async {
-    return preferences.setTheme(theme);
+    return _preferences.setTheme(theme);
+  }
+
+  @override
+  Future<String> getLanguage() async {
+    return await _preferences.getLanguage() ?? "en";
   }
 }
