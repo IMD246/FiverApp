@@ -3,21 +3,29 @@ import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/provider/auth_provider.dart';
-import 'package:fiver/data/model/register_info_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../../core/routes/app_router.dart';
 import '../../../core/utils/validation.dart';
 
-class RegisterModel extends BaseModel {
-  final TextEditingController nameCtr = TextEditingController();
+class LoginModel extends BaseModel {
   final TextEditingController emailCtr = TextEditingController();
   final TextEditingController passwordCtr = TextEditingController();
   final _repo = locator<UserRepository>();
+  Future<bool> onBack() async {
+    SystemNavigator.pop();
+    return false;
+  }
 
-  void onMoveToLogin() async {
-    AppRouter.router.pop();
+  void onMoveToForgotPassword() async {
+    // AppRouter.router.goNamed(AppRouter.);
+  }
+
+  void onMoveToRegister() async {
+    primaryFocus?.unfocus();
+    AppRouter.router.push(AppRouter.registerPath);
   }
 
   String nameValidateCtr(String value) {
@@ -48,7 +56,7 @@ class RegisterModel extends BaseModel {
     return "";
   }
 
-  Future<void> onRegister() async {
+  Future<void> onLogin() async {
     try {
       onWillPop = false;
       EasyLoading.show(
@@ -60,28 +68,22 @@ class RegisterModel extends BaseModel {
         EasyLoading.dismiss();
         return;
       }
-      final name = nameCtr.text;
       final email = emailCtr.text;
       final password = passwordCtr.text;
-
-      final postData = RegisterInfoModel(
-        name: name,
-        email: email,
-        password: password,
-      ).toJson();
-
-      final result = await _repo.register(
-        postData: postData,
+      final result = await _repo.login(
+        postData: {
+          "email": email,
+          "password": password,
+        },
       );
       if (result) {
         EasyLoading.showSuccess(
           currentContext.loc.email_verification_notifcation(email),
         );
         _reset();
-        onMoveToLogin();
       } else {
         EasyLoading.showError(
-          "Register failed",
+          "Login failed",
         );
       }
       onWillPop = true;
@@ -91,7 +93,7 @@ class RegisterModel extends BaseModel {
     }
   }
 
-  Future<void> onRegisterWithGoogle() async {
+  Future<void> onLoginWithGoogle() async {
     try {
       onWillPop = false;
       EasyLoading.show(
@@ -99,16 +101,16 @@ class RegisterModel extends BaseModel {
         maskType: EasyLoadingMaskType.black,
       );
       final AuthGoogleProvider authProvider = AuthGoogleProvider();
-      await authProvider.logout();
       final accountSignIn = await (authProvider.signIn());
       if (accountSignIn == null) {
         EasyLoading.showError(currentContext.loc.something_went_wrong);
         return;
       }
       final authentication = await accountSignIn.authentication;
-      final result = await _repo.register(
+
+      final result = await _repo.login(
         postData: {
-          "access_token": authentication.accessToken,
+          "token": authentication.accessToken ?? "",
         },
       );
       if (result) {
@@ -116,10 +118,9 @@ class RegisterModel extends BaseModel {
           currentContext.loc
               .email_verification_notifcation(accountSignIn.email),
         );
-        onMoveToLogin();
       } else {
         EasyLoading.showError(
-          "Register failed",
+          "Login failed",
         );
       }
       onWillPop = true;
@@ -130,12 +131,9 @@ class RegisterModel extends BaseModel {
   }
 
   bool _validate() {
-    final nameValidation = nameValidateCtr(nameCtr.text);
     final emailValidation = emailValidateCtr(emailCtr.text);
     final passwordValidation = passwordValidateCtr(passwordCtr.text);
-    if (nameValidation.isNotEmpty ||
-        emailValidation.isNotEmpty ||
-        passwordValidation.isNotEmpty) {
+    if (emailValidation.isNotEmpty || passwordValidation.isNotEmpty) {
       return false;
     }
     return true;
@@ -143,13 +141,11 @@ class RegisterModel extends BaseModel {
 
   void _reset() {
     emailCtr.clear();
-    nameCtr.clear();
     passwordCtr.clear();
   }
 
   @override
   void disposeModel() {
-    nameCtr.dispose();
     emailCtr.dispose();
     passwordCtr.dispose();
     super.disposeModel();

@@ -11,6 +11,8 @@ import 'package:fiver/domain/services/user_service.dart';
 import 'package:fiver/presentation/auth/register/register_model.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../presentation/auth/login/login_model.dart';
+
 GetIt locator = GetIt.instance;
 
 void initLocatorSerivce() {
@@ -30,4 +32,5 @@ void initLocatorSerivce() {
 
   // ViewModels
   locator.registerFactory(() => RegisterModel());
+  locator.registerFactory(() => LoginModel());
 }

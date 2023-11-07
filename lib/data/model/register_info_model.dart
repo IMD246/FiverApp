@@ -12,7 +12,7 @@ class RegisterInfoModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'full_name': name,
       'email': email,
       'password': password,
       'userUrl': userUrl,
