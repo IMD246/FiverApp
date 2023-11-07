@@ -16,7 +16,6 @@ class TextInputDefault extends StatefulWidget {
     this.validator,
     this.textInputAction,
     this.keyboardType,
-    this.errorText,
   });
   final TextEditingController controller;
   final String? label;
@@ -25,14 +24,13 @@ class TextInputDefault extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
-  final String? errorText;
   final String Function(String value)? validator;
   @override
   State<TextInputDefault> createState() => _TextInputDefaultState();
 }
 
 class _TextInputDefaultState extends State<TextInputDefault> {
-  String errorText = "";
+  String _errorText = "";
   final FocusNode _focusNode = FocusNode();
   final _deboucer = Debouncer();
   void _onChanged(String value) {
@@ -41,7 +39,7 @@ class _TextInputDefaultState extends State<TextInputDefault> {
       action: () {
         if (widget.validator != null) {
           setState(() {
-            errorText = widget.validator!(value);
+            _errorText = widget.validator!(value);
           });
         }
       },
@@ -54,7 +52,7 @@ class _TextInputDefaultState extends State<TextInputDefault> {
         _onChanged(widget.controller.text);
       } else {
         setState(() {
-          errorText = "";
+          _errorText = "";
         });
       }
     });
@@ -86,7 +84,7 @@ class _TextInputDefaultState extends State<TextInputDefault> {
             color: getColor().themeColorWhiteBlack,
             border: Border.all(
               width: 1,
-              color: errorText.isEmpty
+              color: _errorText.isEmpty
                   ? Colors.transparent
                   : getColor().themeColorRed,
             ),
@@ -127,23 +125,25 @@ class _TextInputDefaultState extends State<TextInputDefault> {
               fillColor: getColor().themeColorWhiteBlack,
               border: InputBorder.none,
               contentPadding: EdgeInsets.zero,
-              suffix: errorText.isEmpty
-                  ? Icon(
-                      Icons.check,
-                      color: getColor().themeColorGreen,
-                    )
-                  : Icon(
-                      Icons.close,
-                      color: getColor().themeColorRed,
-                    ),
+              suffix: _focusNode.hasFocus
+                  ? _errorText.isEmpty
+                      ? Icon(
+                          Icons.check,
+                          color: getColor().themeColorGreen,
+                        )
+                      : Icon(
+                          Icons.close,
+                          color: getColor().themeColorRed,
+                        )
+                  : null,
             ),
           ),
         ),
-        if (errorText.isNotEmpty)
+        if (_errorText.isNotEmpty)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.w),
             child: Text(
-              errorText,
+              _errorText,
               style: text11.medium.copyWith(
                 color: getColor().themeColorRed,
               ),

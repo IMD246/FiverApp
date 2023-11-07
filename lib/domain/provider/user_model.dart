@@ -18,8 +18,8 @@ class UserModel extends ChangeNotifier {
   Future<void> init(Environment environment) async {
     this.environment = environment;
     accessToken = await _userRepository.getAccessToken();
-    initFirebaseCrashlytics();
     await initFirebase();
+    initFirebaseCrashlytics();
     await _initAPI(token: accessToken);
     notifyListeners();
   }

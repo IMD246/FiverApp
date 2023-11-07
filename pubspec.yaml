@@ -53,10 +53,15 @@ dependencies:
   google_sign_in: ^6.1.5
   firebase_crashlytics: ^3.4.3
   firebase_core: ^2.21.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/img_icon_app.jpg"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -79,7 +84,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-
   fonts:
     - family: Metropolis
       fonts:

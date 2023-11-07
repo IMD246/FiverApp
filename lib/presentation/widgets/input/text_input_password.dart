@@ -16,7 +16,6 @@ class TextInputPassword extends StatefulWidget {
     this.validator,
     this.textInputAction,
     this.keyboardType,
-    this.errorText,
   });
   final TextEditingController controller;
   final String? label;
@@ -25,14 +24,13 @@ class TextInputPassword extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
-  final String? errorText;
   final String Function(String value)? validator;
   @override
   State<TextInputPassword> createState() => _TextInputPasswordState();
 }
 
 class _TextInputPasswordState extends State<TextInputPassword> {
-  String errorText = "";
+  String _errorText = "";
   final FocusNode _focusNode = FocusNode();
   final _deboucer = Debouncer();
   bool _obsecureText = false;
@@ -48,7 +46,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
       action: () {
         if (widget.validator != null) {
           setState(() {
-            errorText = widget.validator!(value);
+            _errorText = widget.validator!(value);
           });
         }
       },
@@ -61,7 +59,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
         _onChanged(widget.controller.text);
       } else {
         setState(() {
-          errorText = "";
+          _errorText = "";
         });
       }
     });
@@ -93,7 +91,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             color: getColor().themeColorWhiteBlack,
             border: Border.all(
               width: 1,
-              color: errorText.isEmpty
+              color: _errorText.isEmpty
                   ? Colors.transparent
                   : getColor().themeColorRed,
             ),
@@ -149,11 +147,11 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             ),
           ),
         ),
-        if (errorText.isNotEmpty)
+        if (_errorText.isNotEmpty)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.w),
             child: Text(
-              errorText,
+              _errorText,
               style: text11.medium.copyWith(
                 color: getColor().themeColorRed,
               ),
