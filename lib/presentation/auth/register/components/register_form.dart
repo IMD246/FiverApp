@@ -1,5 +1,5 @@
-import 'package:fiven/core/extensions/ext_localization.dart';
-import 'package:fiven/presentation/widgets/input/text_input_password.dart';
+import 'package:fiver/core/extensions/ext_localization.dart';
+import 'package:fiver/presentation/widgets/input/text_input_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

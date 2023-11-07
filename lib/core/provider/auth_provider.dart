@@ -29,9 +29,7 @@ class AuthGoogleProvider implements AuthProvider {
           'email',
         ],
       );
-      if (await googleSignIn.isSignedIn()) {
-        googleSignIn.signOut();
-      }
+      await googleSignIn.signOut();
     } catch (e) {
       log('Error signing in with Google: $e');
     }

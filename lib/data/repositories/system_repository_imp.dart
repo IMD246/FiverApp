@@ -1,5 +1,5 @@
-import 'package:fiven/data/local/preferences.dart';
-import 'package:fiven/domain/repositories/system_repository.dart';
+import 'package:fiver/data/local/preferences.dart';
+import 'package:fiver/domain/repositories/system_repository.dart';
 
 class SystemRepositoryImp implements SystemRepository {
   final Preferences _preferences;

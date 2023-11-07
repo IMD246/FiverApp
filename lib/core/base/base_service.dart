@@ -1,4 +1,4 @@
-import 'package:fiven/core/base/rest_client.dart';
+import 'package:fiver/core/base/rest_client.dart';
 import 'package:dio/dio.dart' as dio;
 import '../../data/remote/api_reponse/api_respone.dart';
 import '../../data/remote/api_reponse/data_response.dart';

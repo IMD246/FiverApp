@@ -1,6 +1,6 @@
-import 'package:fiven/core/res/theme/text_theme.dart';
-import 'package:fiven/core/res/theme/theme_manager.dart';
-import 'package:fiven/core/utils/deboucer.dart';
+import 'package:fiver/core/res/theme/text_theme.dart';
+import 'package:fiver/core/res/theme/theme_manager.dart';
+import 'package:fiver/core/utils/deboucer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

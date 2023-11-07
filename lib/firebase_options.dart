@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '458951462646',
     projectId: 'fiver-d3dbc',
     storageBucket: 'fiver-d3dbc.appspot.com',
-    iosBundleId: 'com.example.fiven',
+    iosBundleId: 'com.example.fiver',
   );
 }

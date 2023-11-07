@@ -1,13 +1,11 @@
-import 'dart:developer';
-
-import 'package:fiven/core/base/base_state.dart';
-import 'package:fiven/core/enum.dart';
-import 'package:fiven/core/extensions/ext_localization.dart';
-import 'package:fiven/core/res/icons.dart';
-import 'package:fiven/core/res/theme/text_theme.dart';
-import 'package:fiven/core/res/theme/theme_manager.dart';
-import 'package:fiven/presentation/auth/register/register_model.dart';
-import 'package:fiven/presentation/widgets/back_button.dart';
+import 'package:fiver/core/base/base_state.dart';
+import 'package:fiver/core/enum.dart';
+import 'package:fiver/core/extensions/ext_localization.dart';
+import 'package:fiver/core/res/icons.dart';
+import 'package:fiver/core/res/theme/text_theme.dart';
+import 'package:fiver/core/res/theme/theme_manager.dart';
+import 'package:fiver/presentation/auth/register/register_model.dart';
+import 'package:fiver/presentation/widgets/back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';

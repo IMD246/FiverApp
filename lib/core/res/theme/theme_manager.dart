@@ -1,8 +1,8 @@
-import 'package:fiven/core/enum.dart';
-import 'package:fiven/core/di/locator_service.dart';
-import 'package:fiven/domain/repositories/system_repository.dart';
-import 'package:fiven/core/res/colors.dart';
-import 'package:fiven/core/res/theme/text_theme.dart';
+import 'package:fiver/core/enum.dart';
+import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/domain/repositories/system_repository.dart';
+import 'package:fiver/core/res/colors.dart';
+import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -102,7 +102,6 @@ extension ColorSchemeExtension on ColorScheme {
   Color get themeColorGreen => getColorTheme(color2AA952, color2AA952);
 
   Color get themeColorBlackWhite => getColorTheme(colorBlack, colorWhite);
-
 
   Color get themeColorPrimary => getColorTheme(colorPrimary, colorPrimaryBlack);
 

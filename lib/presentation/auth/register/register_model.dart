@@ -1,14 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:fiven/core/base/base_model.dart';
-import 'package:fiven/core/di/locator_service.dart';
-import 'package:fiven/core/extensions/ext_localization.dart';
-import 'package:fiven/core/provider/auth_provider.dart';
-import 'package:fiven/data/model/register_info_model.dart';
-import 'package:fiven/domain/repositories/user_repository.dart';
+import 'package:fiver/core/base/base_model.dart';
+import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/extensions/ext_localization.dart';
+import 'package:fiver/core/provider/auth_provider.dart';
+import 'package:fiver/data/model/register_info_model.dart';
+import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../../../core/utils/validation.dart';
 
 class RegisterModel extends BaseModel {

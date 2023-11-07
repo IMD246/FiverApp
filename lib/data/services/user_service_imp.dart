@@ -1,6 +1,6 @@
-import 'package:fiven/data/local/preferences.dart';
-import 'package:fiven/data/remote/network/network_url.dart';
-import 'package:fiven/domain/services/user_service.dart';
+import 'package:fiver/data/local/preferences.dart';
+import 'package:fiver/data/remote/network/network_url.dart';
+import 'package:fiver/domain/services/user_service.dart';
 
 import '../../core/di/locator_service.dart';
 import '../model/register_info_model.dart';

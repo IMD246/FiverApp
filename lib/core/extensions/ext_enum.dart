@@ -11,3 +11,17 @@ extension SocialIconTypeExtension on SocialIconType {
     }
   }
 }
+
+extension EnvironmentExtension on Environment {
+  String getTitle() {
+    switch (this) {
+      case Environment.dev:
+        return "[DEV]Fiver ";
+      case Environment.staging:
+        return "[STG]Fiver";
+      case Environment.prod:
+      default:
+        return "Fiver";
+    }
+  }
+}

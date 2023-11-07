@@ -1,6 +1,6 @@
-import 'package:fiven/core/di/locator_service.dart';
-import 'package:fiven/domain/provider/user_model.dart';
-import 'package:fiven/presentation/auth/register/register_page.dart';
+import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/domain/provider/user_model.dart';
+import 'package:fiver/presentation/auth/register/register_page.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {

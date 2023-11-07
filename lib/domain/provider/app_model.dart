@@ -1,6 +1,6 @@
-import 'package:fiven/data/local/preferences.dart';
-import 'package:fiven/domain/provider/user_model.dart';
-import 'package:fiven/core/res/theme/theme_manager.dart';
+import 'package:fiver/data/local/preferences.dart';
+import 'package:fiver/domain/provider/user_model.dart';
+import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/enum.dart';

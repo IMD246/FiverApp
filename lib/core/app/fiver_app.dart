@@ -1,6 +1,6 @@
-import 'package:fiven/domain/provider/app_model.dart';
-import 'package:fiven/core/di/locator_service.dart';
-import 'package:fiven/core/res/theme/theme_manager.dart';
+import 'package:fiver/domain/provider/app_model.dart';
+import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,9 +9,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../routes/app_router.dart';
 import '../utils/navigation_service.dart';
 
-class FivenApp extends StatelessWidget {
-  const FivenApp({super.key});
-
+class FiverApp extends StatelessWidget {
+  const FiverApp({super.key, required this.titleApp});
+  final String titleApp;
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -40,7 +40,7 @@ class FivenApp extends StatelessWidget {
                     localizationsDelegates:
                         AppLocalizations.localizationsDelegates,
                     supportedLocales: AppLocalizations.supportedLocales,
-                    title: 'Fiver',
+                    title: titleApp,
                     scaffoldMessengerKey: NavigationService.scaffoldKey,
                     builder: EasyLoading.init(),
                     theme: theme.themeData,

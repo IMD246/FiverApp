@@ -1,4 +1,4 @@
-import 'package:fiven/core/base/base_service.dart';
+import 'package:fiver/core/base/base_service.dart';
 
 import '../../data/model/register_info_model.dart';
 

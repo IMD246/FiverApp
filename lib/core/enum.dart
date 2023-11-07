@@ -2,7 +2,7 @@ enum MethodType { put, get, post, delete }
 
 enum AppTheme { white, dark }
 
-enum Environment { dev }
+enum Environment { dev, prod, staging }
 
 enum RouterRedirect {
   login,

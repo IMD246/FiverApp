@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fiven/core/base/rest_client.dart';
-import 'package:fiven/core/enum.dart';
-import 'package:fiven/core/di/locator_service.dart';
+import 'package:fiver/core/base/rest_client.dart';
+import 'package:fiver/core/enum.dart';
+import 'package:fiver/core/di/locator_service.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -26,11 +26,14 @@ class UserModel extends ChangeNotifier {
 
   Future<void> _initAPI({String? token}) async {
     String baseUrl;
-
     switch (environment) {
       case Environment.dev:
+        baseUrl = baseURLDEV;
+      case Environment.staging:
+        baseUrl = baseURLDEV;
+      case Environment.prod:
       default:
-        baseUrl = baseURL;
+        baseUrl = baseURLPROD;
     }
     final packageInfo = await PackageInfo.fromPlatform();
     RestClient.instance.init(
