@@ -31,12 +31,15 @@ class TextInputDefault extends StatefulWidget {
 
 class _TextInputDefaultState extends State<TextInputDefault> {
   String _errorText = "";
-  final FocusNode _focusNode = FocusNode();
+  bool firstInit = false;
   final _deboucer = Debouncer();
   void _onChanged(String value) {
     _deboucer.run(
       milliseconds: 100,
       action: () {
+        if (!firstInit) {
+          firstInit = true;
+        }
         if (widget.validator != null) {
           setState(() {
             _errorText = widget.validator!(value);
@@ -46,27 +49,14 @@ class _TextInputDefaultState extends State<TextInputDefault> {
     );
   }
 
-  void _onListenFocusNode() {
-    _focusNode.addListener(() {
-      if (_focusNode.hasFocus) {
-        _onChanged(widget.controller.text);
-      } else {
-        setState(() {
-          _errorText = "";
-        });
-      }
-    });
-  }
-
   @override
   void initState() {
-    _onListenFocusNode();
+    _errorText = widget.validator!(widget.controller.text);
     super.initState();
   }
 
   @override
   void dispose() {
-    _focusNode.dispose();
     _deboucer.timer?.cancel();
     super.dispose();
   }
@@ -84,7 +74,7 @@ class _TextInputDefaultState extends State<TextInputDefault> {
             color: getColor().themeColorWhiteBlack,
             border: Border.all(
               width: 1,
-              color: _errorText.isEmpty
+              color: _errorText.isEmpty || !firstInit
                   ? Colors.transparent
                   : getColor().themeColorRed,
             ),
@@ -94,7 +84,6 @@ class _TextInputDefaultState extends State<TextInputDefault> {
             vertical: 14.w,
           ),
           child: TextField(
-            focusNode: _focusNode,
             textAlignVertical: TextAlignVertical.center,
             controller: widget.controller,
             inputFormatters: widget.inputFormatters,
@@ -125,7 +114,7 @@ class _TextInputDefaultState extends State<TextInputDefault> {
               fillColor: getColor().themeColorWhiteBlack,
               border: InputBorder.none,
               contentPadding: EdgeInsets.zero,
-              suffix: _focusNode.hasFocus
+              suffix: firstInit
                   ? _errorText.isEmpty
                       ? Icon(
                           Icons.check,
@@ -135,11 +124,14 @@ class _TextInputDefaultState extends State<TextInputDefault> {
                           Icons.close,
                           color: getColor().themeColorRed,
                         )
-                  : null,
+                  : Icon(
+                      Icons.close,
+                      color: Colors.transparent,
+                    ),
             ),
           ),
         ),
-        if (_errorText.isNotEmpty)
+        if (_errorText.isNotEmpty && firstInit)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.w),
             child: Text(

@@ -31,7 +31,6 @@ class TextInputPassword extends StatefulWidget {
 
 class _TextInputPasswordState extends State<TextInputPassword> {
   String _errorText = "";
-  final FocusNode _focusNode = FocusNode();
   final _deboucer = Debouncer();
   bool _obsecureText = false;
   void _updateObsecureText() {
@@ -53,27 +52,8 @@ class _TextInputPasswordState extends State<TextInputPassword> {
     );
   }
 
-  void _onListenFocusNode() {
-    _focusNode.addListener(() {
-      if (_focusNode.hasFocus) {
-        _onChanged(widget.controller.text);
-      } else {
-        setState(() {
-          _errorText = "";
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    _onListenFocusNode();
-    super.initState();
-  }
-
   @override
   void dispose() {
-    _focusNode.dispose();
     _deboucer.timer?.cancel();
     super.dispose();
   }
@@ -101,7 +81,6 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             vertical: 14.w,
           ),
           child: TextField(
-            focusNode: _focusNode,
             textAlignVertical: TextAlignVertical.center,
             controller: widget.controller,
             inputFormatters: widget.inputFormatters,
