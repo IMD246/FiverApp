@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fiver/core/base/rest_client.dart';
 import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/utils/dynamic_link_util.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -15,11 +16,14 @@ class UserModel extends ChangeNotifier {
   late Environment environment;
   String? accessToken;
   final _userRepository = locator<UserRepository>();
+  String? initRoute;
   Future<void> init(Environment environment) async {
     this.environment = environment;
     accessToken = await _userRepository.getAccessToken();
     await initFirebase();
     initFirebaseCrashlytics();
+    initDynamicLink();
+    initRoute = await getInitPath();
     await _initAPI(token: accessToken);
     notifyListeners();
   }

@@ -55,6 +55,6 @@ class AppRouter {
       final userModel = locator<UserModel>();
     },
     refreshListenable: locator<UserModel>(),
-    initialLocation: loginPath,
+    initialLocation: locator<UserModel>().initRoute ?? loginPath,
   );
 }

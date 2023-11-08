@@ -54,6 +54,7 @@ dependencies:
   firebase_crashlytics: ^3.4.3
   firebase_core: ^2.21.0
   flutter_launcher_icons: ^0.13.1
+  firebase_dynamic_links: ^5.4.3
 
 dev_dependencies:
   flutter_test:
