@@ -21,12 +21,8 @@ class UserModel extends ChangeNotifier {
     this.environment = environment;
     accessToken = await _userRepository.getAccessToken();
     await initFirebase();
-    await Future.wait(
-      [
-        initDynamicLink(),
-        _initAPI(token: accessToken),
-      ],
-    );
+    await _initAPI(token: accessToken);
+    await initDynamicLink();
     initFirebaseCrashlytics();
     notifyListeners();
   }

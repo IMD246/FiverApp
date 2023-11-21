@@ -28,8 +28,8 @@ String? _handleDynamicLinks(
   final screen = link?.queryParameters["screen"];
   log("link listen:" + (link?.host ?? ""));
   log("path dynamic listen:" + (link?.path ?? ""));
-  log("screen listen:" + (link?.queryParameters["screen"] ?? ""));
-  if (link?.path.contains("/change-password") == true) {
+  log("screen listen:" + (link?.queryParameters["verifyCode"] ?? ""));
+  if (link?.path.contains("verify-email") == true) {
     locator<UserModel>().updateInitRoute(AppRouter.registerPath);
   }
   return null;
