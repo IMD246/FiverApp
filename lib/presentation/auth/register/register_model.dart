@@ -4,6 +4,7 @@ import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/provider/auth_provider.dart';
 import 'package:fiver/data/model/register_info_model.dart';
+import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -17,7 +18,12 @@ class RegisterModel extends BaseModel {
   final _repo = locator<UserRepository>();
 
   void onMoveToLogin() async {
-    AppRouter.router.pop();
+    if (AppRouter.router.canPop()) {
+      AppRouter.router.pop();
+    } else {
+      AppRouter.router.pushReplacementNamed(AppRouter.loginName);
+      locator<UserModel>().updateInitRoute("");
+    }
   }
 
   String nameValidateCtr(String value) {

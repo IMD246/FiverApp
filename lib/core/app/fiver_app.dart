@@ -9,9 +9,27 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../routes/app_router.dart';
 import '../utils/navigation_service.dart';
 
-class FiverApp extends StatelessWidget {
+class FiverApp extends StatefulWidget {
   const FiverApp({super.key, required this.titleApp});
   final String titleApp;
+
+  @override
+  State<FiverApp> createState() => _FiverAppState();
+}
+
+class _FiverAppState extends State<FiverApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -40,7 +58,7 @@ class FiverApp extends StatelessWidget {
                     localizationsDelegates:
                         AppLocalizations.localizationsDelegates,
                     supportedLocales: AppLocalizations.supportedLocales,
-                    title: titleApp,
+                    title: widget.titleApp,
                     scaffoldMessengerKey: NavigationService.scaffoldKey,
                     builder: EasyLoading.init(),
                     theme: theme.themeData,
