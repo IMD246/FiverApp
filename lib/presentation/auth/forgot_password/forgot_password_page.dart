@@ -20,6 +20,12 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState
     extends BaseState<ForgotPasswordModel, ForgotPasswordPage> {
   @override
+  void initState() {
+    super.initState();
+    model.init();
+  }
+
+  @override
   Widget buildContentView(BuildContext context, ForgotPasswordModel model) {
     return Scaffold(
       body: SafeArea(
@@ -57,7 +63,7 @@ class _ForgotPasswordPageState
                   keyboardType: TextInputType.emailAddress,
                   label: context.loc.email,
                   textInputAction: TextInputAction.next,
-                  validator: model.emailValidateCtr,
+                  validator: model.emailValidatorCtr,
                 ),
                 SizedBox(
                   height: 28.w,

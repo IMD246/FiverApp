@@ -1,3 +1,4 @@
+import 'package:event_bus/event_bus.dart';
 import 'package:fiver/data/local/preferences.dart';
 import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
@@ -22,3 +23,5 @@ class AppModel extends ChangeNotifier {
 
   RouterRedirect get router => _routerRedirect;
 }
+
+EventBus eventBus = EventBus();

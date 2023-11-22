@@ -20,7 +20,7 @@ class RegisterForm extends StatelessWidget {
       children: [
         TextInputDefault(
           controller: model.nameCtr,
-          validator: model.nameValidateCtr,
+          validator: model.nameValidatorCtr,
           textInputAction: TextInputAction.next,
           label: context.loc.name,
         ),
@@ -30,13 +30,13 @@ class RegisterForm extends StatelessWidget {
           keyboardType: TextInputType.emailAddress,
           label: context.loc.email,
           textInputAction: TextInputAction.next,
-          validator: model.emailValidateCtr,
+          validator: model.emailValidatorCtr,
         ),
         SizedBox(height: 8.w),
         TextInputPassword(
           controller: model.passwordCtr,
           textInputAction: TextInputAction.done,
-          validator: model.passwordValidateCtr,
+          validator: model.passwordValidatorCtr,
           label: context.loc.password,
         ),
       ],

@@ -1,6 +1,5 @@
 import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
-import 'package:fiver/core/utils/deboucer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,14 +23,13 @@ class TextInputPassword extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
-  final String Function(String value)? validator;
+  final ValueNotifier<String>? validator;
   @override
   State<TextInputPassword> createState() => _TextInputPasswordState();
 }
 
 class _TextInputPasswordState extends State<TextInputPassword> {
   String _errorText = "";
-  final _deboucer = Debouncer();
   bool _obsecureText = false;
   void _updateObsecureText() {
     setState(() {
@@ -39,23 +37,16 @@ class _TextInputPasswordState extends State<TextInputPassword> {
     });
   }
 
-  void _onChanged(String value) {
-    _deboucer.run(
-      milliseconds: 100,
-      action: () {
-        if (widget.validator != null) {
-          setState(() {
-            _errorText = widget.validator!(value);
-          });
-        }
-      },
-    );
-  }
-
   @override
-  void dispose() {
-    _deboucer.timer?.cancel();
-    super.dispose();
+  void initState() {
+    super.initState();
+    if (widget.validator != null) {
+      widget.validator!.addListener(() {
+        setState(() {
+          _errorText = widget.validator!.value;
+        });
+      });
+    }
   }
 
   @override
@@ -84,7 +75,6 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             textAlignVertical: TextAlignVertical.center,
             controller: widget.controller,
             inputFormatters: widget.inputFormatters,
-            onChanged: _onChanged,
             style: text14.medium.copyWith(
               color: getColor().textColorBlackWhiteInput,
             ),

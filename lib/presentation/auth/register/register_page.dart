@@ -23,6 +23,11 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends BaseState<RegisterModel, RegisterPage> {
   @override
+  void initState() {
+    super.initState();
+    model.init();
+  }
+  @override
   Widget buildContentView(BuildContext context, RegisterModel model) {
     return Scaffold(
       body: SafeArea(

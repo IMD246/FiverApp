@@ -16,12 +16,24 @@ extension EnvironmentExtension on Environment {
   String getTitle() {
     switch (this) {
       case Environment.dev:
-        return "[DEV]Fiver ";
+        return "[DEV]Fiver";
       case Environment.staging:
         return "[STG]Fiver";
       case Environment.prod:
       default:
         return "Fiver";
+    }
+  }
+}
+
+extension RegisterSocialTypeExtension on RegisterSocialType {
+  String getTitle() {
+    switch (this) {
+      case RegisterSocialType.facebook:
+        return "facebook";
+      case RegisterSocialType.google:
+      default:
+        return "google";
     }
   }
 }

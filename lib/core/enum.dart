@@ -13,3 +13,5 @@ enum RouterRedirect {
 enum SocialIconType { google, facebook }
 
 enum ViewState { init, loading, error, loaded }
+
+enum RegisterSocialType { google, facebook }

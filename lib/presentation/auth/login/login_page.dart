@@ -22,6 +22,11 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends BaseState<LoginModel, LoginPage> {
   @override
+  void initState() {
+    super.initState();
+    model.init();
+  }
+  @override
   Widget buildContentView(BuildContext context, LoginModel model) {
     return WillPopScope(
       onWillPop: model.onBack,

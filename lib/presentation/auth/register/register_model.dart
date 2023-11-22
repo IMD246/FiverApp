@@ -1,8 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/enum.dart';
+import 'package:fiver/core/extensions/ext_enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/provider/auth_provider.dart';
+import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/register_info_model.dart';
 import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
@@ -15,7 +18,37 @@ class RegisterModel extends BaseModel {
   final TextEditingController nameCtr = TextEditingController();
   final TextEditingController emailCtr = TextEditingController();
   final TextEditingController passwordCtr = TextEditingController();
+
+  final ValueNotifier<String> nameValidatorCtr = ValueNotifier("");
+  final ValueNotifier<String> emailValidatorCtr = ValueNotifier("");
+  final ValueNotifier<String> passwordValidatorCtr = ValueNotifier("");
+
+  final _authGoogleProvider = AuthGoogleProvider();
   final _repo = locator<UserRepository>();
+
+  void init() {
+    textFieldListener(
+      controller: nameCtr,
+      action: () {
+        nameValidatorCtr.value = Validator.nameValidation(nameCtr.text);
+      },
+    );
+
+    textFieldListener(
+      controller: emailCtr,
+      action: () {
+        emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
+      },
+    );
+
+    textFieldListener(
+      controller: passwordCtr,
+      action: () {
+        passwordValidatorCtr.value =
+            Validator.passwordValidateCtr(passwordCtr.text);
+      },
+    );
+  }
 
   void onMoveToLogin() async {
     if (AppRouter.router.canPop()) {
@@ -24,34 +57,6 @@ class RegisterModel extends BaseModel {
       AppRouter.router.pushReplacementNamed(AppRouter.loginName);
       locator<UserModel>().updateInitRoute("");
     }
-  }
-
-  String nameValidateCtr(String value) {
-    if (value.isEmpty) {
-      return currentContext.loc.field_required(currentContext.loc.name);
-    }
-    if (value.length < 2) {
-      return currentContext.loc.format_name_notice;
-    }
-    return "";
-  }
-
-  String emailValidateCtr(String value) {
-    final result = Validator.isValidEmail(value);
-    if (!result) {
-      return currentContext.loc.format_email_notice;
-    }
-    return "";
-  }
-
-  String passwordValidateCtr(String value) {
-    if (value.isEmpty) {
-      return currentContext.loc.field_required(currentContext.loc.password);
-    }
-    if (value.length < 6) {
-      return currentContext.loc.format_password_notice;
-    }
-    return "";
   }
 
   Future<void> onRegister() async {
@@ -66,6 +71,7 @@ class RegisterModel extends BaseModel {
         EasyLoading.dismiss();
         return;
       }
+
       final name = nameCtr.text;
       final email = emailCtr.text;
       final password = passwordCtr.text;
@@ -104,30 +110,18 @@ class RegisterModel extends BaseModel {
         status: currentContext.loc.loading,
         maskType: EasyLoadingMaskType.black,
       );
-      final AuthGoogleProvider authProvider = AuthGoogleProvider();
-      await authProvider.logout();
-      final accountSignIn = await (authProvider.signIn());
+      await _authGoogleProvider.logout();
+      final accountSignIn = await _authGoogleProvider.signIn();
       if (accountSignIn == null) {
         EasyLoading.showError(currentContext.loc.something_went_wrong);
         return;
       }
       final authentication = await accountSignIn.authentication;
-      final result = await _repo.register(
-        postData: {
-          "access_token": authentication.accessToken,
-        },
+      final result = await _repo.registerOrLoginSocial(
+        accessToken: authentication.accessToken ?? "",
+        registerType: RegisterSocialType.google.getTitle(),
       );
-      if (result) {
-        EasyLoading.showSuccess(
-          currentContext.loc
-              .email_verification_notifcation(accountSignIn.email),
-        );
-        onMoveToLogin();
-      } else {
-        EasyLoading.showError(
-          "Register failed",
-        );
-      }
+      locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;
     } catch (e) {
       showErrorException(e);
@@ -136,12 +130,12 @@ class RegisterModel extends BaseModel {
   }
 
   bool _validate() {
-    final nameValidation = nameValidateCtr(nameCtr.text);
-    final emailValidation = emailValidateCtr(emailCtr.text);
-    final passwordValidation = passwordValidateCtr(passwordCtr.text);
-    if (nameValidation.isNotEmpty ||
-        emailValidation.isNotEmpty ||
-        passwordValidation.isNotEmpty) {
+    final nameValidation = nameValidatorCtr;
+    final emailValidation = emailValidatorCtr;
+    final passwordValidation = passwordValidatorCtr;
+    if (nameValidation.value.isNotEmpty ||
+        emailValidation.value.isNotEmpty ||
+        passwordValidation.value.isNotEmpty) {
       return false;
     }
     return true;
@@ -158,6 +152,9 @@ class RegisterModel extends BaseModel {
     nameCtr.dispose();
     emailCtr.dispose();
     passwordCtr.dispose();
+    nameValidatorCtr.dispose();
+    emailValidatorCtr.dispose();
+    passwordValidatorCtr.dispose();
     super.disposeModel();
   }
 }

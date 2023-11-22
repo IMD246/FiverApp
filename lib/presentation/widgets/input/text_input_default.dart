@@ -1,6 +1,5 @@
 import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
-import 'package:fiver/core/utils/deboucer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +23,7 @@ class TextInputDefault extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
-  final String Function(String value)? validator;
+  final ValueNotifier<String>? validator;
   @override
   State<TextInputDefault> createState() => _TextInputDefaultState();
 }
@@ -34,40 +33,32 @@ class _TextInputDefaultState extends State<TextInputDefault> {
   bool firstInit = false;
   final FocusNode _focusNode = FocusNode();
   bool focused = false;
-  final _deboucer = Debouncer();
   void _onChanged(String value) {
-    _deboucer.run(
-      milliseconds: 100,
-      action: () {
-        if (!firstInit) {
-          firstInit = true;
-        }
-        if (widget.validator != null) {
-          setState(() {
-            _errorText = widget.validator!(value);
-          });
-        }
-      },
-    );
+    if (!firstInit) {
+      firstInit = true;
+    }
   }
 
   @override
   void initState() {
+    super.initState();
     if (widget.validator != null) {
-      _errorText = widget.validator!(widget.controller.text);
+      widget.validator!.addListener(() {
+        setState(() {
+          _errorText = widget.validator!.value;
+        });
+      });
     }
     _focusNode.addListener(() {
       setState(() {
         focused = _focusNode.hasFocus;
       });
     });
-    super.initState();
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
-    _deboucer.timer?.cancel();
     super.dispose();
   }
 

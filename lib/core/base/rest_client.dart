@@ -1,6 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:dio/dio.dart';
+import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/provider/auth_provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -72,8 +74,11 @@ class RestClient {
       onError: (DioException error, handler) async {
         if (error.response?.statusCode == 401) {
           // await locator<UserRepository>().onLogout(isNeedCallApiLogout: false);
-          EasyLoading.showInfo(error.response?.data['message'] ?? "",
+          EasyLoading.showError(error.response?.data['message'] ?? "",
               duration: const Duration(seconds: 3));
+        } else if (error.response?.statusCode == 422) {
+          locator<AuthGoogleProvider>().logout();
+          handler.next(error);
         } else {
           handler.next(error);
         }

@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:fiver/core/utils/deboucer.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:intl/intl.dart';
 
@@ -109,4 +111,15 @@ int _getQuality(dynamic fileLength) {
     if (quality < 50) quality = 50;
   }
   return quality;
+}
+
+void textFieldListener({
+  required TextEditingController controller,
+  required VoidCallback action,
+  int? miliSeconds,
+}) {
+  final debouncer = Debouncer();
+  controller.addListener(() {
+    debouncer.run(milliseconds: miliSeconds ?? 100, action: action);
+  });
 }

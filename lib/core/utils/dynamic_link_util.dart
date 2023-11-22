@@ -22,15 +22,22 @@ Future<void> initDynamicLink() async {
   });
 }
 
-String? _handleDynamicLinks(
+void _handleDynamicLinks(
     {bool isInit = true, PendingDynamicLinkData? dynamicLinkData}) {
   final link = dynamicLinkData?.link;
   final screen = link?.queryParameters["screen"];
   log("link listen:" + (link?.host ?? ""));
   log("path dynamic listen:" + (link?.path ?? ""));
   log("screen listen:" + (link?.queryParameters["verifyCode"] ?? ""));
-  if (link?.path.contains("verify-email") == true) {
-    locator<UserModel>().updateInitRoute(AppRouter.registerPath);
+  if (link == null) {
+    return;
   }
-  return null;
+  if (link.path.contains("verify-email") == true) {
+    locator<UserModel>().updateInitRoute(AppRouter.registerPath);
+    if (isInit) {
+    } else {
+      log("on listen dynamic link");
+      AppRouter.router.push(AppRouter.registerPath);
+    }
+  }
 }

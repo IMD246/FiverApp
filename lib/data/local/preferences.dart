@@ -19,10 +19,6 @@ class Preferences {
     return prefs.getInt(THEME) ?? 0;
   }
 
-  int get() {
-    return prefs.getInt(THEME) ?? 0;
-  }
-
   setLanguage(String language) async {
     await prefs.setString(LANGUAGE, language);
   }
@@ -31,11 +27,17 @@ class Preferences {
     return prefs.getString(LANGUAGE);
   }
 
-  setAccessToken(String accessToken) async {
+  Future<void> setAccessToken(String accessToken) async {
     await prefs.setString(ACCESS_TOKEN, accessToken);
   }
 
-  Future<String> getAccessToken() async {
+  String getAccessToken() {
     return prefs.getString(ACCESS_TOKEN) ?? "";
+  }
+
+  Future<void> logout() async {
+    prefs.remove(THEME);
+    prefs.remove(LANGUAGE);
+    prefs.remove(ACCESS_TOKEN);
   }
 }

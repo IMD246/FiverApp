@@ -1,19 +1,45 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/extensions/ext_enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/provider/auth_provider.dart';
+import 'package:fiver/core/utils/util.dart';
+import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import '../../../core/enum.dart';
 import '../../../core/routes/app_router.dart';
 import '../../../core/utils/validation.dart';
 
 class LoginModel extends BaseModel {
   final TextEditingController emailCtr = TextEditingController();
   final TextEditingController passwordCtr = TextEditingController();
+
+  final ValueNotifier<String> emailValidatorCtr = ValueNotifier("");
+  final ValueNotifier<String> passwordValidatorCtr = ValueNotifier("");
+
   final _repo = locator<UserRepository>();
+
+  void init() {
+    textFieldListener(
+      controller: emailCtr,
+      action: () {
+        emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
+      },
+    );
+
+    textFieldListener(
+      controller: passwordCtr,
+      action: () {
+        passwordValidatorCtr.value =
+            Validator.passwordValidateCtr(passwordCtr.text);
+      },
+    );
+  }
+
   Future<bool> onBack() async {
     SystemNavigator.pop();
     return false;
@@ -108,32 +134,26 @@ class LoginModel extends BaseModel {
       }
       final authentication = await accountSignIn.authentication;
 
-      final result = await _repo.login(
-        postData: {
-          "token": authentication.accessToken ?? "",
-        },
+      final result = await _repo.registerOrLoginSocial(
+        accessToken: authentication.accessToken ?? "",
+        registerType: RegisterSocialType.google.getTitle(),
       );
-      if (result) {
-        EasyLoading.showSuccess(
-          currentContext.loc
-              .email_verification_notifcation(accountSignIn.email),
-        );
-      } else {
-        EasyLoading.showError(
-          "Login failed",
-        );
-      }
+
+      EasyLoading.dismiss();
+      locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;
     } catch (e) {
+      EasyLoading.dismiss();
       showErrorException(e);
       onWillPop = true;
     }
   }
 
   bool _validate() {
-    final emailValidation = emailValidateCtr(emailCtr.text);
-    final passwordValidation = passwordValidateCtr(passwordCtr.text);
-    if (emailValidation.isNotEmpty || passwordValidation.isNotEmpty) {
+    final emailValidation = emailValidatorCtr;
+    final passwordValidation = passwordValidatorCtr;
+    if (emailValidation.value.isNotEmpty ||
+        passwordValidation.value.isNotEmpty) {
       return false;
     }
     return true;
@@ -148,6 +168,8 @@ class LoginModel extends BaseModel {
   void disposeModel() {
     emailCtr.dispose();
     passwordCtr.dispose();
+    emailValidatorCtr.dispose();
+    passwordValidatorCtr.dispose();
     super.disposeModel();
   }
 }
