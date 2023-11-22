@@ -5,13 +5,13 @@ class ApiResponse {
       required this.success,
       required this.message});
 
-  String code;
+  int code;
   bool success;
   String message;
   dynamic data;
 
-  factory ApiResponse.fromJson(Map<String, dynamic> json) => ApiResponse(
-        code: json["code"] ?? "",
+  factory ApiResponse.fromJson(Map<String, dynamic> json,int code) => ApiResponse(
+        code: code,
         success: json["success"] ?? true,
         data: json.containsKey("data") ? json["data"] : null,
         message: json["message"] ?? "",

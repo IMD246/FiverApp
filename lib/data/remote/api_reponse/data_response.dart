@@ -1,6 +1,6 @@
 class DataResponse {
   dynamic data;
-  String code;
+  int code;
   bool success;
-  DataResponse(this.data, {this.code = "", this.success = true});
+  DataResponse(this.data, {this.code = -1, this.success = true});
 }

@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/enum.dart';
@@ -66,6 +67,7 @@ class RegisterModel extends BaseModel {
         status: currentContext.loc.loading,
         maskType: EasyLoadingMaskType.black,
       );
+
       if (!_validate()) {
         onWillPop = true;
         EasyLoading.dismiss();
@@ -86,19 +88,19 @@ class RegisterModel extends BaseModel {
         postData: postData,
       );
       if (result) {
+        _reset();
         EasyLoading.showSuccess(
           currentContext.loc.email_verification_notifcation(email),
-        );
-        _reset();
-        onMoveToLogin();
-      } else {
-        EasyLoading.showError(
-          "Register failed",
+          duration: Duration(seconds: 3),
         );
       }
       onWillPop = true;
     } catch (e) {
-      showErrorException(e);
+      if (e is DioException && e.response?.statusCode == 422) {
+        _handleValidateError(e);
+      } else {
+        showErrorException(e);
+      }
       onWillPop = true;
     }
   }
@@ -123,7 +125,9 @@ class RegisterModel extends BaseModel {
       );
       locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;
+      EasyLoading.dismiss();
     } catch (e) {
+      EasyLoading.dismiss();
       showErrorException(e);
       onWillPop = true;
     }
@@ -145,6 +149,17 @@ class RegisterModel extends BaseModel {
     emailCtr.clear();
     nameCtr.clear();
     passwordCtr.clear();
+  }
+
+  void _handleValidateError(DioException object) {
+    final validator = getValidatorFromDioException(object);
+    if(validator == null)
+    {
+      return;
+    }
+    setValueValidator(validator.email, emailValidatorCtr);
+    setValueValidator(validator.fullName, nameValidatorCtr);
+    setValueValidator(validator.password, passwordValidatorCtr);
   }
 
   @override

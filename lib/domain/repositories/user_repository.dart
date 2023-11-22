@@ -4,7 +4,7 @@ abstract class UserRepository {
   Future<bool> register({required Map<String, dynamic> postData});
   String getAccessToken();
   Future<void> setAccessToken({required String token});
-  Future<bool> login({required Map<String, String> postData});
+  Future<UserInfoModel> login({required Map<String, String> postData});
   Future<bool> forgotPassword({required String email});
   Future<UserInfoModel> registerOrLoginSocial({
     required String accessToken,

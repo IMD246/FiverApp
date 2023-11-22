@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/event/user_update_model_event.dart';
@@ -42,6 +43,9 @@ abstract class BaseModel extends ChangeNotifier {
   String getErrorMessage(dynamic error) {
     if (error is HandleError) {
       return error.message;
+    }
+    if (error is DioException && error.response?.statusCode != 422) {
+      return error.response?.data['message'] ?? "";
     }
     return "unknown";
   }

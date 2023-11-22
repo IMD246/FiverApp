@@ -30,14 +30,8 @@ class TextInputDefault extends StatefulWidget {
 
 class _TextInputDefaultState extends State<TextInputDefault> {
   String _errorText = "";
-  bool firstInit = false;
   final FocusNode _focusNode = FocusNode();
   bool focused = false;
-  void _onChanged(String value) {
-    if (!firstInit) {
-      firstInit = true;
-    }
-  }
 
   @override
   void initState() {
@@ -75,7 +69,7 @@ class _TextInputDefaultState extends State<TextInputDefault> {
             color: getColor().themeColorWhiteBlack,
             border: Border.all(
               width: 1,
-              color: _errorText.isEmpty || !firstInit
+              color: _errorText.isEmpty
                   ? Colors.transparent
                   : getColor().themeColorRed,
             ),
@@ -89,53 +83,46 @@ class _TextInputDefaultState extends State<TextInputDefault> {
             textAlignVertical: TextAlignVertical.center,
             controller: widget.controller,
             inputFormatters: widget.inputFormatters,
-            onChanged: _onChanged,
             style: text14.medium.copyWith(
               color: getColor().textColorBlackWhiteInput,
             ),
             textInputAction: widget.textInputAction,
             keyboardType: widget.keyboardType,
             decoration: InputDecoration(
-              hintText: widget.hintText,
-              hintStyle: widget.hintStyle ??
-                  text14.copyWith(
+                hintText: widget.hintText,
+                hintStyle: widget.hintStyle ??
+                    text14.copyWith(
+                      color: getColor().textColorGray,
+                    ),
+                label: Text(
+                  widget.label ?? "",
+                  style: text11.copyWith(
                     color: getColor().textColorGray,
                   ),
-              label: Text(
-                widget.label ?? "",
-                style: text11.copyWith(
-                  color: getColor().textColorGray,
                 ),
-              ),
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              filled: true,
-              errorStyle: text11.copyWith(
-                color: getColor().themeColorRed,
-              ),
-              fillColor: getColor().themeColorWhiteBlack,
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.zero,
-              suffix: firstInit
-                  ? _errorText.isEmpty
-                      ? Icon(
-                          Icons.check,
-                          color: focused
-                              ? getColor().themeColorGreen
-                              : Colors.transparent,
-                        )
-                      : Icon(
-                          Icons.close,
-                          color: getColor().themeColorRed,
-                        )
-                  : Icon(
-                      Icons.close,
-                      color: Colors.transparent,
-                    ),
-            ),
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                filled: true,
+                errorStyle: text11.copyWith(
+                  color: getColor().themeColorRed,
+                ),
+                fillColor: getColor().themeColorWhiteBlack,
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.zero,
+                suffix: _errorText.isEmpty
+                    ? Icon(
+                        Icons.check,
+                        color: focused
+                            ? getColor().themeColorGreen
+                            : Colors.transparent,
+                      )
+                    : Icon(
+                        Icons.close,
+                        color: getColor().themeColorRed,
+                      )),
           ),
         ),
-        if (_errorText.isNotEmpty && firstInit)
+        if (_errorText.isNotEmpty)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.w),
             child: Text(

@@ -6,8 +6,6 @@ import 'package:fiver/data/model/info_user_access_token.dart';
 import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:fiver/domain/services/user_service.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import '../../core/di/locator_service.dart';
 
 class UserRepositoryImp implements UserRepository {
@@ -29,8 +27,11 @@ class UserRepositoryImp implements UserRepository {
   }
 
   @override
-  Future<bool> login({required Map<String, String> postData}) async {
-    return await _userService.login(postData: postData);
+  Future<UserInfoModel> login({required Map<String, String> postData}) async {
+    final result = await _userService.login(postData: postData);
+    _setTokenToRestClient(result.accessToken ?? "");
+    await setAccessToken(token: result.accessToken ?? "");
+    return result.userInfo!;
   }
 
   @override
@@ -76,9 +77,11 @@ class UserRepositoryImp implements UserRepository {
       await _userService.logout();
     }
     await Future.wait(
-      [_sharedPreference.logout(), locator<AuthGoogleProvider>().logout()],
+      [
+        _sharedPreference.logout(),
+        locator<AuthGoogleProvider>().logout(),
+      ],
     );
-
     locator<UserModel>().logout();
   }
 }

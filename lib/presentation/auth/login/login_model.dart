@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/extensions/ext_enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/provider/auth_provider.dart';
 import 'package:fiver/core/utils/util.dart';
+import 'package:fiver/data/remote/api_reponse/exceptions/api_exception.dart';
 import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -54,17 +56,10 @@ class LoginModel extends BaseModel {
     AppRouter.router.push(AppRouter.registerPath);
   }
 
-  String nameValidateCtr(String value) {
-    if (value.isEmpty) {
-      return currentContext.loc.field_required(currentContext.loc.name);
-    }
-    if (value.length < 2) {
-      return currentContext.loc.format_name_notice;
-    }
-    return "";
-  }
-
   String emailValidateCtr(String value) {
+    if (value.isEmpty) {
+      return currentContext.loc.field_required(currentContext.loc.email);
+    }
     final result = Validator.isValidEmail(value);
     if (!result) {
       return currentContext.loc.format_email_notice;
@@ -102,19 +97,16 @@ class LoginModel extends BaseModel {
           "password": password,
         },
       );
-      if (result) {
-        EasyLoading.showSuccess(
-          currentContext.loc.email_verification_notifcation(email),
-        );
-        _reset();
-      } else {
-        EasyLoading.showError(
-          "Login failed",
-        );
-      }
+      EasyLoading.dismiss();
+      locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;
     } catch (e) {
-      showErrorException(e);
+      if (e is DioException && e.response?.statusCode == 422) {
+        _handleValidateError(e);
+      } else {
+        showErrorException(e);
+      }
+      EasyLoading.dismiss();
       onWillPop = true;
     }
   }
@@ -143,6 +135,9 @@ class LoginModel extends BaseModel {
       locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;
     } catch (e) {
+      if (e is ApiException && e.code == 422) {
+        locator<AuthGoogleProvider>().logout();
+      }
       EasyLoading.dismiss();
       showErrorException(e);
       onWillPop = true;
@@ -159,9 +154,13 @@ class LoginModel extends BaseModel {
     return true;
   }
 
-  void _reset() {
-    emailCtr.clear();
-    passwordCtr.clear();
+  void _handleValidateError(DioException object) {
+    final validator = getValidatorFromDioException(object);
+    if (validator == null) {
+      return;
+    }
+    setValueValidator(validator.email, emailValidatorCtr);
+    setValueValidator(validator.password, passwordValidatorCtr);
   }
 
   @override

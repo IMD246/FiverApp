@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
@@ -62,7 +63,11 @@ class ForgotPasswordModel extends BaseModel {
       }
       onWillPop = true;
     } catch (e) {
-      showErrorException(e);
+      if (e is DioException && e.response?.statusCode == 422) {
+        _handleValidateError(e);
+      } else {
+        showErrorException(e);
+      }
       onWillPop = true;
     }
   }
@@ -73,6 +78,14 @@ class ForgotPasswordModel extends BaseModel {
       return false;
     }
     return true;
+  }
+
+  void _handleValidateError(DioException object) {
+    final validator = getValidatorFromDioException(object);
+    if (validator == null) {
+      return;
+    }
+    setValueValidator(validator.email, emailValidatorCtr);
   }
 
   void _reset() {
