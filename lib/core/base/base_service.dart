@@ -41,13 +41,18 @@ abstract class BaseSerivce {
   }
 
   DataResponse _handleResponse(dio.Response response) {
-    var apiResponse = ApiResponse.fromJson(response.data);
-    switch (response.statusCode) {
+    var apiResponse = ApiResponse.fromJson(
+      response.data,
+      response.statusCode ?? 0,
+    );
+    switch (apiResponse.code) {
       case 200:
         return DataResponse(apiResponse.data, code: apiResponse.code);
       default:
         throw ApiException(
-            code: apiResponse.code, message: apiResponse.message);
+          code: apiResponse.code,
+          message: apiResponse.message,
+        );
     }
   }
 }

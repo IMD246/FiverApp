@@ -30,7 +30,7 @@ class TextInputPassword extends StatefulWidget {
 
 class _TextInputPasswordState extends State<TextInputPassword> {
   String _errorText = "";
-  bool _obsecureText = false;
+  bool _obsecureText = true;
   void _updateObsecureText() {
     setState(() {
       _obsecureText = !_obsecureText;

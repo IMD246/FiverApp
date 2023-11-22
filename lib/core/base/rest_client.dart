@@ -2,11 +2,10 @@
 
 import 'package:dio/dio.dart';
 import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/provider/auth_provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
 import '../../data/remote/network/network_url.dart';
+import '../../domain/repositories/user_repository.dart';
 
 class RestClient {
   static const TIMEOUT = 30000;
@@ -73,12 +72,9 @@ class RestClient {
     dio.interceptors.add(InterceptorsWrapper(
       onError: (DioException error, handler) async {
         if (error.response?.statusCode == 401) {
-          // await locator<UserRepository>().onLogout(isNeedCallApiLogout: false);
           EasyLoading.showError(error.response?.data['message'] ?? "",
-              duration: const Duration(seconds: 3));
-        } else if (error.response?.statusCode == 422) {
-          locator<AuthGoogleProvider>().logout();
-          handler.next(error);
+              duration: const Duration(seconds: 2));
+          await locator<UserRepository>().logout(isNeedCallApiLogout: false);
         } else {
           handler.next(error);
         }

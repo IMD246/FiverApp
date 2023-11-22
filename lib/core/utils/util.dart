@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:fiver/core/utils/deboucer.dart';
+import 'package:fiver/data/remote/api_reponse/exceptions/api_exception.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -52,6 +54,10 @@ extension IsNullOrEmpty<T> on T {
 
     if (this is Iterable) {
       return (this as Iterable).isEmpty;
+    }
+
+    if (this is List?) {
+      return (this as List?) == null || (this as List?)!.isEmpty;
     }
 
     if (this is List) {
@@ -122,4 +128,25 @@ void textFieldListener({
   controller.addListener(() {
     debouncer.run(milliseconds: miliSeconds ?? 100, action: action);
   });
+}
+
+void setValueValidator(List<String> validator, ValueNotifier valueNotifier) {
+  if (validator.isNullOrEmpty) {
+    return;
+  }
+  String message = "";
+  for (String element in validator) {
+    message += "${element}\n";
+  }
+  valueNotifier.value = message;
+}
+
+ValidatorModel? getValidatorFromDioException(DioException object) {
+  final apiException = ApiException.fromMap(
+      object.response?.data, object.response?.statusCode ?? -1);
+  if (apiException.validator == null) {
+    return null;
+  }
+  final validator = apiException.validator!;
+  return validator;
 }

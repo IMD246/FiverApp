@@ -23,12 +23,13 @@ class UserServiceImp extends UserService {
   }
 
   @override
-  Future<bool> login({required Map<String, String> postData}) async {
-    final response = await post(
+  Future<InfoUserAccessTokenModel> login(
+      {required Map<String, String> postData}) async {
+    final res = await post(
       LOGIN,
       data: postData,
     );
-    return response.success;
+    return InfoUserAccessTokenModel.fromJson(res.data);
   }
 
   @override
