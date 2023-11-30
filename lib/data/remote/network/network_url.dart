@@ -18,3 +18,4 @@ const String REGISTER_SOCIAL = "register-social";
 const String LOGIN = "login";
 const String USER_INFO = "user/info";
 const String USER_LOGOUT = "user/logout";
+const String FORGOT_PASSWORD = "forgot-password";

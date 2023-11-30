@@ -1,17 +1,19 @@
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/domain/provider/app_model.dart';
 import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:fiver/presentation/auth/login/login_page.dart';
 import 'package:fiver/presentation/auth/register/register_page.dart';
 import 'package:fiver/presentation/main/main_page.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
-class AppRouter {
+class AppRouter extends ChangeNotifier {
   // private constructor
   AppRouter._();
+
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static const String mainName = 'main';
   static const String mainPath = '/';
@@ -31,6 +33,7 @@ class AppRouter {
   static GoRouter get router => _router;
   static final _router = GoRouter(
     redirectLimit: 8,
+    navigatorKey: _rootNavigatorKey,
     routes: [
       GoRoute(
         path: registerPath,
@@ -43,7 +46,7 @@ class AppRouter {
         path: loginPath,
         name: loginName,
         builder: (context, state) {
-          return const LoginPage();
+          return LoginPage();
         },
       ),
       GoRoute(
@@ -62,27 +65,83 @@ class AppRouter {
       ),
     ],
     redirect: (context, state) {
-      // handle redirect when userModel changes
       final userModel = locator<UserModel>();
       final appModel = locator<AppModel>();
-      if (!userModel.initRoute.isNullOrEmpty) {
-        return userModel.initRoute;
-      }
-      if (userModel.isLogin) {
-        if (appModel.router == RouterRedirect.main) {
-          appModel.changeRouterRedirect(RouterRedirect.other);
-          return mainPath;
-        }
-        return state.path;
-      } else {
-        if (appModel.router == RouterRedirect.login) {
-          appModel.changeRouterRedirect(RouterRedirect.other);
-          return loginPath;
-        }
-        return state.path;
-      }
+      return _handleRedirectRouter(
+        userModel: userModel,
+        appModel: appModel,
+        context: context,
+        state: state,
+      );
     },
     refreshListenable: locator<UserModel>(),
     initialLocation: loginPath,
   );
+
+  static String? _handleRedirectRouter({
+    required UserModel userModel,
+    required AppModel appModel,
+    required BuildContext context,
+    required GoRouterState state,
+  }) {
+    switch (state.uri.path) {
+      case "/verify-email":
+        return _deeplinkNavigation(
+          userModel,
+          appModel,
+          context,
+          state,
+        );
+      default:
+        return _normalNavigation(userModel, appModel, context, state);
+    }
+  }
+
+  static String? _deeplinkNavigation(
+    UserModel userModel,
+    AppModel appModel,
+    BuildContext context,
+    GoRouterState state,
+  ) {
+    final uri = state.uri;
+    switch (uri.path) {
+      case "/verify-email":
+        return _verifyEmailNavigation(userModel, appModel, context, uri);
+      default:
+        return state.path;
+    }
+  }
+
+  static String? _normalNavigation(
+    UserModel userModel,
+    AppModel appModel,
+    BuildContext context,
+    GoRouterState state,
+  ) {
+    if (userModel.isLogin) {
+      if (appModel.router == RouterRedirect.main) {
+        appModel.changeRouterRedirect(RouterRedirect.other);
+        return mainPath;
+      }
+      return state.path;
+    } else {
+      if (appModel.router == RouterRedirect.login) {
+        appModel.changeRouterRedirect(RouterRedirect.other);
+        return loginPath;
+      }
+      return state.path;
+    }
+  }
+
+  static String? _verifyEmailNavigation(
+    UserModel userModel,
+    AppModel appModel,
+    BuildContext context,
+    Uri uri,
+  ) {
+    return Uri(
+      path: loginPath,
+      queryParameters: {"email": "gofromdeeplink"},
+    ).toString();
+  }
 }

@@ -48,7 +48,7 @@ class UserRepositoryImp implements UserRepository {
 
   @override
   Future<bool> forgotPassword({required String email}) async {
-    throw UnimplementedError();
+    return await _userService.forgotPassword(email: email);
   }
 
   @override

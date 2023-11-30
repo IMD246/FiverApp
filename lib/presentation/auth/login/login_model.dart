@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
 import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';

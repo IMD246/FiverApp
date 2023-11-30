@@ -3,7 +3,7 @@ import 'package:fiver/core/base/rest_client.dart';
 import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/event/user_update_model_event.dart';
-import 'package:fiver/core/utils/dynamic_link_util.dart';
+import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/info_user_access_token.dart';
 import 'package:fiver/domain/provider/app_model.dart';
 import 'package:flutter/material.dart';
@@ -19,21 +19,14 @@ class UserModel extends ChangeNotifier {
   late Environment environment;
   String? accessToken;
   final _userRepository = locator<UserRepository>();
-  String? initRoute;
   UserInfoModel? userInfo;
   final appModel = locator<AppModel>();
   Future<void> init(Environment environment) async {
     this.environment = environment;
     accessToken = _userRepository.getAccessToken();
     await Future.wait([initFirebase(), _initAPI(token: accessToken)]);
-    await Future.wait(
-        [_userRepository.getMe(isNotifyChange: true), initDynamicLink()]);
+    await _userRepository.getMe(isNotifyChange: true);
     initFirebaseCrashlytics();
-    notifyListeners();
-  }
-
-  void updateInitRoute(String name) {
-    initRoute = name;
     notifyListeners();
   }
 
@@ -64,7 +57,7 @@ class UserModel extends ChangeNotifier {
         options: DefaultFirebaseOptions.currentPlatform);
   }
 
-  bool get isLogin => userInfo != null && accessToken != null;
+  bool get isLogin => userInfo != null && !accessToken.isNullOrEmpty;
 
   void onUpdateUserInfo(
       {required UserInfoModel userInfo, bool isNotifyChange = true}) {

@@ -36,8 +36,8 @@ class Preferences {
   }
 
   Future<void> logout() async {
-    prefs.remove(THEME);
-    prefs.remove(LANGUAGE);
-    prefs.remove(ACCESS_TOKEN);
+    await Future.wait(
+      [prefs.remove(THEME), prefs.remove(LANGUAGE), prefs.remove(ACCESS_TOKEN)],
+    );
   }
 }

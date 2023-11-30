@@ -40,7 +40,8 @@ class UserServiceImp extends UserService {
 
   @override
   Future<bool> forgotPassword({required String email}) async {
-    throw UnimplementedError();
+    final res = await post(FORGOT_PASSWORD, data: {"email": email});
+    return res.success;
   }
 
   @override
