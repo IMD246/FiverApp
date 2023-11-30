@@ -56,7 +56,6 @@ class RegisterModel extends BaseModel {
       AppRouter.router.pop();
     } else {
       AppRouter.router.pushReplacementNamed(AppRouter.loginName);
-      locator<UserModel>().updateInitRoute("");
     }
   }
 
@@ -99,6 +98,7 @@ class RegisterModel extends BaseModel {
       if (e is DioException && e.response?.statusCode == 422) {
         _handleValidateError(e);
       } else {
+        EasyLoading.dismiss();
         showErrorException(e);
       }
       onWillPop = true;
@@ -153,8 +153,7 @@ class RegisterModel extends BaseModel {
 
   void _handleValidateError(DioException object) {
     final validator = getValidatorFromDioException(object);
-    if(validator == null)
-    {
+    if (validator == null) {
       return;
     }
     setValueValidator(validator.email, emailValidatorCtr);

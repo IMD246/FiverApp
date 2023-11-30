@@ -31,5 +31,13 @@
     "login" : "Login",
     "send" : "Send",
     "forgot_password" : "Forgot password",
-    "notice_forgot_password" : "Please, enter your email address. You will receive a link to create a new password via email."
+    "notice_forgot_password" : "Please, enter your email address. You will receive a link to create a new password via email.",
+    "email_forgot_password_notifcation": "Check your email: {email} for reset password!",
+    "@email_forgot_password_notifcation": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            }
+        }
+    }
 }

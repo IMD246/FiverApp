@@ -53,9 +53,8 @@ class ForgotPasswordModel extends BaseModel {
       );
       if (result) {
         EasyLoading.showSuccess(
-          currentContext.loc.email_verification_notifcation(email),
+          currentContext.loc.email_forgot_password_notifcation(email),
         );
-        _reset();
       } else {
         EasyLoading.showError(
           "Forgot Password failed",

@@ -58,11 +58,11 @@ class _FiverAppState extends State<FiverApp> with WidgetsBindingObserver {
                     localizationsDelegates:
                         AppLocalizations.localizationsDelegates,
                     supportedLocales: AppLocalizations.supportedLocales,
+                    routerConfig: AppRouter.router,
                     title: widget.titleApp,
                     scaffoldMessengerKey: NavigationService.scaffoldKey,
                     builder: EasyLoading.init(),
                     theme: theme.themeData,
-                    routerConfig: AppRouter.router,
                   );
                 },
               );
