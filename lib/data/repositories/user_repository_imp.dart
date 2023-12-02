@@ -84,4 +84,9 @@ class UserRepositoryImp implements UserRepository {
     );
     locator<UserModel>().logout();
   }
+
+  @override
+  Future<bool> verifyResetPasswordToken({required String token}) async {
+    return await _userService.verifyResetPasswordToken(token: token);
+  }
 }

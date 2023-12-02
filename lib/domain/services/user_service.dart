@@ -11,4 +11,5 @@ abstract class UserService extends BaseSerivce {
   Future<InfoUserAccessTokenModel> registerOrLoginSocial(
       {required Map<String, dynamic> postData});
   Future<void> logout();
+  Future<bool> verifyResetPasswordToken({required String token});
 }

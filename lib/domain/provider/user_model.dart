@@ -3,6 +3,7 @@ import 'package:fiver/core/base/rest_client.dart';
 import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/event/user_update_model_event.dart';
+import 'package:fiver/core/utils/dynamic_link_util.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/info_user_access_token.dart';
 import 'package:fiver/domain/provider/app_model.dart';
@@ -21,13 +22,25 @@ class UserModel extends ChangeNotifier {
   final _userRepository = locator<UserRepository>();
   UserInfoModel? userInfo;
   final appModel = locator<AppModel>();
+  String? _initRoute;
+  String? get initRoute => _initRoute;
   Future<void> init(Environment environment) async {
     this.environment = environment;
     accessToken = _userRepository.getAccessToken();
-    await Future.wait([initFirebase(), _initAPI(token: accessToken)]);
-    await _userRepository.getMe(isNotifyChange: true);
+    await Future.wait([
+      initFirebase(),
+      _initAPI(token: accessToken),
+    ]);
+    await Future.wait([
+      initDynamicLink(),
+      _userRepository.getMe(isNotifyChange: true),
+    ]);
     initFirebaseCrashlytics();
     notifyListeners();
+  }
+
+  void updateInitRoute(String? value) {
+    _initRoute = value;
   }
 
   Future<void> _initAPI({String? token}) async {

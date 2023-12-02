@@ -5,6 +5,7 @@ import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:fiver/presentation/auth/login/login_page.dart';
 import 'package:fiver/presentation/auth/register/register_page.dart';
+import 'package:fiver/presentation/auth/reset_password/reset_password_page.dart';
 import 'package:fiver/presentation/main/main_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -29,6 +30,9 @@ class AppRouter extends ChangeNotifier {
 
   static const String forgotPasswordName = 'forgotPassword';
   static const String forgotPasswordPath = '/forgotPassword';
+
+  static const String resetPasswordName = 'resetPassword';
+  static const String resetPasswordPath = '/resetPassword';
 
   static GoRouter get router => _router;
   static final _router = GoRouter(
@@ -63,10 +67,28 @@ class AppRouter extends ChangeNotifier {
           return const MainPage();
         },
       ),
+      GoRoute(
+        path: resetPasswordPath,
+        name: resetPasswordName,
+        builder: (context, state) {
+          return ResetPasswordPage(
+            token: state.uri.queryParameters["token"] ?? "",
+          );
+        },
+      ),
     ],
     redirect: (context, state) {
       final userModel = locator<UserModel>();
       final appModel = locator<AppModel>();
+      if (userModel.initRoute != null) {
+        Future.delayed(
+          Duration(seconds: 1),
+          () {
+            userModel.updateInitRoute(null);
+          },
+        );
+        return userModel.initRoute;
+      }
       return _handleRedirectRouter(
         userModel: userModel,
         appModel: appModel,
@@ -86,12 +108,8 @@ class AppRouter extends ChangeNotifier {
   }) {
     switch (state.uri.path) {
       case "/verify-email":
-        return _deeplinkNavigation(
-          userModel,
-          appModel,
-          context,
-          state,
-        );
+      case "/forgot-password":
+        return _deeplinkNavigation(userModel, appModel, context, state);
       default:
         return _normalNavigation(userModel, appModel, context, state);
     }
@@ -107,6 +125,8 @@ class AppRouter extends ChangeNotifier {
     switch (uri.path) {
       case "/verify-email":
         return _verifyEmailNavigation(userModel, appModel, context, uri);
+      case "/forgot-password":
+        return _resetPasswordNavigation(userModel, appModel, context, uri);
       default:
         return state.path;
     }
@@ -139,9 +159,20 @@ class AppRouter extends ChangeNotifier {
     BuildContext context,
     Uri uri,
   ) {
+    return loginPath;
+  }
+
+  static String? _resetPasswordNavigation(
+    UserModel userModel,
+    AppModel appModel,
+    BuildContext context,
+    Uri uri,
+  ) {
     return Uri(
-      path: loginPath,
-      queryParameters: {"email": "gofromdeeplink"},
+      path: resetPasswordPath,
+      queryParameters: {
+        "token": uri.queryParameters['token'],
+      },
     ).toString();
   }
 }
