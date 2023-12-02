@@ -39,5 +39,6 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "change_password": "Change Password"
 }

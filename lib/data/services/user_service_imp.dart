@@ -55,4 +55,12 @@ class UserServiceImp extends UserService {
   Future<void> logout() async {
     await get(USER_LOGOUT);
   }
+
+  @override
+  Future<bool> verifyResetPasswordToken({required String token}) async {
+    final res = await post(VERIFY_RESET_TOKEN, data: {
+      "token": token,
+    });
+    return res.success;
+  }
 }
