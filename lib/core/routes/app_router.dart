@@ -138,18 +138,18 @@ class AppRouter extends ChangeNotifier {
     BuildContext context,
     GoRouterState state,
   ) {
-    if (userModel.isLogin) {
+    if (userModel.isLogin()) {
       if (appModel.router == RouterRedirect.main) {
         appModel.changeRouterRedirect(RouterRedirect.other);
         return mainPath;
       }
-      return state.path;
+      return state.fullPath;
     } else {
       if (appModel.router == RouterRedirect.login) {
         appModel.changeRouterRedirect(RouterRedirect.other);
         return loginPath;
       }
-      return state.path;
+      return state.fullPath;
     }
   }
 

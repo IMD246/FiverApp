@@ -4,7 +4,6 @@ import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/event/user_update_model_event.dart';
 import 'package:fiver/core/utils/dynamic_link_util.dart';
-import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/info_user_access_token.dart';
 import 'package:fiver/domain/provider/app_model.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ import '../repositories/user_repository.dart';
 
 class UserModel extends ChangeNotifier {
   late Environment environment;
-  String? accessToken;
+
   final _userRepository = locator<UserRepository>();
   UserInfoModel? userInfo;
   final appModel = locator<AppModel>();
@@ -26,7 +25,7 @@ class UserModel extends ChangeNotifier {
   String? get initRoute => _initRoute;
   Future<void> init(Environment environment) async {
     this.environment = environment;
-    accessToken = _userRepository.getAccessToken();
+    final accessToken = _userRepository.getAccessToken();
     await Future.wait([
       initFirebase(),
       _initAPI(token: accessToken),
@@ -70,14 +69,14 @@ class UserModel extends ChangeNotifier {
         options: DefaultFirebaseOptions.currentPlatform);
   }
 
-  bool get isLogin => userInfo != null && !accessToken.isNullOrEmpty;
+  bool isLogin() => userInfo != null;
 
   void onUpdateUserInfo(
       {required UserInfoModel userInfo, bool isNotifyChange = true}) {
     this.userInfo = userInfo;
     if (isNotifyChange) {
       appModel.changeRouterRedirect(
-        isLogin ? RouterRedirect.main : RouterRedirect.login,
+        isLogin() ? RouterRedirect.main : RouterRedirect.login,
       );
       notifyListeners();
     } else {

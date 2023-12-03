@@ -98,9 +98,9 @@ class RegisterModel extends BaseModel {
       if (e is DioException && e.response?.statusCode == 422) {
         _handleValidateError(e);
       } else {
-        EasyLoading.dismiss();
         showErrorException(e);
       }
+      EasyLoading.dismiss();
       onWillPop = true;
     }
   }
