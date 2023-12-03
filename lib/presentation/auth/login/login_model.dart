@@ -96,9 +96,9 @@ class LoginModel extends BaseModel {
           "password": password,
         },
       );
-      EasyLoading.dismiss();
       locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;
+      EasyLoading.dismiss();
     } catch (e) {
       if (e is DioException && e.response?.statusCode == 422) {
         _handleValidateError(e);
@@ -129,7 +129,7 @@ class LoginModel extends BaseModel {
         accessToken: authentication.accessToken ?? "",
         registerType: RegisterSocialType.google.getTitle(),
       );
-
+      
       EasyLoading.dismiss();
       locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;

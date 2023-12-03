@@ -6,6 +6,7 @@ import 'package:fiver/data/model/info_user_access_token.dart';
 import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:fiver/domain/services/user_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/di/locator_service.dart';
 
 class UserRepositoryImp implements UserRepository {
@@ -37,7 +38,8 @@ class UserRepositoryImp implements UserRepository {
   @override
   Future<void> getMe({bool isNotifyChange = false}) async {
     final userModel = locator<UserModel>();
-    if (!userModel.accessToken.isNullOrEmpty) {
+    final accessToken = locator<Preferences>().getAccessToken();
+    if (!accessToken.isNullOrEmpty) {
       final user = await _userService.getMe();
       userModel.onUpdateUserInfo(
         userInfo: user,
@@ -88,5 +90,16 @@ class UserRepositoryImp implements UserRepository {
   @override
   Future<bool> verifyResetPasswordToken({required String token}) async {
     return await _userService.verifyResetPasswordToken(token: token);
+  }
+
+  @override
+  Future<bool> resetPassword({
+    required String token,
+    required String newPassword,
+  }) async {
+    return await _userService.resetPassword(
+      token: token,
+      newPassword: newPassword,
+    );
   }
 }

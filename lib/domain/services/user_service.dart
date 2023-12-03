@@ -12,4 +12,8 @@ abstract class UserService extends BaseSerivce {
       {required Map<String, dynamic> postData});
   Future<void> logout();
   Future<bool> verifyResetPasswordToken({required String token});
+  Future<bool> resetPassword({
+    required String token,
+    required String newPassword,
+  });
 }

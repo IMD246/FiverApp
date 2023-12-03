@@ -40,5 +40,11 @@
             }
         }
     },
-    "change_password": "Change Password"
+    "change_password": "Change Password",
+    "reset_password": "Reset Password",
+    "reset_password_success_notification" : "Reset password successfully!",
+    "confirm_password_validation" : "Confirm password must be matches with the password",
+    "verify_reset_password_token_error" : "Your token was expired, try make new one!",
+    "new_password" : "New password",
+    "confirm_password" : "Confirm password"
 }

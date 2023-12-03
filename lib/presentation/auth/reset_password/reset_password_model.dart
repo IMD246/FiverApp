@@ -2,13 +2,8 @@
 import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/extensions/ext_enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/provider/auth_provider.dart';
 import 'package:fiver/core/utils/util.dart';
-import 'package:fiver/data/model/register_info_model.dart';
-import 'package:fiver/domain/provider/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,38 +11,36 @@ import '../../../core/routes/app_router.dart';
 import '../../../core/utils/validation.dart';
 
 class ResetPasswordModel extends BaseModel {
-  final TextEditingController nameCtr = TextEditingController();
-  final TextEditingController emailCtr = TextEditingController();
-  final TextEditingController passwordCtr = TextEditingController();
+  final TextEditingController newPasswordCtr = TextEditingController();
+  final TextEditingController confirmPasswordCtr = TextEditingController();
 
-  final ValueNotifier<String> nameValidatorCtr = ValueNotifier("");
-  final ValueNotifier<String> emailValidatorCtr = ValueNotifier("");
-  final ValueNotifier<String> passwordValidatorCtr = ValueNotifier("");
+  final ValueNotifier<String> newPasswordValidatorCtr = ValueNotifier("");
+  final ValueNotifier<String> confirmPasswordValidatorCtr = ValueNotifier("");
 
-  final _authGoogleProvider = AuthGoogleProvider();
   final _repo = locator<UserRepository>();
 
+  String token = "";
+
   void init(String token) {
+    this.token = token;
     _checkTokenExpire(token);
+
     textFieldListener(
-      controller: nameCtr,
+      controller: newPasswordCtr,
       action: () {
-        nameValidatorCtr.value = Validator.nameValidation(nameCtr.text);
+        newPasswordValidatorCtr.value =
+            Validator.passwordValidateCtr(newPasswordCtr.text);
       },
     );
 
     textFieldListener(
-      controller: emailCtr,
+      controller: confirmPasswordCtr,
       action: () {
-        emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
-      },
-    );
-
-    textFieldListener(
-      controller: passwordCtr,
-      action: () {
-        passwordValidatorCtr.value =
-            Validator.passwordValidateCtr(passwordCtr.text);
+        confirmPasswordValidatorCtr.value =
+            Validator.confirmPasswordValidateCtr(
+          newPasswordCtr.text,
+          confirmPasswordCtr.text,
+        );
       },
     );
   }
@@ -60,8 +53,10 @@ class ResetPasswordModel extends BaseModel {
       await _repo.verifyResetPasswordToken(token: token);
     } catch (e) {
       if (e is DioException) {
-        EasyLoading.showError("Your token was expired, try make new one!",
-            duration: Duration(seconds: 2));
+        EasyLoading.showError(
+          currentContext.loc.verify_reset_password_token_error,
+          duration: Duration(seconds: 2),
+        );
       } else {
         showErrorException(e);
       }
@@ -73,11 +68,11 @@ class ResetPasswordModel extends BaseModel {
     if (AppRouter.router.canPop()) {
       AppRouter.router.pop();
     } else {
-      AppRouter.router.pushReplacementNamed(AppRouter.loginName);
+      AppRouter.router.go(AppRouter.loginPath);
     }
   }
 
-  Future<void> onRegister() async {
+  Future<void> onResetPassword() async {
     try {
       onWillPop = false;
       EasyLoading.show(
@@ -91,102 +86,40 @@ class ResetPasswordModel extends BaseModel {
         return;
       }
 
-      final name = nameCtr.text;
-      final email = emailCtr.text;
-      final password = passwordCtr.text;
-
-      final postData = RegisterInfoModel(
-        name: name,
-        email: email,
-        password: password,
-      ).toJson();
-
-      final result = await _repo.register(
-        postData: postData,
+      final newPassword = newPasswordCtr.text;
+      await _repo.resetPassword(
+        token: token,
+        newPassword: newPassword,
       );
-      if (result) {
-        _reset();
-        EasyLoading.showSuccess(
-          currentContext.loc.email_verification_notifcation(email),
-          duration: Duration(seconds: 3),
-        );
-      }
+      EasyLoading.showSuccess(
+        currentContext.loc.reset_password_success_notification,
+        duration: Duration(seconds: 1),
+      );
+      onMoveToLogin();
       onWillPop = true;
     } catch (e) {
-      if (e is DioException && e.response?.statusCode == 422) {
-        _handleValidateError(e);
-      } else {
-        EasyLoading.dismiss();
-        showErrorException(e);
-      }
-      onWillPop = true;
-    }
-  }
-
-  Future<void> onRegisterWithGoogle() async {
-    try {
-      onWillPop = false;
-      EasyLoading.show(
-        status: currentContext.loc.loading,
-        maskType: EasyLoadingMaskType.black,
-      );
-      await _authGoogleProvider.logout();
-      final accountSignIn = await _authGoogleProvider.signIn();
-      if (accountSignIn == null) {
-        EasyLoading.showError(currentContext.loc.something_went_wrong);
-        return;
-      }
-      final authentication = await accountSignIn.authentication;
-      final result = await _repo.registerOrLoginSocial(
-        accessToken: authentication.accessToken ?? "",
-        registerType: RegisterSocialType.google.getTitle(),
-      );
-      locator<UserModel>().onUpdateUserInfo(userInfo: result);
-      onWillPop = true;
-      EasyLoading.dismiss();
-    } catch (e) {
-      EasyLoading.dismiss();
       showErrorException(e);
+      EasyLoading.dismiss();
       onWillPop = true;
     }
   }
 
   bool _validate() {
-    final nameValidation = nameValidatorCtr;
-    final emailValidation = emailValidatorCtr;
-    final passwordValidation = passwordValidatorCtr;
-    if (nameValidation.value.isNotEmpty ||
-        emailValidation.value.isNotEmpty ||
-        passwordValidation.value.isNotEmpty) {
+    final newPasswordValidation = newPasswordValidatorCtr.value;
+    final confirmPasswordValidation = confirmPasswordValidatorCtr.value;
+    if (newPasswordValidation.isNotEmpty ||
+        confirmPasswordValidation.isNotEmpty) {
       return false;
     }
     return true;
   }
 
-  void _reset() {
-    emailCtr.clear();
-    nameCtr.clear();
-    passwordCtr.clear();
-  }
-
-  void _handleValidateError(DioException object) {
-    final validator = getValidatorFromDioException(object);
-    if (validator == null) {
-      return;
-    }
-    setValueValidator(validator.email, emailValidatorCtr);
-    setValueValidator(validator.fullName, nameValidatorCtr);
-    setValueValidator(validator.password, passwordValidatorCtr);
-  }
-
   @override
   void disposeModel() {
-    nameCtr.dispose();
-    emailCtr.dispose();
-    passwordCtr.dispose();
-    nameValidatorCtr.dispose();
-    emailValidatorCtr.dispose();
-    passwordValidatorCtr.dispose();
+    newPasswordCtr.dispose();
+    newPasswordValidatorCtr.dispose();
+    confirmPasswordCtr.dispose();
+    confirmPasswordValidatorCtr.dispose();
     super.disposeModel();
   }
 }

@@ -13,4 +13,8 @@ abstract class UserRepository {
   Future<void> getMe({bool isNotifyChange = false});
   Future<void> logout({bool isNeedCallApiLogout = false});
   Future<bool> verifyResetPasswordToken({required String token});
+  Future<bool> resetPassword({
+    required String token,
+    required String newPassword,
+  });
 }

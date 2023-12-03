@@ -87,13 +87,11 @@ class ForgotPasswordModel extends BaseModel {
     setValueValidator(validator.email, emailValidatorCtr);
   }
 
-  void _reset() {
-    emailCtr.clear();
-  }
 
   @override
   void disposeModel() {
     emailCtr.dispose();
+    emailValidatorCtr.dispose();
     super.disposeModel();
   }
 }

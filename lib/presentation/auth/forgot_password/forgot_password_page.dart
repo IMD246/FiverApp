@@ -62,7 +62,7 @@ class _ForgotPasswordPageState
                   controller: model.emailCtr,
                   keyboardType: TextInputType.emailAddress,
                   label: context.loc.email,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   validator: model.emailValidatorCtr,
                 ),
                 SizedBox(

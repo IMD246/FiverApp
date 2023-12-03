@@ -63,4 +63,19 @@ class UserServiceImp extends UserService {
     });
     return res.success;
   }
+
+  @override
+  Future<bool> resetPassword({
+    required String token,
+    required String newPassword,
+  }) async {
+    final res = await post(
+      RESET_PASSWORD,
+      data: {
+        "token": token,
+        "new_password": newPassword,
+      },
+    );
+    return res.success;
+  }
 }

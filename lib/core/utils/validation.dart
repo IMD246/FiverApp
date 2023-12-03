@@ -41,4 +41,12 @@ class Validator {
     }
     return "";
   }
+
+  static String confirmPasswordValidateCtr(
+      String newPassword, String confirmPassword) {
+    if (confirmPassword != newPassword) {
+      return _currentContext.loc.confirm_password_validation;
+    }
+    return "";
+  }
 }
