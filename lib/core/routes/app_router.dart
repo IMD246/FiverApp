@@ -1,7 +1,7 @@
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/enum.dart';
-import 'package:fiver/domain/provider/app_model.dart';
-import 'package:fiver/domain/provider/user_model.dart';
+import 'package:fiver/core/app/app_model.dart';
+import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:fiver/presentation/auth/login/login_page.dart';
 import 'package:fiver/presentation/auth/register/register_page.dart';
@@ -50,7 +50,7 @@ class AppRouter extends ChangeNotifier {
         path: loginPath,
         name: loginName,
         builder: (context, state) {
-          return LoginPage();
+          return const LoginPage();
         },
       ),
       GoRoute(
@@ -82,7 +82,7 @@ class AppRouter extends ChangeNotifier {
       final appModel = locator<AppModel>();
       if (userModel.initRoute != null) {
         Future.delayed(
-          Duration(seconds: 1),
+          const Duration(seconds: 1),
           () {
             userModel.updateInitRoute(null);
           },

@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/utils/util.dart';
+import 'package:fiver/core/utils/text_field_editing_controller_custom.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -11,8 +11,8 @@ import '../../../core/routes/app_router.dart';
 import '../../../core/utils/validation.dart';
 
 class ResetPasswordModel extends BaseModel {
-  final TextEditingController newPasswordCtr = TextEditingController();
-  final TextEditingController confirmPasswordCtr = TextEditingController();
+  final newPasswordCtr = TextEditingControllerCustom();
+  final confirmPasswordCtr = TextEditingControllerCustom();
 
   final ValueNotifier<String> newPasswordValidatorCtr = ValueNotifier("");
   final ValueNotifier<String> confirmPasswordValidatorCtr = ValueNotifier("");
@@ -25,24 +25,17 @@ class ResetPasswordModel extends BaseModel {
     this.token = token;
     _checkTokenExpire(token);
 
-    textFieldListener(
-      controller: newPasswordCtr,
-      action: () {
-        newPasswordValidatorCtr.value =
-            Validator.passwordValidateCtr(newPasswordCtr.text);
-      },
-    );
+    newPasswordCtr.listener(action: () {
+      newPasswordValidatorCtr.value =
+          Validator.passwordValidateCtr(newPasswordCtr.text);
+    });
 
-    textFieldListener(
-      controller: confirmPasswordCtr,
-      action: () {
-        confirmPasswordValidatorCtr.value =
-            Validator.confirmPasswordValidateCtr(
-          newPasswordCtr.text,
-          confirmPasswordCtr.text,
-        );
-      },
-    );
+    confirmPasswordCtr.listener(action: () {
+      confirmPasswordValidatorCtr.value = Validator.confirmPasswordValidateCtr(
+        newPasswordCtr.text,
+        confirmPasswordCtr.text,
+      );
+    });
   }
 
   void _checkTokenExpire(String token) async {
@@ -55,7 +48,7 @@ class ResetPasswordModel extends BaseModel {
       if (e is DioException) {
         EasyLoading.showError(
           currentContext.loc.verify_reset_password_token_error,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         );
       } else {
         showErrorException(e);
@@ -93,7 +86,7 @@ class ResetPasswordModel extends BaseModel {
       );
       EasyLoading.showSuccess(
         currentContext.loc.reset_password_success_notification,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
       );
       onMoveToLogin();
       onWillPop = true;

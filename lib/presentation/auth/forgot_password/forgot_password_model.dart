@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
+import 'package:fiver/core/utils/text_field_editing_controller_custom.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ import '../../../core/routes/app_router.dart';
 import '../../../core/utils/validation.dart';
 
 class ForgotPasswordModel extends BaseModel {
-  final TextEditingController emailCtr = TextEditingController();
+  final emailCtr = TextEditingControllerCustom();
   final ValueNotifier<String> emailValidatorCtr = ValueNotifier("");
   final _repo = locator<UserRepository>();
   void onBack() async {
@@ -19,12 +20,9 @@ class ForgotPasswordModel extends BaseModel {
   }
 
   void init() {
-    textFieldListener(
-      controller: emailCtr,
-      action: () {
-        emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
-      },
-    );
+    emailCtr.listener(action: () {
+      emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
+    });
   }
 
   String emailValidateCtr(String value) {
@@ -86,7 +84,6 @@ class ForgotPasswordModel extends BaseModel {
     }
     setValueValidator(validator.email, emailValidatorCtr);
   }
-
 
   @override
   void disposeModel() {

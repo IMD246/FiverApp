@@ -27,6 +27,7 @@ class _RegisterPageState extends BaseState<RegisterModel, RegisterPage> {
     super.initState();
     model.init();
   }
+
   @override
   Widget buildContentView(BuildContext context, RegisterModel model) {
     return Scaffold(
@@ -41,9 +42,7 @@ class _RegisterPageState extends BaseState<RegisterModel, RegisterPage> {
                   height: 12.w,
                 ),
                 BackButtonWidget(
-                  action: () {
-                    model.onMoveToLogin();
-                  },
+                  action: model.onMoveToLogin,
                 ),
                 SizedBox(height: 30.w),
                 Text(
@@ -87,9 +86,7 @@ class _RegisterPageState extends BaseState<RegisterModel, RegisterPage> {
           ),
           SocialButton(
             socialIconType: SocialIconType.google,
-            action: () async {
-              await model.onRegisterWithGoogle();
-            },
+            action: model.onRegisterWithGoogle,
           ),
         ],
       ),
@@ -118,9 +115,7 @@ class _RegisterPageState extends BaseState<RegisterModel, RegisterPage> {
   Widget _signUpButton(RegisterModel model, BuildContext context) {
     return DefaultButton(
       title: context.loc.sign_up.toUpperCase(),
-      onTap: () async {
-        await model.onRegister();
-      },
+      onTap: model.onRegister,
     );
   }
 }

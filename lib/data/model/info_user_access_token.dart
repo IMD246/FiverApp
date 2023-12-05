@@ -9,7 +9,7 @@ class InfoUserAccessTokenModel {
 
   InfoUserAccessTokenModel.fromJson(Map<String, dynamic> json) {
     userInfo = json['user_info'] != null
-        ? new UserInfoModel.fromJson(json['user_info'])
+        ? UserInfoModel.fromJson(json['user_info'])
         : null;
     accessToken = json['access_token'];
     tokenType = json['token_type'];
@@ -17,13 +17,13 @@ class InfoUserAccessTokenModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.userInfo != null) {
-      data['user_info'] = this.userInfo!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (userInfo != null) {
+      data['user_info'] = userInfo!.toJson();
     }
-    data['access_token'] = this.accessToken;
-    data['token_type'] = this.tokenType;
-    data['expires_at'] = this.expiresAt;
+    data['access_token'] = accessToken;
+    data['token_type'] = tokenType;
+    data['expires_at'] = expiresAt;
     return data;
   }
 }
@@ -42,10 +42,10 @@ class UserInfoModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['full_name'] = this.fullName;
-    data['email'] = this.email;
-    data['avatar'] = this.avatar;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['full_name'] = fullName;
+    data['email'] = email;
+    data['avatar'] = avatar;
     return data;
   }
 }

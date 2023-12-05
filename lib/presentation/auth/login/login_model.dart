@@ -1,12 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/extensions/ext_enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/provider/auth_provider.dart';
+import 'package:fiver/core/utils/text_field_editing_controller_custom.dart';
 import 'package:fiver/core/utils/util.dart';
-import 'package:fiver/data/remote/api_reponse/exceptions/api_exception.dart';
-import 'package:fiver/domain/provider/user_model.dart';
+import 'package:fiver/core/app/user_model.dart';
+import 'package:fiver/data/source/remote/api_reponse/exceptions/api_exception.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,8 +19,8 @@ import '../../../core/routes/app_router.dart';
 import '../../../core/utils/validation.dart';
 
 class LoginModel extends BaseModel {
-  final TextEditingController emailCtr = TextEditingController();
-  final TextEditingController passwordCtr = TextEditingController();
+  final emailCtr = TextEditingControllerCustom();
+  final passwordCtr = TextEditingControllerCustom();
 
   final ValueNotifier<String> emailValidatorCtr = ValueNotifier("");
   final ValueNotifier<String> passwordValidatorCtr = ValueNotifier("");
@@ -25,20 +28,14 @@ class LoginModel extends BaseModel {
   final _repo = locator<UserRepository>();
 
   void init() {
-    textFieldListener(
-      controller: emailCtr,
-      action: () {
-        emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
-      },
-    );
+    emailCtr.listener(action: () {
+      emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
+    });
 
-    textFieldListener(
-      controller: passwordCtr,
-      action: () {
-        passwordValidatorCtr.value =
-            Validator.passwordValidateCtr(passwordCtr.text);
-      },
-    );
+    passwordCtr.listener(action: () {
+      passwordValidatorCtr.value =
+          Validator.passwordValidateCtr(passwordCtr.text);
+    });
   }
 
   Future<bool> onBack() async {
@@ -129,7 +126,7 @@ class LoginModel extends BaseModel {
         accessToken: authentication.accessToken ?? "",
         registerType: RegisterSocialType.google.getTitle(),
       );
-      
+
       EasyLoading.dismiss();
       locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;

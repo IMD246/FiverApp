@@ -6,11 +6,11 @@ import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/event/user_update_model_event.dart';
 import 'package:fiver/data/model/info_user_access_token.dart';
-import 'package:fiver/domain/provider/app_model.dart';
+import 'package:fiver/core/app/app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../../domain/provider/user_model.dart';
+import '../app/user_model.dart';
 import '../utils/navigation_service.dart';
 import 'handle_error.dart';
 

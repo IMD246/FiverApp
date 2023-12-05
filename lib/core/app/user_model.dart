@@ -1,19 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fiver/core/base/rest_client.dart';
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/event/user_update_model_event.dart';
-import 'package:fiver/core/utils/dynamic_link_util.dart';
-import 'package:fiver/data/model/info_user_access_token.dart';
-import 'package:fiver/domain/provider/app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../core/utils/crashlytic_util.dart';
-import '../../data/remote/network/network_url.dart';
+import 'package:fiver/core/app/app_model.dart';
+import 'package:fiver/core/base/rest_client.dart';
+import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/enum.dart';
+import 'package:fiver/core/event/user_update_model_event.dart';
+import 'package:fiver/core/utils/dynamic_link_util.dart';
+import 'package:fiver/data/model/info_user_access_token.dart';
+
+import '../../data/source/remote/network/network_url.dart';
+import '../../domain/repositories/system_repository.dart';
+import '../../domain/repositories/user_repository.dart';
 import '../../firebase_options.dart';
-import '../repositories/system_repository.dart';
-import '../repositories/user_repository.dart';
+import '../utils/crashlytic_util.dart';
 
 class UserModel extends ChangeNotifier {
   late Environment environment;

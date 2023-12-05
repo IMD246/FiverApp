@@ -26,6 +26,7 @@ class _LoginPageState extends BaseState<LoginModel, LoginPage> {
     super.initState();
     model.init();
   }
+
   @override
   Widget buildContentView(BuildContext context, LoginModel model) {
     return WillPopScope(
@@ -104,9 +105,7 @@ class _LoginPageState extends BaseState<LoginModel, LoginPage> {
           ),
           SocialButton(
             socialIconType: SocialIconType.google,
-            action: () async {
-              await model.onLoginWithGoogle();
-            },
+            action: model.onLoginWithGoogle,
           ),
         ],
       ),
@@ -135,9 +134,7 @@ class _LoginPageState extends BaseState<LoginModel, LoginPage> {
   Widget _loginButton(LoginModel model, BuildContext context) {
     return DefaultButton(
       title: context.loc.login.toUpperCase(),
-      onTap: () async {
-        await model.onLogin();
-      },
+      onTap: model.onLogin,
     );
   }
 }

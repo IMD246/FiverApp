@@ -57,10 +57,14 @@ dependencies:
   firebase_dynamic_links: ^5.4.3
   firebase_analytics: ^10.6.4
   event_bus: ^2.0.0
+  http_mock_adapter: ^0.6.1
 
 dev_dependencies:
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
+  mockito: ^5.4.3
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

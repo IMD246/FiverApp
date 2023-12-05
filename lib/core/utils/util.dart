@@ -2,12 +2,11 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:fiver/core/utils/deboucer.dart';
-import 'package:fiver/data/remote/api_reponse/exceptions/api_exception.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:intl/intl.dart';
+
+import '../../data/source/remote/api_reponse/exceptions/api_exception.dart';
 
 String formatCurrency(
     {required dynamic currency, String? locale, bool isSymbol = true}) {
@@ -119,24 +118,13 @@ int _getQuality(dynamic fileLength) {
   return quality;
 }
 
-void textFieldListener({
-  required TextEditingController controller,
-  required VoidCallback action,
-  int? miliSeconds,
-}) {
-  final debouncer = Debouncer();
-  controller.addListener(() {
-    debouncer.run(milliseconds: miliSeconds ?? 100, action: action);
-  });
-}
-
 void setValueValidator(List<String> validator, ValueNotifier valueNotifier) {
   if (validator.isNullOrEmpty) {
     return;
   }
   String message = "";
   for (String element in validator) {
-    message += "${element}\n";
+    message += "$element\n";
   }
   valueNotifier.value = message;
 }

@@ -1,6 +1,6 @@
 import 'package:fiver/data/model/info_user_access_token.dart';
 
-abstract class UserRepository {
+abstract class UserRepository{
   Future<bool> register({required Map<String, dynamic> postData});
   String getAccessToken();
   Future<void> setAccessToken({required String token});

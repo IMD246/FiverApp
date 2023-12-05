@@ -1,10 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:dio/dio.dart';
-import 'package:fiver/core/di/locator_service.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import '../../data/remote/network/network_url.dart';
+
+import 'package:fiver/core/di/locator_service.dart';
+
+import '../../data/source/remote/network/network_url.dart';
 import '../../domain/repositories/user_repository.dart';
 
 class RestClient {
@@ -23,12 +25,14 @@ class RestClient {
 
   RestClient._internal();
 
-  void init(String baseUrl,
-      {String? platform,
-      String? deviceId,
-      String? language,
-      String? appVersion,
-      String? accessToken}) {
+  void init(
+    String baseUrl, {
+    String? platform,
+    String? deviceId,
+    String? language,
+    String? appVersion,
+    String? accessToken,
+  }) {
     this.baseUrl = baseUrl;
     headers = {
       'Content-Type': 'application/json',
@@ -37,7 +41,7 @@ class RestClient {
       'x-device-id': deviceId
     };
     if (accessToken != null) setToken(accessToken);
-    setLanguage(language!);
+    setLanguage(language ?? "en");
   }
 
   void setToken(String token) {

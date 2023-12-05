@@ -27,10 +27,8 @@ class ValidatorModel {
   });
 
   ValidatorModel.fromMap(Map<String, dynamic> map) {
-    email = List<String>.from(map['email'] != null ? map['email'] : []);
-    password =
-        List<String>.from(map['password'] != null ? map['password'] : []);
-    fullName =
-        List<String>.from(map['full_name'] != null ? map['full_name'] : []);
+    email = List<String>.from(map['email'] ?? []);
+    password = List<String>.from(map['password'] ?? []);
+    fullName = List<String>.from(map['full_name'] ?? []);
   }
 }

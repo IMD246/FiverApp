@@ -1,8 +1,10 @@
-import 'package:fiver/core/base/rest_client.dart';
 import 'package:dio/dio.dart' as dio;
-import '../../data/remote/api_reponse/api_respone.dart';
-import '../../data/remote/api_reponse/data_response.dart';
-import '../../data/remote/api_reponse/exceptions/api_exception.dart';
+
+import 'package:fiver/core/base/rest_client.dart';
+import 'package:fiver/data/source/remote/api_reponse/data_response.dart';
+
+import '../../data/source/remote/api_reponse/api_respone.dart';
+import '../../data/source/remote/api_reponse/exceptions/api_exception.dart';
 
 abstract class BaseSerivce {
   Future<dynamic> getWithCustomUrl(String customUrl, String path,
