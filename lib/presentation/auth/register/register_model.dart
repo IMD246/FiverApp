@@ -6,9 +6,10 @@ import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/extensions/ext_enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/provider/auth_provider.dart';
+import 'package:fiver/core/utils/text_field_editing_controller_custom.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/register_info_model.dart';
-import 'package:fiver/domain/provider/user_model.dart';
+import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,9 +17,9 @@ import '../../../core/routes/app_router.dart';
 import '../../../core/utils/validation.dart';
 
 class RegisterModel extends BaseModel {
-  final TextEditingController nameCtr = TextEditingController();
-  final TextEditingController emailCtr = TextEditingController();
-  final TextEditingController passwordCtr = TextEditingController();
+  final nameCtr = TextEditingControllerCustom();
+  final emailCtr = TextEditingControllerCustom();
+  final passwordCtr = TextEditingControllerCustom();
 
   final ValueNotifier<String> nameValidatorCtr = ValueNotifier("");
   final ValueNotifier<String> emailValidatorCtr = ValueNotifier("");
@@ -28,27 +29,18 @@ class RegisterModel extends BaseModel {
   final _repo = locator<UserRepository>();
 
   void init() {
-    textFieldListener(
-      controller: nameCtr,
-      action: () {
-        nameValidatorCtr.value = Validator.nameValidation(nameCtr.text);
-      },
-    );
+    nameCtr.listener(action: () {
+      nameValidatorCtr.value = Validator.nameValidation(nameCtr.text);
+    });
 
-    textFieldListener(
-      controller: emailCtr,
-      action: () {
-        emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
-      },
-    );
+    emailCtr.listener(action: () {
+      emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
+    });
 
-    textFieldListener(
-      controller: passwordCtr,
-      action: () {
-        passwordValidatorCtr.value =
-            Validator.passwordValidateCtr(passwordCtr.text);
-      },
-    );
+    passwordCtr.listener(action: () {
+      passwordValidatorCtr.value =
+          Validator.passwordValidateCtr(passwordCtr.text);
+    });
   }
 
   void onMoveToLogin() async {
@@ -90,7 +82,7 @@ class RegisterModel extends BaseModel {
         _reset();
         EasyLoading.showSuccess(
           currentContext.loc.email_verification_notifcation(email),
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
         );
       }
       onWillPop = true;

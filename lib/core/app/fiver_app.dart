@@ -1,4 +1,4 @@
-import 'package:fiver/domain/provider/app_model.dart';
+import 'package:fiver/core/app/app_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';

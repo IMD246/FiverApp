@@ -2,10 +2,10 @@ import 'dart:async';
 
 class Debouncer {
   Timer? timer;
-  Future<void> run({
+  void run({
     int? milliseconds,
     required Function() action,
-  }) async {
+  }) {
     if (timer?.isActive ?? true) {
       timer?.cancel();
     }

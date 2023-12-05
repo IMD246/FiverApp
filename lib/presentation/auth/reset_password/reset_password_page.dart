@@ -46,9 +46,7 @@ class _ResetPasswordPageState
                   height: 12.w,
                 ),
                 BackButtonWidget(
-                  action: () {
-                    model.onMoveToLogin();
-                  },
+                  action: model.onMoveToLogin,
                 ),
                 SizedBox(height: 30.w),
                 Text(
@@ -77,9 +75,7 @@ class _ResetPasswordPageState
   Widget _resetPasswordButton(ResetPasswordModel model, BuildContext context) {
     return DefaultButton(
       title: context.loc.reset_password.toUpperCase(),
-      onTap: () async {
-        await model.onResetPassword();
-      },
+      onTap: model.onResetPassword,
     );
   }
 }

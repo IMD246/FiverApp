@@ -20,7 +20,7 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
             onTap: () async {
               await locator<UserRepository>().logout();
             },
-            child: Text("Main Page")),
+            child: const Text("Main Page")),
       ),
     );
   }

@@ -39,9 +39,7 @@ class _ForgotPasswordPageState
                   height: 12.w,
                 ),
                 BackButtonWidget(
-                  action: () {
-                    model.onBack();
-                  },
+                  action: model.onBack,
                 ),
                 SizedBox(height: 30.w),
                 Text(
@@ -83,9 +81,7 @@ class _ForgotPasswordPageState
   ) {
     return DefaultButton(
       title: context.loc.send.toUpperCase(),
-      onTap: () async {
-        await model.onSend();
-      },
+      onTap: model.onSend,
     );
   }
 }
