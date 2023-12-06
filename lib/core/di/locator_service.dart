@@ -10,7 +10,12 @@ import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:fiver/presentation/auth/forgot_password/forgot_password_model.dart';
 import 'package:fiver/presentation/auth/register/register_model.dart';
 import 'package:fiver/presentation/auth/reset_password/reset_password_model.dart';
+import 'package:fiver/presentation/main/bag/bag_model.dart';
+import 'package:fiver/presentation/main/favorites/favorites_model.dart';
+import 'package:fiver/presentation/main/home/home_model.dart';
 import 'package:fiver/presentation/main/main_model.dart';
+import 'package:fiver/presentation/main/profile/profile_model.dart';
+import 'package:fiver/presentation/main/shop/shop_model.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../presentation/auth/login/login_model.dart';
@@ -39,4 +44,9 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
   locator.registerFactory(() => ForgotPasswordModel());
   locator.registerFactory(() => MainModel());
   locator.registerFactory(() => ResetPasswordModel());
+  locator.registerFactory(() => HomeModel());
+  locator.registerFactory(() => ShopModel());
+  locator.registerFactory(() => BagModel());
+  locator.registerFactory(() => FavoritesModel());
+  locator.registerFactory(() => ProfileModel());
 }

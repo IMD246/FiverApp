@@ -107,6 +107,8 @@ extension ColorSchemeExtension on ColorScheme {
 
   Color get themeColorRed => getColorTheme(colorEF3651, colorEF3651);
 
+  Color get themeColorDADADA => getColorTheme(colorDADADA, colorDADADA);
+
   // Background colors
 
   Color get bgColorWhiteBlack => getColorTheme(colorWhite, colorBlack);
