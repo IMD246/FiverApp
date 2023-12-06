@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 setupStatusBar() {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.dark,
-      systemNavigationBarIconBrightness: Brightness.dark));
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+  );
 }
 
 void configLoading() {

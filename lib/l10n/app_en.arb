@@ -46,5 +46,10 @@
     "confirm_password_validation" : "Confirm password must be matches with the password",
     "verify_reset_password_token_error" : "Your token was expired, try make new one!",
     "new_password" : "New password",
-    "confirm_password" : "Confirm password"
+    "confirm_password" : "Confirm password",
+    "home": "Home",
+    "shop": "Shop",
+    "bag": "Bag",
+    "favorites": "Favorites",
+    "profile": "Profile"
 }
