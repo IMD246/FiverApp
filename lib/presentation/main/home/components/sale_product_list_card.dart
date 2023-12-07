@@ -217,7 +217,7 @@ class SaleProductListCard extends StatelessWidget {
           8.w,
         ),
         child: Image.network(
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           product.urlImage,
         ),
       ),

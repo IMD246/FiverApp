@@ -1,9 +1,7 @@
-import 'dart:developer';
-import 'dart:io';
 import 'dart:isolate';
-
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/utils/isolate_util.dart';
 import 'package:fiver/data/model/banner_model.dart';
 import 'package:fiver/data/model/product_model.dart';
 import 'package:fiver/domain/repositories/common_repository.dart';
@@ -17,6 +15,7 @@ class HomeModel extends BaseModel {
   Isolate? isolateBanners;
   Isolate? isolateSaleProducts;
   Isolate? isolateNewProducts;
+  
   void init() {
     getBanners();
     getNewProducts();
@@ -32,23 +31,17 @@ class HomeModel extends BaseModel {
       var receiveport = ReceivePort();
       final getBanners = await _repo.getBannerList();
       isolateBanners = await Isolate.spawn(
-        _sendDataFromPort,
+        IsolateUtil.sendDataFromPort,
         [
           receiveport.sendPort,
           getBanners,
         ],
       );
-      isolateBanners?.kill(priority: Isolate.immediate);
+      IsolateUtil.killIsolate(isolate: isolateBanners);
       _setValueNotifier(banners, await receiveport.first);
     } catch (e) {
-      log("isolateerror:$e");
       _setValueNotifier(banners, []);
     }
-  }
-
-  static void _sendDataFromPort(List<dynamic> params) {
-    final SendPort sp = params[0];
-    sp.send(params[1]);
   }
 
   void getNewProducts() async {
@@ -56,17 +49,16 @@ class HomeModel extends BaseModel {
       var receiveport = ReceivePort();
       final getNewProducts = await _repo.getNewProductList();
       isolateNewProducts = await Isolate.spawn(
-        _sendDataFromPort,
+        IsolateUtil.sendDataFromPort,
         [
           receiveport.sendPort,
           getNewProducts,
         ],
       );
-      isolateNewProducts?.kill(priority: Isolate.immediate);
+      IsolateUtil.killIsolate(isolate: isolateNewProducts);
       _setValueNotifier(newProducts, await receiveport.first);
     } catch (e) {
       _setValueNotifier(newProducts, []);
-      log("new Products home: $e");
     }
   }
 
@@ -75,17 +67,16 @@ class HomeModel extends BaseModel {
       var receiveport = ReceivePort();
       final getSaleProducts = await _repo.getSaleProductList();
       isolateSaleProducts = await Isolate.spawn(
-        _sendDataFromPort,
+        IsolateUtil.sendDataFromPort,
         [
           receiveport.sendPort,
           getSaleProducts,
         ],
       );
-      isolateSaleProducts?.kill(priority: Isolate.immediate);
+      IsolateUtil.killIsolate(isolate: isolateSaleProducts);
       _setValueNotifier(saleProducts, await receiveport.first);
     } catch (e) {
       _setValueNotifier(saleProducts, []);
-      log("sale Products home: $e");
     }
   }
 
@@ -98,8 +89,8 @@ class HomeModel extends BaseModel {
     banners.dispose();
     saleProducts.dispose();
     newProducts.dispose();
-    isolateBanners?.kill(priority: Isolate.immediate);
-    isolateNewProducts?.kill(priority: Isolate.immediate);
-    isolateSaleProducts?.kill(priority: Isolate.immediate);
+    IsolateUtil.killIsolate(isolate: isolateBanners);
+    IsolateUtil.killIsolate(isolate: isolateNewProducts);
+    IsolateUtil.killIsolate(isolate: isolateSaleProducts);
   }
 }
