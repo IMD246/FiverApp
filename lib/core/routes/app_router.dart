@@ -65,7 +65,7 @@ class AppRouter extends ChangeNotifier {
         name: mainName,
         builder: (context, state) {
           return MainPage(
-            tabIndex: (state.uri.queryParameters["tabIndex"] ?? 2) as int,
+            tabIndex: (state.uri.queryParameters["tabIndex"] ?? 0) as int,
           );
         },
       ),

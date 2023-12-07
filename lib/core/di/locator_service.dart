@@ -1,8 +1,10 @@
 import 'package:fiver/core/provider/auth_provider.dart';
+import 'package:fiver/data/repositories/common_repository_imp.dart';
 import 'package:fiver/data/repositories/user_repository_imp.dart';
 import 'package:fiver/core/app/app_model.dart';
 import 'package:fiver/data/repositories/system_repository_imp.dart';
 import 'package:fiver/data/source/local/preferences.dart';
+import 'package:fiver/domain/repositories/common_repository.dart';
 import 'package:fiver/domain/repositories/system_repository.dart';
 import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
@@ -36,6 +38,9 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
   );
   locator.registerLazySingleton<UserRepository>(
     () => UserRepositoryImp(locator<Preferences>()),
+  );
+  locator.registerLazySingleton<CommonRepository>(
+    () => CommonRepositoryImp(),
   );
 
   // ViewModels

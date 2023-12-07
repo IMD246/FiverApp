@@ -138,3 +138,7 @@ ValidatorModel? getValidatorFromDioException(DioException object) {
   final validator = apiException.validator!;
   return validator;
 }
+
+String priceWithUnit(num price){
+  return "${price.toString()}\$";
+}

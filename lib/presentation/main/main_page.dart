@@ -36,12 +36,15 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
 
   @override
   Widget buildContentView(BuildContext context, MainModel model) {
-    return Scaffold(
-      bottomNavigationBar: _bottomNavigation(model),
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: model.pageController,
-        children: pages,
+    return WillPopScope(
+      onWillPop: model.doubleTapToExistApp,
+      child: Scaffold(
+        bottomNavigationBar: _bottomNavigation(model),
+        body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: model.pageController,
+          children: pages,
+        ),
       ),
     );
   }
