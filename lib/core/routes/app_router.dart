@@ -7,6 +7,7 @@ import 'package:fiver/presentation/auth/login/login_page.dart';
 import 'package:fiver/presentation/auth/register/register_page.dart';
 import 'package:fiver/presentation/auth/reset_password/reset_password_page.dart';
 import 'package:fiver/presentation/main/main_page.dart';
+import 'package:fiver/presentation/view_all_product/view_all_products_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,6 +34,9 @@ class AppRouter extends ChangeNotifier {
 
   static const String resetPasswordName = 'resetPassword';
   static const String resetPasswordPath = '/resetPassword';
+
+  static const String viewAllProductsName = 'viewAllProducts';
+  static const String viewAllProductsPath = '/viewAllProducts';
 
   static GoRouter get router => _router;
   static final _router = GoRouter(
@@ -75,6 +79,15 @@ class AppRouter extends ChangeNotifier {
         builder: (context, state) {
           return ResetPasswordPage(
             token: state.uri.queryParameters["token"] ?? "",
+          );
+        },
+      ),
+      GoRoute(
+        path: viewAllProductsPath,
+        name: viewAllProductsName,
+        builder: (context, state) {
+          return ViewAllProductsPage(
+            typeProduct: state.extra as TypeProduct? ?? TypeProduct.news,
           );
         },
       ),

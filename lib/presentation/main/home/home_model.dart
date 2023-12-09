@@ -1,9 +1,9 @@
-import 'dart:developer';
-import 'dart:io';
 import 'dart:isolate';
-
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
+import 'package:fiver/core/enum.dart';
+import 'package:fiver/core/routes/app_router.dart';
+import 'package:fiver/core/utils/isolate_util.dart';
 import 'package:fiver/data/model/banner_model.dart';
 import 'package:fiver/data/model/product_model.dart';
 import 'package:fiver/domain/repositories/common_repository.dart';
@@ -14,78 +14,78 @@ class HomeModel extends BaseModel {
   final ValueNotifier<List<BannerModel>> banners = ValueNotifier([]);
   final ValueNotifier<List<ProductModel>> saleProducts = ValueNotifier([]);
   final ValueNotifier<List<ProductModel>> newProducts = ValueNotifier([]);
-  Isolate? isolateBanners;
-  Isolate? isolateSaleProducts;
-  Isolate? isolateNewProducts;
+  Isolate? _isolateBanners;
+  Isolate? _isolateSaleProducts;
+  Isolate? _isolateNewProducts;
+
   void init() {
-    getBanners();
-    getNewProducts();
-    getSaleProducts();
+    _getBanners();
+    _getNewProducts();
+    _getSaleProducts();
   }
 
   void refresh() {
+    _killAllIsolate();
     init();
   }
 
-  void getBanners() async {
+  void _killAllIsolate() {
+    IsolateUtil.killIsolate(isolate: _isolateBanners);
+    IsolateUtil.killIsolate(isolate: _isolateSaleProducts);
+    IsolateUtil.killIsolate(isolate: _isolateNewProducts);
+  }
+
+  void _getBanners() async {
     try {
       var receiveport = ReceivePort();
       final getBanners = await _repo.getBannerList();
-      isolateBanners = await Isolate.spawn(
-        _sendDataFromPort,
+      _isolateBanners = await Isolate.spawn(
+        IsolateUtil.sendDataFromPort,
         [
           receiveport.sendPort,
           getBanners,
         ],
       );
-      isolateBanners?.kill(priority: Isolate.immediate);
+      IsolateUtil.killIsolate(isolate: _isolateBanners);
       _setValueNotifier(banners, await receiveport.first);
     } catch (e) {
-      log("isolateerror:$e");
       _setValueNotifier(banners, []);
     }
   }
 
-  static void _sendDataFromPort(List<dynamic> params) {
-    final SendPort sp = params[0];
-    sp.send(params[1]);
-  }
-
-  void getNewProducts() async {
+  void _getNewProducts() async {
     try {
       var receiveport = ReceivePort();
       final getNewProducts = await _repo.getNewProductList();
-      isolateNewProducts = await Isolate.spawn(
-        _sendDataFromPort,
+      _isolateNewProducts = await Isolate.spawn(
+        IsolateUtil.sendDataFromPort,
         [
           receiveport.sendPort,
           getNewProducts,
         ],
       );
-      isolateNewProducts?.kill(priority: Isolate.immediate);
+      IsolateUtil.killIsolate(isolate: _isolateNewProducts);
       _setValueNotifier(newProducts, await receiveport.first);
     } catch (e) {
       _setValueNotifier(newProducts, []);
-      log("new Products home: $e");
     }
   }
 
-  void getSaleProducts() async {
+  void _getSaleProducts() async {
     try {
       var receiveport = ReceivePort();
       final getSaleProducts = await _repo.getSaleProductList();
-      isolateSaleProducts = await Isolate.spawn(
-        _sendDataFromPort,
+      _isolateSaleProducts = await Isolate.spawn(
+        IsolateUtil.sendDataFromPort,
         [
           receiveport.sendPort,
           getSaleProducts,
         ],
       );
-      isolateSaleProducts?.kill(priority: Isolate.immediate);
+      IsolateUtil.killIsolate(isolate: _isolateSaleProducts);
       _setValueNotifier(saleProducts, await receiveport.first);
     } catch (e) {
       _setValueNotifier(saleProducts, []);
-      log("sale Products home: $e");
     }
   }
 
@@ -93,13 +93,20 @@ class HomeModel extends BaseModel {
     notifier.value = value;
   }
 
+  void onGoToViewAllProducts(TypeProduct typeProduct) async {
+    AppRouter.router.push(
+      AppRouter.viewAllProductsPath,
+      extra: typeProduct,
+    );
+  }
+
   @override
   void disposeModel() {
     banners.dispose();
     saleProducts.dispose();
     newProducts.dispose();
-    isolateBanners?.kill(priority: Isolate.immediate);
-    isolateNewProducts?.kill(priority: Isolate.immediate);
-    isolateSaleProducts?.kill(priority: Isolate.immediate);
+    IsolateUtil.killIsolate(isolate: _isolateBanners);
+    IsolateUtil.killIsolate(isolate: _isolateNewProducts);
+    IsolateUtil.killIsolate(isolate: _isolateSaleProducts);
   }
 }

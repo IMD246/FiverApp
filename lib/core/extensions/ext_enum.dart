@@ -37,3 +37,15 @@ extension RegisterSocialTypeExtension on RegisterSocialType {
     }
   }
 }
+
+extension TypeProductExtension on TypeProduct {
+  int getValue() {
+    switch (this) {
+      case TypeProduct.news:
+        return 0;
+      case TypeProduct.sale:
+      default:
+        return 1;
+    }
+  }
+}

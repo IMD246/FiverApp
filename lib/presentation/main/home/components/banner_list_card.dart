@@ -20,18 +20,22 @@ class BannerListCard extends StatelessWidget {
         if (banners.isNullOrEmpty) {
           return _shimmerBannerItem();
         }
-        return CarouselSlider.builder(
-          itemCount: banners.length,
-          itemBuilder: (context, index, realIndex) {
-            final banner = banners[index];
-            return _bannerItem(banner);
-          },
-          options: CarouselOptions(
-            viewportFraction: 1,
-            autoPlay: true,
-          ),
-        );
+        return _sliderWidget(banners);
       },
+    );
+  }
+
+  Widget _sliderWidget(List<BannerModel> banners) {
+    return CarouselSlider.builder(
+      itemCount: banners.length,
+      itemBuilder: (context, index, realIndex) {
+        final banner = banners[index];
+        return _bannerItem(banner);
+      },
+      options: CarouselOptions(
+        viewportFraction: 1,
+        autoPlay: true,
+      ),
     );
   }
 

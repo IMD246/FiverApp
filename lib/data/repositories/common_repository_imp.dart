@@ -79,4 +79,62 @@ class CommonRepositoryImp extends BaseSerivce implements CommonRepository {
           salePercent: "-7%"),
     ];
   }
+
+  @override
+  Future<List<ProductModel>> getProductsByType({
+    required int page,
+    required int pageSize,
+    required int typeProduct,
+  }) async {
+    return [
+      ProductModel(
+          name: "Evening Dress",
+          brandName: "Dorothy Perkins",
+          originPrice: 15,
+          price: 12,
+          urlImage:
+              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+          salePercent: "-3%"),
+      ProductModel(
+          name: "Sport Dress",
+          brandName: "Sitlly",
+          originPrice: 22,
+          price: 19,
+          urlImage:
+              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+          salePercent: "-5%"),
+      ProductModel(
+          name: "Evening Dres1s",
+          brandName: "Dorothy Perkins1",
+          originPrice: 14,
+          price: 11,
+          urlImage:
+              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+          salePercent: "-7%"),
+      ProductModel(
+          name: "Evening Dress",
+          brandName: "Dorothy Perkins",
+          originPrice: 15,
+          price: 12,
+          urlImage:
+              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+          salePercent: "-3%"),
+      ProductModel(
+          name: "Sport Dress",
+          brandName: "Sitlly",
+          originPrice: 22,
+          price: 19,
+          urlImage:
+              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+          salePercent: "-5%"),
+      ProductModel(
+          name: "Evening Dres1s",
+          brandName: "Dorothy Perkins1",
+          originPrice: 14,
+          price: 11,
+          urlImage:
+              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+          salePercent: "-7%"),
+    ];
+  }
 }

@@ -1,4 +1,3 @@
-import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/res/colors.dart';
 import 'package:fiver/core/res/icons.dart';
@@ -6,65 +5,28 @@ import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/product_model.dart';
-import 'package:fiver/presentation/main/home/components/components.dart';
-import 'package:fiver/presentation/main/home/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shimmer/shimmer.dart';
 
-class SaleProductListCard extends StatelessWidget {
-  const SaleProductListCard({
+class ProductItemCard extends StatelessWidget {
+  const ProductItemCard({
     super.key,
-    required this.model,
+    required this.product,
+    required this.index,
   });
-  final HomeModel model;
+  final ProductModel product;
+  final int index;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              context.loc.sale,
-              style: text34.bold,
-            ),
-            ViewAllButton(
-              onTap: () {
-                model.onGoToViewAllProducts(TypeProduct.sale);
-              },
-            ),
-          ],
-        ),
-        SizedBox(height: 22.w),
-        SizedBox(
-          height: 420.w,
-          child: ValueListenableBuilder(
-            valueListenable: model.saleProducts,
-            builder: (context, saleProducts, child) {
-              if (saleProducts.isNullOrEmpty) {
-                return _shimmerProductList();
-              }
-              return ListView(
-                scrollDirection: Axis.horizontal,
-                children: saleProducts
-                    .map(
-                      (product) => _productItem(product),
-                    )
-                    .toList(),
-              );
-            },
-          ),
-        ),
-      ],
-    );
+    return _productItem(product, context);
   }
 
-  Widget _productItem(ProductModel product) {
+  Widget _productItem(ProductModel product, BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 17.w),
+      padding: EdgeInsets.only(right: (index % 2 != 0) ? 0 : 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -79,7 +41,7 @@ class SaleProductListCard extends StatelessWidget {
                   ],
                 ),
               ),
-              _salePercentProduct(product),
+              _newProduct(product, context),
             ],
           ),
           _ratingProduct(),
@@ -154,37 +116,36 @@ class SaleProductListCard extends StatelessWidget {
           itemSize: 16.w,
         ),
         SizedBox(width: 4.w),
-        Text("(10)",
-            style: text10.copyWith(
-              color: getColor().themeColorBlackWhite,
-            ),
-            overflow: TextOverflow.ellipsis),
+        Text(
+          "(10)",
+          style: text10.copyWith(
+            color: getColor().themeColorBlackWhite,
+          ),
+          overflow: TextOverflow.ellipsis,
+        ),
       ],
     );
   }
 
-  Widget _salePercentProduct(ProductModel product) {
+  Widget _newProduct(ProductModel product, BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8.w),
       child: Align(
         alignment: Alignment.topLeft,
         child: Container(
-          width: 48.w,
-          height: 28.w,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              29.r,
+            alignment: AlignmentDirectional.center,
+            width: 48.w,
+            height: 28.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(29.r),
+              color: color222222,
             ),
-            color: colordb3022,
-          ),
-          child: Text(
-            product.salePercent,
-            style: text11.copyWith(
-              color: getColor().themeColorWhiteBlack,
-            ),
-          ),
-        ),
+            child: Text(
+              context.loc.new_title.toUpperCase(),
+              style: text11.copyWith(
+                color: getColor().themeColorWhiteBlack,
+              ),
+            )),
       ),
     );
   }
@@ -213,8 +174,7 @@ class SaleProductListCard extends StatelessWidget {
 
   Widget _imageProduct(ProductModel product) {
     return SizedBox(
-      width: 150.w,
-      height: 260.w,
+      height: 265.w,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(
           8.w,
@@ -223,66 +183,6 @@ class SaleProductListCard extends StatelessWidget {
           fit: BoxFit.cover,
           product.urlImage,
         ),
-      ),
-    );
-  }
-
-  Widget _shimmerProductList() {
-    return Shimmer.fromColors(
-      baseColor: getColor().themeColorAAAAAAA.withOpacity(0.4),
-      highlightColor: getColor().themeColorAAAAAAA.withOpacity(0.2),
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          _shimmerProductItem(),
-          _shimmerProductItem(),
-          _shimmerProductItem(),
-        ],
-      ),
-    );
-  }
-
-  Widget _shimmerProductItem() {
-    return Padding(
-      padding: EdgeInsets.only(right: 17.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 150.w,
-            height: 276.w,
-            decoration: BoxDecoration(
-              color: getColor().themeColorAAAAAAA,
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-          ),
-          SizedBox(height: 10.w),
-          Container(
-            width: 150.w,
-            height: 20.w,
-            color: getColor().themeColorAAAAAAA,
-          ),
-          SizedBox(height: 10.w),
-          Container(
-            width: 150.w,
-            height: 20.w,
-            color: getColor().themeColorAAAAAAA,
-          ),
-          SizedBox(height: 10.w),
-          Container(
-            width: 150.w,
-            height: 20.w,
-            color: getColor().themeColorAAAAAAA,
-          ),
-          SizedBox(height: 10.w),
-          Container(
-            width: 150.w,
-            height: 20.w,
-            color: getColor().themeColorAAAAAAA,
-          ),
-          SizedBox(height: 10.w),
-        ],
       ),
     );
   }

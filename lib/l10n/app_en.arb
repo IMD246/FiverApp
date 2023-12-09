@@ -55,5 +55,6 @@
     "sale": "Sale",
     "view_all": "View all",
     "new_title": "New",
-    "tap_again_to_exit" : "Tap again to exit"
+    "tap_again_to_exit" : "Tap again to exit",
+    "no_data" : "No data"
 }

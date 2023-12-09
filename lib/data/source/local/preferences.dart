@@ -1,4 +1,5 @@
 // ignore_for_file: constant_identifier_names
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
@@ -7,7 +8,7 @@ class Preferences {
   static const ACCESS_TOKEN = "access_token";
 
   static late final SharedPreferences prefs;
-  init() async {
+  Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
   }
 

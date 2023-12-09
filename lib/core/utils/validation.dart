@@ -6,6 +6,7 @@ class Validator {
   static final GlobalKey<ScaffoldMessengerState> _appKey =
       NavigationService.scaffoldKey;
   static BuildContext get _currentContext => _appKey.currentContext!;
+
   static bool isValidPhoneNumber(String? value) =>
       RegExp(r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{5}$)')
           .hasMatch(value ?? '');

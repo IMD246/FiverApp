@@ -10,9 +10,9 @@ import '../core/app/fiver_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initLocatorSerivce();
-  await initAppModel();
+  initLocatorSerivce();
   setupStatusBar();
+  await initAppModel();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
