@@ -42,7 +42,6 @@ String trimStringCharactersByAmount(String input, {int amount = 120}) {
 
 extension IsNullOrEmpty<T> on T {
   bool get isNullOrEmpty {
-    // ignore: unnecessary_null_comparison
     if (this == null) {
       return true;
     }

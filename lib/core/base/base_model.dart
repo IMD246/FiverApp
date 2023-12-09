@@ -16,8 +16,8 @@ import 'handle_error.dart';
 
 abstract class BaseModel extends ChangeNotifier {
   StreamSubscription? updateProfileStream;
-  ViewState? _viewState;
-  ViewState get viewState => _viewState ?? ViewState.loaded;
+  ViewState? viewState;
+  ViewState get initState => ViewState.loaded;
   bool isDisposed = false;
   bool onWillPop = true;
   UserInfoModel? user;
@@ -25,7 +25,10 @@ abstract class BaseModel extends ChangeNotifier {
       NavigationService.scaffoldKey;
   BuildContext get currentContext => appKey.currentContext!;
 
-  initData() {
+  BaseModel() {
+    viewState = initState;
+  }
+  void initData() {
     user = locator<UserModel>().userInfo;
     updateProfileStream =
         eventBus.on<UserInfoModelUpdateEvent>().listen((event) {
@@ -36,7 +39,7 @@ abstract class BaseModel extends ChangeNotifier {
 
   setState(ViewState newState, {forceUpdate = false, dynamic error}) {
     if (viewState == newState && !forceUpdate) return;
-    _viewState = newState;
+    viewState = newState;
     if (viewState == ViewState.error && error != null) {}
   }
 

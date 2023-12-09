@@ -12,13 +12,17 @@ class MainModel extends BaseModel {
 
   void init(int tabIndex) {
     pageController = PageController();
+    _onPageChangeInit(tabIndex);
+    onTabChanged(tabIndex, isInit: true);
+  }
+
+  void _onPageChangeInit(int tabIndex) {
     Timer.periodic(const Duration(milliseconds: 20), (timer) {
       if (pageController.hasClients) {
         _onChangePageController(tabIndex);
         timer.cancel();
       }
     });
-    onTabChanged(tabIndex, isInit: true);
   }
 
   void onTabChanged(int tabIndex, {bool isInit = false}) {

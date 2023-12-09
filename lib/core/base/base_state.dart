@@ -29,23 +29,29 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
   }
 
   Widget buildContent() {
-    return Consumer<ThemeManager>(
-      builder: (context, theme, child) {
-        return ChangeNotifierProvider<M>.value(
-          value: model,
-          builder: (context, child) {
-            if (Platform.isAndroid) {
-              WillPopScope(
-                child: buildViewByState(context, model),
-                onWillPop: () async {
-                  return await Future.value(model.onWillPop);
+    return SafeArea(
+      child: Consumer<ThemeManager>(
+        builder: (context, theme, child) {
+          return ChangeNotifierProvider<M>.value(
+            value: model,
+            builder: (context, child) {
+              return Consumer<M>(
+                builder: (context, model, child) {
+                  if (Platform.isAndroid) {
+                    return WillPopScope(
+                      child: buildViewByState(context, model),
+                      onWillPop: () async {
+                        return await Future.value(model.onWillPop);
+                      },
+                    );
+                  }
+                  return buildViewByState(context, model);
                 },
               );
-            }
-            return buildViewByState(context, model);
-          },
-        );
-      },
+            },
+          );
+        },
+      ),
     );
   }
 

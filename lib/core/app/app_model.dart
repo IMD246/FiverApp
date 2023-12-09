@@ -1,4 +1,5 @@
 import 'package:event_bus/event_bus.dart';
+import 'package:fiver/data/source/local/preferences.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fiver/core/app/user_model.dart';
@@ -12,7 +13,8 @@ class AppModel extends ChangeNotifier {
   RouterRedirect _routerRedirect = RouterRedirect.login;
   Future<void> init(Environment environment) async {
     this.environment = environment;
-    await locator<ThemeManager>().init();
+    await locator<Preferences>().init();
+    locator<ThemeManager>().init();
     await locator<UserModel>().init(environment);
   }
 

@@ -49,7 +49,7 @@ class ThemeManager extends ChangeNotifier {
     return _themeData!;
   }
 
-  init() async {
+  void init() async {
     _loadTheme();
   }
 

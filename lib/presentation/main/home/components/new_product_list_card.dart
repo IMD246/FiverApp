@@ -1,3 +1,4 @@
+import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/res/colors.dart';
 import 'package:fiver/core/res/icons.dart';
@@ -5,6 +6,7 @@ import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/product_model.dart';
+import 'package:fiver/presentation/main/home/components/view_all_button.dart';
 import 'package:fiver/presentation/main/home/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -30,9 +32,10 @@ class NewProductListCard extends StatelessWidget {
               context.loc.new_title,
               style: text34.bold,
             ),
-            Text(
-              context.loc.view_all,
-              style: text11,
+            ViewAllButton(
+              onTap: () {
+                model.onGoToViewAllProducts(TypeProduct.news);
+              },
             ),
           ],
         ),

@@ -18,6 +18,7 @@ import 'package:fiver/presentation/main/home/home_model.dart';
 import 'package:fiver/presentation/main/main_model.dart';
 import 'package:fiver/presentation/main/profile/profile_model.dart';
 import 'package:fiver/presentation/main/shop/shop_model.dart';
+import 'package:fiver/presentation/view_all_product/view_all_products_model.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../presentation/auth/login/login_model.dart';
@@ -26,7 +27,7 @@ GetIt locator = GetIt.instance;
 
 Future<void> initLocatorSerivce({bool isTesting = false}) async {
   locator.registerLazySingleton<Preferences>(() => Preferences());
-  await locator<Preferences>().init();
+  // await locator<Preferences>().init();
   locator.registerLazySingleton<ThemeManager>(() => ThemeManager());
   locator.registerLazySingleton<AppModel>(() => AppModel());
   locator.registerLazySingleton<UserModel>(() => UserModel());
@@ -34,10 +35,10 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
 
   // Repositories
   locator.registerLazySingleton<SystemRepository>(
-    () => SystemRepositoryImp(locator<Preferences>()),
+    () => SystemRepositoryImp(locator.get()),
   );
   locator.registerLazySingleton<UserRepository>(
-    () => UserRepositoryImp(locator<Preferences>()),
+    () => UserRepositoryImp(locator.get()),
   );
   locator.registerLazySingleton<CommonRepository>(
     () => CommonRepositoryImp(),
@@ -54,4 +55,5 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
   locator.registerFactory(() => BagModel());
   locator.registerFactory(() => FavoritesModel());
   locator.registerFactory(() => ProfileModel());
+  locator.registerFactory(() => ViewAllProductsModel());
 }
