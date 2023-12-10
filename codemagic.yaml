@@ -17,12 +17,6 @@ workflows:
         script: |
           flutter clean
           flutter packages pub get
-      - name: Set up keychain to be used for codesigning using Codemagic CLI 'keychain' command
-        script: |
-          keychain initialize
-      - name: Add certs to keychain
-        script: |
-          keychain add-certificates
       - name: Flutter build apk with flavors
         script: |
           flutter build apk -t lib/flavors/main_develop.dart --flavor=dev --release --no-tree-shake-icons
