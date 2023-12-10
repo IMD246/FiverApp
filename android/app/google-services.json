@@ -1,0 +1,142 @@
+{
+  "project_info": {
+    "project_number": "458951462646",
+    "project_id": "fiver-d3dbc",
+    "storage_bucket": "fiver-d3dbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458951462646:android:71aacd9d168dce5e0de6d7",
+        "android_client_info": {
+          "package_name": "com.example.fiver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458951462646-hjckrognuj1c7efg3ohdsmkpufij7ctf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fiver",
+            "certificate_hash": "d8503aa82a53d300fffd5d6019a609a92d48016a"
+          }
+        },
+        {
+          "client_id": "458951462646-cccujjtpq4bjn86p7eg2o076m4ona2bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALdlmwlUGtDVYnhQdpGVF2H8Mf9tGlr58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458951462646-cccujjtpq4bjn86p7eg2o076m4ona2bk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458951462646-6t9pn80lda4lpb11u5c7q33ka71trf85.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fiven"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458951462646:android:d0be5948a16e0a220de6d7",
+        "android_client_info": {
+          "package_name": "com.example.fiver.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458951462646-0rvpgoesharjoctv5fkdtp1m3g9kgg9h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fiver.dev",
+            "certificate_hash": "d8503aa82a53d300fffd5d6019a609a92d48016a"
+          }
+        },
+        {
+          "client_id": "458951462646-cccujjtpq4bjn86p7eg2o076m4ona2bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALdlmwlUGtDVYnhQdpGVF2H8Mf9tGlr58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458951462646-cccujjtpq4bjn86p7eg2o076m4ona2bk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458951462646-6t9pn80lda4lpb11u5c7q33ka71trf85.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fiven"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458951462646:android:e2ccceecf092ca510de6d7",
+        "android_client_info": {
+          "package_name": "com.example.fiver.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458951462646-ecfp9heeiv5k3eo0p2uldadlna6cmoa5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fiver.stg",
+            "certificate_hash": "d8503aa82a53d300fffd5d6019a609a92d48016a"
+          }
+        },
+        {
+          "client_id": "458951462646-cccujjtpq4bjn86p7eg2o076m4ona2bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALdlmwlUGtDVYnhQdpGVF2H8Mf9tGlr58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458951462646-cccujjtpq4bjn86p7eg2o076m4ona2bk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "458951462646-6t9pn80lda4lpb11u5c7q33ka71trf85.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fiven"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
