@@ -22,9 +22,9 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends BaseState<MainModel, MainPage> {
   List<Widget> pages = const [
-    HomePage(),
     ShopPage(),
     BagPage(),
+    HomePage(),
     FavoritesPage(),
     ProfilePage(),
   ];
