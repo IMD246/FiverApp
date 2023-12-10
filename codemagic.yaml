@@ -9,7 +9,7 @@ workflows:
       events:
         - push
       branch_patterns:
-        - pattern: "integrate_cicd"
+        - pattern: "duy/integrate_cicd"
           include: true
           source: true
     scripts:
