@@ -21,7 +21,7 @@ workflows:
         script: |
           flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
     artifacts:
-      - build/app/flutter-apk/*.apk
+      - build\app\outputs\flutter-apk\app-dev-release.apk
     publishing:
       email:
         recipients:
