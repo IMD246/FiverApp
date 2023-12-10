@@ -16,8 +16,6 @@ workflows:
       - name: Get Flutter Packages
         script: |
           flutter clean
-          ./icons-gen.sh 
-          ./images-gen.sh
           flutter pub get
       - name: Flutter build apk with flavors
         script: |
