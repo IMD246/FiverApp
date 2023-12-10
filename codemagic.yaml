@@ -19,7 +19,7 @@ workflows:
           flutter packages pub get
       - name: Flutter build apk with flavors
         script: |
-          flutter build apk -t lib/flavors/main_develop.dart --flavor=dev --release --no-tree-shake-icons
+          flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
     artifacts:
       - build/app/flutter-apk/*.apk
     publishing:
