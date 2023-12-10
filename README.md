@@ -18,4 +18,4 @@ flutter pub get
 
 flutter build apk -t lib/flavors/main_production.dart --flavor=prod --release --no-tree-shake-icons
 flutter build apk -t lib/flavors/main_staging.dart --flavor=staging --release --no-tree-shake-icons
-flutter build apk -t lib/flavors/main_develop.dart --flavor=dev --release --no-tree-shake-icons
+flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
