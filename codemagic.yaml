@@ -17,6 +17,7 @@ workflows:
         script: |
           flutter clean
           flutter packages pub get
+          ./icons-gen.sh && ./images-gen.sh
       - name: Flutter build apk with flavors
         script: |
           flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
