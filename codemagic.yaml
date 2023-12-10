@@ -7,9 +7,9 @@ workflows:
       flutter: stable
     triggering:
       events:
-        - push
+        - pull_request
       branch_patterns:
-        - pattern: "duy/integrate_cicd"
+        - pattern: "dev"
           include: true
           source: true
     scripts:
@@ -27,6 +27,8 @@ workflows:
         recipients:
           - tduy24699@gmail.com
           - gianghobagai@gmail.com
+          - ntsinh.dev@gmail.com
+          - Boigaming1411@gmail.com
         notify:
           success: true
           failure: true
