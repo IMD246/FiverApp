@@ -8,6 +8,8 @@ workflows:
     triggering:
       events:
         - pull_request
+        - push
+        - tag
       branch_patterns:
         - pattern: "dev"
           include: true
