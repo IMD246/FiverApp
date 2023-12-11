@@ -138,6 +138,10 @@ ValidatorModel? getValidatorFromDioException(DioException object) {
   return validator;
 }
 
-String priceWithUnit(num price){
+String priceWithUnit(num price) {
   return "${price.toString()}\$";
+}
+
+void setValueNotifier(ValueNotifier notifier, dynamic value) {
+  notifier.value = value;
 }

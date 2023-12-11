@@ -22,9 +22,9 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends BaseState<MainModel, MainPage> {
   List<Widget> pages = const [
+    HomePage(),
     ShopPage(),
     BagPage(),
-    HomePage(),
     FavoritesPage(),
     ProfilePage(),
   ];
@@ -63,22 +63,27 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
             _bottomNavigationBarItem(
               label: context.loc.home,
               icon: DIcons.home,
+              iconAct: DIcons.homeAct,
             ),
             _bottomNavigationBarItem(
               label: context.loc.shop,
               icon: DIcons.shop,
+              iconAct: DIcons.shopAct,
             ),
             _bottomNavigationBarItem(
               label: context.loc.bag,
               icon: DIcons.shoppingBag,
+              iconAct: DIcons.shoppingBagAct,
             ),
             _bottomNavigationBarItem(
               label: context.loc.favorites,
               icon: DIcons.heart,
+              iconAct: DIcons.heartAct,
             ),
             _bottomNavigationBarItem(
               label: context.loc.profile,
               icon: DIcons.profile,
+              iconAct: DIcons.profileAct,
             ),
           ],
         );
@@ -89,6 +94,7 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
   BottomNavigationBarItem _bottomNavigationBarItem({
     required String label,
     required String icon,
+    required String iconAct,
   }) {
     return BottomNavigationBarItem(
       label: label,
@@ -97,20 +103,12 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
         width: 30.w,
         height: 30.w,
         fit: BoxFit.scaleDown,
-        colorFilter: ColorFilter.mode(
-          color9B9B9B,
-          BlendMode.srcIn,
-        ),
       ),
       activeIcon: SvgPicture.asset(
-        icon,
+        iconAct,
         width: 30.w,
         height: 30.w,
         fit: BoxFit.scaleDown,
-        colorFilter: ColorFilter.mode(
-          colorEF3651,
-          BlendMode.srcIn,
-        ),
       ),
     );
   }

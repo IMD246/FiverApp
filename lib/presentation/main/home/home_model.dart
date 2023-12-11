@@ -9,6 +9,8 @@ import 'package:fiver/data/model/product_model.dart';
 import 'package:fiver/domain/repositories/common_repository.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/utils/util.dart';
+
 class HomeModel extends BaseModel {
   final _repo = locator<CommonRepository>();
   final ValueNotifier<List<BannerModel>> banners = ValueNotifier([]);
@@ -47,9 +49,9 @@ class HomeModel extends BaseModel {
         ],
       );
       IsolateUtil.killIsolate(isolate: _isolateBanners);
-      _setValueNotifier(banners, await receiveport.first);
+      setValueNotifier(banners, await receiveport.first);
     } catch (e) {
-      _setValueNotifier(banners, []);
+      setValueNotifier(banners, <BannerModel>[]);
     }
   }
 
@@ -65,9 +67,9 @@ class HomeModel extends BaseModel {
         ],
       );
       IsolateUtil.killIsolate(isolate: _isolateNewProducts);
-      _setValueNotifier(newProducts, await receiveport.first);
+      setValueNotifier(newProducts, await receiveport.first);
     } catch (e) {
-      _setValueNotifier(newProducts, []);
+      setValueNotifier(newProducts, <ProductModel>[]);
     }
   }
 
@@ -83,14 +85,10 @@ class HomeModel extends BaseModel {
         ],
       );
       IsolateUtil.killIsolate(isolate: _isolateSaleProducts);
-      _setValueNotifier(saleProducts, await receiveport.first);
+      setValueNotifier(saleProducts, await receiveport.first);
     } catch (e) {
-      _setValueNotifier(saleProducts, []);
+      setValueNotifier(saleProducts, <ProductModel>[]);
     }
-  }
-
-  void _setValueNotifier(ValueNotifier notifier, dynamic value) {
-    notifier.value = value;
   }
 
   void onGoToViewAllProducts(TypeProduct typeProduct) async {
@@ -105,8 +103,7 @@ class HomeModel extends BaseModel {
     banners.dispose();
     saleProducts.dispose();
     newProducts.dispose();
-    IsolateUtil.killIsolate(isolate: _isolateBanners);
-    IsolateUtil.killIsolate(isolate: _isolateNewProducts);
-    IsolateUtil.killIsolate(isolate: _isolateSaleProducts);
+    _killAllIsolate();
+    super.disposeModel();
   }
 }
