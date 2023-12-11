@@ -114,6 +114,8 @@ extension ColorSchemeExtension on ColorScheme {
   Color get themeColorAAAAAAA =>
       getColorTheme(colorAAAAAA, colorWhite.withOpacity(0.7));
 
+  Color get themeColor222222White => getColorTheme(color222222, colorWhite);    
+
   // Background colors
 
   Color get bgColorWhiteBlack => getColorTheme(colorWhite, colorBlack);

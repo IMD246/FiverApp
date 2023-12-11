@@ -1,5 +1,6 @@
 import 'package:fiver/core/base/base_service.dart';
 import 'package:fiver/data/model/banner_model.dart';
+import 'package:fiver/data/model/gender_model.dart';
 import 'package:fiver/data/model/product_model.dart';
 import 'package:fiver/domain/repositories/common_repository.dart';
 
@@ -135,6 +136,15 @@ class CommonRepositoryImp extends BaseSerivce implements CommonRepository {
           urlImage:
               "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
           salePercent: "-7%"),
+    ];
+  }
+
+  @override
+  Future<List<GenderModel>> getGenders() async {
+    return [
+      GenderModel(gender: "Women"),
+      GenderModel(gender: "Men"),
+      GenderModel(gender: "Kids"),
     ];
   }
 }

@@ -1,3 +1,4 @@
+import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/res/colors.dart';
 import 'package:fiver/core/res/icons.dart';
@@ -15,10 +16,11 @@ class ProductItemCard extends StatelessWidget {
     super.key,
     required this.product,
     required this.index,
+    required this.typeProduct,
   });
   final ProductModel product;
   final int index;
-
+  final TypeProduct typeProduct;
   @override
   Widget build(BuildContext context) {
     return _productItem(product, context);
@@ -41,7 +43,9 @@ class ProductItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              _newProduct(product, context),
+              typeProduct == TypeProduct.sale
+                  ? _salePercentProduct(product)
+                  : _newProduct(product, context),
             ],
           ),
           _ratingProduct(),
@@ -146,6 +150,32 @@ class ProductItemCard extends StatelessWidget {
                 color: getColor().themeColorWhiteBlack,
               ),
             )),
+      ),
+    );
+  }
+
+  Widget _salePercentProduct(ProductModel product) {
+    return Padding(
+      padding: EdgeInsets.all(8.w),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Container(
+          width: 48.w,
+          height: 28.w,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              29.r,
+            ),
+            color: colordb3022,
+          ),
+          child: Text(
+            product.salePercent,
+            style: text11.copyWith(
+              color: getColor().themeColorWhiteBlack,
+            ),
+          ),
+        ),
       ),
     );
   }

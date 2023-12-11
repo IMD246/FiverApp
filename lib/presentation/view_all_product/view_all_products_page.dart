@@ -29,6 +29,7 @@ class _ViewAllProductsPageState extends BaseGridState<ProductModel,
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        centerTitle: true,
         title: Text(
           widget.typeProduct.name,
           style: text30.bold.copyWith(
@@ -41,28 +42,12 @@ class _ViewAllProductsPageState extends BaseGridState<ProductModel,
     );
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       automaticallyImplyLeading: false,
-  //       title: Text(
-  //         widget.typeProduct.name,
-  //         style: text30.bold.copyWith(
-  //           color: getColor().themeColorBlackWhite,
-  //         ),
-  //       ),
-  //       leading: const BackButtonWidget(),
-  //     ),
-  //     body: super.buildContent(),
-  //   );
-  // }
-
   @override
   Widget buildItem(BuildContext context, ProductModel item, int index) {
     return ProductItemCard(
       product: item,
       index: index,
+      typeProduct: widget.typeProduct,
     );
   }
 

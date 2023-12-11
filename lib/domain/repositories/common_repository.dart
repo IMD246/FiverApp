@@ -1,4 +1,5 @@
 import 'package:fiver/data/model/banner_model.dart';
+import 'package:fiver/data/model/gender_model.dart';
 import 'package:fiver/data/model/product_model.dart';
 
 abstract class CommonRepository {
@@ -10,4 +11,5 @@ abstract class CommonRepository {
     required int pageSize,
     required int typeProduct,
   });
+  Future<List<GenderModel>> getGenders();
 }

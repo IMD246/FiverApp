@@ -22,7 +22,7 @@ class _HomePageState extends BaseState<HomeModel, HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return buildContent();
+    return super.buildContent();
   }
 
   @override
