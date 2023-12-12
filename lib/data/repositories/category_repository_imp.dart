@@ -1,7 +1,7 @@
-import 'package:fiver/core/base/base_service.dart';
-import 'package:fiver/core/res/images.dart';
-import 'package:fiver/data/model/category_model.dart';
-import 'package:fiver/domain/repositories/category_repository.dart';
+import '../../core/base/base_service.dart';
+import '../../core/res/images.dart';
+import '../model/category_model.dart';
+import '../../domain/repositories/category_repository.dart';
 
 class CategoryRepositoryImp extends BaseSerivce implements CategoryRepository {
   @override

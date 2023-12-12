@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:fiver/core/base/base_model.dart';
-import 'package:fiver/core/extensions/ext_localization.dart';
+import '../../core/base/base_model.dart';
+import '../../core/extensions/ext_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

@@ -1,7 +1,7 @@
-import 'package:fiver/core/base/base_state.dart';
-import 'package:fiver/presentation/main/shop/shop_model.dart';
-import 'package:fiver/presentation/main/shop_category/shop_category_page.dart';
-import 'package:fiver/presentation/main/shop_category_detail/shop_category_detail_page.dart';
+import '../../../core/base/base_state.dart';
+import 'shop_model.dart';
+import '../shop_category/shop_category_page.dart';
+import '../shop_category_detail/shop_category_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class ShopPage extends StatefulWidget {

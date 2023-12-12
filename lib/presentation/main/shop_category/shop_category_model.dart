@@ -1,14 +1,14 @@
 import 'dart:isolate';
 
-import 'package:fiver/core/app/app_model.dart';
-import 'package:fiver/core/base/base_model.dart';
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/event/category_detail_event.dart';
-import 'package:fiver/core/utils/isolate_util.dart';
-import 'package:fiver/data/model/category_model.dart';
-import 'package:fiver/data/model/gender_model.dart';
-import 'package:fiver/domain/repositories/category_repository.dart';
-import 'package:fiver/domain/repositories/common_repository.dart';
+import '../../../core/app/app_model.dart';
+import '../../../core/base/base_model.dart';
+import '../../../core/di/locator_service.dart';
+import '../../../core/event/category_detail_event.dart';
+import '../../../core/utils/isolate_util.dart';
+import '../../../data/model/category_model.dart';
+import '../../../data/model/gender_model.dart';
+import '../../../domain/repositories/category_repository.dart';
+import '../../../domain/repositories/common_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

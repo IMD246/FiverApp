@@ -1,4 +1,5 @@
 class DImages {
+  static String get arrowRight => "assets/images/img_arrow_right.png";
   static String get bgCardCheckIn => "assets/images/img_bg_card_check_in.png";
   static String get cat => "assets/images/img_cat.png";
   static String get cat1 => "assets/images/img_cat_1.png";

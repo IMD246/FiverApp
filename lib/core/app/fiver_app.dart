@@ -1,6 +1,6 @@
-import 'package:fiver/core/app/app_model.dart';
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
+import 'app_model.dart';
+import '../di/locator_service.dart';
+import '../res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

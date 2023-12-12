@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:fiver/core/utils/deboucer.dart';
+import 'deboucer.dart';
 import 'package:flutter/widgets.dart';
 
 class TextEditingControllerCustom extends TextEditingController {

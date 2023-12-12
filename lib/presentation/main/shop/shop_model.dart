@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:fiver/core/app/app_model.dart';
-import 'package:fiver/core/base/base_model.dart';
-import 'package:fiver/core/utils/util.dart';
+import '../../../core/app/app_model.dart';
+import '../../../core/base/base_model.dart';
+import '../../../core/utils/util.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/event/category_detail_event.dart';

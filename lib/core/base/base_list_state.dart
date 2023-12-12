@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:fiver/presentation/widgets/empty_data_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+
+import '../../presentation/widgets/empty_data_widget.dart';
 import '../res/theme/theme_manager.dart';
 import 'base_list_model.dart';
 import 'base_state.dart';

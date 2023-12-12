@@ -1,5 +1,5 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/utils/navigation_service.dart';
+import '../extensions/ext_localization.dart';
+import 'navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class Validator {

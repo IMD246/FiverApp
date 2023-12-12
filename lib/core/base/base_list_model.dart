@@ -1,6 +1,6 @@
-import 'package:fiver/core/enum.dart';
 import 'package:flutter/foundation.dart';
 
+import '../enum.dart';
 import 'base_model.dart';
 
 abstract class BaseListModel<T> extends BaseModel {

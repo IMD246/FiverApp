@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart' as dio;
 
-import 'package:fiver/core/base/rest_client.dart';
-import 'package:fiver/data/source/remote/api_reponse/data_response.dart';
+import 'rest_client.dart';
+import '../../data/source/remote/api_reponse/data_response.dart';
 
 import '../../data/source/remote/api_reponse/api_respone.dart';
 import '../../data/source/remote/api_reponse/exceptions/api_exception.dart';

@@ -1,4 +1,4 @@
-import 'package:fiver/data/model/product_model.dart';
+import '../../data/model/product_model.dart';
 
 abstract class ProductRepository {
   Future<List<ProductModel>> getSaleProductList();

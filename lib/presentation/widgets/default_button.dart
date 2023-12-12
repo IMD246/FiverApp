@@ -11,23 +11,31 @@ class DefaultButton extends StatelessWidget {
     required this.title,
     this.textColor,
     this.bgColor,
+    this.width,
+    this.height,
+    this.borderColor,
   });
   final void Function()? onTap;
   final String title;
   final Color? textColor;
   final Color? bgColor;
+  final double? width;
+  final double? height;
+  final Color? borderColor;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(25.r),
       onTap: onTap,
       child: Container(
-        width: 1.sw,
-        height: 48,
+        width: width ?? 1.sw,
+        height: height ?? 48.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25.r),
-          color: bgColor ?? getColor().themeColorRed,
-        ),
+            borderRadius: BorderRadius.circular(25.r),
+            color: bgColor ?? getColor().themeColorRed,
+            border: Border.all(
+              color: borderColor ?? Colors.transparent,
+            )),
         alignment: Alignment.center,
         child: Text(
           title,

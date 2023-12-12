@@ -1,7 +1,7 @@
-import 'package:fiver/core/base/base_state.dart';
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
+import '../../../core/base/base_state.dart';
+import '../../../core/extensions/ext_localization.dart';
+import '../../../core/res/theme/text_theme.dart';
+import '../../../core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

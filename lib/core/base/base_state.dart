@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
+import '../enum.dart';
+import '../res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

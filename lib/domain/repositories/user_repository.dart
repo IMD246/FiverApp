@@ -1,4 +1,4 @@
-import 'package:fiver/data/model/info_user_access_token.dart';
+import '../../data/model/info_user_access_token.dart';
 
 abstract class UserRepository{
   Future<bool> register({required Map<String, dynamic> postData});

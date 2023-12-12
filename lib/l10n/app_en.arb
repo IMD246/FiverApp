@@ -60,5 +60,14 @@
     "category": "Category",
     "categories": "Categories",
     "filter" : "Filter",
-    "sort_by": "Sort by"
+    "sort_by": "Sort by",
+    "filters": "Filters",
+    "price_range": "Price range",
+    "colors": "Colors",
+    "sizes": "Sizes",
+    "brand": "Brand",
+    "discard" : "Discard",
+    "apply" : "Apply",
+    "search" : "Search",
+    "no_brands_selected" : "No brands selected"
 }

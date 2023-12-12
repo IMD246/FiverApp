@@ -1,4 +1,4 @@
-import 'package:fiver/core/res/theme/theme_manager.dart';
+import '../../../../core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';

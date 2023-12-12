@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import '../../data/model/brand_model.dart';
+import '../../data/model/category_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:intl/intl.dart';
-
 import '../../data/source/remote/api_reponse/exceptions/api_exception.dart';
 
 String formatCurrency(
@@ -144,4 +146,26 @@ String priceWithUnit(num price) {
 
 void setValueNotifier(ValueNotifier notifier, dynamic value) {
   notifier.value = value;
+}
+
+Map<String, dynamic> toMapFilters({
+  required double minPrice,
+  required double maxPrice,
+  required List<Color> colors,
+  required List<int> sizes,
+  CategoryModel? category,
+  required List<BrandModel> brands,
+}) {
+  return {
+    'minPrice': minPrice,
+    'maxPrice': maxPrice,
+    'colors': colors,
+    'sizes': sizes,
+    'category': category,
+    'brands': brands,
+  };
+}
+
+Color toColorFromString(String value) {
+  return Color(int.parse(value));
 }

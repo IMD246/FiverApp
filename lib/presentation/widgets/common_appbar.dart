@@ -1,13 +1,13 @@
-import 'package:fiver/core/res/theme/text_theme.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
-import 'package:fiver/presentation/widgets/back_button.dart';
+import '../../core/res/theme/text_theme.dart';
+import '../../core/res/theme/theme_manager.dart';
+import 'back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppbar({
     super.key,
-    this.centerTitle = false,
+    this.centerTitle = true,
     this.leading,
     required this.title,
     this.bgColor,

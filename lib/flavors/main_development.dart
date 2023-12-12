@@ -1,8 +1,8 @@
-import 'package:fiver/core/app/app_config.dart';
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/extensions/ext_enum.dart';
-import 'package:fiver/core/app/app_model.dart';
-import 'package:fiver/core/di/locator_service.dart';
+import '../core/app/app_config.dart';
+import '../core/enum.dart';
+import '../core/extensions/ext_enum.dart';
+import '../core/app/app_model.dart';
+import '../core/di/locator_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

@@ -1,13 +1,15 @@
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/app/app_model.dart';
-import 'package:fiver/core/app/user_model.dart';
-import 'package:fiver/presentation/auth/forgot_password/forgot_password_page.dart';
-import 'package:fiver/presentation/auth/login/login_page.dart';
-import 'package:fiver/presentation/auth/register/register_page.dart';
-import 'package:fiver/presentation/auth/reset_password/reset_password_page.dart';
-import 'package:fiver/presentation/main/main_page.dart';
-import 'package:fiver/presentation/view_all_product/view_all_products_page.dart';
+import '../di/locator_service.dart';
+import '../enum.dart';
+import '../app/app_model.dart';
+import '../app/user_model.dart';
+import '../../data/model/filter_ui_model.dart';
+import '../../presentation/auth/forgot_password/forgot_password_page.dart';
+import '../../presentation/auth/login/login_page.dart';
+import '../../presentation/auth/register/register_page.dart';
+import '../../presentation/auth/reset_password/reset_password_page.dart';
+import '../../presentation/filter/filter_page.dart';
+import '../../presentation/main/main_page.dart';
+import '../../presentation/view_all_product/view_all_products_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,6 +39,9 @@ class AppRouter extends ChangeNotifier {
 
   static const String viewAllProductsName = 'viewAllProducts';
   static const String viewAllProductsPath = '/viewAllProducts';
+
+  static const String filterName = 'filter';
+  static const String filterPath = '/filter';
 
   static GoRouter get router => _router;
   static final _router = GoRouter(
@@ -88,6 +93,19 @@ class AppRouter extends ChangeNotifier {
         builder: (context, state) {
           return ViewAllProductsPage(
             typeProduct: state.extra as TypeProduct? ?? TypeProduct.news,
+          );
+        },
+      ),
+      GoRoute(
+        path: filterPath,
+        name: filterName,
+        builder: (context, state) {
+          final Map<String, dynamic>? map =
+              state.extra as Map<String, dynamic>?;
+          final FilterUIModel? filterModel =
+              map == null ? null : FilterUIModel.fromMap(map);
+          return FilterPage(
+            filterUIModel: filterModel,
           );
         },
       ),

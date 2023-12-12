@@ -1,13 +1,16 @@
 import 'dart:isolate';
 
-import 'package:fiver/core/app/app_model.dart';
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/utils/util.dart';
-import 'package:fiver/data/model/category_model.dart';
-import 'package:fiver/data/model/product_model.dart';
-import 'package:fiver/data/model/sort_by_model.dart';
-import 'package:fiver/domain/repositories/category_repository.dart';
-import 'package:fiver/domain/repositories/common_repository.dart';
+import '../../../core/app/app_model.dart';
+import '../../../core/di/locator_service.dart';
+import '../../../core/routes/app_router.dart';
+import '../../../core/utils/util.dart';
+import '../../../data/model/brand_model.dart';
+import '../../../data/model/category_model.dart';
+import '../../../data/model/filter_ui_model.dart';
+import '../../../data/model/product_model.dart';
+import '../../../data/model/sort_by_model.dart';
+import '../../../domain/repositories/category_repository.dart';
+import '../../../domain/repositories/common_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/base/base_list_model.dart';
@@ -33,19 +36,17 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
 
   ValueNotifier<double> minPrice = ValueNotifier(0);
 
-  ValueNotifier<double> maxPrice = ValueNotifier(143);
+  ValueNotifier<double> maxPrice = ValueNotifier(0);
 
-  ValueNotifier<List<Colors>> colors = ValueNotifier([]);
+  ValueNotifier<List<Color>> colors = ValueNotifier([]);
 
   ValueNotifier<List<int>> sizes = ValueNotifier([]);
 
   ValueNotifier<CategoryModel?> category = ValueNotifier(null);
 
-  ValueNotifier<List<int>> idBrands = ValueNotifier([]);
+  ValueNotifier<List<BrandModel>> brands = ValueNotifier([]);
 
   List<String> colorsCovertedToString = [];
-
-  late final CategoryModel categoryModel;
 
   void updateProductCategoryIndex(int? index) async {
     if (productCategoryIndex.value == index) return;
@@ -72,9 +73,9 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     }
   }
 
-  void _updateColors(List<Colors> colors) {
+  void _updateColors(List<Color> colors) {
     if (colors.isEmpty) {
-      setValueNotifier(this.colors, <Colors>[]);
+      setValueNotifier(this.colors, <Color>[]);
     } else {
       setValueNotifier(this.colors, colors);
     }
@@ -84,8 +85,8 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
   void _convertedColorsToString() {
     final colors = this.colors.value;
     colorsCovertedToString.clear();
-    for (Colors color in colors) {
-      colorsCovertedToString.add(color.toString());
+    for (Color color in colors) {
+      colorsCovertedToString.add(color.value.toString());
     }
   }
 
@@ -102,11 +103,11 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     setValueNotifier(this.category, category);
   }
 
-  void _updateBrands(List<int> idBrands) {
-    if (idBrands.isEmpty) {
-      setValueNotifier(this.idBrands, <int>[]);
+  void _updateBrands(List<BrandModel> brands) {
+    if (brands.isEmpty) {
+      setValueNotifier(this.brands, <int>[]);
     } else {
-      setValueNotifier(this.idBrands, idBrands);
+      setValueNotifier(this.brands, brands);
     }
   }
 
@@ -119,23 +120,17 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
   }
 
   void applyFilter({
-    required double minPrice,
-    required double maxPrice,
-    required List<Colors> colors,
-    required List<int> sizes,
-    required List<int> brands,
-    required CategoryModel categoryModel,
+    required FilterUIModel filterUIModel,
   }) async {
-    _updateMinMaxPrice(minPrice, maxPrice);
-    _updateColors(colors);
-    _updateSizes(sizes);
-    _updateBrands(brands);
-    _updateCategory(categoryModel);
+    _updateMinMaxPrice(filterUIModel.minPrice, filterUIModel.maxPrice);
+    _updateColors(filterUIModel.colors);
+    _updateSizes(filterUIModel.sizes);
+    _updateBrands(filterUIModel.brands);
+    _updateCategory(filterUIModel.category);
     await refresh();
   }
 
   void init(CategoryModel category) {
-    categoryModel = category;
     setValueNotifier(this.category, category);
     _getProductCategories();
     _getSortByList();
@@ -173,13 +168,37 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     }
   }
 
-  void onGoToFilter() async {}
+  void onGoToFilter() async {
+    AppRouter.router
+        .push(
+      AppRouter.filterPath,
+      extra: toMapFilters(
+        minPrice: minPrice.value,
+        maxPrice: maxPrice.value,
+        colors: colors.value,
+        sizes: sizes.value,
+        brands: brands.value,
+      ),
+    )
+        .then((value) {
+      if (value != null) {
+        final filterModel =
+            FilterUIModel.fromMap(value as Map<String, dynamic>);
+        applyFilter(filterUIModel: filterModel);
+      }
+    });
+  }
+
+  List<int> _toBrandsId() {
+    if (brands.value.isEmpty) return [];
+    return List<int>.from(brands.value.map((e) => e.id).toList());
+  }
 
   @override
   Future<List<ProductModel>?> getData({params, bool? isClear}) async {
     try {
       return await _productRepo.getProductsByFilter(
-        brands: idBrands.value,
+        brands: _toBrandsId(),
         categoryId: 1,
         colors: colorsCovertedToString,
         maxPrice: maxPrice.value,
@@ -211,7 +230,7 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     colors.dispose();
     sizes.dispose();
     category.dispose();
-    idBrands.dispose();
+    brands.dispose();
     _killAllIsolates();
     super.disposeModel();
   }

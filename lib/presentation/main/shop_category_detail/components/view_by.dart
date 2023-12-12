@@ -1,6 +1,6 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/res/colors.dart';
-import 'package:fiver/data/model/sort_by_model.dart';
+import '../../../../core/extensions/ext_localization.dart';
+import '../../../../core/res/colors.dart';
+import '../../../../data/model/sort_by_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
