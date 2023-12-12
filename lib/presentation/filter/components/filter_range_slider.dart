@@ -37,7 +37,7 @@ class FilterRangeSlider extends StatelessWidget {
                         const TextSpan(text: "["),
                         TextSpan(
                           text: "${rangePrice.start.toStringAsFixed(3)}\$",
-                          style: text16.copyWith(
+                          style: text14.copyWith(
                             color: colordb3022,
                           ),
                         ),
@@ -46,13 +46,14 @@ class FilterRangeSlider extends StatelessWidget {
                         ),
                         TextSpan(
                             text: "${rangePrice.end.toStringAsFixed(3)}\$",
-                            style: text16.copyWith(
+                            style: text14.copyWith(
                               color: colordb3022,
                             )),
                         const TextSpan(text: "]"),
                       ],
                     ),
-                    style: text16.copyWith(
+                    maxLines: 2,
+                    style: text14.copyWith(
                       color: getColor().themeColorBlackWhite,
                     ),
                   );
