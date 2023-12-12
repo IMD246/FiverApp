@@ -1,5 +1,6 @@
 import 'package:fiver/data/model/category_model.dart';
 
-abstract class CategoryReopsitory {
-  Future<List<CateogoryModel>> getCategories();
+abstract class CategoryRepository {
+  Future<List<CategoryModel>> getCategories();
+  Future<List<CategoryModel>> getProductCategories();
 }

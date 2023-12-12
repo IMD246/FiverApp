@@ -31,7 +31,6 @@ abstract class BaseListModel<T> extends BaseModel {
     try {
       final data = await getData(params: params, isClear: isClear);
       if (isClear) items.clear();
-
       disableLoadMore = data == null || data.isEmpty;
       if (data?.isNotEmpty == true) {
         items.addAll(data!);

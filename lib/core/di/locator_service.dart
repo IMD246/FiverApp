@@ -7,6 +7,7 @@ import 'package:fiver/data/repositories/system_repository_imp.dart';
 import 'package:fiver/data/source/local/preferences.dart';
 import 'package:fiver/domain/repositories/category_repository.dart';
 import 'package:fiver/domain/repositories/common_repository.dart';
+import 'package:fiver/domain/repositories/product_repository.dart';
 import 'package:fiver/domain/repositories/system_repository.dart';
 import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
@@ -20,10 +21,13 @@ import 'package:fiver/presentation/main/home/home_model.dart';
 import 'package:fiver/presentation/main/main_model.dart';
 import 'package:fiver/presentation/main/profile/profile_model.dart';
 import 'package:fiver/presentation/main/shop/shop_model.dart';
+import 'package:fiver/presentation/main/shop_category_detail/shop_category_detail_model.dart';
 import 'package:fiver/presentation/view_all_product/view_all_products_model.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../data/repositories/product_repository_imp.dart';
 import '../../presentation/auth/login/login_model.dart';
+import '../../presentation/main/shop_category/shop_category_model.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -45,8 +49,11 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
   locator.registerLazySingleton<CommonRepository>(
     () => CommonRepositoryImp(),
   );
-  locator.registerLazySingleton<CategoryReopsitory>(
+  locator.registerLazySingleton<CategoryRepository>(
     () => CategoryRepositoryImp(),
+  );
+  locator.registerLazySingleton<ProductRepository>(
+    () => ProductRepositoryImp(),
   );
 
   // ViewModels
@@ -57,6 +64,8 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
   locator.registerFactory(() => ResetPasswordModel());
   locator.registerFactory(() => HomeModel());
   locator.registerFactory(() => ShopModel());
+  locator.registerFactory(() => ShopCategoryModel());
+  locator.registerFactory(() => ShopCategoryDetailModel());
   locator.registerFactory(() => BagModel());
   locator.registerFactory(() => FavoritesModel());
   locator.registerFactory(() => ProfileModel());

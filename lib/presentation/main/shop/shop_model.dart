@@ -1,86 +1,41 @@
-import 'dart:isolate';
+import 'dart:async';
+import 'dart:developer';
 
+import 'package:fiver/core/app/app_model.dart';
 import 'package:fiver/core/base/base_model.dart';
-import 'package:fiver/core/utils/isolate_util.dart';
-import 'package:fiver/data/model/category_model.dart';
-import 'package:fiver/data/model/gender_model.dart';
-import 'package:fiver/domain/repositories/category_repository.dart';
-import 'package:fiver/domain/repositories/common_repository.dart';
+import 'package:fiver/core/utils/util.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/di/locator_service.dart';
-import '../../../core/utils/util.dart';
+import '../../../core/event/category_detail_event.dart';
+import '../../../data/model/category_model.dart';
 
 class ShopModel extends BaseModel {
-  final _commonRepo = locator<CommonRepository>();
-  final _cateRepo = locator<CategoryReopsitory>();
-
-  Isolate? _isolateCategories;
-  Isolate? _isolateGenders;
-
-  final ValueNotifier<List<GenderModel>> genders = ValueNotifier([]);
-  final ValueNotifier<List<CateogoryModel>> categories = ValueNotifier([]);
-
-  final ValueNotifier<int> selectedGenderIndex = ValueNotifier(0);
-
+  late final PageController pageController;
+  final ValueNotifier<CategoryModel?> category = ValueNotifier(null);
+  StreamSubscription<CategoryDetailEvent>? streamCategoryDetail;
   void init() {
-    _getCategories();
-    _getGenders();
+    pageController = PageController();
+    streamCategoryDetail = eventBus.on<CategoryDetailEvent>().listen((event) {
+      setValueNotifier(category, event.category);
+      if (event.category != null) {
+        onChangedPage(1);
+      } else {
+        onChangedPage(0);
+      }
+    });
   }
 
-  void _getCategories() async {
-    try {
-      var receiveport = ReceivePort();
-      final getCategories = await _cateRepo.getCategories();
-      _isolateCategories = await Isolate.spawn(
-        IsolateUtil.sendDataFromPort,
-        [
-          receiveport.sendPort,
-          getCategories,
-        ],
-      );
-      IsolateUtil.killIsolate(isolate: _isolateCategories);
-      setValueNotifier(categories, await receiveport.first);
-    } catch (e) {
-      setValueNotifier(categories, <CateogoryModel>[]);
-    }
-  }
-
-  void _getGenders() async {
-    try {
-      var receiveport = ReceivePort();
-      final getGenders = await _commonRepo.getGenders();
-      _isolateCategories = await Isolate.spawn(
-        IsolateUtil.sendDataFromPort,
-        [
-          receiveport.sendPort,
-          getGenders,
-        ],
-      );
-      IsolateUtil.killIsolate(isolate: _isolateGenders);
-      setValueNotifier(genders, await receiveport.first);
-    } catch (e) {
-      setValueNotifier(genders, <GenderModel>[]);
-    }
-  }
-
-  void _killAllIsolate() {
-    IsolateUtil.killIsolate(isolate: _isolateCategories);
-    IsolateUtil.killIsolate(isolate: _isolateGenders);
-  }
-
-  void updateSelectedGenderIndex(int index) {
-    if (index == selectedGenderIndex.value) return;
-    setValueNotifier(selectedGenderIndex, index);
-    setValueNotifier(categories, <CateogoryModel>[]);
-    _getCategories();
+  void onChangedPage(int index) {
+    final currentPage = (pageController.page?.toInt() ?? 0);
+    log("currentPage: $currentPage");
+    if (currentPage == index) return;
+    pageController.jumpToPage(index);
   }
 
   @override
   void disposeModel() {
-    genders.dispose();
-    categories.dispose();
-    _killAllIsolate();
+    pageController.dispose();
+    streamCategoryDetail?.cancel();
     super.disposeModel();
   }
 }

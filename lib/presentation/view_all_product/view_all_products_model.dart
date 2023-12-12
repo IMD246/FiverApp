@@ -2,13 +2,13 @@ import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/enum.dart';
 import 'package:fiver/core/extensions/ext_enum.dart';
 import 'package:fiver/data/model/product_model.dart';
-import 'package:fiver/domain/repositories/common_repository.dart';
+import 'package:fiver/domain/repositories/product_repository.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../core/base/base_list_model.dart';
 
 class ViewAllProductsModel extends BaseListModel<ProductModel> {
-  final _repo = locator<CommonRepository>();
+  final _productRepo = locator<ProductRepository>();
   int typeProduct = 0;
   void init(TypeProduct typeProduct) {
     this.typeProduct = typeProduct.getValue();
@@ -17,7 +17,7 @@ class ViewAllProductsModel extends BaseListModel<ProductModel> {
   @override
   Future<List<ProductModel>?> getData({params, bool? isClear}) async {
     try {
-      return await _repo.getProductsByType(
+      return await _productRepo.getProductsByType(
         typeProduct: typeProduct,
         page: page,
         pageSize: pageSize,
