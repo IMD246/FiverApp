@@ -58,5 +58,7 @@
     "tap_again_to_exit" : "Tap again to exit",
     "no_data" : "No data",
     "category": "Category",
-    "categories": "Categories"
+    "categories": "Categories",
+    "filter" : "Filter",
+    "sort_by": "Sort by"
 }

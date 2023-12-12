@@ -2,49 +2,53 @@ import 'package:fiver/core/res/colors.dart';
 import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:fiver/data/model/category_model.dart';
-import 'package:fiver/presentation/main/shop/shop_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../shop_category_model.dart';
+
 class CategoryList extends StatelessWidget {
-  final ShopModel model;
+  final ShopCategoryModel model;
   const CategoryList({
     super.key,
     required this.model,
   });
 
-  Widget _categoryItem(CateogoryModel item) {
-    return Container(
-      width: 343.w,
-      height: 100.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
-        color: Colors.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(left: 23.0.w),
-              child: Text(
-                item.category,
-                style: text18.copyWith(
-                  color: getColor().themeColor222222White,
+  Widget _categoryItem(CategoryModel item) {
+    return GestureDetector(
+      onTap: () {
+        model.onGoToCategoryDetail(item);
+      },
+      child: Container(
+        width: 343.w,
+        height: 100.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.r),
+          color: Colors.white,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 23.0.w),
+                child: Text(
+                  item.category,
+                  style: text18.copyWith(
+                    color: getColor().themeColor222222White,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 343.w / 2,
-            height: 100.w,
-            child: Image.asset(
-              item.urlImages,
-              fit: BoxFit.fill,
+            Expanded(
+              child: Image.asset(
+                item.urlImages,
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

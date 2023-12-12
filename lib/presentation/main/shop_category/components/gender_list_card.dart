@@ -7,14 +7,14 @@ import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../shop_model.dart';
+import '../shop_category_model.dart';
 
 class GenderListCard extends StatelessWidget {
   const GenderListCard({
     super.key,
     required this.model,
   });
-  final ShopModel model;
+  final ShopCategoryModel model;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

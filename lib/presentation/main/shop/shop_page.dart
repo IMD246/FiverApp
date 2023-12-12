@@ -1,12 +1,8 @@
 import 'package:fiver/core/base/base_state.dart';
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/presentation/main/shop/components/category_list.dart';
 import 'package:fiver/presentation/main/shop/shop_model.dart';
-import 'package:fiver/presentation/widgets/common_appbar.dart';
+import 'package:fiver/presentation/main/shop_category/shop_category_page.dart';
+import 'package:fiver/presentation/main/shop_category_detail/shop_category_detail_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'components/components.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
@@ -30,20 +26,27 @@ class _ShopPageState extends BaseState<ShopModel, ShopPage>
 
   @override
   Widget buildContentView(BuildContext context, ShopModel model) {
-    return Scaffold(
-      appBar: CommonAppbar(
-        title: context.loc.categories,
-        centerTitle: true,
-      ),
-      body: SizedBox.expand(
-        child: Column(
-          children: [
-            SizedBox(height: 8.w),
-            GenderListCard(model: model),
-            CategoryList(model: model),
-          ],
-        ),
-      ),
+    return PageView(
+      physics: const NeverScrollableScrollPhysics(),
+      controller: model.pageController,
+      children: [
+        const ShopCategoryPage(),
+        _detailCategoryPage(),
+      ],
+    );
+  }
+
+  Widget _detailCategoryPage() {
+    return ValueListenableBuilder(
+      valueListenable: model.category,
+      builder: (context, category, child) {
+        if (category == null) {
+          return Container();
+        }
+        return ShopCategoryDetailPage(
+          category: model.category.value!,
+        );
+      },
     );
   }
 
