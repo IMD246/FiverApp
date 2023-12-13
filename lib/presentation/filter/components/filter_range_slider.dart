@@ -28,37 +28,7 @@ class FilterRangeSlider extends StatelessWidget {
                   color: getColor().themeColor222222White,
                 ),
               ),
-              ValueListenableBuilder(
-                valueListenable: model.rangePriceSelected,
-                builder: (context, rangePrice, child) {
-                  return Text.rich(
-                    TextSpan(
-                      children: [
-                        const TextSpan(text: "["),
-                        TextSpan(
-                          text: "${rangePrice.start.toStringAsFixed(3)}\$",
-                          style: text14.copyWith(
-                            color: colordb3022,
-                          ),
-                        ),
-                        const TextSpan(
-                          text: " -> ",
-                        ),
-                        TextSpan(
-                            text: "${rangePrice.end.toStringAsFixed(3)}\$",
-                            style: text14.copyWith(
-                              color: colordb3022,
-                            )),
-                        const TextSpan(text: "]"),
-                      ],
-                    ),
-                    maxLines: 2,
-                    style: text14.copyWith(
-                      color: getColor().themeColorBlackWhite,
-                    ),
-                  );
-                },
-              ),
+              _rangePriceSelected(),
             ],
           ),
           SizedBox(height: 36.w),
@@ -84,6 +54,39 @@ class FilterRangeSlider extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _rangePriceSelected() {
+    return ValueListenableBuilder(
+      valueListenable: model.rangePriceSelected,
+      builder: (context, rangePrice, child) {
+        return Text.rich(
+          TextSpan(
+            children: [
+              const TextSpan(text: "["),
+              TextSpan(
+                text: "${rangePrice.start.toStringAsFixed(3)}\$",
+                style: text14.copyWith(
+                  color: colordb3022,
+                ),
+              ),
+              const TextSpan(
+                text: " -> ",
+              ),
+              TextSpan(
+                  text: "${rangePrice.end.toStringAsFixed(3)}\$",
+                  style: text14.copyWith(
+                    color: colordb3022,
+                  )),
+              const TextSpan(text: "]"),
+            ],
+          ),
+          style: text14.copyWith(
+            color: getColor().themeColorBlackWhite,
+          ),
+        );
+      },
     );
   }
 

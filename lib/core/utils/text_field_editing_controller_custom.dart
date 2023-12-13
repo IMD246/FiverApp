@@ -1,7 +1,8 @@
 import 'dart:developer';
 
-import 'deboucer.dart';
 import 'package:flutter/widgets.dart';
+
+import 'deboucer.dart';
 
 class TextEditingControllerCustom extends TextEditingController {
   late final Debouncer _debouncer;

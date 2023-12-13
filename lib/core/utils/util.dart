@@ -2,13 +2,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import '../../data/model/brand_model.dart';
-import '../../data/model/category_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:intl/intl.dart';
-import '../../data/source/remote/api_reponse/exceptions/api_exception.dart';
+
+import '../../data/data_source/remote/api_reponse/exceptions/api_exception.dart';
+import '../../data/model/brand_model.dart';
+import '../../data/model/category_model.dart';
 
 String formatCurrency(
     {required dynamic currency, String? locale, bool isSymbol = true}) {

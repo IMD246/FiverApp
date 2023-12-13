@@ -1,5 +1,5 @@
 import '../../domain/repositories/system_repository.dart';
-import '../source/local/preferences.dart';
+import '../data_source/local/preferences.dart';
 
 class SystemRepositoryImp implements SystemRepository {
   final Preferences _preferences;

@@ -1,3 +1,7 @@
+import '../constant/constants.dart';
+import '../../data/data_source/local/isar_db.dart';
+import '../../data/repositories/local/local_common_repository.dart';
+import '../../data/repositories/remote/remote_common_repository.dart';
 import 'package:get_it/get_it.dart';
 
 import '../app/app_model.dart';
@@ -8,7 +12,7 @@ import '../../data/repositories/category_repository_imp.dart';
 import '../../data/repositories/common_repository_imp.dart';
 import '../../data/repositories/system_repository_imp.dart';
 import '../../data/repositories/user_repository_imp.dart';
-import '../../data/source/local/preferences.dart';
+import '../../data/data_source/local/preferences.dart';
 import '../../domain/repositories/category_repository.dart';
 import '../../domain/repositories/common_repository.dart';
 import '../../domain/repositories/product_repository.dart';
@@ -35,6 +39,7 @@ GetIt locator = GetIt.instance;
 
 Future<void> initLocatorSerivce({bool isTesting = false}) async {
   locator.registerLazySingleton<Preferences>(() => Preferences());
+  locator.registerLazySingleton<IsarDb>(() => IsarDb());
   // await locator<Preferences>().init();
   locator.registerLazySingleton<ThemeManager>(() => ThemeManager());
   locator.registerLazySingleton<AppModel>(() => AppModel());
@@ -57,6 +62,19 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
   locator.registerLazySingleton<ProductRepository>(
     () => ProductRepositoryImp(),
   );
+
+  // Remote Repositories
+  locator.registerLazySingleton<CommonRepository>(
+    () => RemoteCommonRepository(),
+    instanceName: Constants.instanceRemoteCommonRepository,
+  );
+
+  // Local Repositories
+  locator.registerLazySingleton<CommonRepository>(
+    () => LocalCommonRepository(),
+    instanceName: Constants.instanceLocalCommonRepository,
+  );
+
 
   // ViewModels
   locator.registerFactory(() => RegisterModel());

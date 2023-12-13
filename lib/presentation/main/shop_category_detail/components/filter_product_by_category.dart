@@ -1,8 +1,8 @@
-import '../../../../core/extensions/ext_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/extensions/ext_localization.dart';
 import '../../../../core/res/icons.dart';
 import '../../../../core/res/theme/text_theme.dart';
 import '../../../../core/res/theme/theme_manager.dart';

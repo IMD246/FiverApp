@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'brand_model.dart';
-
 import 'category_model.dart';
 
 class FilterUIModel {

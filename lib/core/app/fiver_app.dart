@@ -1,13 +1,14 @@
-import 'app_model.dart';
-import '../di/locator_service.dart';
-import '../res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../di/locator_service.dart';
+import '../res/theme/theme_manager.dart';
 import '../routes/app_router.dart';
 import '../utils/navigation_service.dart';
+import 'app_model.dart';
 
 class FiverApp extends StatefulWidget {
   const FiverApp({super.key, required this.titleApp});

@@ -1,13 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../core/base/base_grid_state.dart';
 import '../../core/enum.dart';
 import '../../core/res/theme/text_theme.dart';
 import '../../core/res/theme/theme_manager.dart';
 import '../../data/model/product_model.dart';
+import '../widgets/back_button.dart';
 import 'components/components.dart';
 import 'view_all_products_model.dart';
-import '../widgets/back_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ViewAllProductsPage extends StatefulWidget {
   const ViewAllProductsPage({super.key, required this.typeProduct});

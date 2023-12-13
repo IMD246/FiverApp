@@ -1,9 +1,9 @@
-import '../../../../core/extensions/ext_localization.dart';
-import '../../../widgets/input/text_input_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/extensions/ext_localization.dart';
 import '../../../widgets/input/text_input_default.dart';
+import '../../../widgets/input/text_input_password.dart';
 import '../login_model.dart';
 
 class LoginForm extends StatelessWidget {

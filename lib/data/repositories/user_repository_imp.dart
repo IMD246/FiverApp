@@ -6,8 +6,8 @@ import '../model/info_user_access_token.dart';
 import '../../core/app/user_model.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../../core/di/locator_service.dart';
-import '../source/local/preferences.dart';
-import '../source/remote/network/network_url.dart';
+import '../data_source/local/preferences.dart';
+import '../data_source/remote/network/network_url.dart';
 
 class UserRepositoryImp extends BaseSerivce implements UserRepository {
   final Preferences _pref;

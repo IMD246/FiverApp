@@ -36,43 +36,50 @@ class FilterModel extends BaseModel {
 
   ValueNotifier<List<BrandModel>> brandsSelected = ValueNotifier([]);
 
-  void init(FilterUIModel? filterModel) {
-    _getSizes();
-    _getColors();
+  ValueNotifier<bool> isReadyOnApply = ValueNotifier(false);
+
+  void init(FilterUIModel? filterModel) async {
+    await Future.wait([
+      _getSizes(),
+      _getColors(),
+      _getRangePrice(),
+    ]).whenComplete(() {
+      setValueNotifier(isReadyOnApply, true);
+    });
+
+    _updateSizes(filterModel?.sizes ?? []);
+    _updateColors(filterModel?.colors ?? <Color>[]);
+    updateCategory(filterModel?.category);
+    updateBrands(filterModel?.brands ?? []);
     updateRangeValues(
       RangeValues(
         filterModel?.minPrice ?? 0,
         filterModel?.maxPrice ?? 0,
       ),
     );
-    _updateSizes(filterModel?.sizes ?? []);
-    _updateColors(filterModel?.colors ?? <Color>[]);
-    updateCategory(filterModel?.category);
-    updateBrands(filterModel?.brands ?? []);
-    _getRangePrice();
   }
 
-  void _getSizes() async {
+  Future<void> _getSizes() async {
     try {
       final getSizes = await IsolateUtil.isolateFunction(
-          actionFuture: _commonRepo.getSizeList, isolate: _isolateSizes);
+          actionFuture: _commonRepo.getSizes, isolate: _isolateSizes);
       setValueNotifier(sizes, getSizes);
     } catch (e) {
       setValueNotifier(sizes, <SizeModel>[]);
     }
   }
 
-  void _getColors() async {
+  Future<void> _getColors() async {
     try {
       final getColors = await IsolateUtil.isolateFunction(
-          actionFuture: _commonRepo.getColorList, isolate: _isolateColors);
+          actionFuture: _commonRepo.getColors, isolate: _isolateColors);
       setValueNotifier(colors, getColors);
     } catch (e) {
       setValueNotifier(colors, <SizeModel>[]);
     }
   }
 
-  void _getRangePrice() async {
+  Future<void> _getRangePrice() async {
     try {
       final getRangePrice = await IsolateUtil.isolateFunction(
         actionFuture: _commonRepo.getRangePrice,

@@ -1,8 +1,18 @@
 import 'dart:convert';
 
+import 'package:isar/isar.dart';
+
+part 'size_model.g.dart';
+
+@Collection()
+@Name("sizes")
 class SizeModel {
+  Id? idLocal;
+
   final int id;
+  @Index(unique: true)
   final String sizeName;
+
   SizeModel({
     required this.id,
     required this.sizeName,

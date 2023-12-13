@@ -1,6 +1,14 @@
 import 'dart:convert';
 
+import 'package:isar/isar.dart';
+
+part 'gender_model.g.dart';
+
+@collection
+@Name('genders')
 class GenderModel {
+  Id? idLocal;
+
   final int id;
   final String gender;
   GenderModel({

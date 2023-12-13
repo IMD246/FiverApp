@@ -1,3 +1,5 @@
+import '../../widgets/custom_button.dart';
+
 import '../../../core/extensions/ext_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,10 +75,14 @@ class FilterBottom extends StatelessWidget {
               ),
               SizedBox(width: 23.w),
               Expanded(
-                child: DefaultButton(
-                  onTap: model.onApply,
-                  title: context.loc.apply,
-                  textColor: colorWhite,
+                child: CustomButton(
+                  isEnable: model.isReadyOnApply,
+                  onPressed: model.onApply,
+                  text: context.loc.apply,
+                  backgroundIsEnable: colordb3022,
+                  textStyleEnable: text14.medium.copyWith(
+                    color: colorWhite,
+                  ),
                 ),
               ),
             ],

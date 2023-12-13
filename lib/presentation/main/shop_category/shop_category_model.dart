@@ -1,18 +1,18 @@
 import 'dart:isolate';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
 import '../../../core/app/app_model.dart';
 import '../../../core/base/base_model.dart';
 import '../../../core/di/locator_service.dart';
 import '../../../core/event/category_detail_event.dart';
 import '../../../core/utils/isolate_util.dart';
+import '../../../core/utils/util.dart';
 import '../../../data/model/category_model.dart';
 import '../../../data/model/gender_model.dart';
 import '../../../domain/repositories/category_repository.dart';
 import '../../../domain/repositories/common_repository.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import '../../../core/utils/util.dart';
 
 class ShopCategoryModel extends BaseModel {
   final _commonRepo = locator<CommonRepository>();

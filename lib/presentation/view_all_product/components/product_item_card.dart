@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../core/enum.dart';
 import '../../../core/extensions/ext_localization.dart';
 import '../../../core/res/colors.dart';
@@ -6,10 +11,6 @@ import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';
 import '../../../core/utils/util.dart';
 import '../../../data/model/product_model.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductItemCard extends StatelessWidget {
   const ProductItemCard({

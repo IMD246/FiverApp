@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../core/res/theme/text_theme.dart';
 import '../../core/res/theme/theme_manager.dart';
 import 'back_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppbar({

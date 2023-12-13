@@ -1,12 +1,11 @@
-import '../../../../data/model/gender_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/res/colors.dart';
 import '../../../../core/res/theme/text_theme.dart';
 import '../../../../core/res/theme/theme_manager.dart';
-import 'package:shimmer/shimmer.dart';
-
+import '../../../../data/model/gender_model.dart';
 import '../shop_category_model.dart';
 
 class GenderListCard extends StatelessWidget {

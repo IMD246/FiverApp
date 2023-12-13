@@ -9,8 +9,8 @@ abstract class CommonRepository {
   Future<List<BannerModel>> getBannerList();
   Future<List<GenderModel>> getGenders();
   Future<List<SortByModel>> getSortByList();
-  Future<List<SizeModel>> getSizeList();
-  Future<List<Color>> getColorList();
+  Future<List<SizeModel>> getSizes();
+  Future<List<Color>> getColors();
   Future<List<double>> getRangePrice();
   Future<List<GenderModel>> getFilterGenders();
 }

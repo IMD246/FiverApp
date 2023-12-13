@@ -1,9 +1,10 @@
-import '../../../core/base/base_state.dart';
-import '../../../core/res/colors.dart';
-import 'home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/base/base_state.dart';
+import '../../../core/res/colors.dart';
 import 'components/components.dart';
+import 'home_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

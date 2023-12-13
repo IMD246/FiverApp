@@ -1,10 +1,11 @@
-import '../../widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/base/base_grid_state.dart';
 import '../../../core/res/colors.dart';
 import '../../../data/model/category_model.dart';
 import '../../../data/model/product_model.dart';
+import '../../widgets/common_appbar.dart';
 import 'components/components.dart';
 import 'shop_category_detail_model.dart';
 

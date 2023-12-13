@@ -1,7 +1,8 @@
-import '../../../core/extensions/ext_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../core/extensions/ext_localization.dart';
 import '../../../core/res/colors.dart';
 import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';

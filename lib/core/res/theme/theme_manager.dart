@@ -1,10 +1,11 @@
-import '../../enum.dart';
-import '../../di/locator_service.dart';
-import '../../../domain/repositories/system_repository.dart';
-import '../colors.dart';
-import 'text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../../../domain/repositories/system_repository.dart';
+import '../../di/locator_service.dart';
+import '../../enum.dart';
+import '../colors.dart';
+import 'text_theme.dart';
 
 final appThemeData = {
   AppTheme.white: ThemeData(

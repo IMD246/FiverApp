@@ -10,7 +10,7 @@ import '../event/user_update_model_event.dart';
 import '../utils/dynamic_link_util.dart';
 import '../../data/model/info_user_access_token.dart';
 
-import '../../data/source/remote/network/network_url.dart';
+import '../../data/data_source/remote/network/network_url.dart';
 import '../../domain/repositories/system_repository.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../../firebase_options.dart';

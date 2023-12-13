@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/base/base_state.dart';
 import '../../../core/extensions/ext_localization.dart';
 import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';
+import '../../widgets/back_button.dart';
+import '../../widgets/default_button.dart';
 import 'components/reset_password_form.dart';
 import 'reset_password_model.dart';
-import '../../widgets/back_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../widgets/default_button.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key, required this.token});

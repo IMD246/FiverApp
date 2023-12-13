@@ -1,14 +1,24 @@
+import 'package:flutter/material.dart';
+
 import '../../core/base/base_service.dart';
+import '../../core/constant/constants.dart';
+import '../../core/di/locator_service.dart';
+import '../../domain/repositories/common_repository.dart';
 import '../model/banner_model.dart';
 import '../model/gender_model.dart';
 import '../model/size_model.dart';
 import '../model/sort_by_model.dart';
-import '../../domain/repositories/common_repository.dart';
-import 'package:flutter/material.dart';
-
-import '../../core/res/colors.dart';
+import 'local/local_common_repository.dart';
+import 'remote/remote_common_repository.dart';
 
 class CommonRepositoryImp extends BaseSerivce implements CommonRepository {
+  final _localCommonRepository = locator<CommonRepository>(
+          instanceName: Constants.instanceLocalCommonRepository)
+      as LocalCommonRepository;
+
+  final _remoteCommonRepository = locator<CommonRepository>(
+          instanceName: Constants.instanceRemoteCommonRepository)
+      as RemoteCommonRepository;
   @override
   Future<List<BannerModel>> getBannerList() async {
     return [
@@ -27,17 +37,17 @@ class CommonRepositoryImp extends BaseSerivce implements CommonRepository {
 
   @override
   Future<List<GenderModel>> getGenders() async {
-    return [
-      GenderModel(id: 2,gender: "Women"),
-      GenderModel(id: 3,gender: "Men"),
-      GenderModel(id: 4,gender: "Kids"),
-    ];
+    List<GenderModel> genders = await _localCommonRepository.getGenders();
+    if (genders.isNotEmpty) {
+      return genders;
+    }
+    return await _remoteCommonRepository.getGenders();
   }
 
   @override
   Future<List<GenderModel>> getFilterGenders() async {
     return [
-      GenderModel(id: 1,gender: "All"),
+      GenderModel(id: 1, gender: "All"),
       GenderModel(id: 2, gender: "Women"),
       GenderModel(id: 3, gender: "Men"),
       GenderModel(id: 4, gender: "Kids"),
@@ -56,33 +66,29 @@ class CommonRepositoryImp extends BaseSerivce implements CommonRepository {
   }
 
   @override
-  Future<List<SizeModel>> getSizeList() async {
-    return [
-      SizeModel(id: 1,sizeName: "XS"),
-      SizeModel(id: 2,sizeName: "S"),
-      SizeModel(id: 3,sizeName: "M"),
-      SizeModel(id: 4,sizeName: "L"),
-      SizeModel(id: 5,sizeName: "XL"),
-    ];
+  Future<List<SizeModel>> getSizes() async {
+    List<SizeModel> sizes = await _localCommonRepository.getSizes();
+    if (sizes.isNotEmpty) {
+      return sizes;
+    }
+    return await _remoteCommonRepository.getSizes();
   }
 
   @override
-  Future<List<Color>> getColorList() async {
-    return [
-      color020202,
-      colorF6F6F6,
-      colorF48117,
-      colorBEA9A9,
-      color91BA4F,
-      color2CB1B1
-    ];
+  Future<List<Color>> getColors() async {
+    final colors = await _localCommonRepository.getColors();
+    if (colors.isNotEmpty) {
+      return colors;
+    }
+    return await _remoteCommonRepository.getColors();
   }
 
   @override
   Future<List<double>> getRangePrice() async {
-    return [
-      0,
-      135,
-    ];
+    final rangePrice = await _localCommonRepository.getRangePrice();
+    if (rangePrice.isNotEmpty) {
+      return rangePrice;
+    }
+    return await _remoteCommonRepository.getRangePrice();
   }
 }

@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 
-import '../../../core/app/app_model.dart';
-import '../../../core/base/base_model.dart';
-import '../../../core/utils/util.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/app/app_model.dart';
+import '../../../core/base/base_model.dart';
 import '../../../core/event/category_detail_event.dart';
+import '../../../core/utils/util.dart';
 import '../../../data/model/category_model.dart';
 
 class ShopModel extends BaseModel {

@@ -5,7 +5,7 @@ import 'package:fiver/core/di/locator_service.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../../data/source/remote/network/network_url.dart';
+import '../../data/data_source/remote/network/network_url.dart';
 import '../../domain/repositories/user_repository.dart';
 
 class RestClient {

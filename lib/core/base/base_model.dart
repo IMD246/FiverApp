@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import '../di/locator_service.dart';
-import '../enum.dart';
-import '../event/user_update_model_event.dart';
-import '../../data/model/info_user_access_token.dart';
-import '../app/app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import '../../data/model/info_user_access_token.dart';
+import '../app/app_model.dart';
 import '../app/user_model.dart';
+import '../di/locator_service.dart';
+import '../enum.dart';
+import '../event/user_update_model_event.dart';
 import '../utils/navigation_service.dart';
 import 'handle_error.dart';
 

@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/base/base_state.dart';
 import '../../../core/extensions/ext_localization.dart';
 import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../widgets/back_button.dart';
 import '../../widgets/default_button.dart';
 import '../../widgets/input/text_input_default.dart';
