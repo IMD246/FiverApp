@@ -1,3 +1,5 @@
+import 'package:fiver/data/model/brand_model.dart';
+
 import '../../data/model/banner_model.dart';
 import '../../data/model/gender_model.dart';
 import '../../data/model/size_model.dart';
@@ -13,4 +15,9 @@ abstract class CommonRepository {
   Future<List<Color>> getColors();
   Future<List<double>> getRangePrice();
   Future<List<GenderModel>> getFilterGenders();
+  Future<List<MBrand>> getBrands({
+    String? query,
+    required int page,
+    required int pageSize,
+  });
 }

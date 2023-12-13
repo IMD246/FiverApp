@@ -1,3 +1,6 @@
+import 'package:fiver/data/model/brand_model.dart';
+import 'package:fiver/presentation/brand/brand_page.dart';
+
 import '../di/locator_service.dart';
 import '../enum.dart';
 import '../app/app_model.dart';
@@ -42,6 +45,9 @@ class AppRouter extends ChangeNotifier {
 
   static const String filterName = 'filter';
   static const String filterPath = '/filter';
+
+  static const String brandName = 'brand';
+  static const String brandPath = '/brand';
 
   static GoRouter get router => _router;
   static final _router = GoRouter(
@@ -106,6 +112,16 @@ class AppRouter extends ChangeNotifier {
               map == null ? null : FilterUIModel.fromMap(map);
           return FilterPage(
             filterUIModel: filterModel,
+          );
+        },
+      ),
+      GoRoute(
+        path: brandPath,
+        name: brandName,
+        builder: (context, state) {
+          final List<MBrand>? brands = state.extra as List<MBrand>?;
+          return BrandPage(
+            brands: brands ?? [],
           );
         },
       ),

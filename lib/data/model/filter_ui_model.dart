@@ -10,7 +10,7 @@ class FilterUIModel {
   final List<Color> colors;
   final List<int> sizes;
   final CategoryModel? category;
-  final List<BrandModel> brands;
+  final List<MBrand> brands;
   FilterUIModel({
     required this.minPrice,
     required this.maxPrice,

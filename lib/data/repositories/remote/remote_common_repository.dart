@@ -1,5 +1,8 @@
 import 'dart:ui';
 
+import 'package:fiver/core/utils/util.dart';
+import 'package:fiver/data/model/brand_model.dart';
+
 import '../../../core/constant/constants.dart';
 import '../../../core/di/locator_service.dart';
 import '../../model/banner_model.dart';
@@ -55,13 +58,15 @@ class RemoteCommonRepository implements CommonRepository {
 
   @override
   Future<List<SortByModel>> getSortByList() async {
-    return [
-      SortByModel(name: "Popular"),
-      SortByModel(name: "Newest"),
-      SortByModel(name: "Customer review"),
-      SortByModel(name: "Price: lowest to high"),
-      SortByModel(name: "Price: highest to low"),
+    final sortByList = [
+      SortByModel(id: 1, name: "Popular"),
+      SortByModel(id: 2, name: "Newest"),
+      SortByModel(id: 3, name: "Customer review"),
+      SortByModel(id: 4, name: "Price: lowest to high"),
+      SortByModel(id: 5, name: "Price: highest to low"),
     ];
+    await _localCommonRepository.saveSortByList(sortByList);
+    return sortByList;
   }
 
   @override
@@ -96,5 +101,69 @@ class RemoteCommonRepository implements CommonRepository {
     final List<double> rangePrice = [0, 135];
     await _localCommonRepository.savePriceRange(rangePrice);
     return rangePrice;
+  }
+
+  @override
+  Future<List<MBrand>> getBrands({
+    String? query,
+    required int page,
+    required int pageSize,
+  }) async {
+    final brands = [
+      MBrand(
+        id: 1,
+        name: "adidas",
+      ),
+      MBrand(
+        id: 2,
+        name: "adidas Originals",
+      ),
+      MBrand(
+        id: 3,
+        name: "Blend",
+      ),
+      MBrand(
+        id: 4,
+        name: "Boutique Moschino",
+      ),
+      MBrand(
+        id: 5,
+        name: "Champion",
+      ),
+      MBrand(
+        id: 6,
+        name: "Diesel",
+      ),
+      MBrand(
+        id: 7,
+        name: "Jack & Jones",
+      ),
+      MBrand(
+        id: 8,
+        name: "Naf Naf",
+      ),
+      MBrand(
+        id: 9,
+        name: "Red Valentino",
+      ),
+      MBrand(
+        id: 10,
+        name: "s.Oliver",
+      ),
+    ];
+    if (query.isNullOrEmpty) {
+      return brands;
+    }
+    List<MBrand> brandsFiltered = [];
+    for (var brand in brands) {
+      for (var i = 0; i < brand.name.length; i++) {
+        final charName = brand.name[i].toLowerCase();
+        if (query!.contains(charName)) {
+          brandsFiltered.add(brand);
+          break;
+        }
+      }
+    }
+    return brandsFiltered;
   }
 }

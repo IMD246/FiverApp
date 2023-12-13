@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'size_model.dart';
+part of 'sort_by_model.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,88 +9,74 @@ part of 'size_model.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetSizeModelCollection on Isar {
-  IsarCollection<SizeModel> get sizeModels => this.collection();
+extension GetSortByModelCollection on Isar {
+  IsarCollection<SortByModel> get sortByModels => this.collection();
 }
 
-const SizeModelSchema = CollectionSchema(
-  name: r'sizes',
-  id: 7887996259756897908,
+const SortByModelSchema = CollectionSchema(
+  name: r'sortBy',
+  id: -8763872028365182417,
   properties: {
     r'id': PropertySchema(
       id: 0,
       name: r'id',
       type: IsarType.long,
     ),
-    r'sizeName': PropertySchema(
+    r'name': PropertySchema(
       id: 1,
-      name: r'sizeName',
+      name: r'name',
       type: IsarType.string,
     )
   },
-  estimateSize: _sizeModelEstimateSize,
-  serialize: _sizeModelSerialize,
-  deserialize: _sizeModelDeserialize,
-  deserializeProp: _sizeModelDeserializeProp,
+  estimateSize: _sortByModelEstimateSize,
+  serialize: _sortByModelSerialize,
+  deserialize: _sortByModelDeserialize,
+  deserializeProp: _sortByModelDeserializeProp,
   idName: r'idLocal',
-  indexes: {
-    r'sizeName': IndexSchema(
-      id: 1774564210404109722,
-      name: r'sizeName',
-      unique: true,
-      replace: false,
-      properties: [
-        IndexPropertySchema(
-          name: r'sizeName',
-          type: IndexType.hash,
-          caseSensitive: true,
-        )
-      ],
-    )
-  },
+  indexes: {},
   links: {},
   embeddedSchemas: {},
-  getId: _sizeModelGetId,
-  getLinks: _sizeModelGetLinks,
-  attach: _sizeModelAttach,
+  getId: _sortByModelGetId,
+  getLinks: _sortByModelGetLinks,
+  attach: _sortByModelAttach,
   version: '3.1.0+1',
 );
 
-int _sizeModelEstimateSize(
-  SizeModel object,
+int _sortByModelEstimateSize(
+  SortByModel object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.sizeName.length * 3;
+  bytesCount += 3 + object.name.length * 3;
   return bytesCount;
 }
 
-void _sizeModelSerialize(
-  SizeModel object,
+void _sortByModelSerialize(
+  SortByModel object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeLong(offsets[0], object.id);
-  writer.writeString(offsets[1], object.sizeName);
+  writer.writeString(offsets[1], object.name);
 }
 
-SizeModel _sizeModelDeserialize(
+SortByModel _sortByModelDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = SizeModel(
+  final object = SortByModel(
     id: reader.readLong(offsets[0]),
-    sizeName: reader.readString(offsets[1]),
+    name: reader.readString(offsets[1]),
   );
   object.idLocal = id;
   return object;
 }
 
-P _sizeModelDeserializeProp<P>(
+P _sortByModelDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -106,85 +92,31 @@ P _sizeModelDeserializeProp<P>(
   }
 }
 
-Id _sizeModelGetId(SizeModel object) {
+Id _sortByModelGetId(SortByModel object) {
   return object.idLocal ?? Isar.autoIncrement;
 }
 
-List<IsarLinkBase<dynamic>> _sizeModelGetLinks(SizeModel object) {
+List<IsarLinkBase<dynamic>> _sortByModelGetLinks(SortByModel object) {
   return [];
 }
 
-void _sizeModelAttach(IsarCollection<dynamic> col, Id id, SizeModel object) {
+void _sortByModelAttach(
+    IsarCollection<dynamic> col, Id id, SortByModel object) {
   object.idLocal = id;
 }
 
-extension SizeModelByIndex on IsarCollection<SizeModel> {
-  Future<SizeModel?> getBySizeName(String sizeName) {
-    return getByIndex(r'sizeName', [sizeName]);
-  }
-
-  SizeModel? getBySizeNameSync(String sizeName) {
-    return getByIndexSync(r'sizeName', [sizeName]);
-  }
-
-  Future<bool> deleteBySizeName(String sizeName) {
-    return deleteByIndex(r'sizeName', [sizeName]);
-  }
-
-  bool deleteBySizeNameSync(String sizeName) {
-    return deleteByIndexSync(r'sizeName', [sizeName]);
-  }
-
-  Future<List<SizeModel?>> getAllBySizeName(List<String> sizeNameValues) {
-    final values = sizeNameValues.map((e) => [e]).toList();
-    return getAllByIndex(r'sizeName', values);
-  }
-
-  List<SizeModel?> getAllBySizeNameSync(List<String> sizeNameValues) {
-    final values = sizeNameValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'sizeName', values);
-  }
-
-  Future<int> deleteAllBySizeName(List<String> sizeNameValues) {
-    final values = sizeNameValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'sizeName', values);
-  }
-
-  int deleteAllBySizeNameSync(List<String> sizeNameValues) {
-    final values = sizeNameValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'sizeName', values);
-  }
-
-  Future<Id> putBySizeName(SizeModel object) {
-    return putByIndex(r'sizeName', object);
-  }
-
-  Id putBySizeNameSync(SizeModel object, {bool saveLinks = true}) {
-    return putByIndexSync(r'sizeName', object, saveLinks: saveLinks);
-  }
-
-  Future<List<Id>> putAllBySizeName(List<SizeModel> objects) {
-    return putAllByIndex(r'sizeName', objects);
-  }
-
-  List<Id> putAllBySizeNameSync(List<SizeModel> objects,
-      {bool saveLinks = true}) {
-    return putAllByIndexSync(r'sizeName', objects, saveLinks: saveLinks);
-  }
-}
-
-extension SizeModelQueryWhereSort
-    on QueryBuilder<SizeModel, SizeModel, QWhere> {
-  QueryBuilder<SizeModel, SizeModel, QAfterWhere> anyIdLocal() {
+extension SortByModelQueryWhereSort
+    on QueryBuilder<SortByModel, SortByModel, QWhere> {
+  QueryBuilder<SortByModel, SortByModel, QAfterWhere> anyIdLocal() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension SizeModelQueryWhere
-    on QueryBuilder<SizeModel, SizeModel, QWhereClause> {
-  QueryBuilder<SizeModel, SizeModel, QAfterWhereClause> idLocalEqualTo(
+extension SortByModelQueryWhere
+    on QueryBuilder<SortByModel, SortByModel, QWhereClause> {
+  QueryBuilder<SortByModel, SortByModel, QAfterWhereClause> idLocalEqualTo(
       Id idLocal) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
@@ -194,7 +126,7 @@ extension SizeModelQueryWhere
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterWhereClause> idLocalNotEqualTo(
+  QueryBuilder<SortByModel, SortByModel, QAfterWhereClause> idLocalNotEqualTo(
       Id idLocal) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -217,7 +149,7 @@ extension SizeModelQueryWhere
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterWhereClause> idLocalGreaterThan(
+  QueryBuilder<SortByModel, SortByModel, QAfterWhereClause> idLocalGreaterThan(
       Id idLocal,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
@@ -227,7 +159,7 @@ extension SizeModelQueryWhere
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterWhereClause> idLocalLessThan(
+  QueryBuilder<SortByModel, SortByModel, QAfterWhereClause> idLocalLessThan(
       Id idLocal,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
@@ -237,7 +169,7 @@ extension SizeModelQueryWhere
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterWhereClause> idLocalBetween(
+  QueryBuilder<SortByModel, SortByModel, QAfterWhereClause> idLocalBetween(
     Id lowerIdLocal,
     Id upperIdLocal, {
     bool includeLower = true,
@@ -252,56 +184,11 @@ extension SizeModelQueryWhere
       ));
     });
   }
-
-  QueryBuilder<SizeModel, SizeModel, QAfterWhereClause> sizeNameEqualTo(
-      String sizeName) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'sizeName',
-        value: [sizeName],
-      ));
-    });
-  }
-
-  QueryBuilder<SizeModel, SizeModel, QAfterWhereClause> sizeNameNotEqualTo(
-      String sizeName) {
-    return QueryBuilder.apply(this, (query) {
-      if (query.whereSort == Sort.asc) {
-        return query
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'sizeName',
-              lower: [],
-              upper: [sizeName],
-              includeUpper: false,
-            ))
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'sizeName',
-              lower: [sizeName],
-              includeLower: false,
-              upper: [],
-            ));
-      } else {
-        return query
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'sizeName',
-              lower: [sizeName],
-              includeLower: false,
-              upper: [],
-            ))
-            .addWhereClause(IndexWhereClause.between(
-              indexName: r'sizeName',
-              lower: [],
-              upper: [sizeName],
-              includeUpper: false,
-            ));
-      }
-    });
-  }
 }
 
-extension SizeModelQueryFilter
-    on QueryBuilder<SizeModel, SizeModel, QFilterCondition> {
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idEqualTo(
+extension SortByModelQueryFilter
+    on QueryBuilder<SortByModel, SortByModel, QFilterCondition> {
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> idEqualTo(
       int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -311,7 +198,7 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> idGreaterThan(
     int value, {
     bool include = false,
   }) {
@@ -324,7 +211,7 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idLessThan(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> idLessThan(
     int value, {
     bool include = false,
   }) {
@@ -337,7 +224,7 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idBetween(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> idBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -354,7 +241,8 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idLocalIsNull() {
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition>
+      idLocalIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'idLocal',
@@ -362,7 +250,8 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idLocalIsNotNull() {
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition>
+      idLocalIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'idLocal',
@@ -370,7 +259,7 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idLocalEqualTo(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> idLocalEqualTo(
       Id? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -380,7 +269,8 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idLocalGreaterThan(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition>
+      idLocalGreaterThan(
     Id? value, {
     bool include = false,
   }) {
@@ -393,7 +283,7 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idLocalLessThan(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> idLocalLessThan(
     Id? value, {
     bool include = false,
   }) {
@@ -406,7 +296,7 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> idLocalBetween(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> idLocalBetween(
     Id? lower,
     Id? upper, {
     bool includeLower = true,
@@ -423,20 +313,20 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameEqualTo(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sizeName',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameGreaterThan(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -444,14 +334,14 @@ extension SizeModelQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'sizeName',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameLessThan(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -459,14 +349,14 @@ extension SizeModelQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'sizeName',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameBetween(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -475,7 +365,7 @@ extension SizeModelQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'sizeName',
+        property: r'name',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -485,180 +375,181 @@ extension SizeModelQueryFilter
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameStartsWith(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'sizeName',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameEndsWith(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'sizeName',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameContains(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'sizeName',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameMatches(
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'sizeName',
+        property: r'name',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition> sizeNameIsEmpty() {
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition> nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sizeName',
+        property: r'name',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterFilterCondition>
-      sizeNameIsNotEmpty() {
+  QueryBuilder<SortByModel, SortByModel, QAfterFilterCondition>
+      nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'sizeName',
+        property: r'name',
         value: '',
       ));
     });
   }
 }
 
-extension SizeModelQueryObject
-    on QueryBuilder<SizeModel, SizeModel, QFilterCondition> {}
+extension SortByModelQueryObject
+    on QueryBuilder<SortByModel, SortByModel, QFilterCondition> {}
 
-extension SizeModelQueryLinks
-    on QueryBuilder<SizeModel, SizeModel, QFilterCondition> {}
+extension SortByModelQueryLinks
+    on QueryBuilder<SortByModel, SortByModel, QFilterCondition> {}
 
-extension SizeModelQuerySortBy on QueryBuilder<SizeModel, SizeModel, QSortBy> {
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> sortById() {
+extension SortByModelQuerySortBy
+    on QueryBuilder<SortByModel, SortByModel, QSortBy> {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> sortById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> sortByIdDesc() {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> sortByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> sortBySizeName() {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sizeName', Sort.asc);
+      return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> sortBySizeNameDesc() {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sizeName', Sort.desc);
+      return query.addSortBy(r'name', Sort.desc);
     });
   }
 }
 
-extension SizeModelQuerySortThenBy
-    on QueryBuilder<SizeModel, SizeModel, QSortThenBy> {
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> thenById() {
+extension SortByModelQuerySortThenBy
+    on QueryBuilder<SortByModel, SortByModel, QSortThenBy> {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> thenByIdLocal() {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> thenByIdLocal() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'idLocal', Sort.asc);
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> thenByIdLocalDesc() {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> thenByIdLocalDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'idLocal', Sort.desc);
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> thenBySizeName() {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sizeName', Sort.asc);
+      return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QAfterSortBy> thenBySizeNameDesc() {
+  QueryBuilder<SortByModel, SortByModel, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sizeName', Sort.desc);
+      return query.addSortBy(r'name', Sort.desc);
     });
   }
 }
 
-extension SizeModelQueryWhereDistinct
-    on QueryBuilder<SizeModel, SizeModel, QDistinct> {
-  QueryBuilder<SizeModel, SizeModel, QDistinct> distinctById() {
+extension SortByModelQueryWhereDistinct
+    on QueryBuilder<SortByModel, SortByModel, QDistinct> {
+  QueryBuilder<SortByModel, SortByModel, QDistinct> distinctById() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'id');
     });
   }
 
-  QueryBuilder<SizeModel, SizeModel, QDistinct> distinctBySizeName(
+  QueryBuilder<SortByModel, SortByModel, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'sizeName', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
 }
 
-extension SizeModelQueryProperty
-    on QueryBuilder<SizeModel, SizeModel, QQueryProperty> {
-  QueryBuilder<SizeModel, int, QQueryOperations> idLocalProperty() {
+extension SortByModelQueryProperty
+    on QueryBuilder<SortByModel, SortByModel, QQueryProperty> {
+  QueryBuilder<SortByModel, int, QQueryOperations> idLocalProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'idLocal');
     });
   }
 
-  QueryBuilder<SizeModel, int, QQueryOperations> idProperty() {
+  QueryBuilder<SortByModel, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<SizeModel, String, QQueryOperations> sizeNameProperty() {
+  QueryBuilder<SortByModel, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'sizeName');
+      return query.addPropertyName(r'name');
     });
   }
 }

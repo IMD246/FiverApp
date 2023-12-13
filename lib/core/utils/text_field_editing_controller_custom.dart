@@ -14,11 +14,13 @@ class TextEditingControllerCustom extends TextEditingController {
   void listener({
     int? milliseconds,
     required Function() action,
+    void Function()? timeOut,
   }) {
     addListener(() {
       _debouncer.run(
         milliseconds: milliseconds,
         action: action,
+        timeOut: timeOut,
       );
     });
   }

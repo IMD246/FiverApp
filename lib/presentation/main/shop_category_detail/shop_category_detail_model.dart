@@ -44,7 +44,7 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
 
   ValueNotifier<CategoryModel?> category = ValueNotifier(null);
 
-  ValueNotifier<List<BrandModel>> brands = ValueNotifier([]);
+  ValueNotifier<List<MBrand>> brands = ValueNotifier([]);
 
   List<String> colorsCovertedToString = [];
 
@@ -99,11 +99,11 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
   }
 
   void _updateCategory(CategoryModel? category) {
-    if (this.category.value?.uid == category?.uid) return;
+    if (this.category.value?.id == category?.id) return;
     setValueNotifier(this.category, category);
   }
 
-  void _updateBrands(List<BrandModel> brands) {
+  void _updateBrands(List<MBrand> brands) {
     if (brands.isEmpty) {
       setValueNotifier(this.brands, <int>[]);
     } else {
@@ -199,13 +199,12 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     try {
       return await _productRepo.getProductsByFilter(
         brands: _toBrandsId(),
-        categoryId: 1,
+        categoryId: category.value?.id,
         colors: colorsCovertedToString,
         maxPrice: maxPrice.value,
         minPrice: minPrice.value,
         sizes: sizes.value,
-        // sortByType: sortBy.value,
-        sortByType: 1,
+        sortByType: sortBy.value?.id,
         page: page,
         pageSize: pageSize,
       );

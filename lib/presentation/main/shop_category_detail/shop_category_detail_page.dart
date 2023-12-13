@@ -105,6 +105,7 @@ class _ShopCategoryDetailPageState extends BaseGridState<
   @override
   Widget buildItem(BuildContext context, ProductModel item, int index) {
     return ProductItemCard(
+      key: ValueKey(item.name),
       product: item,
       index: index,
     );

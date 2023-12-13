@@ -86,7 +86,7 @@ class ViewBy extends StatelessWidget {
                       (sortBy) {
                         setState(
                           () {
-                            if (currentSortBy?.uid == sortBy.uid) {
+                            if (currentSortBy?.id == sortBy.id) {
                               currentSortBy = null;
                             } else {
                               currentSortBy = sortBy;
@@ -124,7 +124,7 @@ class ViewBy extends StatelessWidget {
                       onTap(sortBy);
                     },
                     child: _sortByItem(
-                      currentSortBy?.uid == sortBy.uid,
+                      currentSortBy?.id == sortBy.id,
                       sortBy,
                     ),
                   );

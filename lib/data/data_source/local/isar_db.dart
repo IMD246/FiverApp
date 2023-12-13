@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../model/gender_model.dart';
 import '../../model/size_model.dart';
+import '../../model/sort_by_model.dart';
 
 class IsarDb {
   late final Isar isar;
@@ -14,6 +15,7 @@ class IsarDb {
       [
         GenderModelSchema,
         SizeModelSchema,
+        SortByModelSchema,
       ],
       directory: dir.path,
     );
@@ -69,6 +71,31 @@ class IsarDb {
       await isar.writeTxn(() async {
         await isar.sizeModels.clear();
         isar.sizeModels.putAll(sizes);
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+  }
+
+  Future<List<SortByModel>> getSortByList() async {
+    try {
+      final getSortByList = await isar.sortByModels.where().findAll();
+      return getSortByList;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return [];
+    }
+  }
+
+  Future<void> saveSortByList(List<SortByModel> sortByList) async {
+    try {
+      await isar.writeTxn(() async {
+        await isar.sortByModels.clear();
+        isar.sortByModels.putAll(sortByList);
       });
     } catch (e) {
       if (kDebugMode) {

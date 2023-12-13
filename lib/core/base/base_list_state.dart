@@ -33,13 +33,13 @@ abstract class BaseListState<I, M extends BaseListModel<I>,
     });
   }
 
-  // void _jumpToTop() {
-  //   controller.animateTo(
-  //     0.0,
-  //     curve: Curves.easeInOut,
-  //     duration: const Duration(milliseconds: 300),
-  //   );
-  // }
+  void jumpToTop() {
+    controller.animateTo(
+      0.0,
+      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 300),
+    );
+  }
 
   @override
   Widget buildContentView(BuildContext context, M model) {

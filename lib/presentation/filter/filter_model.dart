@@ -34,7 +34,7 @@ class FilterModel extends BaseModel {
 
   ValueNotifier<CategoryModel?> categorySelected = ValueNotifier(null);
 
-  ValueNotifier<List<BrandModel>> brandsSelected = ValueNotifier([]);
+  ValueNotifier<List<MBrand>> brandsSelected = ValueNotifier([]);
 
   ValueNotifier<bool> isReadyOnApply = ValueNotifier(false);
 
@@ -122,13 +122,13 @@ class FilterModel extends BaseModel {
   }
 
   void updateCategory(CategoryModel? category) {
-    if (categorySelected.value?.uid == category?.uid) return;
+    if (categorySelected.value?.id == category?.id) return;
     setValueNotifier(categorySelected, category);
   }
 
-  void updateBrands(List<BrandModel> brands) {
+  void updateBrands(List<MBrand> brands) {
     if (brands.isEmpty) {
-      setValueNotifier(brandsSelected, <BrandModel>[]);
+      setValueNotifier(brandsSelected, <MBrand>[]);
     } else {
       setValueNotifier(brandsSelected, brands);
     }
@@ -206,7 +206,18 @@ class FilterModel extends BaseModel {
     return sizes.any((element) => element == id);
   }
 
-  void onGoToBrandPage() {}
+  void onGoToBrandPage() async {
+    await AppRouter.router
+        .push(
+      AppRouter.brandPath,
+      extra: brandsSelected.value,
+    )
+        .then((value) {
+      if (value != null) {
+        updateBrands(value as List<MBrand>);
+      }
+    });
+  }
 
   @override
   void disposeModel() {
@@ -218,6 +229,7 @@ class FilterModel extends BaseModel {
     sizes.dispose();
     categorySelected.dispose();
     brandsSelected.dispose();
+    isReadyOnApply.dispose();
     _killAllIsolates();
     super.disposeModel();
   }

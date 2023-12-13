@@ -82,7 +82,7 @@ class ProductCategoryListCard extends StatelessWidget {
       valueListenable: model.productCategoryIndex,
       builder: (context, productCategoryIndex, child) {
         return Container(
-          key: ValueKey(productCategory.uid),
+          key: ValueKey(productCategory.id),
           constraints: BoxConstraints(
             minWidth: 100.w,
           ),

@@ -42,6 +42,7 @@ abstract class BaseListModel<T> extends BaseModel {
     }
     loadMoreValue.value = false;
     if (!isDisposed) notifyListeners();
+    onModelReady();
   }
 
   void loadCacheData({dynamic params}) async {
@@ -80,6 +81,8 @@ abstract class BaseListModel<T> extends BaseModel {
     items.clear();
     if (!isDisposed) notifyListeners();
   }
+
+  void onModelReady() {}
 
   Future<List<T>?> getData({dynamic params, bool isClear});
 

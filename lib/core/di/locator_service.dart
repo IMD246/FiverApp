@@ -1,3 +1,5 @@
+import 'package:fiver/presentation/brand/brand_model.dart';
+
 import '../constant/constants.dart';
 import '../../data/data_source/local/isar_db.dart';
 import '../../data/repositories/local/local_common_repository.dart';
@@ -75,7 +77,6 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
     instanceName: Constants.instanceLocalCommonRepository,
   );
 
-
   // ViewModels
   locator.registerFactory(() => RegisterModel());
   locator.registerFactory(() => LoginModel());
@@ -91,4 +92,5 @@ Future<void> initLocatorSerivce({bool isTesting = false}) async {
   locator.registerFactory(() => ProfileModel());
   locator.registerFactory(() => ViewAllProductsModel());
   locator.registerFactory(() => FilterModel());
+  locator.registerFactory(() => BrandModel());
 }

@@ -69,5 +69,7 @@
     "discard" : "Discard",
     "apply" : "Apply",
     "search" : "Search",
-    "no_brands_selected" : "No brands selected"
+    "no_brands_selected" : "No brands selected",
+    "searching" : "Searching...",
+    "there_is_no_data_matched" : "There is no data matched"
 }

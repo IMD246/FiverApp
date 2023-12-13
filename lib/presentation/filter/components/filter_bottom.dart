@@ -41,12 +41,17 @@ class FilterBottom extends StatelessWidget {
                     ValueListenableBuilder(
                       valueListenable: model.brandsSelected,
                       builder: (context, brands, child) {
-                        return Text(
-                          brands.isEmpty
-                              ? context.loc.no_brands_selected
-                              : model.getBrandsName(),
-                          style: text11.copyWith(
-                            color: getColor().themeColorBlackABB4BD,
+                        return SizedBox(
+                          width: 0.8.sw,
+                          child: Text(
+                            brands.isEmpty
+                                ? context.loc.no_brands_selected
+                                : model.getBrandsName(),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: text11.copyWith(
+                              color: getColor().themeColorBlackABB4BD,
+                            ),
                           ),
                         );
                       },

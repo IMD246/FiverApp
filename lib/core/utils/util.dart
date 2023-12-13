@@ -155,7 +155,7 @@ Map<String, dynamic> toMapFilters({
   required List<Color> colors,
   required List<int> sizes,
   CategoryModel? category,
-  required List<BrandModel> brands,
+  required List<MBrand> brands,
 }) {
   return {
     'minPrice': minPrice,
@@ -169,4 +169,9 @@ Map<String, dynamic> toMapFilters({
 
 Color toColorFromString(String value) {
   return Color(int.parse(value));
+}
+
+
+void unFocus(){
+  primaryFocus?.unfocus();
 }

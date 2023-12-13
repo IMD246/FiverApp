@@ -1,5 +1,5 @@
+import 'package:fiver/data/model/brand_model.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/base/base_service.dart';
 import '../../core/constant/constants.dart';
 import '../../core/di/locator_service.dart';
@@ -56,13 +56,11 @@ class CommonRepositoryImp extends BaseSerivce implements CommonRepository {
 
   @override
   Future<List<SortByModel>> getSortByList() async {
-    return [
-      SortByModel(name: "Popular"),
-      SortByModel(name: "Newest"),
-      SortByModel(name: "Customer review"),
-      SortByModel(name: "Price: lowest to high"),
-      SortByModel(name: "Price: highest to low"),
-    ];
+    final sortByList = await _localCommonRepository.getSortByList();
+    if (sortByList.isNotEmpty) {
+      return sortByList;
+    }
+    return await _remoteCommonRepository.getSortByList();
   }
 
   @override
@@ -90,5 +88,18 @@ class CommonRepositoryImp extends BaseSerivce implements CommonRepository {
       return rangePrice;
     }
     return await _remoteCommonRepository.getRangePrice();
+  }
+
+  @override
+  Future<List<MBrand>> getBrands({
+    String? query,
+    required int page,
+    required int pageSize,
+  }) async {
+    return await _remoteCommonRepository.getBrands(
+      query: query,
+      page: page,
+      pageSize: pageSize,
+    );
   }
 }

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:fiver/data/model/brand_model.dart';
+
 import '../../data_source/local/isar_db.dart';
 import '../../data_source/local/preferences.dart';
 import '../../model/banner_model.dart';
@@ -60,6 +62,19 @@ class LocalCommonRepository extends CommonRepository {
 
   @override
   Future<List<SortByModel>> getSortByList() async {
+    return await _isarDb.getSortByList();
+  }
+
+  Future<void> saveSortByList(List<SortByModel> sortByList) async {
+     await _isarDb.saveSortByList(sortByList);
+  }
+
+  @override
+  Future<List<MBrand>> getBrands({
+    String? query,
+    required int page,
+    required int pageSize,
+  }) async {
     return [];
   }
 }

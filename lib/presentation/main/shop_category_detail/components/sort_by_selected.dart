@@ -29,10 +29,10 @@ class SortBySelected extends StatelessWidget {
           }
           return Text(
             sortBy.name,
-            style: text11.bold.copyWith(
+            style: text12.bold.copyWith(
               color: getColor().themeColor222222White,
               decoration: TextDecoration.underline,
-              decorationStyle: TextDecorationStyle.dashed,
+              decorationThickness: 8.w,
             ),
           );
         },
