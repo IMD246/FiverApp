@@ -1,7 +1,8 @@
 import 'dart:developer';
 
-import 'package:fiver/core/utils/deboucer.dart';
 import 'package:flutter/widgets.dart';
+
+import 'deboucer.dart';
 
 class TextEditingControllerCustom extends TextEditingController {
   late final Debouncer _debouncer;
@@ -13,11 +14,13 @@ class TextEditingControllerCustom extends TextEditingController {
   void listener({
     int? milliseconds,
     required Function() action,
+    void Function()? timeOut,
   }) {
     addListener(() {
       _debouncer.run(
         milliseconds: milliseconds,
         action: action,
+        timeOut: timeOut,
       );
     });
   }

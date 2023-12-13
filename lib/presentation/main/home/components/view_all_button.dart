@@ -1,6 +1,7 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/extensions/ext_localization.dart';
+import '../../../../core/res/theme/text_theme.dart';
 
 class ViewAllButton extends StatelessWidget {
   const ViewAllButton({super.key, required this.onTap});

@@ -1,9 +1,10 @@
 import 'package:event_bus/event_bus.dart';
-import 'package:fiver/data/source/local/preferences.dart';
+import '../../data/data_source/local/isar_db.dart';
+import '../../data/data_source/local/preferences.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fiver/core/app/user_model.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
+import 'user_model.dart';
+import '../res/theme/theme_manager.dart';
 
 import '../di/locator_service.dart';
 import '../enum.dart';
@@ -13,7 +14,12 @@ class AppModel extends ChangeNotifier {
   RouterRedirect _routerRedirect = RouterRedirect.login;
   Future<void> init(Environment environment) async {
     this.environment = environment;
-    await locator<Preferences>().init();
+    await Future.wait(
+      [
+        locator<IsarDb>().init(),
+        locator<Preferences>().init(),
+      ],
+    );
     locator<ThemeManager>().init();
     await locator<UserModel>().init(environment);
   }

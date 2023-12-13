@@ -1,4 +1,4 @@
-import 'package:fiver/core/routes/app_router.dart';
+import '../../core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/res/theme/theme_manager.dart';

@@ -1,7 +1,8 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/routes/app_router.dart';
-import 'package:fiver/core/app/user_model.dart';
+
+import '../app/user_model.dart';
+import '../di/locator_service.dart';
+import '../routes/app_router.dart';
 
 Future<void> initDynamicLink() async {
   final firebaseDynamicLink = FirebaseDynamicLinks.instance;

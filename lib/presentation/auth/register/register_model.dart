@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:dio/dio.dart';
+import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/enum.dart';
@@ -9,10 +10,10 @@ import 'package:fiver/core/provider/auth_provider.dart';
 import 'package:fiver/core/utils/text_field_editing_controller_custom.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/register_info_model.dart';
-import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/domain/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import '../../../core/routes/app_router.dart';
 import '../../../core/utils/validation.dart';
 

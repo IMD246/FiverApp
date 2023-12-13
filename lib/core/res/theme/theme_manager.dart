@@ -1,10 +1,11 @@
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/domain/repositories/system_repository.dart';
-import 'package:fiver/core/res/colors.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../../../domain/repositories/system_repository.dart';
+import '../../di/locator_service.dart';
+import '../../enum.dart';
+import '../colors.dart';
+import 'text_theme.dart';
 
 final appThemeData = {
   AppTheme.white: ThemeData(
@@ -103,6 +104,9 @@ extension ColorSchemeExtension on ColorScheme {
 
   Color get themeColorBlackWhite => getColorTheme(colorBlack, colorWhite);
 
+  Color get themeColorBlack60White =>
+      getColorTheme(colorBlack.withOpacity(0.6), colorWhite);
+
   Color get themeColorPrimary => getColorTheme(colorPrimary, colorPrimaryBlack);
 
   Color get themeColorRed => getColorTheme(colorEF3651, colorEF3651);
@@ -114,7 +118,11 @@ extension ColorSchemeExtension on ColorScheme {
   Color get themeColorAAAAAAA =>
       getColorTheme(colorAAAAAA, colorWhite.withOpacity(0.7));
 
-  Color get themeColor222222White => getColorTheme(color222222, colorWhite);    
+  Color get themeColor222222White => getColorTheme(color222222, colorWhite);
+
+  Color get themeColorF6F6F6 => getColorTheme(colorAAAAAA, colorF6F6F6);
+
+  Color get themeColorBlackABB4BD => getColorTheme(colorBlack, colorABB4BD);
 
   // Background colors
 

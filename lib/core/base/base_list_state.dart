@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:fiver/presentation/widgets/empty_data_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+
+import '../../presentation/widgets/empty_data_widget.dart';
 import '../res/theme/theme_manager.dart';
 import 'base_list_model.dart';
 import 'base_state.dart';
@@ -32,13 +33,13 @@ abstract class BaseListState<I, M extends BaseListModel<I>,
     });
   }
 
-  // void _jumpToTop() {
-  //   controller.animateTo(
-  //     0.0,
-  //     curve: Curves.easeInOut,
-  //     duration: const Duration(milliseconds: 300),
-  //   );
-  // }
+  void jumpToTop() {
+    controller.animateTo(
+      0.0,
+      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 300),
+    );
+  }
 
   @override
   Widget buildContentView(BuildContext context, M model) {

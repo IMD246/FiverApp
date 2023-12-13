@@ -1,13 +1,14 @@
-import 'package:fiver/core/base/base_grid_state.dart';
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
-import 'package:fiver/data/model/product_model.dart';
-import 'package:fiver/presentation/view_all_product/components/components.dart';
-import 'package:fiver/presentation/view_all_product/view_all_products_model.dart';
-import 'package:fiver/presentation/widgets/back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../core/base/base_grid_state.dart';
+import '../../core/enum.dart';
+import '../../core/res/theme/text_theme.dart';
+import '../../core/res/theme/theme_manager.dart';
+import '../../data/model/product_model.dart';
+import '../widgets/back_button.dart';
+import 'components/components.dart';
+import 'view_all_products_model.dart';
 
 class ViewAllProductsPage extends StatefulWidget {
   const ViewAllProductsPage({super.key, required this.typeProduct});

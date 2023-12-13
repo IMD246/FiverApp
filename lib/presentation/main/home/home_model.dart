@@ -1,16 +1,17 @@
 import 'dart:isolate';
-import 'package:fiver/core/base/base_model.dart';
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/routes/app_router.dart';
-import 'package:fiver/core/utils/isolate_util.dart';
-import 'package:fiver/data/model/banner_model.dart';
-import 'package:fiver/data/model/product_model.dart';
-import 'package:fiver/domain/repositories/common_repository.dart';
-import 'package:fiver/domain/repositories/product_repository.dart';
+
 import 'package:flutter/material.dart';
 
+import '../../../core/base/base_model.dart';
+import '../../../core/di/locator_service.dart';
+import '../../../core/enum.dart';
+import '../../../core/routes/app_router.dart';
+import '../../../core/utils/isolate_util.dart';
 import '../../../core/utils/util.dart';
+import '../../../data/model/banner_model.dart';
+import '../../../data/model/product_model.dart';
+import '../../../domain/repositories/common_repository.dart';
+import '../../../domain/repositories/product_repository.dart';
 
 class HomeModel extends BaseModel {
   final _repo = locator<CommonRepository>();

@@ -1,5 +1,5 @@
-import 'package:fiver/core/base/base_state.dart';
-import 'package:fiver/presentation/main/profile/profile_model.dart';
+import '../../../core/base/base_state.dart';
+import 'profile_model.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {

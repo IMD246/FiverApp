@@ -1,11 +1,11 @@
-import 'package:fiver/core/di/locator_service.dart';
-import 'package:fiver/core/enum.dart';
-import 'package:fiver/core/extensions/ext_enum.dart';
-import 'package:fiver/data/model/product_model.dart';
-import 'package:fiver/domain/repositories/product_repository.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../core/base/base_list_model.dart';
+import '../../core/di/locator_service.dart';
+import '../../core/enum.dart';
+import '../../core/extensions/ext_enum.dart';
+import '../../data/model/product_model.dart';
+import '../../domain/repositories/product_repository.dart';
 
 class ViewAllProductsModel extends BaseListModel<ProductModel> {
   final _productRepo = locator<ProductRepository>();

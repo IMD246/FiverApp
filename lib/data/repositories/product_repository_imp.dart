@@ -1,7 +1,6 @@
-import 'package:fiver/core/base/base_service.dart';
-import 'package:fiver/data/model/product_model.dart';
-
+import '../../core/base/base_service.dart';
 import '../../domain/repositories/product_repository.dart';
+import '../model/product_model.dart';
 
 class ProductRepositoryImp extends BaseSerivce implements ProductRepository {
   @override

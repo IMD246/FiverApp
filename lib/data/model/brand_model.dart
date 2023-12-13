@@ -1,28 +1,29 @@
 import 'dart:convert';
 
-import 'package:uuidv6/uuidv6.dart';
-
-class BrandModel {
-  final String uid = uuidv6();
+class MBrand {
+  final int id;
   final String name;
-  BrandModel({
+
+  MBrand({
+    required this.id,
     required this.name,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
     };
   }
 
-  factory BrandModel.fromMap(Map<String, dynamic> map) {
-    return BrandModel(
+  factory MBrand.fromMap(Map<String, dynamic> map) {
+    return MBrand(
+      id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory BrandModel.fromJson(String source) =>
-      BrandModel.fromMap(json.decode(source));
+  factory MBrand.fromJson(String source) => MBrand.fromMap(json.decode(source));
 }

@@ -1,5 +1,5 @@
-import 'package:fiver/core/base/base_state.dart';
-import 'package:fiver/presentation/main/bag/bag_model.dart';
+import '../../../core/base/base_state.dart';
+import 'bag_model.dart';
 import 'package:flutter/material.dart';
 
 class BagPage extends StatefulWidget {
