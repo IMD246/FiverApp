@@ -21,6 +21,7 @@ class CategoryList extends StatelessWidget {
         model.onGoToCategoryDetail(item);
       },
       child: Container(
+        key: ValueKey(item.id),
         width: 343.w,
         height: 100.h,
         decoration: BoxDecoration(

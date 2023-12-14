@@ -33,41 +33,41 @@ class _BrandPageState extends BaseListState<MBrand, BrandModel, BrandPage> {
         model.onBack(newUpdate: false);
         return true;
       },
-      child: Scaffold(
-        appBar: CommonAppbar(
-          title: context.loc.brand,
-          action: () {
-            model.onBack(newUpdate: false);
-          },
-        ),
-        body: Column(
-          children: [
-            SizedBox(height: 16.w),
-            Padding(
-              padding: padding,
-              child: SearchTextInput(
-                controller: model.searchCtr,
-                hintText: context.loc.search,
-                label: "",
-              ),
+      child: Column(
+        children: [
+          SizedBox(height: 16.w),
+          Padding(
+            padding: padding,
+            child: SearchTextInput(
+              controller: model.searchCtr,
+              hintText: context.loc.search,
+              label: "",
             ),
-            Padding(padding: padding),
-            SizedBox(height: 24.w),
-            Expanded(
-              child: super.buildContentView(
-                context,
-                model,
-              ),
+          ),
+          Padding(padding: padding),
+          SizedBox(height: 24.w),
+          Expanded(
+            child: super.buildContentView(
+              context,
+              model,
             ),
-            FilterBottom(model: model)
-          ],
-        ),
+          ),
+          FilterBottom(model: model)
+        ],
       ),
     );
   }
 
   @override
   EdgeInsets get padding => EdgeInsets.symmetric(horizontal: 16.w);
+
+  @override
+  CommonAppbar? get appbar => CommonAppbar(
+        title: context.loc.brand,
+        action: () {
+          model.onBack(newUpdate: false);
+        },
+      );
 
   @override
   Widget buildEmptyView(BuildContext context) {
@@ -90,6 +90,7 @@ class _BrandPageState extends BaseListState<MBrand, BrandModel, BrandPage> {
   @override
   Widget buildItem(BuildContext context, MBrand item, int index) {
     return Padding(
+      key: ValueKey(item.id),
       padding: EdgeInsets.only(bottom: 32.w),
       child: InkWell(
         onTap: () {

@@ -45,7 +45,6 @@ class _FilterColorListState extends State<FilterColorList> {
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: colors.length,
-                  shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final color = colors[index];
                     return GestureDetector(
@@ -98,6 +97,7 @@ class _FilterColorListState extends State<FilterColorList> {
 
   Widget _colorItem(Color color) {
     return Container(
+      key: ValueKey(color.value),
       height: 44.w,
       width: 44.w,
       margin: EdgeInsets.only(right: 20.w),

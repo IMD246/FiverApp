@@ -19,10 +19,8 @@ class _FavoritesPageState extends BaseState<FavoritesModel, FavoritesPage>
 
   @override
   Widget buildContentView(BuildContext context, FavoritesModel model) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Favorites page"),
-      ),
+    return const Center(
+      child: Text("Favorites page"),
     );
   }
 

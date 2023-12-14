@@ -31,37 +31,33 @@ class _LoginPageState extends BaseState<LoginModel, LoginPage> {
   Widget buildContentView(BuildContext context, LoginModel model) {
     return WillPopScope(
       onWillPop: model.onBack,
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 30.w),
-                  Text(
-                    context.loc.login,
-                    style: text34.bold.copyWith(
-                      color: getColor().themeColorBlack,
-                    ),
-                  ),
-                  SizedBox(height: 72.w),
-                  LoginForm(model: model),
-                  SizedBox(
-                    height: 16.w,
-                  ),
-                  _toForgotPasswordButton(model),
-                  SizedBox(
-                    height: 28.w,
-                  ),
-                  _loginButton(model, context),
-                  _toRegisterButton(model, context),
-                  SizedBox(height: 24.w),
-                  _socialButtons(context, model),
-                ],
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 30.w),
+              Text(
+                context.loc.login,
+                style: text34.bold.copyWith(
+                  color: getColor().themeColorBlack,
+                ),
               ),
-            ),
+              SizedBox(height: 72.w),
+              LoginForm(model: model),
+              SizedBox(
+                height: 16.w,
+              ),
+              _toForgotPasswordButton(model),
+              SizedBox(
+                height: 28.w,
+              ),
+              _loginButton(model, context),
+              _toRegisterButton(model, context),
+              SizedBox(height: 24.w),
+              _socialButtons(context, model),
+            ],
           ),
         ),
       ),

@@ -1,5 +1,6 @@
-import 'dart:convert';
 import 'dart:ui';
+
+import 'package:fiver/presentation/brand/brand_model.dart';
 
 import 'brand_model.dart';
 import 'category_model.dart';
@@ -11,12 +12,13 @@ class FilterUIModel {
   final List<int> sizes;
   final CategoryModel? category;
   final List<MBrand> brands;
+
   FilterUIModel({
     required this.minPrice,
     required this.maxPrice,
     required this.colors,
     required this.sizes,
-    this.category,
+    required this.category,
     required this.brands,
   });
 
@@ -36,14 +38,9 @@ class FilterUIModel {
       minPrice: map['minPrice']?.toDouble() ?? 0.0,
       maxPrice: map['maxPrice']?.toDouble() ?? 0.0,
       colors: map['colors'] ?? <Color>[],
-      sizes: map['sizes'] ?? [],
+      sizes: map['sizes'] ?? <int>[],
       category: map['category'],
-      brands: map['brands'] ?? [],
+      brands: map['brands'] ?? <BrandModel>[],
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory FilterUIModel.fromJson(String source) =>
-      FilterUIModel.fromMap(json.decode(source));
 }

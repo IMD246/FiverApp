@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:core';
 
 class ProductModel {
@@ -7,7 +6,8 @@ class ProductModel {
   final num originPrice;
   final num price;
   final String urlImage;
-  final String salePercent;
+  final num salePercent;
+  final bool isNew;
 
   ProductModel({
     required this.name,
@@ -16,6 +16,7 @@ class ProductModel {
     required this.price,
     required this.urlImage,
     required this.salePercent,
+    this.isNew = false,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,6 +27,7 @@ class ProductModel {
       'price': price,
       'urlImage': urlImage,
       'salePercent': salePercent,
+      'isNew': isNew,
     };
   }
 
@@ -36,12 +38,8 @@ class ProductModel {
       originPrice: map['originPrice'] ?? 0,
       price: map['price'] ?? 0,
       urlImage: map['urlImage'] ?? '',
-      salePercent: map['salePercent'] ?? '',
+      salePercent: map['salePercent'] ?? 0,
+      isNew: map['isNew'] ?? false,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory ProductModel.fromJson(String source) =>
-      ProductModel.fromMap(json.decode(source));
 }

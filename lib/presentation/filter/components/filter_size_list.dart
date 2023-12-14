@@ -46,7 +46,6 @@ class _FilterSizeListState extends State<FilterSizeList> {
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: sizes.length,
-                  shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final size = sizes[index];
                     return GestureDetector(
@@ -97,6 +96,7 @@ class _FilterSizeListState extends State<FilterSizeList> {
 
   Widget _sizeItem(SizeModel size) {
     return Container(
+      key: ValueKey(size.id),
       width: 40.w,
       height: 40.w,
       margin: EdgeInsets.only(right: 16.w),

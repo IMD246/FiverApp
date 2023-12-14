@@ -28,43 +28,41 @@ class _HomePageState extends BaseState<HomeModel, HomePage>
 
   @override
   Widget buildContentView(BuildContext context, HomeModel model) {
-    return Scaffold(
-      body: RefreshIndicator(
-        color: colorEF3651,
-        onRefresh: () async {
-          model.refresh();
-        },
-        child: SizedBox.expand(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BannerListCard(
-                  model: model,
+    return RefreshIndicator(
+      color: colorEF3651,
+      onRefresh: () async {
+        model.refresh();
+      },
+      child: SizedBox.expand(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BannerListCard(
+                model: model,
+              ),
+              SizedBox(
+                height: 32.w,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 18.w,
                 ),
-                SizedBox(
-                  height: 32.w,
+                child: Column(
+                  children: [
+                    SaleProductListCard(
+                      model: model,
+                    ),
+                    SizedBox(
+                      height: 8.w,
+                    ),
+                    NewProductListCard(
+                      model: model,
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 18.w,
-                  ),
-                  child: Column(
-                    children: [
-                      SaleProductListCard(
-                        model: model,
-                      ),
-                      SizedBox(
-                        height: 8.w,
-                      ),
-                      NewProductListCard(
-                        model: model,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

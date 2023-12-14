@@ -141,10 +141,6 @@ ValidatorModel? getValidatorFromDioException(DioException object) {
   return validator;
 }
 
-String priceWithUnit(num price) {
-  return "${price.toString()}\$";
-}
-
 void setValueNotifier(ValueNotifier notifier, dynamic value) {
   notifier.value = value;
 }
@@ -171,7 +167,6 @@ Color toColorFromString(String value) {
   return Color(int.parse(value));
 }
 
-
-void unFocus(){
+void unFocus() {
   primaryFocus?.unfocus();
 }

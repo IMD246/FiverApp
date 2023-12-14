@@ -18,10 +18,8 @@ class _BagPageState extends BaseState<BagModel, BagPage>
 
   @override
   Widget buildContentView(BuildContext context, BagModel model) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Bag page"),
-      ),
+    return const Center(
+      child: Text("Bag page"),
     );
   }
 

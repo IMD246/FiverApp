@@ -2,26 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../core/enum.dart';
-import '../../../core/extensions/ext_localization.dart';
-import '../../../core/res/colors.dart';
 import '../../../core/res/icons.dart';
 import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';
-import '../../../core/utils/util.dart';
 import '../../../data/model/product_model.dart';
+import '../../widgets/extra_product_display_widget.dart';
+import '../../widgets/price_display_widget.dart';
 
 class ProductItemCard extends StatelessWidget {
   const ProductItemCard({
     super.key,
     required this.product,
     required this.index,
-    required this.typeProduct,
   });
   final ProductModel product;
   final int index;
-  final TypeProduct typeProduct;
   @override
   Widget build(BuildContext context) {
     return _productItem(product, context);
@@ -44,9 +39,11 @@ class ProductItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              typeProduct == TypeProduct.sale
-                  ? _salePercentProduct(product)
-                  : _newProduct(product, context),
+              ExtraProductDisplayWidget(
+                isNew: product.isNew,
+                salePercent: product.salePercent,
+                width: 156.w,
+              ),
             ],
           ),
           _ratingProduct(),
@@ -55,35 +52,13 @@ class ProductItemCard extends StatelessWidget {
           SizedBox(height: 5.w),
           _nameProduct(product),
           SizedBox(height: 4.w),
-          Row(
-            children: [
-              _originPriceProduct(product),
-              SizedBox(width: 4.w),
-              _priceProduct(product),
-            ],
+          PriceDisplayWidget(
+            salePrice: product.price,
+            originPrice: product.originPrice,
+            salePercent: product.salePercent,
           ),
         ],
       ),
-    );
-  }
-
-  Widget _priceProduct(ProductModel product) {
-    return Text(
-      priceWithUnit(product.price),
-      style: text14.medium.copyWith(
-        color: colordb3022,
-      ),
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-
-  Widget _originPriceProduct(ProductModel product) {
-    return Text(
-      priceWithUnit(product.originPrice),
-      style: text14.medium.copyWith(
-          color: getColor().themeColorGrey,
-          decoration: TextDecoration.lineThrough,
-          overflow: TextOverflow.ellipsis),
     );
   }
 
@@ -129,55 +104,6 @@ class ProductItemCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
       ],
-    );
-  }
-
-  Widget _newProduct(ProductModel product, BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.w),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Container(
-            alignment: AlignmentDirectional.center,
-            width: 48.w,
-            height: 28.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(29.r),
-              color: color222222,
-            ),
-            child: Text(
-              context.loc.new_title.toUpperCase(),
-              style: text11.copyWith(
-                color: getColor().themeColorWhiteBlack,
-              ),
-            )),
-      ),
-    );
-  }
-
-  Widget _salePercentProduct(ProductModel product) {
-    return Padding(
-      padding: EdgeInsets.all(8.w),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Container(
-          width: 48.w,
-          height: 28.w,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              29.r,
-            ),
-            color: colordb3022,
-          ),
-          child: Text(
-            product.salePercent,
-            style: text11.copyWith(
-              color: getColor().themeColorWhiteBlack,
-            ),
-          ),
-        ),
-      ),
     );
   }
 

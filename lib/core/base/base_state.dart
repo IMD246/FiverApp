@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:fiver/presentation/widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -67,21 +68,37 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
   }
 
   Widget buildViewByState(BuildContext context, M model) {
+    Widget body;
     switch (model.viewState) {
       case ViewState.loading:
-        return buildDefaultLoading();
+        body = buildDefaultLoading();
+        break;
       case ViewState.error:
-        return ErrorWidget(Exception());
+        body = ErrorWidget(Exception());
+        break;
       case ViewState.loaded:
-        return buildContentView(context, model);
+        body = buildContentView(context, model);
+        break;
       default:
-        return const SizedBox();
+        body = const SizedBox();
     }
+    return Scaffold(
+      backgroundColor: bgColorScaffold,
+      appBar: appbar,
+      bottomNavigationBar: bottomNavigationBar,
+      body: body,
+    );
   }
 
   Widget buildContentView(BuildContext context, M model);
 
   Color get backgroundLoadingColor => getColor().bgColorWhiteBlack;
+
+  CommonAppbar? appbar;
+
+  Color? bgColorScaffold;
+
+  Widget? bottomNavigationBar;
 
   @override
   void dispose() {

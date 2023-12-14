@@ -30,42 +30,38 @@ class _RegisterPageState extends BaseState<RegisterModel, RegisterPage> {
 
   @override
   Widget buildContentView(BuildContext context, RegisterModel model) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 12.w,
-                ),
-                BackButtonWidget(
-                  action: model.onMoveToLogin,
-                ),
-                SizedBox(height: 30.w),
-                Text(
-                  context.loc.sign_up,
-                  style: text34.bold.copyWith(
-                    color: getColor().themeColorBlack,
-                  ),
-                ),
-                SizedBox(height: 72.w),
-                RegisterForm(model: model),
-                SizedBox(
-                  height: 16.w,
-                ),
-                _toLoginButton(model),
-                SizedBox(
-                  height: 28.w,
-                ),
-                _signUpButton(model, context),
-                SizedBox(height: 24.w),
-                _socialButtons(context, model),
-              ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 12.w,
             ),
-          ),
+            BackButtonWidget(
+              action: model.onMoveToLogin,
+            ),
+            SizedBox(height: 30.w),
+            Text(
+              context.loc.sign_up,
+              style: text34.bold.copyWith(
+                color: getColor().themeColorBlack,
+              ),
+            ),
+            SizedBox(height: 72.w),
+            RegisterForm(model: model),
+            SizedBox(
+              height: 16.w,
+            ),
+            _toLoginButton(model),
+            SizedBox(
+              height: 28.w,
+            ),
+            _signUpButton(model, context),
+            SizedBox(height: 24.w),
+            _socialButtons(context, model),
+          ],
         ),
       ),
     );

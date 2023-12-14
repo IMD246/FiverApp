@@ -39,7 +39,7 @@ class ViewBy extends StatelessWidget {
     ShopCategoryDetailModel model,
     BuildContext context,
   ) {
-    SortByModel? currentSortBy = model.sortBy.value;
+    SortByModel? currentSortBy = model.sortBySelected.value;
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -134,6 +134,7 @@ class ViewBy extends StatelessWidget {
 
   Widget _sortByItem(bool isSelected, SortByModel sortBy) {
     return Container(
+      key: ValueKey(sortBy.id),
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       alignment: Alignment.center,
       height: 48.w,

@@ -1,3 +1,5 @@
+import 'package:fiver/data/data_source/local/isar_db.dart';
+
 import '../../core/app/user_model.dart';
 import '../../core/base/base_service.dart';
 import '../../core/base/rest_client.dart';
@@ -88,18 +90,24 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
     await setAccessToken(token: accessToken);
   }
 
+  Future<void> _optinalCallAPILogout(bool isNeedCallApiLogout) async {
+    if (!isNeedCallApiLogout) {
+      return;
+    }
+    await get(USER_LOGOUT);
+  }
+
   @override
   Future<void> logout({bool isNeedCallApiLogout = false}) async {
-    if (isNeedCallApiLogout) {
-      await get(USER_LOGOUT);
-    }
-    await Future.wait(
+    locator<UserModel>().logout();
+    Future.wait(
       [
+        _optinalCallAPILogout(isNeedCallApiLogout),
         _pref.logout(),
         locator<AuthGoogleProvider>().logout(),
+        locator<IsarDb>().clear(),
       ],
     );
-    locator<UserModel>().logout();
   }
 
   @override

@@ -6,6 +6,8 @@ import 'base_list_state.dart';
 
 abstract class BaseGridState<I, M extends BaseListModel<I>,
     W extends StatefulWidget> extends BaseListState<I, M, W> {
+
+      
   @override
   Widget buildContentView(BuildContext context, M model) {
     Widget content;
@@ -48,7 +50,10 @@ abstract class BaseGridState<I, M extends BaseListModel<I>,
       );
     }
     if (enableRefresh) {
-      content = RefreshIndicator(onRefresh: onRefresh, child: content);
+      content = RefreshIndicator(
+        onRefresh: onRefresh,
+        child: content,
+      );
     }
     return content;
   }

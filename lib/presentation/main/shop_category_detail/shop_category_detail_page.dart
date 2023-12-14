@@ -34,53 +34,46 @@ class _ShopCategoryDetailPageState extends BaseGridState<
 
   @override
   Widget buildContentView(BuildContext context, ShopCategoryDetailModel model) {
-    return Scaffold(
-      appBar: CommonAppbar(
-        action: model.onBack,
-        title: widget.category.category,
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 12.r,
-                  color: color000000.withOpacity(0.12),
-                  offset: const Offset(0, 4),
-                  blurStyle: BlurStyle.outer,
-                  spreadRadius: 0,
-                )
-              ],
-            ),
-            child: Column(
-              children: [
-                ProductCategoryListCard(model: model),
-                SizedBox(height: 18.w),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      FilterProductByCategory(
-                        onTap: model.onGoToFilter,
-                      ),
-                      SortBySelected(model: model),
-                      ViewBy(model: model),
-                    ],
-                  ),
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 12.r,
+                color: color000000.withOpacity(0.12),
+                offset: const Offset(0, 4),
+                blurStyle: BlurStyle.outer,
+                spreadRadius: 0,
+              )
+            ],
+          ),
+          child: Column(
+            children: [
+              ProductCategoryListCard(model: model),
+              SizedBox(height: 18.w),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FilterProductByCategory(
+                      onTap: model.onGoToFilter,
+                    ),
+                    SortBySelected(model: model),
+                    ViewBy(model: model),
+                  ],
                 ),
-                SizedBox(height: 10.w),
-              ],
-            ),
+              ),
+              SizedBox(height: 10.w),
+            ],
           ),
-          Expanded(
-            child: super.buildContentView(context, model),
-          ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: super.buildContentView(context, model),
+        ),
+      ],
     );
   }
 
@@ -101,6 +94,13 @@ class _ShopCategoryDetailPageState extends BaseGridState<
 
   @override
   double get childAspectRatio => 0.52;
+
+  @override
+  CommonAppbar? get appbar => CommonAppbar(
+        action: model.onBack,
+        title: widget.category.category,
+        centerTitle: true,
+      );
 
   @override
   Widget buildItem(BuildContext context, ProductModel item, int index) {

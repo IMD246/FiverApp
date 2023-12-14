@@ -30,24 +30,24 @@ class _ShopCategoryPageState
 
   @override
   Widget buildContentView(BuildContext context, ShopCategoryModel model) {
-    return Scaffold(
-      appBar: CommonAppbar(
-        title: context.loc.categories,
-        isHideBackButton: true,
-        centerTitle: true,
-      ),
-      body: SizedBox.expand(
-        child: Column(
-          children: [
-            SizedBox(height: 8.w),
-            GenderListCard(model: model),
-            CategoryList(model: model),
-          ],
-        ),
+    return SizedBox.expand(
+      child: Column(
+        children: [
+          SizedBox(height: 8.w),
+          GenderListCard(model: model),
+          CategoryList(model: model),
+        ],
       ),
     );
   }
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  CommonAppbar? get appbar => CommonAppbar(
+        title: context.loc.categories,
+        isHideBackButton: true,
+        centerTitle: true,
+      );
 }

@@ -1,3 +1,4 @@
+import 'package:fiver/presentation/widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,7 +7,6 @@ import '../../core/enum.dart';
 import '../../core/res/theme/text_theme.dart';
 import '../../core/res/theme/theme_manager.dart';
 import '../../data/model/product_model.dart';
-import '../widgets/back_button.dart';
 import 'components/components.dart';
 import 'view_all_products_model.dart';
 
@@ -26,29 +26,19 @@ class _ViewAllProductsPageState extends BaseGridState<ProductModel,
   }
 
   @override
-  Widget buildContentView(BuildContext context, ViewAllProductsModel model) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          widget.typeProduct.name,
-          style: text30.bold.copyWith(
-            color: getColor().themeColorBlackWhite,
-          ),
+  CommonAppbar? get appbar => CommonAppbar(
+        title: widget.typeProduct.name,
+        titleStyle: text30.bold.copyWith(
+          color: getColor().themeColorBlackWhite,
         ),
-        leading: const BackButtonWidget(),
-      ),
-      body: super.buildContentView(context, model),
-    );
-  }
+      );
 
   @override
   Widget buildItem(BuildContext context, ProductModel item, int index) {
     return ProductItemCard(
+      key: ValueKey(item.name),
       product: item,
       index: index,
-      typeProduct: widget.typeProduct,
     );
   }
 

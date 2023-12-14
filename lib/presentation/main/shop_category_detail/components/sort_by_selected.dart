@@ -18,7 +18,7 @@ class SortBySelected extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ValueListenableBuilder(
-        valueListenable: model.sortBy,
+        valueListenable: model.sortBySelected,
         builder: (context, sortBy, child) {
           if (sortBy == null) {
             return const SizedBox.shrink();

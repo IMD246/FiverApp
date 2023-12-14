@@ -27,49 +27,45 @@ class _ForgotPasswordPageState
 
   @override
   Widget buildContentView(BuildContext context, ForgotPasswordModel model) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 12.w,
-                ),
-                BackButtonWidget(
-                  action: model.onBack,
-                ),
-                SizedBox(height: 30.w),
-                Text(
-                  context.loc.forgot_password,
-                  style: text34.bold.copyWith(
-                    color: getColor().themeColorBlack,
-                  ),
-                ),
-                SizedBox(height: 72.w),
-                Text(
-                  context.loc.notice_forgot_password,
-                  style: text14.medium.copyWith(
-                    color: getColor().themeColorBlackWhite,
-                  ),
-                ),
-                SizedBox(height: 16.w),
-                TextInputDefault(
-                  controller: model.emailCtr,
-                  keyboardType: TextInputType.emailAddress,
-                  label: context.loc.email,
-                  textInputAction: TextInputAction.done,
-                  validator: model.emailValidatorCtr,
-                ),
-                SizedBox(
-                  height: 28.w,
-                ),
-                _sendButton(model, context),
-              ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 12.w,
             ),
-          ),
+            BackButtonWidget(
+              action: model.onBack,
+            ),
+            SizedBox(height: 30.w),
+            Text(
+              context.loc.forgot_password,
+              style: text34.bold.copyWith(
+                color: getColor().themeColorBlack,
+              ),
+            ),
+            SizedBox(height: 72.w),
+            Text(
+              context.loc.notice_forgot_password,
+              style: text14.medium.copyWith(
+                color: getColor().themeColorBlackWhite,
+              ),
+            ),
+            SizedBox(height: 16.w),
+            TextInputDefault(
+              controller: model.emailCtr,
+              keyboardType: TextInputType.emailAddress,
+              label: context.loc.email,
+              textInputAction: TextInputAction.done,
+              validator: model.emailValidatorCtr,
+            ),
+            SizedBox(
+              height: 28.w,
+            ),
+            _sendButton(model, context),
+          ],
         ),
       ),
     );

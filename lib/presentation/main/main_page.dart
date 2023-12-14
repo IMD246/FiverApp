@@ -38,13 +38,10 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
   Widget buildContentView(BuildContext context, MainModel model) {
     return WillPopScope(
       onWillPop: model.doubleTapToExistApp,
-      child: Scaffold(
-        bottomNavigationBar: _bottomNavigation(model),
-        body: PageView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: model.pageController,
-          children: pages,
-        ),
+      child: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: model.pageController,
+        children: pages,
       ),
     );
   }
@@ -112,4 +109,7 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
       ),
     );
   }
+
+  @override
+  Widget? get bottomNavigationBar => _bottomNavigation(model);
 }

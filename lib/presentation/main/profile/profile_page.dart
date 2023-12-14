@@ -1,4 +1,6 @@
+import 'package:fiver/core/res/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/base/base_state.dart';
 import 'profile_model.dart';
@@ -19,10 +21,18 @@ class _ProfilePageState extends BaseState<ProfileModel, ProfilePage>
 
   @override
   Widget buildContentView(BuildContext context, ProfileModel model) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Profile page"),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Center(
+          child: Text("Profile page"),
+        ),
+        SizedBox(height: 20.w),
+        InkWell(
+          onTap: model.onLogout,
+          child: Text("Logout", style: text30),
+        ),
+      ],
     );
   }
 

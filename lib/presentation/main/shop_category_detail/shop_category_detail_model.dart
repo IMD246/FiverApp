@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:isolate';
 
 import 'package:collection/collection.dart';
@@ -33,7 +34,7 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
 
   ValueNotifier<int?> productCategoryIndex = ValueNotifier(null);
 
-  ValueNotifier<SortByModel?> sortBy = ValueNotifier(null);
+  ValueNotifier<SortByModel?> sortBySelected = ValueNotifier(null);
 
   double minPrice = 0;
 
@@ -43,11 +44,18 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
 
   List<int> sizes = [];
 
-  ValueNotifier<CategoryModel?> category = ValueNotifier(null);
+  CategoryModel? category;
 
   List<MBrand> brands = [];
 
   List<String> colorsCovertedToString = [];
+
+  void init(CategoryModel category) async {
+    await _getRangePrice();
+    this.category = category;
+    _getProductCategories();
+    _getSortByList();
+  }
 
   void updateProductCategoryIndex(int? index) async {
     if (productCategoryIndex.value == index) return;
@@ -91,8 +99,8 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
   }
 
   void _updateCategory(CategoryModel? category) {
-    if (this.category.value?.id == category?.id) return;
-    setValueNotifier(this.category, category);
+    if (this.category?.id == category?.id) return;
+    this.category = category;
   }
 
   void _updateBrands(List<MBrand> brands) {
@@ -100,9 +108,9 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
   }
 
   void updateSortBy(SortByModel? sortBy) async {
-    if (this.sortBy.value == sortBy) return;
+    if (sortBySelected.value == sortBy) return;
     if (sortByList.value.isNotEmpty) {
-      setValueNotifier(this.sortBy, sortBy);
+      setValueNotifier(sortBySelected, sortBy);
       await refresh();
     }
   }
@@ -118,18 +126,11 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     await refresh();
   }
 
-  void init(CategoryModel category) async {
-    await _getRangePrice();
-    setValueNotifier(this.category, category);
-    _getProductCategories();
-    _getSortByList();
-  }
-
   void onBack() {
     eventBus.fire(CategoryDetailEvent(category: null));
   }
 
-  void reverseSortBy(SortByModel currentSortBy) {
+  void reverseSortBy(SortByModel currentSortBy) async {
     final isPriceLowestToHigh =
         currentSortBy.name.toLowerCase().contains("lowest");
     SortByModel? sortBy;
@@ -139,6 +140,7 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
       sortBy = _getSortByInlistByName("lowest");
     }
     updateSortBy(sortBy ?? currentSortBy);
+    await refresh();
   }
 
   SortByModel? _getSortByInlistByName(String name) {
@@ -169,7 +171,7 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
   }
 
   void onGoToFilter() async {
-    AppRouter.router
+    await AppRouter.router
         .push(
       AppRouter.filterPath,
       extra: toMapFilters(
@@ -178,12 +180,13 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
         colors: colors,
         sizes: sizes,
         brands: brands,
+        category: category,
       ),
     )
-        .then((value) {
-      if (value != null) {
+        .then((result) {
+      if (result != null) {
         final filterModel =
-            FilterUIModel.fromMap(value as Map<String, dynamic>);
+            FilterUIModel.fromMap(result as Map<String, dynamic>);
         _applyFilter(filterUIModel: filterModel);
       }
     });
@@ -199,12 +202,12 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     try {
       return await _productRepo.getProductsByFilter(
         brands: _toBrandsId(),
-        categoryId: category.value?.id,
+        categoryId: category?.id,
         colors: colorsCovertedToString,
         maxPrice: maxPrice,
         minPrice: minPrice,
         sizes: sizes,
-        sortByType: sortBy.value?.id,
+        sortByType: sortBySelected.value?.id,
         page: page,
         pageSize: pageSize,
       );
@@ -223,8 +226,7 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     productCategories.dispose();
     sortByList.dispose();
     productCategoryIndex.dispose();
-    sortBy.dispose();
-    category.dispose();
+    sortBySelected.dispose();
     _killAllIsolates();
     super.disposeModel();
   }

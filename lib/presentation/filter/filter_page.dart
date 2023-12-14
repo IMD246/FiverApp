@@ -29,32 +29,32 @@ class _FilterPageState extends BaseState<FilterModel, FilterPage> {
         model.onBack(newUpdate: false);
         return true;
       },
-      child: Scaffold(
-        appBar: CommonAppbar(
-          title: context.loc.filters,
-          action: () {
-            model.onBack(newUpdate: false);
-          },
-          trailing: [
-            InkWell(
-              onTap: model.clearAll,
-              child: Icon(
-                Icons.filter_list_off_outlined,
-                color: getColor().themeColorBlackWhite,
-              ),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            FilterRangeSlider(model: model),
-            FilterColorList(model: model),
-            FilterSizeList(model: model),
-            const Spacer(),
-            FilterBottom(model: model)
-          ],
-        ),
+      child: Column(
+        children: [
+          FilterRangeSlider(model: model),
+          FilterColorList(model: model),
+          FilterSizeList(model: model),
+          const Spacer(),
+          FilterBottom(model: model)
+        ],
       ),
     );
   }
+
+  @override
+  CommonAppbar? get appbar => CommonAppbar(
+        title: context.loc.filters,
+        action: () {
+          model.onBack(newUpdate: false);
+        },
+        trailing: [
+          InkWell(
+            onTap: model.clearAll,
+            child: Icon(
+              Icons.filter_list_off_outlined,
+              color: getColor().themeColorBlackWhite,
+            ),
+          ),
+        ],
+      );
 }

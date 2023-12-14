@@ -1,17 +1,17 @@
+import 'package:fiver/presentation/widgets/price_display_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../core/enum.dart';
 import '../../../../core/extensions/ext_localization.dart';
-import '../../../../core/res/colors.dart';
 import '../../../../core/res/icons.dart';
 import '../../../../core/res/theme/text_theme.dart';
 import '../../../../core/res/theme/theme_manager.dart';
 import '../../../../core/utils/util.dart';
 import '../../../../data/model/product_model.dart';
+import '../../../widgets/extra_product_display_widget.dart';
 import '../home_model.dart';
 import 'view_all_button.dart';
 
@@ -66,22 +66,29 @@ class NewProductListCard extends StatelessWidget {
 
   Widget _productItem(ProductModel product, BuildContext context) {
     return Padding(
+      key: ValueKey(product.name),
       padding: EdgeInsets.only(right: 17.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
+            clipBehavior: Clip.none,
             children: [
               SizedBox(
                 height: 275.w,
                 child: Stack(
+                  clipBehavior: Clip.none,
                   children: [
                     _imageProduct(product),
                     _addToFavoriteButton(),
                   ],
                 ),
               ),
-              _newProduct(product, context),
+              ExtraProductDisplayWidget(
+                isNew: product.isNew,
+                salePercent: product.salePercent,
+                width: 140.w,
+              ),
             ],
           ),
           _ratingProduct(),
@@ -90,35 +97,13 @@ class NewProductListCard extends StatelessWidget {
           SizedBox(height: 5.w),
           _nameProduct(product),
           SizedBox(height: 4.w),
-          Row(
-            children: [
-              _originPriceProduct(product),
-              SizedBox(width: 4.w),
-              _priceProduct(product),
-            ],
+          PriceDisplayWidget(
+            salePrice: product.price,
+            originPrice: product.originPrice,
+            salePercent: product.salePercent,
           ),
         ],
       ),
-    );
-  }
-
-  Widget _priceProduct(ProductModel product) {
-    return Text(
-      priceWithUnit(product.price),
-      style: text14.medium.copyWith(
-        color: colordb3022,
-      ),
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-
-  Widget _originPriceProduct(ProductModel product) {
-    return Text(
-      priceWithUnit(product.originPrice),
-      style: text14.medium.copyWith(
-          color: getColor().themeColorGrey,
-          decoration: TextDecoration.lineThrough,
-          overflow: TextOverflow.ellipsis),
     );
   }
 
@@ -162,29 +147,6 @@ class NewProductListCard extends StatelessWidget {
             ),
             overflow: TextOverflow.ellipsis),
       ],
-    );
-  }
-
-  Widget _newProduct(ProductModel product, BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.w),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Container(
-            alignment: AlignmentDirectional.center,
-            width: 48.w,
-            height: 28.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(29.r),
-              color: color222222,
-            ),
-            child: Text(
-              context.loc.new_title.toUpperCase(),
-              style: text11.copyWith(
-                color: getColor().themeColorWhiteBlack,
-              ),
-            )),
-      ),
     );
   }
 

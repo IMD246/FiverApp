@@ -7,29 +7,32 @@ class ProductRepositoryImp extends BaseSerivce implements ProductRepository {
   Future<List<ProductModel>> getSaleProductList() async {
     return [
       ProductModel(
-          name: "Evening Dress",
-          brandName: "Dorothy Perkins",
-          originPrice: 15,
-          price: 12,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-3%"),
+        name: "Evening Dress",
+        brandName: "Dorothy Perkins",
+        originPrice: 15,
+        price: 12,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+      ),
       ProductModel(
-          name: "Sport Dress",
-          brandName: "Sitlly",
-          originPrice: 22,
-          price: 19,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-5%"),
+        name: "Sport Dress",
+        brandName: "Sitlly",
+        originPrice: 22,
+        price: 19,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+      ),
       ProductModel(
-          name: "Evening Dres1s",
-          brandName: "Dorothy Perkins1",
-          originPrice: 14,
-          price: 11,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-7%"),
+        name: "Evening Dres1s",
+        brandName: "Dorothy Perkins1",
+        originPrice: 14,
+        price: 11,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+      ),
     ];
   }
 
@@ -37,29 +40,35 @@ class ProductRepositoryImp extends BaseSerivce implements ProductRepository {
   Future<List<ProductModel>> getNewProductList() async {
     return [
       ProductModel(
-          name: "Evening Dress",
-          brandName: "Dorothy Perkins",
-          originPrice: 15,
-          price: 12,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-3%"),
+        name: "Evening Dress",
+        brandName: "Dorothy Perkins",
+        originPrice: 15,
+        price: 12,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 0,
+        isNew: true,
+      ),
       ProductModel(
-          name: "Sport Dress",
-          brandName: "Sitlly",
-          originPrice: 22,
-          price: 19,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-5%"),
+        name: "Sport Dress",
+        brandName: "Sitlly",
+        originPrice: 22,
+        price: 19,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 3,
+        isNew: true,
+      ),
       ProductModel(
-          name: "Evening Dres1s",
-          brandName: "Dorothy Perkins1",
-          originPrice: 14,
-          price: 11,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-7%"),
+        name: "Evening Dres1s",
+        brandName: "Dorothy Perkins1",
+        originPrice: 14,
+        price: 11,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 0,
+        isNew: true,
+      ),
     ];
   }
 
@@ -71,53 +80,65 @@ class ProductRepositoryImp extends BaseSerivce implements ProductRepository {
   }) async {
     return [
       ProductModel(
-          name: "Evening Dress",
-          brandName: "Dorothy Perkins",
-          originPrice: 15,
-          price: 12,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-3%"),
+        name: "Evening Dress",
+        brandName: "Dorothy Perkins",
+        originPrice: 15,
+        price: 12,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+        isNew: typeProduct == 0,
+      ),
       ProductModel(
-          name: "Sport Dress",
-          brandName: "Sitlly",
-          originPrice: 22,
-          price: 19,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-5%"),
+        name: "Sport Dress",
+        brandName: "Sitlly",
+        originPrice: 22,
+        price: 19,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+        isNew: typeProduct == 0,
+      ),
       ProductModel(
-          name: "Evening Dres1s",
-          brandName: "Dorothy Perkins1",
-          originPrice: 14,
-          price: 11,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-7%"),
+        isNew: typeProduct == 0,
+        name: "Evening Dres1s",
+        brandName: "Dorothy Perkins1",
+        originPrice: 14,
+        price: 11,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 0,
+      ),
       ProductModel(
-          name: "Evening Dress",
-          brandName: "Dorothy Perkins",
-          originPrice: 15,
-          price: 12,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-3%"),
+        isNew: typeProduct == 0,
+        name: "Evening Dress",
+        brandName: "Dorothy Perkins",
+        originPrice: 15,
+        price: 12,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 0,
+      ),
       ProductModel(
-          name: "Sport Dress",
-          brandName: "Sitlly",
-          originPrice: 22,
-          price: 19,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-5%"),
+        isNew: typeProduct == 0,
+        name: "Sport Dress",
+        brandName: "Sitlly",
+        originPrice: 22,
+        price: 19,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+      ),
       ProductModel(
-          name: "Evening Dres1s",
-          brandName: "Dorothy Perkins1",
-          originPrice: 14,
-          price: 11,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-7%"),
+        isNew: typeProduct == 0,
+        name: "Evening Dres1s",
+        brandName: "Dorothy Perkins1",
+        originPrice: 14,
+        price: 11,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+      ),
     ];
   }
 
@@ -141,39 +162,17 @@ class ProductRepositoryImp extends BaseSerivce implements ProductRepository {
           price: 12,
           urlImage:
               "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-3%"),
+          salePercent: 5,
+          isNew: true),
       ProductModel(
-          name: "Sport Dress",
-          brandName: "Sitlly",
-          originPrice: 22,
-          price: 19,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-5%"),
-      ProductModel(
-          name: "Evening Dres1s",
-          brandName: "Dorothy Perkins1",
-          originPrice: 14,
-          price: 11,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-7%"),
-      ProductModel(
-          name: "Evening Dress",
-          brandName: "Dorothy Perkins",
-          originPrice: 15,
-          price: 12,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-3%"),
-      ProductModel(
-          name: "Sport Dress",
-          brandName: "Sitlly",
-          originPrice: 22,
-          price: 19,
-          urlImage:
-              "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-5%"),
+        name: "Sport Dress",
+        brandName: "Sitlly",
+        originPrice: 22,
+        price: 19,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 0,
+      ),
       ProductModel(
           name: "Evening Dres1s",
           brandName: "Dorothy Perkins1",
@@ -181,7 +180,35 @@ class ProductRepositoryImp extends BaseSerivce implements ProductRepository {
           price: 11,
           urlImage:
               "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
-          salePercent: "-7%"),
+          salePercent: 0,
+          isNew: true),
+      ProductModel(
+        name: "Evening Dress",
+        brandName: "Dorothy Perkins",
+        originPrice: 15,
+        price: 12,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+      ),
+      ProductModel(
+        name: "Sport Dress",
+        brandName: "Sitlly",
+        originPrice: 22,
+        price: 19,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+      ),
+      ProductModel(
+        name: "Evening Dres1s",
+        brandName: "Dorothy Perkins1",
+        originPrice: 14,
+        price: 11,
+        urlImage:
+            "https://images.squarespace-cdn.com/content/v1/528f8b33e4b01f2a315145b2/1473165174041-ELTK3U8JIOQRWBV330P7/static1.squarespace-13.jpg",
+        salePercent: 5,
+      ),
     ];
   }
 }

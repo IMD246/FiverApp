@@ -1,7 +1,4 @@
-import 'dart:isolate';
-
 import '../../core/base/base_model.dart';
-import '../../core/utils/isolate_util.dart';
 import '../../data/model/brand_model.dart';
 import '../../data/model/size_model.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +11,6 @@ import '../../domain/repositories/common_repository.dart';
 
 class FilterModel extends BaseModel {
   final _commonRepo = locator<CommonRepository>();
-
-  Isolate? _isolateSizes;
-  Isolate? _isolateColors;
-  Isolate? _isolateRangePrice;
 
   ValueNotifier<RangeValues> rangePriceSelected =
       ValueNotifier(const RangeValues(0, 0));
@@ -54,14 +47,15 @@ class FilterModel extends BaseModel {
       _getColors(),
       _getRangePrice(),
     ]).whenComplete(() {
-      setValueNotifier(isReadyOnApply, true);
+      if (!isDisposed) {
+        setValueNotifier(isReadyOnApply, true);
+      }
     });
   }
 
   Future<void> _getSizes() async {
     try {
-      final getSizes = await IsolateUtil.isolateFunction(
-          actionFuture: _commonRepo.getSizes, isolate: _isolateSizes);
+      final getSizes = await _commonRepo.getSizes();
       setValueNotifier(sizes, getSizes);
     } catch (e) {
       setValueNotifier(sizes, <SizeModel>[]);
@@ -70,8 +64,7 @@ class FilterModel extends BaseModel {
 
   Future<void> _getColors() async {
     try {
-      final getColors = await IsolateUtil.isolateFunction(
-          actionFuture: _commonRepo.getColors, isolate: _isolateColors);
+      final getColors = await _commonRepo.getColors();
       setValueNotifier(colors, getColors);
     } catch (e) {
       setValueNotifier(colors, <SizeModel>[]);
@@ -80,10 +73,7 @@ class FilterModel extends BaseModel {
 
   Future<void> _getRangePrice() async {
     try {
-      final getRangePrice = await IsolateUtil.isolateFunction(
-        actionFuture: _commonRepo.getRangePrice,
-        isolate: _isolateRangePrice,
-      );
+      final getRangePrice = await _commonRepo.getRangePrice();
       setValueNotifier(
         rangePrice,
         RangeValues(
@@ -107,7 +97,10 @@ class FilterModel extends BaseModel {
     if (sizes.isEmpty) {
       setValueNotifier(sizesSelected, <int>[]);
     } else {
-      setValueNotifier(sizesSelected, sizes);
+      setValueNotifier(
+        sizesSelected,
+        [...sizes],
+      );
     }
   }
 
@@ -129,7 +122,7 @@ class FilterModel extends BaseModel {
     if (brands.isEmpty) {
       setValueNotifier(brandsSelected, <MBrand>[]);
     } else {
-      setValueNotifier(brandsSelected, brands);
+      setValueNotifier(brandsSelected, [...brands]);
     }
   }
 
@@ -137,7 +130,9 @@ class FilterModel extends BaseModel {
     if (colors.isEmpty) {
       setValueNotifier(colorsSelected, <Color>[]);
     } else {
-      setValueNotifier(colorsSelected, colors);
+      setValueNotifier(colorsSelected, [
+        ...colors,
+      ]);
     }
   }
 
@@ -187,12 +182,6 @@ class FilterModel extends BaseModel {
     return name;
   }
 
-  void _killAllIsolates() {
-    IsolateUtil.killIsolate(isolate: _isolateSizes);
-    IsolateUtil.killIsolate(isolate: _isolateColors);
-    IsolateUtil.killIsolate(isolate: _isolateRangePrice);
-  }
-
   bool checkMatchedColors(Color color) {
     final colors = colorsSelected.value;
     if (colors.isEmpty) return false;
@@ -237,7 +226,6 @@ class FilterModel extends BaseModel {
     categorySelected.dispose();
     brandsSelected.dispose();
     isReadyOnApply.dispose();
-    _killAllIsolates();
     super.disposeModel();
   }
 }
