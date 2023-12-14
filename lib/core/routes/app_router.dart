@@ -1,5 +1,5 @@
-import 'package:fiver/data/model/brand_model.dart';
-import 'package:fiver/presentation/brand/brand_page.dart';
+import '../../data/model/brand_model.dart';
+import '../../presentation/brand/brand_page.dart';
 
 import '../di/locator_service.dart';
 import '../enum.dart';

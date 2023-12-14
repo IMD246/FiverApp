@@ -39,24 +39,23 @@ class FilterModel extends BaseModel {
   ValueNotifier<bool> isReadyOnApply = ValueNotifier(false);
 
   void init(FilterUIModel? filterModel) async {
-    await Future.wait([
-      _getSizes(),
-      _getColors(),
-      _getRangePrice(),
-    ]).whenComplete(() {
-      setValueNotifier(isReadyOnApply, true);
-    });
-
     _updateSizes(filterModel?.sizes ?? []);
     _updateColors(filterModel?.colors ?? <Color>[]);
-    updateCategory(filterModel?.category);
-    updateBrands(filterModel?.brands ?? []);
+    _updateCategory(filterModel?.category);
+    _updateBrands(filterModel?.brands ?? []);
     updateRangeValues(
       RangeValues(
         filterModel?.minPrice ?? 0,
         filterModel?.maxPrice ?? 0,
       ),
     );
+    Future.wait([
+      _getSizes(),
+      _getColors(),
+      _getRangePrice(),
+    ]).whenComplete(() {
+      setValueNotifier(isReadyOnApply, true);
+    });
   }
 
   Future<void> _getSizes() async {
@@ -121,12 +120,12 @@ class FilterModel extends BaseModel {
     }
   }
 
-  void updateCategory(CategoryModel? category) {
+  void _updateCategory(CategoryModel? category) {
     if (categorySelected.value?.id == category?.id) return;
     setValueNotifier(categorySelected, category);
   }
 
-  void updateBrands(List<MBrand> brands) {
+  void _updateBrands(List<MBrand> brands) {
     if (brands.isEmpty) {
       setValueNotifier(brandsSelected, <MBrand>[]);
     } else {
@@ -214,9 +213,17 @@ class FilterModel extends BaseModel {
     )
         .then((value) {
       if (value != null) {
-        updateBrands(value as List<MBrand>);
+        _updateBrands(value as List<MBrand>);
       }
     });
+  }
+
+  void clearAll() {
+    _updateColors([]);
+    _updateSizes([]);
+    updateRangeValues(rangePrice.value ?? const RangeValues(0, 0));
+    _updateBrands([]);
+    notifyListeners();
   }
 
   @override

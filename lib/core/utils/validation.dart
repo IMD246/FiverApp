@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import '../extensions/ext_localization.dart';
 import 'navigation_service.dart';
-import 'package:flutter/material.dart';
 
 class Validator {
   static final GlobalKey<ScaffoldMessengerState> _appKey =

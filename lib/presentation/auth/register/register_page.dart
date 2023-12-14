@@ -1,18 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../core/base/base_state.dart';
 import '../../../core/enum.dart';
 import '../../../core/extensions/ext_localization.dart';
 import '../../../core/res/icons.dart';
 import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';
-import 'register_model.dart';
 import '../../widgets/back_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../widgets/default_button.dart';
 import '../../widgets/social_button.dart';
 import 'components/components.dart';
+import 'register_model.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

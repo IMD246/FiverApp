@@ -1,4 +1,4 @@
-import 'package:fiver/data/model/brand_model.dart';
+import '../../data/model/brand_model.dart';
 
 import '../../data/model/banner_model.dart';
 import '../../data/model/gender_model.dart';

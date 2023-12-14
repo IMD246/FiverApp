@@ -1,4 +1,4 @@
-import 'package:fiver/presentation/brand/brand_model.dart';
+import '../brand_model.dart';
 
 import '../../widgets/custom_button.dart';
 

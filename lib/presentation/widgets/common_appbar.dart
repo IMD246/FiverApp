@@ -44,7 +44,10 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
           color: getColor().themeColor222222White,
         ),
       ),
-      actions: trailing,
+      actions: [
+        if (trailing != null) ...trailing!,
+        SizedBox(width: 16.w),
+      ],
     );
   }
 }

@@ -1,7 +1,7 @@
 import '../../core/base/base_service.dart';
 import '../../core/res/images.dart';
-import '../model/category_model.dart';
 import '../../domain/repositories/category_repository.dart';
+import '../model/category_model.dart';
 
 class CategoryRepositoryImp extends BaseSerivce implements CategoryRepository {
   @override

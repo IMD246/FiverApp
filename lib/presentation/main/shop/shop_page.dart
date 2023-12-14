@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '../../../core/base/base_state.dart';
-import 'shop_model.dart';
 import '../shop_category/shop_category_page.dart';
 import '../shop_category_detail/shop_category_detail_page.dart';
-import 'package:flutter/material.dart';
+import 'shop_model.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});

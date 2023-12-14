@@ -1,4 +1,4 @@
-import 'package:fiver/presentation/brand/brand_model.dart';
+import '../../presentation/brand/brand_model.dart';
 
 import '../constant/constants.dart';
 import '../../data/data_source/local/isar_db.dart';

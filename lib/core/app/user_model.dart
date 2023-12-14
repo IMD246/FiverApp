@@ -2,19 +2,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'app_model.dart';
+import '../../data/data_source/remote/network/network_url.dart';
+import '../../data/model/info_user_access_token.dart';
+import '../../domain/repositories/system_repository.dart';
+import '../../domain/repositories/user_repository.dart';
+import '../../firebase_options.dart';
 import '../base/rest_client.dart';
 import '../di/locator_service.dart';
 import '../enum.dart';
 import '../event/user_update_model_event.dart';
-import '../utils/dynamic_link_util.dart';
-import '../../data/model/info_user_access_token.dart';
-
-import '../../data/data_source/remote/network/network_url.dart';
-import '../../domain/repositories/system_repository.dart';
-import '../../domain/repositories/user_repository.dart';
-import '../../firebase_options.dart';
 import '../utils/crashlytic_util.dart';
+import '../utils/dynamic_link_util.dart';
+import 'app_model.dart';
 
 class UserModel extends ChangeNotifier {
   late Environment environment;

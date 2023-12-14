@@ -1,13 +1,13 @@
-import '../../../../core/extensions/ext_localization.dart';
-import '../../../../core/res/colors.dart';
-import '../../../../data/model/sort_by_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/extensions/ext_localization.dart';
+import '../../../../core/res/colors.dart';
 import '../../../../core/res/images.dart';
 import '../../../../core/res/theme/text_theme.dart';
 import '../../../../core/res/theme/theme_manager.dart';
+import '../../../../data/model/sort_by_model.dart';
 import '../shop_category_detail_model.dart';
 
 class ViewBy extends StatelessWidget {

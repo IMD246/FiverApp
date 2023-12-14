@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart' as dio;
 
-import 'rest_client.dart';
-import '../../data/data_source/remote/api_reponse/data_response.dart';
-
 import '../../data/data_source/remote/api_reponse/api_respone.dart';
+import '../../data/data_source/remote/api_reponse/data_response.dart';
 import '../../data/data_source/remote/api_reponse/exceptions/api_exception.dart';
+import 'rest_client.dart';
 
 abstract class BaseSerivce {
   Future<dynamic> getWithCustomUrl(String customUrl, String path,

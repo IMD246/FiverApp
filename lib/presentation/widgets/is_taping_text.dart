@@ -1,4 +1,4 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
+import '../../core/extensions/ext_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/res/theme/text_theme.dart';

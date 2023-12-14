@@ -1,12 +1,12 @@
-import '../core/app/app_config.dart';
-import '../core/enum.dart';
-import '../core/extensions/ext_enum.dart';
-import '../core/app/app_model.dart';
-import '../core/di/locator_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../core/app/app_config.dart';
+import '../core/app/app_model.dart';
 import '../core/app/fiver_app.dart';
+import '../core/di/locator_service.dart';
+import '../core/enum.dart';
+import '../core/extensions/ext_enum.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

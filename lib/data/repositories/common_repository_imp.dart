@@ -1,4 +1,4 @@
-import 'package:fiver/data/model/brand_model.dart';
+import '../model/brand_model.dart';
 import 'package:flutter/material.dart';
 import '../../core/base/base_service.dart';
 import '../../core/constant/constants.dart';

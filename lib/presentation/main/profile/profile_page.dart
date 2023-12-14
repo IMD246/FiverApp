@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import '../../../core/base/base_state.dart';
 import 'profile_model.dart';
-import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

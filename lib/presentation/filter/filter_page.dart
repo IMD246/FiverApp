@@ -1,3 +1,4 @@
+import '../../core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/base/base_state.dart';
@@ -34,6 +35,15 @@ class _FilterPageState extends BaseState<FilterModel, FilterPage> {
           action: () {
             model.onBack(newUpdate: false);
           },
+          trailing: [
+            InkWell(
+              onTap: model.clearAll,
+              child: Icon(
+                Icons.filter_list_off_outlined,
+                color: getColor().themeColorBlackWhite,
+              ),
+            ),
+          ],
         ),
         body: Column(
           children: [
@@ -48,4 +58,3 @@ class _FilterPageState extends BaseState<FilterModel, FilterPage> {
     );
   }
 }
-

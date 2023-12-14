@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:fiver/data/model/brand_model.dart';
+import '../../model/brand_model.dart';
 
 import '../../data_source/local/isar_db.dart';
 import '../../data_source/local/preferences.dart';

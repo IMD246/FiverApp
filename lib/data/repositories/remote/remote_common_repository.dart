@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:fiver/core/utils/util.dart';
-import 'package:fiver/data/model/brand_model.dart';
+import '../../../core/utils/util.dart';
+import '../../model/brand_model.dart';
 
 import '../../../core/constant/constants.dart';
 import '../../../core/di/locator_service.dart';

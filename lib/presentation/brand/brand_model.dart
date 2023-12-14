@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '../../core/base/base_list_model.dart';
+import '../../core/di/locator_service.dart';
 import '../../core/routes/app_router.dart';
 import '../../core/utils/text_field_editing_controller_custom.dart';
-import 'package:flutter/material.dart';
-import '../../core/di/locator_service.dart';
 import '../../core/utils/util.dart';
 import '../../data/model/brand_model.dart';
 import '../../domain/repositories/common_repository.dart';

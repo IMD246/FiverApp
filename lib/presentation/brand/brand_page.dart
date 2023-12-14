@@ -1,9 +1,9 @@
-import 'package:fiver/core/base/base_list_state.dart';
-import 'package:fiver/core/res/colors.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
-import 'package:fiver/data/model/brand_model.dart';
-import 'package:fiver/presentation/widgets/input/search_text_input.dart';
+import '../../core/base/base_list_state.dart';
+import '../../core/res/colors.dart';
+import '../../core/res/theme/text_theme.dart';
+import '../../core/res/theme/theme_manager.dart';
+import '../../data/model/brand_model.dart';
+import '../widgets/input/search_text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/extensions/ext_localization.dart';

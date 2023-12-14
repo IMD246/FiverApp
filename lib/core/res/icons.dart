@@ -2,7 +2,6 @@ class DIcons {
   static String get account => "assets/icons/ic_account.svg";
   static String get addToFavorite => "assets/icons/ic_add_to_favorite.svg";
   static String get arrowRight => "assets/icons/ic_arrow_right.svg";
-  static String get filter => "assets/icons/ic_filter.svg";
   static String get google => "assets/icons/ic_google.svg";
   static String get heart => "assets/icons/ic_heart.svg";
   static String get heartAct => "assets/icons/ic_heart_act.svg";

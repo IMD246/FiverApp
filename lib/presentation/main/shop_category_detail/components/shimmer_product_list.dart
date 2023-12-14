@@ -1,7 +1,8 @@
-import '../../../../core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../../core/res/theme/theme_manager.dart';
 
 class ShimmerProductList extends StatelessWidget {
   const ShimmerProductList({super.key});

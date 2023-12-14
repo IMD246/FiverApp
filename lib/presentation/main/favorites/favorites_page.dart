@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import '../../../core/base/base_state.dart';
 import 'favorites_model.dart';
-import 'package:flutter/material.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});

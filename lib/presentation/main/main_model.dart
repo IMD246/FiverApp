@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import '../../core/base/base_model.dart';
-import '../../core/extensions/ext_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../core/base/base_model.dart';
+import '../../core/extensions/ext_localization.dart';
 
 class MainModel extends BaseModel {
   late final PageController pageController;

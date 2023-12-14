@@ -1,8 +1,9 @@
-import '../../../core/res/theme/text_theme.dart';
-import '../../../core/res/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/res/theme/text_theme.dart';
+import '../../../core/res/theme/theme_manager.dart';
 
 class TextInputPassword extends StatefulWidget {
   const TextInputPassword({
