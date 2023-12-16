@@ -150,4 +150,10 @@ abstract class BaseListState<I, M extends BaseListModel<I>,
   Axis get getScrollDirection => Axis.vertical;
 
   ScrollPhysics get physics => const AlwaysScrollableScrollPhysics();
+
+  @override
+  bool get isNeedSafeAreaBuildContent => true;
+
+  @override
+  bool get isNeedSafeAreaBuildViewByState => false;
 }

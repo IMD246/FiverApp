@@ -24,7 +24,7 @@ class AppModel extends ChangeNotifier {
     await locator<UserModel>().init(environment);
   }
 
-  changeRouterRedirect(RouterRedirect redirect) {
+  void changeRouterRedirect(RouterRedirect redirect) {
     _routerRedirect = redirect;
   }
 

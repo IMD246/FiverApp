@@ -32,6 +32,17 @@ class TextInputPassword extends StatefulWidget {
 class _TextInputPasswordState extends State<TextInputPassword> {
   String _errorText = "";
   bool _obsecureText = true;
+
+  void _init() {
+    if (widget.validator != null) {
+      widget.validator!.addListener(() {
+        setState(() {
+          _errorText = widget.validator!.value;
+        });
+      });
+    }
+  }
+
   void _updateObsecureText() {
     setState(() {
       _obsecureText = !_obsecureText;
@@ -41,13 +52,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
   @override
   void initState() {
     super.initState();
-    if (widget.validator != null) {
-      widget.validator!.addListener(() {
-        setState(() {
-          _errorText = widget.validator!.value;
-        });
-      });
-    }
+    _init();
   }
 
   @override
@@ -80,7 +85,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
               color: getColor().textColorBlackWhiteInput,
             ),
             textInputAction: widget.textInputAction,
-            keyboardType: widget.keyboardType,
+            keyboardType: widget.keyboardType ?? TextInputType.visiblePassword,
             obscureText: _obsecureText,
             decoration: InputDecoration(
               hintText: widget.hintText,
@@ -106,9 +111,7 @@ class _TextInputPasswordState extends State<TextInputPassword> {
               suffix: widget.controller.text.isEmpty
                   ? null
                   : InkWell(
-                      onTap: () {
-                        _updateObsecureText();
-                      },
+                      onTap: _updateObsecureText,
                       child: Icon(
                         _obsecureText ? Icons.visibility : Icons.visibility_off,
                         color: getColor().themeColorBlackWhite,

@@ -34,9 +34,7 @@ class _TextInputDefaultState extends State<TextInputDefault> {
   final FocusNode _focusNode = FocusNode();
   bool focused = false;
 
-  @override
-  void initState() {
-    super.initState();
+  void _init() {
     if (widget.validator != null) {
       widget.validator!.addListener(() {
         setState(() {
@@ -49,6 +47,12 @@ class _TextInputDefaultState extends State<TextInputDefault> {
         focused = _focusNode.hasFocus;
       });
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
   }
 
   @override
@@ -90,37 +94,38 @@ class _TextInputDefaultState extends State<TextInputDefault> {
             textInputAction: widget.textInputAction,
             keyboardType: widget.keyboardType,
             decoration: InputDecoration(
-                hintText: widget.hintText,
-                hintStyle: widget.hintStyle ??
-                    text14.copyWith(
-                      color: getColor().textColorGray,
-                    ),
-                label: Text(
-                  widget.label ?? "",
-                  style: text11.copyWith(
+              hintText: widget.hintText,
+              hintStyle: widget.hintStyle ??
+                  text14.copyWith(
                     color: getColor().textColorGray,
                   ),
+              label: Text(
+                widget.label ?? "",
+                style: text11.copyWith(
+                  color: getColor().textColorGray,
                 ),
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                filled: true,
-                errorStyle: text11.copyWith(
-                  color: getColor().themeColorRed,
-                ),
-                fillColor: getColor().themeColorWhiteBlack,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.zero,
-                suffix: _errorText.isEmpty
-                    ? Icon(
-                        Icons.check,
-                        color: focused
-                            ? getColor().themeColorGreen
-                            : Colors.transparent,
-                      )
-                    : Icon(
-                        Icons.close,
-                        color: getColor().themeColorRed,
-                      )),
+              ),
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              filled: true,
+              errorStyle: text11.copyWith(
+                color: getColor().themeColorRed,
+              ),
+              fillColor: getColor().themeColorWhiteBlack,
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.zero,
+              suffix: _errorText.isEmpty
+                  ? Icon(
+                      Icons.check,
+                      color: focused
+                          ? getColor().themeColorGreen
+                          : Colors.transparent,
+                    )
+                  : Icon(
+                      Icons.close,
+                      color: getColor().themeColorRed,
+                    ),
+            ),
           ),
         ),
         if (_errorText.isNotEmpty)

@@ -26,7 +26,6 @@ class ResetPasswordForm extends StatelessWidget {
         SizedBox(height: 8.w),
         TextInputPassword(
           controller: model.confirmPasswordCtr,
-          keyboardType: TextInputType.text,
           label: context.loc.confirm_password,
           textInputAction: TextInputAction.done,
           validator: model.confirmPasswordValidatorCtr,

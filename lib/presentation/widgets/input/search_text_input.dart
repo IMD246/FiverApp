@@ -61,6 +61,7 @@ class _SearchTextInputState extends State<SearchTextInput> {
         style: text16.medium.copyWith(
           color: getColor().textColorBlackWhiteInput,
         ),
+        scrollPadding: EdgeInsets.zero,
         textInputAction: widget.textInputAction,
         keyboardType: widget.keyboardType,
         decoration: InputDecoration(
@@ -74,7 +75,9 @@ class _SearchTextInputState extends State<SearchTextInput> {
           filled: true,
           fillColor: getColor().themeColorWhiteBlack,
           border: InputBorder.none,
-          contentPadding: EdgeInsets.zero,
+          contentPadding: EdgeInsets.only(
+            bottom: 4.w,
+          ),
           prefixIcon: Icon(
             Icons.search,
             color: getColor().themeColorBlackWhite,

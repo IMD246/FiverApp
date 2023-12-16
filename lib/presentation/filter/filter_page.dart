@@ -57,4 +57,10 @@ class _FilterPageState extends BaseState<FilterModel, FilterPage> {
           ),
         ],
       );
+
+  @override
+  bool get isNeedSafeAreaBuildContent => true;
+
+  @override
+  bool get isNeedSafeAreaBuildViewByState => false;
 }

@@ -30,30 +30,33 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
   }
 
   Widget buildContent() {
-    return SafeArea(
-      child: Consumer<ThemeManager>(
-        builder: (context, theme, child) {
-          return ChangeNotifierProvider<M>.value(
-            value: model,
-            builder: (context, child) {
-              return Consumer<M>(
-                builder: (context, model, child) {
-                  if (Platform.isAndroid) {
-                    return WillPopScope(
-                      child: buildViewByState(context, model),
-                      onWillPop: () async {
-                        return await Future.value(model.onWillPop);
-                      },
-                    );
-                  }
-                  return buildViewByState(context, model);
-                },
-              );
-            },
-          );
-        },
-      ),
+    Widget content;
+    content = Consumer<ThemeManager>(
+      builder: (context, theme, child) {
+        return ChangeNotifierProvider<M>.value(
+          value: model,
+          builder: (context, child) {
+            return Consumer<M>(
+              builder: (context, model, child) {
+                if (Platform.isAndroid) {
+                  return WillPopScope(
+                    child: buildViewByState(context, model),
+                    onWillPop: () async {
+                      return await Future.value(model.onWillPop);
+                    },
+                  );
+                }
+                return buildViewByState(context, model);
+              },
+            );
+          },
+        );
+      },
     );
+    if (isNeedSafeAreaBuildContent) {
+      return SafeArea(child: content);
+    }
+    return content;
   }
 
   Widget buildDefaultLoading() {
@@ -82,8 +85,11 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
       default:
         body = const SizedBox();
     }
+
+    if (isNeedSafeAreaBuildViewByState) body = SafeArea(child: body);
+
     return Scaffold(
-      backgroundColor: bgColorScaffold,
+      backgroundColor: Colors.white,
       appBar: appbar,
       bottomNavigationBar: bottomNavigationBar,
       body: body,
@@ -99,6 +105,10 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
   Color? bgColorScaffold;
 
   Widget? bottomNavigationBar;
+
+  bool isNeedSafeAreaBuildContent = false;
+
+  bool isNeedSafeAreaBuildViewByState = true;
 
   @override
   void dispose() {
