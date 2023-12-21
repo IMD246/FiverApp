@@ -9,16 +9,24 @@ import '../../model/sort_by_model.dart';
 class IsarDb {
   late final Isar isar;
 
-  Future<void> init() async {
-    final dir = await getApplicationDocumentsDirectory();
-    isar = await Isar.open(
-      [
+  Future<void> init({bool isTesting = false}) async {
+    if (isTesting) {
+      isar = await Isar.open([
         GenderModelSchema,
         SizeModelSchema,
         SortByModelSchema,
-      ],
-      directory: dir.path,
-    );
+      ], directory: "");
+    } else {
+      final dir = await getApplicationDocumentsDirectory();
+      isar = await Isar.open(
+        [
+          GenderModelSchema,
+          SizeModelSchema,
+          SortByModelSchema,
+        ],
+        directory: dir.path,
+      );
+    }
   }
 
   void close() => isar.close();
@@ -29,7 +37,7 @@ class IsarDb {
     });
   }
 
-   Future<List<GenderModel>> getGenders() async {
+  Future<List<GenderModel>> getGenders() async {
     try {
       final getGenders = await isar.genderModels.where().findAll();
       return getGenders;
