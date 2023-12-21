@@ -1,4 +1,4 @@
-import 'package:fiver/data/data_source/local/isar_db.dart';
+import '../data_source/local/isar_db.dart';
 
 import '../../core/app/user_model.dart';
 import '../../core/base/base_service.dart';

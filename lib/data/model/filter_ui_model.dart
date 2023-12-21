@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:fiver/presentation/brand/brand_model.dart';
+import '../../presentation/brand/brand_model.dart';
 
 import 'brand_model.dart';
 import 'category_model.dart';

@@ -201,3 +201,16 @@ bool equalList<T>(List<T> list1, List<T> list2,
     return false;
   }
 }
+
+Future<void> clearDirectoryApp(String name) async {
+  try {
+    String baseDir = Directory.current.path;
+
+    final dir = Directory("$baseDir$name");
+    dir.deleteSync(recursive: true);
+  } catch (e) {
+    if (kDebugMode) {
+      print("clear directory cause error: $e");
+    }
+  }
+}

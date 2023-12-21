@@ -1,4 +1,4 @@
-import 'package:fiver/core/res/theme/text_theme.dart';
+import '../../../core/res/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

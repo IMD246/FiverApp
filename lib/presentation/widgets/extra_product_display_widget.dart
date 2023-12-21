@@ -1,5 +1,5 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/extensions/ext_num.dart';
+import '../../core/extensions/ext_localization.dart';
+import '../../core/extensions/ext_num.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,16 +1,17 @@
+import 'package:fiver/core/utils/util.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:isar/isar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:fiver/core/constant/constants.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/res/colors.dart';
-import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/data_source/local/isar_db.dart';
 import 'package:fiver/data/data_source/local/preferences.dart';
 import 'package:fiver/data/model/size_model.dart';
 import 'package:fiver/data/model/sort_by_model.dart';
 import 'package:fiver/data/repositories/local/local_common_repository.dart';
 import 'package:fiver/domain/repositories/common_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:isar/isar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   late LocalCommonRepository localCommonRepository;

@@ -1,20 +1,20 @@
-import '../../data/model/brand_model.dart';
-import '../../presentation/brand/brand_page.dart';
+import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 
-import '../di/locator_service.dart';
-import '../enum.dart';
-import '../app/app_model.dart';
-import '../app/user_model.dart';
+import '../../data/model/brand_model.dart';
 import '../../data/model/filter_ui_model.dart';
 import '../../presentation/auth/forgot_password/forgot_password_page.dart';
 import '../../presentation/auth/login/login_page.dart';
 import '../../presentation/auth/register/register_page.dart';
 import '../../presentation/auth/reset_password/reset_password_page.dart';
+import '../../presentation/brand/brand_page.dart';
 import '../../presentation/filter/filter_page.dart';
 import '../../presentation/main/main_page.dart';
 import '../../presentation/view_all_product/view_all_products_page.dart';
-import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
+import '../app/app_model.dart';
+import '../app/user_model.dart';
+import '../di/locator_service.dart';
+import '../enum.dart';
 
 class AppRouter extends ChangeNotifier {
   // private constructor

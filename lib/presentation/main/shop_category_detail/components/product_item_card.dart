@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../core/res/icons.dart';
 import '../../../../core/res/theme/text_theme.dart';
 import '../../../../core/res/theme/theme_manager.dart';

@@ -1,13 +1,12 @@
 import 'package:event_bus/event_bus.dart';
-import '../../data/data_source/local/isar_db.dart';
-import '../../data/data_source/local/preferences.dart';
 import 'package:flutter/material.dart';
 
-import 'user_model.dart';
-import '../res/theme/theme_manager.dart';
-
+import '../../data/data_source/local/isar_db.dart';
+import '../../data/data_source/local/preferences.dart';
 import '../di/locator_service.dart';
 import '../enum.dart';
+import '../res/theme/theme_manager.dart';
+import 'user_model.dart';
 
 class AppModel extends ChangeNotifier {
   late final Environment environment;
