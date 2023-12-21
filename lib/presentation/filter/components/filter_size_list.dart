@@ -15,6 +15,7 @@ class FilterSizeList extends StatefulWidget {
     super.key,
     required this.model,
   });
+
   final FilterModel model;
 
   @override

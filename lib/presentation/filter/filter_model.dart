@@ -1,12 +1,13 @@
-import '../../core/base/base_model.dart';
-import '../../data/model/brand_model.dart';
-import '../../data/model/size_model.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/base/base_model.dart';
 import '../../core/di/locator_service.dart';
 import '../../core/routes/app_router.dart';
 import '../../core/utils/util.dart';
+import '../../data/model/brand_model.dart';
 import '../../data/model/category_model.dart';
 import '../../data/model/filter_ui_model.dart';
+import '../../data/model/size_model.dart';
 import '../../domain/repositories/common_repository.dart';
 
 class FilterModel extends BaseModel {

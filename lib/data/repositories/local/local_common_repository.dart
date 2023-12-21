@@ -1,19 +1,19 @@
 import 'dart:ui';
 
-import '../../model/brand_model.dart';
-
+import '../../../core/di/locator_service.dart';
+import '../../../domain/repositories/common_repository.dart';
 import '../../data_source/local/isar_db.dart';
 import '../../data_source/local/preferences.dart';
 import '../../model/banner_model.dart';
+import '../../model/brand_model.dart';
 import '../../model/gender_model.dart';
 import '../../model/size_model.dart';
 import '../../model/sort_by_model.dart';
-import '../../../domain/repositories/common_repository.dart';
-import '../../../core/di/locator_service.dart';
 
 class LocalCommonRepository extends CommonRepository {
   final _pref = locator<Preferences>();
   final _isarDb = locator<IsarDb>();
+
   @override
   Future<List<BannerModel>> getBannerList() async {
     return [];
@@ -66,7 +66,7 @@ class LocalCommonRepository extends CommonRepository {
   }
 
   Future<void> saveSortByList(List<SortByModel> sortByList) async {
-     await _isarDb.saveSortByList(sortByList);
+    await _isarDb.saveSortByList(sortByList);
   }
 
   @override

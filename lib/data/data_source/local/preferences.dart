@@ -11,7 +11,8 @@ class Preferences {
   static const PRICE_RANGE = "price_range";
   static const COLORS = "colors";
 
-  static late final SharedPreferences prefs;
+  late final SharedPreferences prefs;
+
   Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
   }
@@ -57,7 +58,7 @@ class Preferences {
 
     final toDoubleList =
         List<double>.from(values.map((e) => double.parse(e)).toList());
-        
+
     return toDoubleList;
   }
 
@@ -74,5 +75,9 @@ class Preferences {
         List<Color>.from(values.map((e) => Color(int.parse(e))).toList());
 
     return toColorList;
+  }
+
+  Future<void> clear() async {
+    await prefs.clear();
   }
 }
