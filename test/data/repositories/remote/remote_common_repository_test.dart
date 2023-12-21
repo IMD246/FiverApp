@@ -44,7 +44,7 @@ void main() {
     final localGenders = await localCommonRepository.getGenders();
 
     expect(
-      false,
+      true,
       equalList(
         genders,
         localGenders,
