@@ -22,3 +22,4 @@ const String USER_LOGOUT = "user/logout";
 const String FORGOT_PASSWORD = "forgot-password";
 const String VERIFY_RESET_TOKEN = "verify-reset-token";
 const String RESET_PASSWORD = "reset-password";
+const String GET_BANNER = "get-home-banner";

@@ -7,7 +7,7 @@ import '../../data/model/size_model.dart';
 import '../../data/model/sort_by_model.dart';
 
 abstract class CommonRepository {
-  Future<List<BannerModel>> getBannerList();
+  Future<List<BannerModel>> getBannerList({required String isHome});
 
   Future<List<GenderModel>> getGenders();
 
