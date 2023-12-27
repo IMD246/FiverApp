@@ -15,7 +15,7 @@ class LocalCommonRepository extends CommonRepository {
   final _isarDb = locator<IsarDb>();
 
   @override
-  Future<List<BannerModel>> getBannerList() async {
+  Future<List<BannerModel>> getBannerList({required String isHome}) async {
     return [];
   }
 

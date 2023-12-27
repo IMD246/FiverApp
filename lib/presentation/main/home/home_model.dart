@@ -43,7 +43,7 @@ class HomeModel extends BaseModel {
   void _getBanners() async {
     try {
       final getBanners = await IsolateUtil.isolateFunction(
-        actionFuture: _repo.getBannerList,
+        actionFuture: () => _repo.getBannerList(isHome: "Y"),
         isolate: _isolateBanners,
       );
       setValueNotifier(banners, getBanners);

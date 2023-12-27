@@ -47,8 +47,9 @@ class BannerListCard extends StatelessWidget {
           width: 1.sw,
           height: 200.sw,
           child: CachedNetworkImage(
-            fit: BoxFit.fill,
-            imageUrl: banner.urlImage,
+            cacheKey: banner.image,
+            fit: BoxFit.cover,
+            imageUrl: banner.image,
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
@@ -57,7 +58,7 @@ class BannerListCard extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              banner.content,
+              banner.name,
               style: text28.bold.copyWith(
                 color: getColor().themeColorWhiteBlack,
               ),

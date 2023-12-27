@@ -1,22 +1,22 @@
 class BannerModel {
-  String urlImage;
-  String content;
+  final int id;
+  final String name;
+  final String bannerLink;
+  final String image;
+
   BannerModel({
-    required this.urlImage,
-    required this.content,
+    required this.id,
+    required this.name,
+    required this.bannerLink,
+    required this.image,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'urlImage': urlImage,
-      'content': content,
-    };
-  }
-
-  factory BannerModel.fromMap(Map<String, dynamic> map) {
+  factory BannerModel.fromJson(Map<String, dynamic> json) {
     return BannerModel(
-      urlImage: map['urlImage'] ?? '',
-      content: map['content'] ?? '',
+      id: json['id'] ?? -1,
+      name: json['name'] ?? "",
+      bannerLink: json['banner_link'] ?? "",
+      image: json['image'] ?? "",
     );
   }
 }
