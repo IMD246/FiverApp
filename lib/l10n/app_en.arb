@@ -71,5 +71,12 @@
     "search" : "Search",
     "no_brands_selected" : "No brands selected",
     "searching" : "Searching...",
-    "there_is_no_data_matched" : "There is no data matched"
+    "there_is_no_data_matched" : "There is no data matched",
+    "rating_and_reviews_title" : "Rating&Reviews",
+    "rating_and_reviews" : "Rating and reviews",
+    "write_a_review":"Write a review",
+    "ratings" : "ratings",
+    "reviews" : "reviews",
+    "with_photo" : "With photo",
+    "helpful" : "Helpful"
 }

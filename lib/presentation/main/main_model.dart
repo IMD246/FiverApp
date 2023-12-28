@@ -61,7 +61,7 @@ class MainModel extends BaseModel {
       );
       return Future.value(false);
     }
-    return Future.value(false);
+    return Future.value(true);
   }
 
   @override

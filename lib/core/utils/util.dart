@@ -85,7 +85,7 @@ Future<XFile?> compressImage(
   XFile originalImageFile,
 ) async {
   try {
-    var originalSizeInBytes = await originalImageFile.readAsBytes();
+    final originalSizeInBytes = await originalImageFile.readAsBytes();
     final List<int> finalCompressedImageData =
         await FlutterImageCompress.compressWithList(originalSizeInBytes,
             quality: _getQuality(originalSizeInBytes.length));
@@ -141,7 +141,7 @@ ValidatorModel? getValidatorFromDioException(DioException object) {
   return validator;
 }
 
-void setValueNotifier(ValueNotifier notifier, dynamic value) {
+void setValueNotifier<T>(ValueNotifier<T> notifier, T value) {
   notifier.value = value;
 }
 

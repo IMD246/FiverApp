@@ -1,3 +1,7 @@
+import 'package:fiver/data/repositories/remote/remote_review_repository.dart';
+import 'package:fiver/data/repositories/review_repository_imp.dart';
+import 'package:fiver/domain/repositories/review_repository.dart';
+import 'package:fiver/presentation/rating_and_review/rating_and_review_model.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../data/data_source/local/isar_db.dart';
@@ -61,11 +65,19 @@ Future<void> initLocatorSerivce() async {
   locator.registerLazySingleton<ProductRepository>(
     () => ProductRepositoryImp(),
   );
+  locator.registerLazySingleton<ReviewRepository>(
+    () => ReviewRepositoryImp(),
+  );
 
   // Remote Repositories
   locator.registerLazySingleton<CommonRepository>(
     () => RemoteCommonRepository(),
     instanceName: Constants.instanceRemoteCommonRepository,
+  );
+
+  locator.registerLazySingleton<ReviewRepository>(
+    () => RemoteReviewRepository(),
+    instanceName: Constants.instanceRemoteReviewRepository,
   );
 
   // Local Repositories
@@ -90,4 +102,5 @@ Future<void> initLocatorSerivce() async {
   locator.registerFactory(() => ViewAllProductsModel());
   locator.registerFactory(() => FilterModel());
   locator.registerFactory(() => BrandModel());
+  locator.registerFactory(() => RatingAndReviewModel());
 }

@@ -7,6 +7,7 @@ class DIcons {
   static String get heartAct => "assets/icons/ic_heart_act.svg";
   static String get home => "assets/icons/ic_home.svg";
   static String get homeAct => "assets/icons/ic_home_act.svg";
+  static String get like => "assets/icons/ic_like.svg";
   static String get profile => "assets/icons/ic_profile.svg";
   static String get profileAct => "assets/icons/ic_profile_act.svg";
   static String get reverseSortBy => "assets/icons/ic_reverse_sort_by.svg";
