@@ -1,6 +1,5 @@
 import 'dart:isolate';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/app/app_model.dart';
@@ -9,26 +8,25 @@ import '../../../core/di/locator_service.dart';
 import '../../../core/event/category_detail_event.dart';
 import '../../../core/utils/isolate_util.dart';
 import '../../../core/utils/util.dart';
+import '../../../data/model/banner_model.dart';
 import '../../../data/model/category_model.dart';
-import '../../../data/model/gender_model.dart';
 import '../../../domain/repositories/category_repository.dart';
-import '../../../domain/repositories/common_repository.dart';
 
 class ShopCategoryModel extends BaseModel {
-  final _commonRepo = locator<CommonRepository>();
   final _cateRepo = locator<CategoryRepository>();
 
   Isolate? _isolateCategories;
-  Isolate? _isolateGenders;
 
-  final ValueNotifier<List<GenderModel>> genders = ValueNotifier([]);
   final ValueNotifier<List<CategoryModel>> categories = ValueNotifier([]);
 
-  final ValueNotifier<int> selectedGenderIndex = ValueNotifier(0);
+  final ValueNotifier<List<CategoryModel>> subCategories = ValueNotifier([]);
+
+  final ValueNotifier<BannerModel?> banner = ValueNotifier(null);
+
+  final ValueNotifier<int> selectedCategory = ValueNotifier(0);
 
   void init() {
     _getCategories();
-    _getGenders();
   }
 
   void _getCategories() async {
@@ -36,34 +34,37 @@ class ShopCategoryModel extends BaseModel {
       final getCategories = await IsolateUtil.isolateFunction(
           actionFuture: _cateRepo.getCategories, isolate: _isolateCategories);
       setValueNotifier(categories, getCategories);
+      if (!categories.value.isNullOrEmpty) {
+        setValueNotifier(selectedCategory, categories.value.first.id);
+        setValueNotifier(subCategories, categories.value.first.childs ?? []);
+        setValueNotifier(banner, categories.value.first.banner);
+      }
     } catch (e) {
       setValueNotifier(categories, <CategoryModel>[]);
     }
   }
 
-  void _getGenders() async {
+  void _getSubCategories() async {
     try {
-      final getGenders = await IsolateUtil.isolateFunction(
-        actionFuture: _commonRepo.getGenders,
-        isolate: _isolateGenders,
-      );
-
-      setValueNotifier(genders, getGenders);
+      setValueNotifier(banner, null);
+      setValueNotifier(subCategories, <CategoryModel>[]);
+      final getCategory =
+          await _cateRepo.getCategoryById(selectedCategory.value);
+      setValueNotifier(subCategories, getCategory.childs);
+      setValueNotifier(banner, getCategory.banner);
     } catch (e) {
-      setValueNotifier(genders, <GenderModel>[]);
+      setValueNotifier(subCategories, <CategoryModel>[]);
     }
   }
 
   void _killAllIsolate() {
     IsolateUtil.killIsolate(isolate: _isolateCategories);
-    IsolateUtil.killIsolate(isolate: _isolateGenders);
   }
 
-  void updateSelectedGenderIndex(int index) {
-    if (index == selectedGenderIndex.value) return;
-    setValueNotifier(selectedGenderIndex, index);
-    setValueNotifier(categories, <CategoryModel>[]);
-    _getCategories();
+  void updateSelectedCategory(int index) {
+    if (index == selectedCategory.value) return;
+    setValueNotifier(selectedCategory, index);
+    _getSubCategories();
   }
 
   void onGoToCategoryDetail(CategoryModel category) {
@@ -72,9 +73,9 @@ class ShopCategoryModel extends BaseModel {
 
   @override
   void disposeModel() {
-    genders.dispose();
+    subCategories.dispose();
     categories.dispose();
-    selectedGenderIndex.dispose();
+    selectedCategory.dispose();
     _killAllIsolate();
     super.disposeModel();
   }

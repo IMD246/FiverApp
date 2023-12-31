@@ -98,7 +98,7 @@ class _ShopCategoryDetailPageState extends BaseGridState<
   @override
   CommonAppbar? get appbar => CommonAppbar(
         action: model.onBack,
-        title: widget.category.category,
+        title: widget.category.name ?? "",
         centerTitle: true,
       );
 

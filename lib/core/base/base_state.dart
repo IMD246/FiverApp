@@ -89,7 +89,7 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
     if (isNeedSafeAreaBuildViewByState) body = SafeArea(child: body);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bgColorScaffold,
       appBar: appbar,
       bottomNavigationBar: bottomNavigationBar,
       body: body,

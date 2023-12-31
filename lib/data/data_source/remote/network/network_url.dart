@@ -23,3 +23,5 @@ const String FORGOT_PASSWORD = "forgot-password";
 const String VERIFY_RESET_TOKEN = "verify-reset-token";
 const String RESET_PASSWORD = "reset-password";
 const String GET_BANNER = "get-home-banner";
+const String GET_CATEGORY = "get-category";
+const String GET_CATEGORY_BY_ID = "get-category-by-id";
