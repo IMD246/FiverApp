@@ -1,31 +1,49 @@
-import 'dart:convert';
+import 'package:fiver/data/model/banner_model.dart';
 
 class CategoryModel {
-  final int id;
-  final String category;
-  final String urlImages;
+  int? id;
+  String? name;
+  String? image;
+  int? order;
+  List<CategoryModel>? childs;
+  BannerModel? banner;
 
-  CategoryModel(
-      {required this.id, required this.category, required this.urlImages});
+  CategoryModel({
+    this.id,
+    this.name,
+    this.image,
+    this.order,
+    this.childs,
+    this.banner,
+  });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'category': category,
-      'urlImages': urlImages,
-    };
+  CategoryModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    image = json['image'];
+    order = json['order'];
+    if (json['childs'] != null) {
+      childs = <CategoryModel>[];
+      json['childs'].forEach((v) {
+        childs!.add(CategoryModel.fromJson(v));
+      });
+    }
+    banner =
+        json['banner'] != null ? BannerModel.fromJson(json['banner']) : null;
   }
 
-  factory CategoryModel.fromMap(Map<String, dynamic> map) {
-    return CategoryModel(
-      id: map['id']?.toInt() ?? 0,
-      category: map['category'] ?? '',
-      urlImages: map['urlImages'] ?? '',
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
+    data['order'] = order;
+    if (childs != null) {
+      data['childs'] = childs!.map((v) => v.toJson()).toList();
+    }
+    if (banner != null) {
+      data['banner'] = banner!.toJson();
+    }
+    return data;
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory CategoryModel.fromJson(String source) =>
-      CategoryModel.fromMap(json.decode(source));
 }

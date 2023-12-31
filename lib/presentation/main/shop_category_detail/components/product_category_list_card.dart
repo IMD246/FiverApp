@@ -95,7 +95,8 @@ class ProductCategoryListCard extends StatelessWidget {
             color: getColor().themeColor222222White,
           ),
           child: Text(
-            productCategory.category,
+            // productCategory.category,
+            "",
             style: text14.medium.copyWith(
               color: productCategoryIndex == index
                   ? colordb3022

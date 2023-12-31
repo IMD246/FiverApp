@@ -8,9 +8,9 @@ import '../../../../core/res/theme/theme_manager.dart';
 import '../../../../data/model/category_model.dart';
 import '../shop_category_model.dart';
 
-class CategoryList extends StatelessWidget {
+class SubCategoryList extends StatelessWidget {
   final ShopCategoryModel model;
-  const CategoryList({
+  const SubCategoryList({
     super.key,
     required this.model,
   });
@@ -35,7 +35,7 @@ class CategoryList extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(left: 23.0.w),
                 child: Text(
-                  item.category,
+                  item.name ?? "",
                   style: text18.copyWith(
                     color: getColor().themeColor222222White,
                   ),
@@ -43,9 +43,16 @@ class CategoryList extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Image.asset(
-                item.urlImages,
-                fit: BoxFit.fill,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(8.r),
+                  bottomRight: Radius.circular(8.r),
+                ),
+                child: Image.network(
+                  item.image ?? "",
+                  height: 100.w,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ],
@@ -84,24 +91,6 @@ class CategoryList extends StatelessWidget {
     );
   }
 
-  Widget _categoryBanner() {
-    return Container(
-      width: 343.w,
-      height: 100.w,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
-        color: colordb3022,
-      ),
-      alignment: Alignment.center,
-      child: Text(
-        "SUMMER SALES",
-        style: text24.copyWith(
-          color: colorWhite,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -111,20 +100,18 @@ class CategoryList extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 16.w),
-              _categoryBanner(),
-              SizedBox(height: 16.w),
               ValueListenableBuilder(
-                valueListenable: model.categories,
-                builder: (context, categories, child) {
-                  if (categories.isEmpty) {
+                valueListenable: model.subCategories,
+                builder: (context, subCategories, child) {
+                  if (subCategories.isEmpty) {
                     return _categoryShimmerList();
                   }
                   return ListView.builder(
                     shrinkWrap: true,
-                    itemCount: categories.length,
+                    itemCount: subCategories.length,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      final category = categories[index];
+                      final category = subCategories[index];
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.w),
                         child: _categoryItem(category),
