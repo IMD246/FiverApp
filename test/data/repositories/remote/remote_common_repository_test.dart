@@ -3,6 +3,7 @@ import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/data_source/local/isar_db.dart';
 import 'package:fiver/data/data_source/local/preferences.dart';
+import 'package:fiver/data/model/rating_model.dart';
 import 'package:fiver/data/repositories/local/local_common_repository.dart';
 import 'package:fiver/domain/repositories/common_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -113,5 +114,11 @@ void main() {
           rangePrice,
           localRangePrice,
         ));
+  });
+
+  test("must be convert to rating model after call getRating", () async {
+    final rating = await testRemoteCommonRepository.getRating();
+
+    expect(RatingModel, rating.runtimeType);
   });
 }

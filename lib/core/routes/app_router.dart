@@ -1,3 +1,4 @@
+import 'package:fiver/presentation/rating_and_review/rating_and_review_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -48,6 +49,9 @@ class AppRouter extends ChangeNotifier {
 
   static const String brandName = 'brand';
   static const String brandPath = '/brand';
+
+  static const String ratingAndReviewName = 'ratingAndReview';
+  static const String ratingAndReviewPath = '/ratingAndReview';
 
   static GoRouter get router => _router;
   static final _router = GoRouter(
@@ -123,6 +127,13 @@ class AppRouter extends ChangeNotifier {
           return BrandPage(
             brands: brands ?? [],
           );
+        },
+      ),
+      GoRoute(
+        path: ratingAndReviewPath,
+        name: ratingAndReviewName,
+        builder: (context, state) {
+          return const RatingAndReviewPage();
         },
       ),
     ],

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:fiver/data/model/rating_model.dart';
+
 import '../../../core/di/locator_service.dart';
 import '../../../domain/repositories/common_repository.dart';
 import '../../data_source/local/isar_db.dart';
@@ -76,5 +78,11 @@ class LocalCommonRepository extends CommonRepository {
     required int pageSize,
   }) async {
     return [];
+  }
+
+  @override
+  Future<RatingModel> getRating() {
+    // TODO: implement getRating
+    throw UnimplementedError();
   }
 }

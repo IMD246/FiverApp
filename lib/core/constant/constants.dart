@@ -6,4 +6,7 @@ class Constants {
   static const String instanceLocalCommonRepository = "local_common_repository";
   static const String instanceRemoteCommonRepository =
       "remote_common_repository";
+
+  static const String instanceRemoteReviewRepository =
+      "remote_review_repository";
 }

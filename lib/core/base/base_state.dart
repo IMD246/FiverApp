@@ -92,13 +92,16 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
       backgroundColor: bgColorScaffold,
       appBar: appbar,
       bottomNavigationBar: bottomNavigationBar,
+      floatingActionButtonLocation: floatingActionButtonLocation ??
+          FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: floatingActionButton,
       body: body,
     );
   }
 
   Widget buildContentView(BuildContext context, M model);
 
-  Color get backgroundLoadingColor => getColor().bgColorWhiteBlack;
+  Color? get backgroundLoadingColor => getColor().bgColorWhiteBlack;
 
   CommonAppbar? appbar;
 
@@ -109,6 +112,10 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
   bool isNeedSafeAreaBuildContent = false;
 
   bool isNeedSafeAreaBuildViewByState = true;
+
+  FloatingActionButtonLocation? floatingActionButtonLocation;
+
+  Widget? floatingActionButton;
 
   @override
   void dispose() {

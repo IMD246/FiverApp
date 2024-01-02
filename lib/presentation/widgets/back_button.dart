@@ -11,17 +11,20 @@ class BackButtonWidget extends StatelessWidget {
   final void Function()? action;
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        if (action == null) {
-          AppRouter.router.pop();
-        } else {
-          action!.call();
-        }
-      },
-      icon: Icon(
-        Icons.arrow_back_ios_new,
-        color: getColor().themeColorBlack,
+    return Transform.translate(
+      offset: const Offset(-8, 0),
+      child: IconButton(
+        onPressed: () {
+          if (action == null) {
+            AppRouter.router.pop();
+          } else {
+            action!.call();
+          }
+        },
+        icon: Icon(
+          Icons.arrow_back_ios_new,
+          color: getColor().themeColorBlack,
+        ),
       ),
     );
   }

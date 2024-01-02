@@ -1,3 +1,5 @@
+import 'package:fiver/presentation/widgets/check_box_widget.dart';
+
 import '../../core/base/base_list_state.dart';
 import '../../core/res/colors.dart';
 import '../../core/res/theme/text_theme.dart';
@@ -107,27 +109,13 @@ class _BrandPageState extends BaseListState<MBrand, BrandModel, BrandPage> {
                     : getColor().themeColor222222White,
               ),
             ),
-            Transform.scale(
-              scale: 1.2,
-              child: Checkbox(
-                activeColor: colorEF3651,
-                checkColor: colorWhite,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-                side: MaterialStateBorderSide.resolveWith(
-                  (states) => BorderSide(
-                    width: 1.0.w,
-                    color: model.checkMatchedBrand(item)
-                        ? Colors.transparent
-                        : getColor().themeColorBlackWhite,
-                  ),
-                ),
-                value: model.checkMatchedBrand(item),
-                onChanged: (_) {
-                  model.updateBrand(item);
-                },
-              ),
+            CheckBoxWidget(
+              onChanged: (value) {
+                model.updateBrand(item);
+              },
+              value: model.checkMatchedBrand(item),
+              activeColor: colorEF3651,
+              checkColor: colorWhite,
             ),
           ],
         ),

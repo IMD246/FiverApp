@@ -1,4 +1,5 @@
 {
+    "@@locale": "en",
     "sign_up": "Sign up",
     "name": "Name",
     "email": "Email",
@@ -71,5 +72,29 @@
     "search" : "Search",
     "no_brands_selected" : "No brands selected",
     "searching" : "Searching...",
-    "there_is_no_data_matched" : "There is no data matched"
+    "there_is_no_data_matched" : "There is no data matched",
+    "rating_and_reviews_title" : "Rating&Reviews",
+    "rating_and_reviews" : "Rating and reviews",
+    "write_a_review":"Write a review",
+    "ratings" : "ratings",
+    "reviews" : "reviews",
+    "with_photo" : "With photo",
+    "helpful" : "Helpful",
+    "what_is_your_rate" : "What is your rate?",
+    "please_share_your_opinion_about_the_product" : "Please share your opinion about the product",
+    "your_review" : "Your review",
+    "add_your_photos" : "Add your photos",
+    "send_review" : "Send review",
+    "permission_message" :"You are not allowed to {permission} access!",
+    "@permission_message": {
+        "placeholders": {
+            "permission": {
+                "type": "String"
+            }
+        }
+    },
+    "to_settings": "To settings",
+    "camera" : "Camera",
+    "gallery" : "Galerry",
+    "no_review":"There is no review!"
 }

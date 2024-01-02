@@ -15,7 +15,8 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.trailing,
     this.isHideBackButton = false,
     this.action,
-    this.elevation, this.titleStyle,
+    this.elevation,
+    this.titleStyle,
   });
 
   final bool centerTitle;
@@ -33,17 +34,18 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: elevation,
-      backgroundColor: bgColor ?? Colors.transparent,
+      elevation: elevation ?? 0,
+      backgroundColor: bgColor,
       automaticallyImplyLeading: false,
       centerTitle: centerTitle,
       leading: leading ??
           (!isHideBackButton ? BackButtonWidget(action: action) : null),
       title: Text(
         title,
-        style: titleStyle ?? text18.copyWith(
-          color: getColor().themeColor222222White,
-        ),
+        style: titleStyle ??
+            text18.copyWith(
+              color: getColor().themeColor222222White,
+            ),
       ),
       actions: [
         if (trailing != null) ...trailing!,
