@@ -1,7 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
+import 'dart:io';
 import 'dart:isolate';
 
+import 'package:customize_picker/customize_picker.dart';
 import 'package:fiver/core/base/base_model.dart';
+import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/rating_model.dart';
 import 'package:fiver/data/model/review_model.dart';
@@ -11,9 +16,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 import '../../core/di/locator_service.dart';
 import '../../core/utils/isolate_util.dart';
@@ -46,7 +50,7 @@ class RatingAndReviewModel extends BaseModel {
 
   ValueNotifier<bool> enableSendReview = ValueNotifier(false);
 
-  ValueNotifier<List<XFile>> images = ValueNotifier([]);
+  ValueNotifier<List<AssetEntity>> imagesPicker = ValueNotifier([]);
 
   ValueNotifier<bool> loadingReview = ValueNotifier(false);
 
@@ -154,11 +158,12 @@ class RatingAndReviewModel extends BaseModel {
     try {
       final content = reviewCtr.text;
       final rate = rateStar;
+      final images = imagesPicker.value;
       Isolate? imagesIsolate;
       final getImages = await IsolateUtil.isolateFunction(
-        actionFuture: () => compressImages(images.value),
+        actionFuture: () => compressImages(images),
         isolate: imagesIsolate,
-      ) as List<XFile>;
+      ) as List<File>;
 
       log("compressd images: ${getImages.length}");
 
@@ -205,56 +210,44 @@ class RatingAndReviewModel extends BaseModel {
     reviewsScrollController.removeListener(_scrollReviewListener);
     reviewsScrollController.dispose();
     reviewCtr.dispose();
-    images.dispose();
-    images.dispose();
+    imagesPicker.dispose();
     super.disposeModel();
   }
 
-  void onFiles(bool isGalerry) {
-    if (isGalerry) {
-      _onGallery();
-    } else {
-      _onCamera();
-    }
+  void onFiles(BuildContext context) {
+    _onGallery(context);
+
     _updateEnableSendReview();
   }
 
-  void _onGallery() async {
+  void _onGallery(BuildContext context) async {
     final permission =
         await PermissionHandlerUtil.checkAndRequestPermissionPhoto();
     if (!permission) return;
-    final filesResult = await ImagePicker().pickMultiImage(
-      maxHeight: 104.w,
-      maxWidth: 104.w,
+    final filesResult = await PickerHelper.pickAssets(
+      requestType: RequestType.image,
+      context: context,
+      locale: currentContext.loc.localeName,
+      maxSelect: 3,
+      selectedAssetlist: imagesPicker.value,
     );
-    setValueNotifier(images, filesResult);
-  }
-
-  void _onCamera() async {
-    final permission =
-        await PermissionHandlerUtil.checkAndRequestPermissionCamera();
-
-    if (!permission) return;
-
-    final getImage = await ImagePicker().pickImage(source: ImageSource.camera);
-
-    if (getImage == null) return;
-
-    setValueNotifier(images, images.value.add(getImage));
+    if (filesResult != null) {
+      setValueNotifier(imagesPicker, filesResult);
+    }
   }
 
   void onDeleteFileItem(int index) {
-    images.value.removeAt(index);
+    imagesPicker.value.removeAt(index);
   }
 
-  void onOpenFile(XFile file) async {
+  void onOpenFile(String filePath) async {
     await OpenFile.open(
-      file.path,
+      filePath,
     );
   }
 
   void _resetSendReview() {
-    setValueNotifier(images, <XFile>[]);
+    setValueNotifier(imagesPicker, <AssetEntity>[]);
     reviewCtr.clear();
     rateStar = 0;
     setValueNotifier(enableSendReview, false);

@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:intl/intl.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 import '../../data/data_source/remote/api_reponse/exceptions/api_exception.dart';
 import '../../data/model/brand_model.dart';
@@ -82,18 +83,19 @@ extension IsNullOrEmpty<T> on T {
   }
 }
 
-Future<XFile?> compressImage(
-  XFile originalImageFile,
+Future<File?> compressImage(
+  AssetEntity originalImageFile,
 ) async {
   try {
-    final originalSizeInBytes = await originalImageFile.readAsBytes();
+    final originalFile = (await originalImageFile.file)!;
+    final originalSizeInBytes = await originalFile.readAsBytes();
     final List<int> finalCompressedImageData =
         await FlutterImageCompress.compressWithList(originalSizeInBytes,
             quality: _getQuality(originalSizeInBytes.length));
-    final pdfName = originalImageFile.path;
+    final pdfName = "${originalFile.path}.${originalFile.path.split(".").last}";
     File newFile = File(pdfName);
     newFile.writeAsBytesSync(List<int>.from(finalCompressedImageData));
-    return XFile(newFile.path);
+    return newFile;
   } catch (error) {
     if (kDebugMode) {
       print("Image compression error: $error");
@@ -102,11 +104,11 @@ Future<XFile?> compressImage(
   }
 }
 
-Future<List<XFile>?> compressImages(
-  List<XFile> originalImageFiles,
+Future<List<File>> compressImages(
+  List<AssetEntity> originalImageFiles,
 ) async {
   try {
-    List<XFile> newImageFiles = [];
+    List<File> newImageFiles = [];
     for (var element in originalImageFiles) {
       newImageFiles.add((await compressImage(element))!);
     }
@@ -119,7 +121,7 @@ Future<List<XFile>?> compressImages(
   }
 }
 
-Future<List<String>> toBase64Strings(List<XFile> originalImageFiles) async {
+Future<List<String>> toBase64Strings(List<File> originalImageFiles) async {
   try {
     List<String> base64Strings = [];
     for (var element in originalImageFiles) {

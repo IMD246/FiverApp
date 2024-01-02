@@ -11,7 +11,6 @@ import '../../../core/res/colors.dart';
 import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/default_button.dart';
 import '../../widgets/input/customizable_text_input.dart';
 
 class WriteReview extends StatefulWidget {
@@ -123,14 +122,14 @@ class _WriteReviewState extends State<WriteReview> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: ValueListenableBuilder(
-        valueListenable: widget.model.images,
+        valueListenable: widget.model.imagesPicker,
         builder: (context, images, child) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ValueListenableBuilder(
-                valueListenable: widget.model.images,
+                valueListenable: widget.model.imagesPicker,
                 builder: (context, images, child) {
                   if (images.isEmpty) {
                     return const SizedBox.shrink();
@@ -143,7 +142,16 @@ class _WriteReviewState extends State<WriteReview> {
                         images.length,
                         (index) {
                           final image = images[index];
-                          return _imageItem(image, index);
+                          return FutureBuilder(
+                            future: image.file,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              }
+                              return _imageItem(snapshot.data!, index);
+                            },
+                          );
                         },
                       ),
                     ),
@@ -152,11 +160,7 @@ class _WriteReviewState extends State<WriteReview> {
               ),
               GestureDetector(
                 onTap: () {
-                  _bottomSheetPickOptionFile(context).then((value) {
-                    if (value is bool) {
-                      widget.model.onFiles(value);
-                    }
-                  });
+                  widget.model.onFiles(context);
                 },
                 child: Container(
                   height: 104.w,
@@ -206,41 +210,13 @@ class _WriteReviewState extends State<WriteReview> {
     );
   }
 
-  Future<bool?> _bottomSheetPickOptionFile(BuildContext context) {
-    return showModalBottomSheet<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          color: Colors.white,
-          padding: EdgeInsets.all(16.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DefaultButton(
-                onTap: () => Navigator.of(context).pop(false),
-                title: context.loc.camera,
-              ),
-              SizedBox(height: 16.w),
-              DefaultButton(
-                bgColor: Colors.blueAccent,
-                onTap: () => Navigator.of(context).pop(true),
-                title: context.loc.gallery,
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _imageItem(XFile image, int index) {
+  Widget _imageItem(File image, int index) {
     return Stack(
       alignment: Alignment.topRight,
       clipBehavior: Clip.none,
       children: [
         GestureDetector(
-          onTap: () => widget.model.onOpenFile(image),
+          onTap: () => widget.model.onOpenFile(image.path),
           child: Container(
             width: 104.w,
             height: 104.w,
@@ -253,23 +229,25 @@ class _WriteReviewState extends State<WriteReview> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4.r),
               child: Image.file(
-                File(image.path),
+                image,
                 fit: BoxFit.cover,
               ),
             ),
           ),
         ),
-        _deleteImage(index),
+        Positioned.fill(
+          child: _deleteImage(image is XFile, index),
+        )
       ],
     );
   }
 
-  Widget _deleteImage(int index) {
+  Widget _deleteImage(isCameraFile, int index) {
     return Align(
       alignment: Alignment.topRight,
       child: Padding(
         padding: EdgeInsets.only(
-          bottom: 20.w,
+          top: 0,
           right: 8.w,
         ),
         child: IconButton(

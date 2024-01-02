@@ -13,6 +13,7 @@ final appThemeData = {
     primaryColorDark: colorWhite,
     scaffoldBackgroundColor: colorPrimary,
     fontFamily: fontFamily,
+    dividerColor: color9B9B9B,
     brightness: Brightness.light,
     appBarTheme: AppBarTheme(
       elevation: 0,
@@ -30,6 +31,7 @@ final appThemeData = {
     scaffoldBackgroundColor: colorPrimaryBlack,
     brightness: Brightness.dark,
     fontFamily: fontFamily,
+    dividerColor: color9B9B9B,
     appBarTheme: AppBarTheme(
       elevation: 0,
       color: colorWhite,

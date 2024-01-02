@@ -13,7 +13,8 @@ flutter clean
 flutter pub get
 
 ## flutter build apk release
-   flutter build apk --release
+
+flutter build apk --release
 
 ## flutter build apk release with flavor
 
@@ -28,3 +29,13 @@ flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --
 dart run build_runner clean
 
 dart run build_runner build --delete-conflicting-outputs
+
+## flutter upgrade package
+
+-single
+
+dart pub upgrade --namePackage
+
+-plural
+
+dart pub upgrade
