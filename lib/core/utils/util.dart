@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -89,17 +90,47 @@ Future<XFile?> compressImage(
     final List<int> finalCompressedImageData =
         await FlutterImageCompress.compressWithList(originalSizeInBytes,
             quality: _getQuality(originalSizeInBytes.length));
-    final pdfName = '${originalImageFile.path}/image.jpg';
+    final pdfName = originalImageFile.path;
     File newFile = File(pdfName);
     newFile.writeAsBytesSync(List<int>.from(finalCompressedImageData));
-    // newFile =
-    //     await newFile.writeAsBytes(List<int>.from(finalCompressedImageData));
     return XFile(newFile.path);
   } catch (error) {
     if (kDebugMode) {
       print("Image compression error: $error");
     }
     return null;
+  }
+}
+
+Future<List<XFile>?> compressImages(
+  List<XFile> originalImageFiles,
+) async {
+  try {
+    List<XFile> newImageFiles = [];
+    for (var element in originalImageFiles) {
+      newImageFiles.add((await compressImage(element))!);
+    }
+    return newImageFiles;
+  } catch (error) {
+    if (kDebugMode) {
+      print("Image compression error: $error");
+    }
+    return [];
+  }
+}
+
+Future<List<String>> toBase64Strings(List<XFile> originalImageFiles) async {
+  try {
+    List<String> base64Strings = [];
+    for (var element in originalImageFiles) {
+      base64Strings.add(base64Encode(await element.readAsBytes()));
+    }
+    return base64Strings;
+  } catch (error) {
+    if (kDebugMode) {
+      print("Image compression error: $error");
+    }
+    return [];
   }
 }
 

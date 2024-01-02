@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -99,7 +98,9 @@ class _RatingAndReviewPageState
   Widget? get floatingActionButton => Padding(
         padding: EdgeInsets.only(bottom: 14.w),
         child: GestureDetector(
-          onTap: () {},
+          onTap: () async {
+            _bottomSheetSendReview(context: context, model: model);
+          },
           child: Container(
             width: 160.w,
             height: 36.w,
@@ -126,4 +127,32 @@ class _RatingAndReviewPageState
           ),
         ),
       );
+
+  Future _bottomSheetSendReview({
+    required BuildContext context,
+    required RatingAndReviewModel model,
+  }) {
+    return showModalBottomSheet<dynamic>(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
+            34.r,
+          ),
+          topRight: Radius.circular(
+            34.r,
+          ),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      constraints: BoxConstraints(maxHeight: 0.87.sh),
+      isScrollControlled: true,
+      useSafeArea: true,
+      context: context,
+      builder: (bottomSheetContext) => StatefulBuilder(
+        builder: (context, setState) {
+          return WriteReview(model: model);
+        },
+      ),
+    );
+  }
 }

@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fiver/core/res/theme/theme_manager.dart';
 import 'package:fiver/presentation/rating_and_review/rating_and_review_model.dart';
 import 'package:like_button/like_button.dart';
-
+import 'package:shimmer/shimmer.dart';
 import '../../widgets/check_box_widget.dart';
 
 class ReviewList extends StatelessWidget {
@@ -24,17 +24,35 @@ class ReviewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 600.w,
+      width: 1.sw,
+      height: 0.8.sh,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          Column(
-            children: [
-              SizedBox(height: 48.w),
-              Expanded(
-                child: ValueListenableBuilder(
+          Padding(
+            padding: EdgeInsets.only(top: 48.w),
+            child: ValueListenableBuilder(
+              valueListenable: model.loadingReview,
+              builder: (context, loading, child) {
+                if (loading) {
+                  return _shimmerReviews();
+                }
+                return ValueListenableBuilder(
                   valueListenable: model.reviews,
                   builder: (context, reviews, child) {
+                    if (reviews.isEmpty) {
+                      return SizedBox(
+                        height: 0.9.sw,
+                        child: Center(
+                          child: Text(
+                            context.loc.no_review,
+                            textAlign: TextAlign.center,
+                            style: text20.medium.copyWith(
+                                color: getColor().themeColor222222White),
+                          ),
+                        ),
+                      );
+                    }
                     return ListView.builder(
                       controller: model.reviewsScrollController,
                       itemCount: reviews.length,
@@ -50,9 +68,9 @@ class ReviewList extends StatelessWidget {
                       },
                     );
                   },
-                ),
-              ),
-            ],
+                );
+              },
+            ),
           ),
           Positioned(
             top: 0,
@@ -61,6 +79,95 @@ class ReviewList extends StatelessWidget {
             child: _withPhoto(8, context),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _shimmerReviews() {
+    return ListView(
+      children: List.generate(
+        2,
+        (index) => _shimmerReviewItem(),
+      ),
+    );
+  }
+
+  Widget _shimmerReviewItem() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(32.w, 0.w, 32.w, 32.w),
+      padding: EdgeInsets.all(24.w),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.r),
+        color: getColor().themeColorWhiteBlack,
+      ),
+      child: Shimmer.fromColors(
+        baseColor: getColor().themeColorAAAAAAA.withOpacity(0.4),
+        highlightColor: getColor().themeColorAAAAAAA.withOpacity(0.2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 96.w,
+              height: 10.w,
+              color: getColor().themeColorAAAAAAA,
+            ),
+            SizedBox(height: 8.w),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 74.w,
+                  height: 14.w,
+                  color: getColor().themeColorAAAAAAA,
+                ),
+                Container(
+                  width: 119.w,
+                  height: 7.w,
+                  color: getColor().themeColorAAAAAAA,
+                ),
+              ],
+            ),
+            SizedBox(height: 11.w),
+            ...List.generate(
+              5,
+              (index) => Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(bottom: 12.w),
+                height: 14.w,
+                color: getColor().themeColorAAAAAAA,
+              ),
+            ),
+            SizedBox(height: 20.w),
+            Container(
+              margin: EdgeInsets.only(bottom: 20.w),
+              height: 104.w,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: List.generate(
+                  3,
+                  (index) => Container(
+                    width: 104.w,
+                    margin: EdgeInsets.only(right: 16.w),
+                    height: 104.w,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.r),
+                      color: colorWhite,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                width: 64.w,
+                height: 22,
+                color: getColor().themeColorAAAAAAA,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -237,52 +344,58 @@ class ReviewList extends StatelessWidget {
   }
 
   Widget _withPhoto(int review, BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(14.w, 0.w, 30.w, 14.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ValueListenableBuilder(
-            valueListenable: model.reviews,
-            builder: (context, reviews, child) {
-              return Text(
-                "${reviews.length} ${context.loc.reviews}",
-                style: text22.copyWith(
-                  color: getColor().themeColor222222White,
+    return ValueListenableBuilder(
+      valueListenable: model.loadingReview,
+      builder: (context, loading, child) {
+        if (loading) return const SizedBox.shrink();
+        return Padding(
+          padding: EdgeInsets.fromLTRB(14.w, 0.w, 30.w, 14.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ValueListenableBuilder(
+                valueListenable: model.reviews,
+                builder: (context, reviews, child) {
+                  return Text(
+                    "${reviews.length} ${context.loc.reviews}",
+                    style: text22.copyWith(
+                      color: getColor().themeColor222222White,
+                    ),
+                  );
+                },
+              ),
+              InkWell(
+                onTap: () => model.onChangedWithPhotoReview(
+                  !model.withPhotoReview.value,
                 ),
-              );
-            },
-          ),
-          InkWell(
-            onTap: () => model.onChangedWithPhotoReview(
-              !model.withPhotoReview.value,
-            ),
-            child: Row(
-              children: [
-                ValueListenableBuilder(
-                  valueListenable: model.withPhotoReview,
-                  builder: (context, withPhotoReview, child) {
-                    return CheckBoxWidget(
-                      onChanged: (value) {
-                        model.onChangedWithPhotoReview(value!);
+                child: Row(
+                  children: [
+                    ValueListenableBuilder(
+                      valueListenable: model.withPhotoReview,
+                      builder: (context, withPhotoReview, child) {
+                        return CheckBoxWidget(
+                          onChanged: (value) {
+                            model.onChangedWithPhotoReview(value!);
+                          },
+                          value: withPhotoReview,
+                          activeColor: getColor().themeColor222222White,
+                          checkColor: getColor().themeColorWhiteBlack,
+                        );
                       },
-                      value: withPhotoReview,
-                      activeColor: getColor().themeColor222222White,
-                      checkColor: getColor().themeColorWhiteBlack,
-                    );
-                  },
+                    ),
+                    Text(
+                      context.loc.with_photo,
+                      style: text14.copyWith(
+                        color: getColor().themeColor222222White,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  context.loc.with_photo,
-                  style: text14.copyWith(
-                    color: getColor().themeColor222222White,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

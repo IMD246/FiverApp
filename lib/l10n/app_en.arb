@@ -1,4 +1,5 @@
 {
+    "@@locale": "en",
     "sign_up": "Sign up",
     "name": "Name",
     "email": "Email",
@@ -78,5 +79,22 @@
     "ratings" : "ratings",
     "reviews" : "reviews",
     "with_photo" : "With photo",
-    "helpful" : "Helpful"
+    "helpful" : "Helpful",
+    "what_is_your_rate" : "What is your rate?",
+    "please_share_your_opinion_about_the_product" : "Please share your opinion about the product",
+    "your_review" : "Your review",
+    "add_your_photos" : "Add your photos",
+    "send_review" : "Send review",
+    "permission_message" :"You are not allowed to {permission} access!",
+    "@permission_message": {
+        "placeholders": {
+            "permission": {
+                "type": "String"
+            }
+        }
+    },
+    "to_settings": "To settings",
+    "camera" : "Camera",
+    "gallery" : "Galerry",
+    "no_review":"There is no review!"
 }
