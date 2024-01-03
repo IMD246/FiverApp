@@ -1,4 +1,3 @@
----
 name: fiver
 description: A new Flutter project.
 publish_to: none
@@ -48,13 +47,13 @@ dependencies:
   permission_handler: ^11.0.1
   app_settings: ^5.1.1
   device_info_plus: ^9.1.1
-  open_file: ^3.3.2
   customize_picker:
     git:
       url: https://github.com/IMD246/CustomizePicker
       path: packages/customize_picker
   photo_manager: ^2.8.1
   image_picker: ^1.0.5
+  open_filex: ^4.3.4
 dev_dependencies:
   flutter_lints: ^3.0.1
   flutter_test:

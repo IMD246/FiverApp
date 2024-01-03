@@ -16,7 +16,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:open_file/open_file.dart';
+import 'package:open_filex/open_filex.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 import '../../core/di/locator_service.dart';
@@ -201,16 +201,18 @@ class RatingAndReviewModel extends BaseModel {
 
   @override
   void disposeModel() {
-    isScrollToAppbar.dispose();
     scrollController.removeListener(_handlerShowTitleAppbar);
     scrollController.dispose();
-    withPhotoReview.dispose();
-    rating.dispose();
-    reviews.dispose();
     reviewsScrollController.removeListener(_scrollReviewListener);
     reviewsScrollController.dispose();
+    rating.dispose();
+    reviews.dispose();
+    isScrollToAppbar.dispose();
+    withPhotoReview.dispose();
     reviewCtr.dispose();
+    enableSendReview.dispose();
     imagesPicker.dispose();
+    loadingReview.dispose();
     super.disposeModel();
   }
 
@@ -241,9 +243,15 @@ class RatingAndReviewModel extends BaseModel {
   }
 
   void onOpenFile(String filePath) async {
-    await OpenFile.open(
-      filePath,
-    );
+    try {
+      await OpenFilex.open(
+        filePath,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 
   void _resetSendReview() {

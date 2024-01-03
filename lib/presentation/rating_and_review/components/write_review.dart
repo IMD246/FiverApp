@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/presentation/rating_and_review/rating_and_review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 import '../../../core/res/colors.dart';
 import '../../../core/res/theme/text_theme.dart';
@@ -142,16 +141,7 @@ class _WriteReviewState extends State<WriteReview> {
                         images.length,
                         (index) {
                           final image = images[index];
-                          return FutureBuilder(
-                            future: image.file,
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const CircularProgressIndicator();
-                              }
-                              return _imageItem(snapshot.data!, index);
-                            },
-                          );
+                          return _imageItem(image, index);
                         },
                       ),
                     ),
@@ -210,13 +200,15 @@ class _WriteReviewState extends State<WriteReview> {
     );
   }
 
-  Widget _imageItem(File image, int index) {
+  Widget _imageItem(AssetEntity image, int index) {
     return Stack(
       alignment: Alignment.topRight,
       clipBehavior: Clip.none,
       children: [
         GestureDetector(
-          onTap: () => widget.model.onOpenFile(image.path),
+          onTap: () async {
+            widget.model.onOpenFile((await image.file)!.path);
+          },
           child: Container(
             width: 104.w,
             height: 104.w,
@@ -228,9 +220,10 @@ class _WriteReviewState extends State<WriteReview> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4.r),
-              child: Image.file(
+              child: AssetEntityImage(
                 image,
                 fit: BoxFit.cover,
+                isOriginal: false,
               ),
             ),
           ),

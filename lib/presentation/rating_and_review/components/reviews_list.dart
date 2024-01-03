@@ -322,21 +322,24 @@ class ReviewList extends StatelessWidget {
   }
 
   Widget _avatar(String avatar) {
-    return Positioned(
+    return Positioned.fill(
       top: -16.w,
       left: 8.w,
-      child: CircleAvatar(
-        radius: 24.r,
-        child: ClipOval(
-          child: CachedNetworkImage(
-            imageUrl: avatar,
-            fit: BoxFit.cover,
-            width: 48.w,
-            height: 48.w,
-            placeholder: (context, url) {
-              return const CircularProgressIndicator();
-            },
-            cacheKey: avatar,
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: CircleAvatar(
+          radius: 24.r,
+          child: ClipOval(
+            child: CachedNetworkImage(
+              imageUrl: avatar,
+              fit: BoxFit.cover,
+              width: 48.w,
+              height: 48.w,
+              placeholder: (context, url) {
+                return const CircularProgressIndicator();
+              },
+              cacheKey: avatar,
+            ),
           ),
         ),
       ),

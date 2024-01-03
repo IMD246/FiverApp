@@ -138,7 +138,6 @@ class AppRouter extends ChangeNotifier {
       ),
     ],
     redirect: (context, state) {
-      return ratingAndReviewPath;
       final userModel = locator<UserModel>();
       final appModel = locator<AppModel>();
       if (userModel.initRoute != null) {
