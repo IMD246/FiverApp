@@ -1,8 +1,8 @@
-import '../../../core/res/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/base/base_state.dart';
+import '../../../core/res/theme/text_theme.dart';
 import 'profile_model.dart';
 
 class ProfilePage extends StatefulWidget {

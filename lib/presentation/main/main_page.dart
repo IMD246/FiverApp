@@ -1,5 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../core/base/base_state.dart';
 import '../../core/extensions/ext_localization.dart';
+import '../../core/res/colors.dart';
 import '../../core/res/icons.dart';
 import 'bag/bag_page.dart';
 import 'favorites/favorites_page.dart';
@@ -7,11 +12,6 @@ import 'home/home_page.dart';
 import 'main_model.dart';
 import 'profile/profile_page.dart';
 import 'shop/shop_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../core/res/colors.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.tabIndex});

@@ -1,8 +1,8 @@
-import '../../../../core/extensions/ext_localization.dart';
-import '../../../widgets/input/text_input_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/extensions/ext_localization.dart';
+import '../../../widgets/input/text_input_password.dart';
 import '../reset_password_model.dart';
 
 class ResetPasswordForm extends StatelessWidget {

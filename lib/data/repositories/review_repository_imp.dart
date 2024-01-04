@@ -1,7 +1,7 @@
-import 'package:fiver/core/base/base_service.dart';
-import 'package:fiver/data/model/review_model.dart';
-import 'package:fiver/data/repositories/remote/remote_review_repository.dart';
-import 'package:fiver/domain/repositories/review_repository.dart';
+import '../../core/base/base_service.dart';
+import '../model/review_model.dart';
+import 'remote/remote_review_repository.dart';
+import '../../domain/repositories/review_repository.dart';
 
 import '../../core/constant/constants.dart';
 import '../../core/di/locator_service.dart';

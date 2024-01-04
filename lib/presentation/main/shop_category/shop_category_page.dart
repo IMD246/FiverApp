@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/base/base_state.dart';
 import '../../../core/extensions/ext_localization.dart';
 import '../../widgets/common_appbar.dart';

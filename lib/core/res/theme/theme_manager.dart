@@ -15,6 +15,9 @@ final appThemeData = {
     fontFamily: fontFamily,
     dividerColor: color9B9B9B,
     brightness: Brightness.light,
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: colordb3022,
+    ),
     appBarTheme: AppBarTheme(
       elevation: 0,
       color: colorWhite,
@@ -32,6 +35,9 @@ final appThemeData = {
     brightness: Brightness.dark,
     fontFamily: fontFamily,
     dividerColor: color9B9B9B,
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: colordb3022,
+    ),
     appBarTheme: AppBarTheme(
       elevation: 0,
       color: colorWhite,

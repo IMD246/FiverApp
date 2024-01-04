@@ -1,11 +1,13 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/presentation/rating_and_review/rating_and_review_model.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
+
+import '../../../core/extensions/ext_localization.dart';
+import '../rating_and_review_model.dart';
 
 import '../../../core/res/colors.dart';
 import '../../../core/res/theme/text_theme.dart';
@@ -71,7 +73,19 @@ class _WriteReviewState extends State<WriteReview> {
                 radius: 4.r,
               ),
               SizedBox(
-                height: 30.w,
+                height: 8.w,
+              ),
+              Center(
+                child: Text(
+                  context.loc.only_select_3_images,
+                  textAlign: TextAlign.center,
+                  style: text11.copyWith(
+                    color: getColor().themeColor222222White,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 8.w,
               ),
               _addPhotos(),
               SizedBox(height: 32.w),
@@ -221,10 +235,18 @@ class _WriteReviewState extends State<WriteReview> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4.r),
-              child: AssetEntityImage(
-                image,
-                fit: BoxFit.cover,
-                isOriginal: false,
+              child: FutureBuilder<File?>(
+                initialData: null,
+                future: image.file,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const CircularProgressIndicator();
+                  }
+                  return Image.file(
+                    snapshot.data!,
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
             ),
           ),

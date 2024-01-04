@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:fiver/core/base/base_service.dart';
-import 'package:fiver/data/model/rating_model.dart';
+import '../../../core/base/base_service.dart';
+import '../../model/rating_model.dart';
 
 import '../../../core/constant/constants.dart';
 import '../../../core/di/locator_service.dart';

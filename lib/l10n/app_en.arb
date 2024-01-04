@@ -96,5 +96,6 @@
     "to_settings": "To settings",
     "camera" : "Camera",
     "gallery" : "Galerry",
-    "no_review":"There is no review!"
+    "no_review":"There is no review!",
+    "only_select_3_images": "(Only select 3 images)"
 }

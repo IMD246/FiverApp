@@ -1,4 +1,4 @@
-import 'package:fiver/data/model/banner_model.dart';
+import '../../../../data/model/banner_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';

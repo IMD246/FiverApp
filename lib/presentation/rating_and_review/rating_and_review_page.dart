@@ -2,10 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:fiver/core/base/base_state.dart';
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
-import 'package:fiver/presentation/rating_and_review/rating_and_review_model.dart';
+import '../../core/base/base_state.dart';
+import '../../core/extensions/ext_localization.dart';
+import '../../core/res/theme/text_theme.dart';
+import 'rating_and_review_model.dart';
 
 import '../../core/res/colors.dart';
 import 'components/components.dart';

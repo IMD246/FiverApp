@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/res/colors.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
+import '../extensions/ext_localization.dart';
+import '../res/colors.dart';
+import '../res/theme/text_theme.dart';
+import '../res/theme/theme_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';

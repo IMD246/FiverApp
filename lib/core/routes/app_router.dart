@@ -1,4 +1,4 @@
-import 'package:fiver/presentation/rating_and_review/rating_and_review_page.dart';
+import '../../presentation/rating_and_review/rating_and_review_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 

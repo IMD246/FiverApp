@@ -1,5 +1,5 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/presentation/rating_and_review/rating_and_review_model.dart';
+import '../../../core/extensions/ext_localization.dart';
+import '../rating_and_review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:fiver/data/model/rating_model.dart';
+import '../../model/rating_model.dart';
 
 import '../../../core/di/locator_service.dart';
 import '../../../domain/repositories/common_repository.dart';

@@ -1,4 +1,3 @@
-import '../widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,6 +6,7 @@ import '../../core/enum.dart';
 import '../../core/res/theme/text_theme.dart';
 import '../../core/res/theme/theme_manager.dart';
 import '../../data/model/product_model.dart';
+import '../widgets/common_appbar.dart';
 import 'components/components.dart';
 import 'view_all_products_model.dart';
 

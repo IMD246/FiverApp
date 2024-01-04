@@ -1,4 +1,4 @@
-import 'package:fiver/data/model/banner_model.dart';
+import 'banner_model.dart';
 
 class CategoryModel {
   int? id;

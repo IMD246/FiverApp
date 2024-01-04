@@ -1,4 +1,4 @@
-import 'package:fiver/presentation/widgets/check_box_widget.dart';
+import '../widgets/check_box_widget.dart';
 
 import '../../core/base/base_list_state.dart';
 import '../../core/res/colors.dart';

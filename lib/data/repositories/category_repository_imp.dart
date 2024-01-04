@@ -1,4 +1,4 @@
-import 'package:fiver/data/data_source/remote/network/network_url.dart';
+import '../data_source/remote/network/network_url.dart';
 
 import '../../core/base/base_service.dart';
 import '../../domain/repositories/category_repository.dart';

@@ -1,6 +1,6 @@
-import 'package:fiver/core/base/base_service.dart';
-import 'package:fiver/data/model/review_model.dart';
-import 'package:fiver/domain/repositories/review_repository.dart';
+import '../../../core/base/base_service.dart';
+import '../../model/review_model.dart';
+import '../../../domain/repositories/review_repository.dart';
 
 class RemoteReviewRepository extends BaseSerivce implements ReviewRepository {
   @override

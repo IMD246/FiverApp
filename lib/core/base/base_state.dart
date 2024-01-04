@@ -1,11 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
-import '../../presentation/widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../presentation/widgets/common_appbar.dart';
 import '../di/locator_service.dart';
 import '../enum.dart';
 import '../res/theme/theme_manager.dart';

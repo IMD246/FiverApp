@@ -1,16 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fiver/core/extensions/ext_datetime.dart';
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/res/colors.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
-import 'package:fiver/core/utils/util.dart';
-import 'package:fiver/data/model/review_model.dart';
+import '../../../core/extensions/ext_datetime.dart';
+import '../../../core/extensions/ext_localization.dart';
+import '../../../core/res/colors.dart';
+import '../../../core/res/theme/text_theme.dart';
+import '../../../core/utils/util.dart';
+import '../../../data/model/review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:fiver/core/res/theme/theme_manager.dart';
-import 'package:fiver/presentation/rating_and_review/rating_and_review_model.dart';
+import '../../../core/res/theme/theme_manager.dart';
+import '../rating_and_review_model.dart';
 import 'package:like_button/like_button.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../widgets/check_box_widget.dart';

@@ -1,4 +1,4 @@
-import 'package:fiver/data/model/rating_model.dart';
+import '../model/rating_model.dart';
 
 import '../model/brand_model.dart';
 import 'package:flutter/material.dart';

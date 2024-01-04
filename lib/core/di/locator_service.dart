@@ -1,7 +1,7 @@
-import 'package:fiver/data/repositories/remote/remote_review_repository.dart';
-import 'package:fiver/data/repositories/review_repository_imp.dart';
-import 'package:fiver/domain/repositories/review_repository.dart';
-import 'package:fiver/presentation/rating_and_review/rating_and_review_model.dart';
+import '../../data/repositories/remote/remote_review_repository.dart';
+import '../../data/repositories/review_repository_imp.dart';
+import '../../domain/repositories/review_repository.dart';
+import '../../presentation/rating_and_review/rating_and_review_model.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../data/data_source/local/isar_db.dart';
