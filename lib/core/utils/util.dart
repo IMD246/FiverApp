@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 import '../../data/data_source/remote/api_reponse/exceptions/api_exception.dart';
@@ -246,4 +247,26 @@ Future<void> clearDirectoryApp(String name) async {
       print("clear directory cause error: $e");
     }
   }
+}
+
+Future<File> urlImageToFile({required String url}) async {
+  /// Get Image from server
+  final Response res = await Dio().get<List<int>>(
+    url,
+    options: Options(
+      responseType: ResponseType.bytes,
+    ),
+  );
+
+  /// Get App local storage
+
+  final Directory directory = await getTemporaryDirectory();
+
+  final File file = await File('${directory.path}/image.png').writeAsBytes(
+    res.data,
+  );
+
+  file.writeAsBytesSync(res.data as List<int>);
+
+  return file;
 }

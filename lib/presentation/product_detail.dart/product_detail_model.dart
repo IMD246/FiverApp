@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/routes/app_router.dart';
 import 'package:fiver/core/utils/dynamic_link_util.dart';
@@ -138,13 +136,15 @@ class ProductDetailModel extends BaseModel {
       isEnableAddToCart,
       !loadingRelatedProducts.value && !loadingProductDetail.value,
     );
-    log(isEnableAddToCart.toString());
   }
 
   void addToCart() {}
 
   void onShare(BuildContext context) async {
     try {
+      final file = await urlImageToFile(
+        url: images.first,
+      );
       final uri = await createDynamicLink(
         path: "/product-detail",
         queryParameters: {
@@ -152,7 +152,12 @@ class ProductDetailModel extends BaseModel {
           "name": name,
         },
       );
-      await Share.share("${uri.toString()} \n $name");
+      await Share.shareXFiles(
+        [
+          XFile(file.path),
+        ],
+        text: "${uri.toString()} \n $name",
+      );
     } catch (e) {
       showErrorException(e);
     }
