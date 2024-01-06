@@ -11,8 +11,8 @@ import '../../core/res/colors.dart';
 import 'components/components.dart';
 
 class RatingAndReviewPage extends StatefulWidget {
-  const RatingAndReviewPage({super.key});
-
+  const RatingAndReviewPage({super.key, required this.productId});
+  final String productId;
   @override
   State<RatingAndReviewPage> createState() => _RatingAndReviewPageState();
 }
@@ -22,7 +22,7 @@ class _RatingAndReviewPageState
   @override
   void initState() {
     super.initState();
-    model.init();
+    model.init(widget.productId);
   }
 
   @override

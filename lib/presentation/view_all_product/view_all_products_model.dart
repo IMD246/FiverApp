@@ -4,6 +4,7 @@ import '../../core/base/base_list_model.dart';
 import '../../core/di/locator_service.dart';
 import '../../core/enum.dart';
 import '../../core/extensions/ext_enum.dart';
+import '../../core/routes/app_router.dart';
 import '../../data/model/product_model.dart';
 import '../../domain/repositories/product_repository.dart';
 
@@ -28,5 +29,17 @@ class ViewAllProductsModel extends BaseListModel<ProductModel> {
       }
       return [];
     }
+  }
+
+  void onToProductDetail(ProductModel item) {
+    AppRouter.router.push(
+      Uri(
+        path: AppRouter.productDetailPath,
+        queryParameters: {
+          "id": item.id,
+          "name": item.name,
+        },
+      ).toString(),
+    );
   }
 }

@@ -47,8 +47,10 @@ class UserModel extends ChangeNotifier {
     switch (environment) {
       case Environment.staging:
         baseUrl = baseURLSTG;
+        break;
       case Environment.prod:
         baseUrl = baseURLPROD;
+        break;
       case Environment.dev:
       default:
         baseUrl = baseURLDEV;

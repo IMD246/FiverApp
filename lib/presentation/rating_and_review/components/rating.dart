@@ -24,7 +24,7 @@ class Rating extends StatelessWidget {
           return const SizedBox.shrink();
         }
         return Padding(
-          padding: EdgeInsets.fromLTRB(14.w, 22.w, 14.w, 22.w),
+          padding: EdgeInsets.fromLTRB(14.w, 12.w, 0.w, 22.w),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -90,7 +90,7 @@ class Rating extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Text(
               star.starRating.toString(),
-              style: text14.copyWith(
+              style: text12.copyWith(
                 color: getColor().themeColor222222White,
               ),
             ),

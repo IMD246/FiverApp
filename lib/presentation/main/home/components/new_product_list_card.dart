@@ -1,12 +1,10 @@
+import 'package:fiver/presentation/widgets/add_to_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../core/enum.dart';
 import '../../../../core/extensions/ext_localization.dart';
-import '../../../../core/res/icons.dart';
 import '../../../../core/res/theme/text_theme.dart';
 import '../../../../core/res/theme/theme_manager.dart';
 import '../../../../core/utils/util.dart';
@@ -66,44 +64,47 @@ class NewProductListCard extends StatelessWidget {
   }
 
   Widget _productItem(ProductModel product, BuildContext context) {
-    return Padding(
-      key: ValueKey(product.name),
-      padding: EdgeInsets.only(right: 17.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              SizedBox(
-                height: 275.w,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    _imageProduct(product),
-                    _addToFavoriteButton(),
-                  ],
+    return InkWell(
+      onTap: () => model.onToProductDetail(product),
+      child: Padding(
+        key: ValueKey(product.name),
+        padding: EdgeInsets.only(right: 17.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                SizedBox(
+                  height: 275.w,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      _imageProduct(product),
+                      _addToFavoriteButton(),
+                    ],
+                  ),
                 ),
-              ),
-              ExtraProductDisplayWidget(
-                isNew: product.isNew,
-                salePercent: product.salePercent,
-                width: 140.w,
-              ),
-            ],
-          ),
-          _ratingProduct(),
-          SizedBox(height: 6.w),
-          _brandNameProduct(product),
-          SizedBox(height: 5.w),
-          _nameProduct(product),
-          SizedBox(height: 4.w),
-          PriceDisplayWidget(
-            salePrice: product.price,
-            originPrice: product.originPrice,
-            salePercent: product.salePercent,
-          ),
-        ],
+                ExtraProductDisplayWidget(
+                  isNew: product.isNew,
+                  salePercent: product.salePercent,
+                  width: 140.w,
+                ),
+              ],
+            ),
+            _ratingProduct(),
+            SizedBox(height: 6.w),
+            _brandNameProduct(product),
+            SizedBox(height: 5.w),
+            _nameProduct(product),
+            SizedBox(height: 4.w),
+            PriceDisplayWidget(
+              salePrice: product.price,
+              originPrice: product.originPrice,
+              salePercent: product.salePercent,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -155,20 +156,8 @@ class NewProductListCard extends StatelessWidget {
     return Positioned(
       bottom: 0.w,
       right: 0.w,
-      child: Container(
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-        ),
-        width: 36.w,
-        height: 36.w,
-        child: SvgPicture.asset(
-          fit: BoxFit.scaleDown,
-          DIcons.addToFavorite,
-          width: 24.w,
-          height: 24.w,
-        ),
+      child: AddToFavoriteButton(
+        onTap: () {},
       ),
     );
   }

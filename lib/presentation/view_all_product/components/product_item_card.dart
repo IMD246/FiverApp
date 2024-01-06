@@ -1,9 +1,7 @@
+import 'package:fiver/presentation/widgets/add_to_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../core/res/icons.dart';
 import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';
 import '../../../data/model/product_model.dart';
@@ -112,20 +110,8 @@ class ProductItemCard extends StatelessWidget {
     return Positioned(
       bottom: 0.w,
       right: 0.w,
-      child: Container(
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-        ),
-        width: 36.w,
-        height: 36.w,
-        child: SvgPicture.asset(
-          fit: BoxFit.scaleDown,
-          DIcons.addToFavorite,
-          width: 24.w,
-          height: 24.w,
-        ),
+      child: AddToFavoriteButton(
+        onTap: () {},
       ),
     );
   }

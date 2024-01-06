@@ -58,11 +58,13 @@ class ResetPasswordModel extends BaseModel {
     }
   }
 
-  void onMoveToLogin() async {
+  Future<bool> onMoveToLogin() async {
     if (AppRouter.router.canPop()) {
       AppRouter.router.pop();
+      return true;
     } else {
       AppRouter.router.go(AppRouter.loginPath);
+      return false;
     }
   }
 

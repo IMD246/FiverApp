@@ -221,6 +221,18 @@ class ShopCategoryDetailModel extends BaseListModel<ProductModel> {
     IsolateUtil.killIsolate(isolate: _isolateProductCategories);
   }
 
+  void onToProductDetail(ProductModel item) {
+    AppRouter.router.push(
+      Uri(
+        path: AppRouter.productDetailPath,
+        queryParameters: {
+          "id": item.id,
+          "name": item.name,
+        },
+      ).toString(),
+    );
+  }
+
   @override
   void disposeModel() {
     productCategories.dispose();
