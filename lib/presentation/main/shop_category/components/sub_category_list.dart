@@ -93,36 +93,32 @@ class SubCategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            children: [
-              SizedBox(height: 16.w),
-              ValueListenableBuilder(
-                valueListenable: model.subCategories,
-                builder: (context, subCategories, child) {
-                  if (subCategories.isEmpty) {
-                    return _categoryShimmerList();
-                  }
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: subCategories.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final category = subCategories[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.w),
-                        child: _categoryItem(category),
-                      );
-                    },
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Column(
+        children: [
+          SizedBox(height: 16.w),
+          ValueListenableBuilder(
+            valueListenable: model.subCategories,
+            builder: (context, subCategories, child) {
+              if (subCategories.isEmpty) {
+                return _categoryShimmerList();
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: subCategories.length,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final category = subCategories[index];
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.w),
+                    child: _categoryItem(category),
                   );
                 },
-              ),
-            ],
+              );
+            },
           ),
-        ),
+        ],
       ),
     );
   }

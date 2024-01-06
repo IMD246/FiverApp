@@ -16,6 +16,8 @@ class CustomizableTextInput extends StatefulWidget {
     this.height,
     this.radius,
     this.padding,
+    this.maxLength,
+    this.maxLines,
   });
   final TextEditingController controller;
   final String? label;
@@ -26,6 +28,8 @@ class CustomizableTextInput extends StatefulWidget {
   final double? height;
   final double? radius;
   final EdgeInsetsGeometry? padding;
+  final int? maxLength;
+  final int? maxLines;
   @override
   State<CustomizableTextInput> createState() => _SearchTextInputState();
 }
@@ -68,6 +72,8 @@ class _SearchTextInputState extends State<CustomizableTextInput> {
         scrollPadding: EdgeInsets.zero,
         textInputAction: widget.textInputAction,
         keyboardType: widget.keyboardType,
+        maxLength: widget.maxLength,
+        maxLines: widget.maxLines,
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: widget.hintStyle ??

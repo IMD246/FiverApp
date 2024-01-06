@@ -30,15 +30,21 @@ class _ShopCategoryPageState
 
   @override
   Widget buildContentView(BuildContext context, ShopCategoryModel model) {
-    return SizedBox.expand(
-      child: Column(
-        children: [
-          SizedBox(height: 8.w),
-          CategoryListCard(model: model),
-          CategoryBanner(banner: model.banner),
-          SubCategoryList(model: model),
-        ],
-      ),
+    return Column(
+      children: [
+        SizedBox(height: 8.w),
+        CategoryListCard(model: model),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CategoryBanner(banner: model.banner),
+                SubCategoryList(model: model),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 

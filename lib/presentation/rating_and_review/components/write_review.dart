@@ -67,6 +67,7 @@ class _WriteReviewState extends State<WriteReview> {
                 height: 33.w,
               ),
               CustomizableTextInput(
+                keyboardType: TextInputType.multiline,
                 controller: widget.model.reviewCtr,
                 height: 154.w,
                 hintText: context.loc.your_review,
@@ -104,6 +105,7 @@ class _WriteReviewState extends State<WriteReview> {
                 ),
                 isEnable: widget.model.enableSendReview,
               ),
+              SizedBox(height: 8.w),
             ],
           ),
         ),

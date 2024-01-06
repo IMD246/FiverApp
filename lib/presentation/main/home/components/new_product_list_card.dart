@@ -68,7 +68,7 @@ class NewProductListCard extends StatelessWidget {
       onTap: () => model.onToProductDetail(product),
       child: Padding(
         key: ValueKey(product.name),
-        padding: EdgeInsets.only(right: 17.w),
+        padding: EdgeInsets.only(right: 11.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -196,7 +196,7 @@ class NewProductListCard extends StatelessWidget {
 
   Widget _shimmerProductItem() {
     return Padding(
-      padding: EdgeInsets.only(right: 17.w),
+      padding: EdgeInsets.only(right: 11.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

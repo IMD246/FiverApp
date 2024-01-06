@@ -4,6 +4,7 @@ import 'package:fiver/core/utils/dynamic_link_util.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ProductDetailModel extends BaseModel {
@@ -20,6 +21,10 @@ class ProductDetailModel extends BaseModel {
   final ValueNotifier<bool> loadingProductDetail = ValueNotifier(true);
 
   final ValueNotifier<bool> isEnableAddToCart = ValueNotifier(false);
+
+  final ScrollController scrollController = ScrollController();
+
+  ValueNotifier<double> opacity = ValueNotifier(1);
 
   final ValueNotifier<List<ProductModel>> relatedProducts = ValueNotifier(
     [
@@ -92,6 +97,7 @@ class ProductDetailModel extends BaseModel {
   }) async {
     this.id = id;
     this.name = name;
+    scrollController.addListener(_scrollReviewListener);
     Future.delayed(
       const Duration(seconds: 4),
       () {
@@ -102,6 +108,28 @@ class ProductDetailModel extends BaseModel {
         }
       },
     );
+  }
+
+  void _scrollReviewListener() {
+    final isScrollUp = scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse;
+    if (isScrollUp) {
+      if (opacity.value > 0) {
+        setValueNotifier(opacity, opacity.value -= 0.01);
+      }
+    } else {
+      if (opacity.value < 1) {
+        setValueNotifier(opacity, opacity.value += 0.01);
+      }
+    }
+    if (scrollController.position.atEdge) {
+      bool isTop = scrollController.position.pixels == 0;
+      if (isTop) {
+        setValueNotifier(opacity, 1.0);
+      } else {
+        setValueNotifier(opacity, 0.5);
+      }
+    }
   }
 
   void onToRatingAndReview(String id) {
@@ -116,6 +144,8 @@ class ProductDetailModel extends BaseModel {
     relatedProducts.dispose();
     loadingRelatedProducts.dispose();
     loadingProductDetail.dispose();
+    scrollController.removeListener(_scrollReviewListener);
+    scrollController.dispose();
     super.disposeModel();
   }
 

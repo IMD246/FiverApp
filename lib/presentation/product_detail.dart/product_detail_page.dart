@@ -48,6 +48,7 @@ class _ProductDetailPageState
   @override
   Widget buildContentView(BuildContext context, ProductDetailModel model) {
     return SingleChildScrollView(
+      controller: model.scrollController,
       child: Column(
         children: [
           BannerProductDetail(
@@ -244,14 +245,19 @@ class _ProductDetailPageState
   @override
   Widget? get floatingActionButton => Padding(
         padding: EdgeInsets.only(left: 16.w, bottom: 8.w, right: 16.w),
-        child: CustomButton(
-          text: context.loc.add_to_cart.toUpperCase(),
-          onPressed: model.addToCart,
-          backgroundIsEnable: colordb3022,
-          textStyleEnable: text14.copyWith(
-            color: colorWhite,
-          ),
-          isEnable: model.isEnableAddToCart,
+        child: ValueListenableBuilder(
+          valueListenable: model.opacity,
+          builder: (context, opacity, child) {
+            return CustomButton(
+              text: context.loc.add_to_cart.toUpperCase(),
+              onPressed: model.addToCart,
+              backgroundIsEnable: colordb3022.withOpacity(opacity),
+              textStyleEnable: text14.copyWith(
+                color: colorWhite,
+              ),
+              isEnable: model.isEnableAddToCart,
+            );
+          },
         ),
       );
 }
