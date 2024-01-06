@@ -35,10 +35,13 @@ class _ViewAllProductsPageState extends BaseGridState<ProductModel,
 
   @override
   Widget buildItem(BuildContext context, ProductModel item, int index) {
-    return ProductItemCard(
-      key: ValueKey(item.name),
-      product: item,
-      index: index,
+    return InkWell(
+      onTap: () => model.onToProductDetail(item),
+      child: ProductItemCard(
+        key: ValueKey(item.name),
+        product: item,
+        index: index,
+      ),
     );
   }
 

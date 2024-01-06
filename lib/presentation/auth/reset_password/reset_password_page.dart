@@ -33,6 +33,14 @@ class _ResetPasswordPageState
   }
 
   @override
+  Widget buildContent() {
+    return WillPopScope(
+      onWillPop: model.onMoveToLogin,
+      child: super.buildContent(),
+    );
+  }
+
+  @override
   Widget buildContentView(BuildContext context, ResetPasswordModel model) {
     return SingleChildScrollView(
       child: Padding(

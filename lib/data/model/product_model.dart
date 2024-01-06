@@ -1,6 +1,9 @@
 import 'dart:core';
 
+import 'package:uuidv6/uuidv6.dart';
+
 class ProductModel {
+  String id = uuidv6();
   final String name;
   final String brandName;
   final num originPrice;

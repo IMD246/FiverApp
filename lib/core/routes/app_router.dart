@@ -1,3 +1,5 @@
+import 'package:fiver/presentation/product_detail.dart/product_detail_page.dart';
+
 import '../../presentation/rating_and_review/rating_and_review_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -52,6 +54,9 @@ class AppRouter extends ChangeNotifier {
 
   static const String ratingAndReviewName = 'ratingAndReview';
   static const String ratingAndReviewPath = '/ratingAndReview';
+
+  static const String productDetailName = 'productDetail';
+  static const String productDetailPath = '/productDetail';
 
   static GoRouter get router => _router;
   static final _router = GoRouter(
@@ -133,7 +138,18 @@ class AppRouter extends ChangeNotifier {
         path: ratingAndReviewPath,
         name: ratingAndReviewName,
         builder: (context, state) {
-          return const RatingAndReviewPage();
+          final String? productId = state.extra as String?;
+          return RatingAndReviewPage(productId: productId ?? "");
+        },
+      ),
+      GoRoute(
+        path: productDetailPath,
+        name: productDetailName,
+        builder: (context, state) {
+          final String id = state.uri.queryParameters["id"] ?? "";
+          final String name =
+              state.uri.queryParameters["name"] ?? "Short dress";
+          return ProductDetailPage(id: id, name: name);
         },
       ),
     ],
@@ -169,6 +185,7 @@ class AppRouter extends ChangeNotifier {
     switch (state.uri.path) {
       case "/verify-email":
       case "/forgot-password":
+      case "/product-detail":
         return _deeplinkNavigation(userModel, appModel, context, state);
       default:
         return _normalNavigation(userModel, appModel, context, state);
@@ -187,6 +204,8 @@ class AppRouter extends ChangeNotifier {
         return _verifyEmailNavigation(userModel, appModel, context, uri);
       case "/forgot-password":
         return _resetPasswordNavigation(userModel, appModel, context, uri);
+      case "/product-detail":
+        return _productDetailNavigation(userModel, appModel, context, uri);
       default:
         return state.path;
     }
@@ -232,6 +251,21 @@ class AppRouter extends ChangeNotifier {
       path: resetPasswordPath,
       queryParameters: {
         "token": uri.queryParameters['token'],
+      },
+    ).toString();
+  }
+
+  static String? _productDetailNavigation(
+    UserModel userModel,
+    AppModel appModel,
+    BuildContext context,
+    Uri uri,
+  ) {
+    return Uri(
+      path: productDetailPath,
+      queryParameters: {
+        "id": uri.queryParameters['id'],
+        "name": uri.queryParameters['name'],
       },
     ).toString();
   }

@@ -1,59 +1,78 @@
+import 'package:fiver/core/extensions/ext_localization.dart';
+import 'package:fiver/presentation/product_detail.dart/product_detail_model.dart';
 import 'package:fiver/presentation/widgets/add_to_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../../core/enum.dart';
-import '../../../../core/extensions/ext_localization.dart';
 import '../../../../core/res/theme/text_theme.dart';
 import '../../../../core/res/theme/theme_manager.dart';
-import '../../../../core/utils/util.dart';
 import '../../../../data/model/product_model.dart';
-import '../../../widgets/extra_product_display_widget.dart';
-import '../../../widgets/price_display_widget.dart';
-import '../home_model.dart';
-import 'components.dart';
+import '../../widgets/extra_product_display_widget.dart';
+import '../../widgets/price_display_widget.dart';
 
-class SaleProductListCard extends StatelessWidget {
-  const SaleProductListCard({
+class RelatedProductListCard extends StatelessWidget {
+  const RelatedProductListCard({
     super.key,
     required this.model,
   });
-  final HomeModel model;
+  final ProductDetailModel model;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              context.loc.sale,
-              style: text34.bold,
-            ),
-            ViewAllButton(
-              onTap: () {
-                model.onGoToViewAllProducts(TypeProduct.sale);
+        ValueListenableBuilder(
+          valueListenable: model.loadingRelatedProducts,
+          builder: (context, loadingRelatedProducts, child) {
+            if (loadingRelatedProducts) {
+              return const SizedBox.shrink();
+            }
+            return ValueListenableBuilder(
+              valueListenable: model.relatedProducts,
+              builder: (context, relatedProducts, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      context.loc.you_can_also_like_this,
+                      style: text18.bold.copyWith(
+                        color: getColor().themeColor222222White,
+                      ),
+                    ),
+                    Text(
+                      "${relatedProducts.length} ${context.loc.items.toLowerCase()}",
+                      style: text11.copyWith(
+                        color: getColor().themeColorGrey,
+                      ),
+                    ),
+                  ],
+                );
               },
-            ),
-          ],
+            );
+          },
         ),
-        SizedBox(height: 22.w),
+        SizedBox(height: 12.w),
         SizedBox(
-          height: 420.w,
+          height: 400.w,
           child: ValueListenableBuilder(
-            valueListenable: model.saleProducts,
-            builder: (context, saleProducts, child) {
-              if (saleProducts.isNullOrEmpty) {
+            valueListenable: model.loadingRelatedProducts,
+            builder: (context, loadingRelatedProducts, child) {
+              if (loadingRelatedProducts) {
                 return _shimmerProductList();
               }
-              return ListView(
-                scrollDirection: Axis.horizontal,
-                children: saleProducts
-                    .map(
-                      (product) => _productItem(product),
-                    )
-                    .toList(),
+              return ValueListenableBuilder(
+                valueListenable: model.relatedProducts,
+                builder: (context, newProducts, child) {
+                  return ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: newProducts
+                        .map(
+                          (product) => _productItem(product, context),
+                        )
+                        .toList(),
+                  );
+                },
               );
             },
           ),
@@ -62,33 +81,32 @@ class SaleProductListCard extends StatelessWidget {
     );
   }
 
-  Widget _productItem(ProductModel product) {
+  Widget _productItem(ProductModel product, BuildContext context) {
     return InkWell(
       onTap: () => model.onToProductDetail(product),
       child: Padding(
         key: ValueKey(product.name),
-        padding: EdgeInsets.only(right: 17.w),
+        padding: EdgeInsets.only(right: 11.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
+              clipBehavior: Clip.none,
               children: [
                 SizedBox(
                   height: 275.w,
                   child: Stack(
+                    clipBehavior: Clip.none,
                     children: [
                       _imageProduct(product),
                       _addToFavoriteButton(),
                     ],
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: ExtraProductDisplayWidget(
-                    isNew: product.isNew,
-                    salePercent: product.salePercent,
-                    width: 120.w,
-                  ),
+                ExtraProductDisplayWidget(
+                  isNew: product.isNew,
+                  salePercent: product.salePercent,
+                  width: 140.w,
                 ),
               ],
             ),
@@ -143,11 +161,13 @@ class SaleProductListCard extends StatelessWidget {
           itemSize: 16.w,
         ),
         SizedBox(width: 4.w),
-        Text("(10)",
-            style: text10.copyWith(
-              color: getColor().themeColorBlackWhite,
-            ),
-            overflow: TextOverflow.ellipsis),
+        Text(
+          "(10)",
+          style: text10.copyWith(
+            color: getColor().themeColorBlackWhite,
+          ),
+          overflow: TextOverflow.ellipsis,
+        ),
       ],
     );
   }
@@ -196,13 +216,13 @@ class SaleProductListCard extends StatelessWidget {
 
   Widget _shimmerProductItem() {
     return Padding(
-      padding: EdgeInsets.only(right: 17.w),
+      padding: EdgeInsets.only(right: 11.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: 150.w,
-            height: 276.w,
+            height: 260.w,
             decoration: BoxDecoration(
               color: getColor().themeColorAAAAAAA,
               borderRadius: BorderRadius.circular(8.r),

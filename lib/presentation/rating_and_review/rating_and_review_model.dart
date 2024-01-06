@@ -24,6 +24,7 @@ import '../../core/utils/isolate_util.dart';
 import '../../core/utils/permission_handler_util.dart';
 
 class RatingAndReviewModel extends BaseModel {
+  late final String productId;
   final _commonRepo = locator<CommonRepository>();
   final _reviewRepo = locator<ReviewRepository>();
 
@@ -54,7 +55,8 @@ class RatingAndReviewModel extends BaseModel {
 
   ValueNotifier<bool> loadingReview = ValueNotifier(false);
 
-  void init() {
+  void init(String productId) {
+    this.productId = productId;
     scrollController.addListener(_handlerShowTitleAppbar);
     reviewsScrollController.addListener(_scrollReviewListener);
     _getRating();

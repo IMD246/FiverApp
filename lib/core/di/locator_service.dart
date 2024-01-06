@@ -1,3 +1,5 @@
+import 'package:fiver/presentation/product_detail.dart/product_detail_model.dart';
+
 import '../../data/repositories/remote/remote_review_repository.dart';
 import '../../data/repositories/review_repository_imp.dart';
 import '../../domain/repositories/review_repository.dart';
@@ -103,4 +105,5 @@ Future<void> initLocatorSerivce() async {
   locator.registerFactory(() => FilterModel());
   locator.registerFactory(() => BrandModel());
   locator.registerFactory(() => RatingAndReviewModel());
+  locator.registerFactory(() => ProductDetailModel());
 }
