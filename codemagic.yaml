@@ -4,8 +4,8 @@ workflows:
     instance_type: mac_mini_m1
     max_build_duration: 120
     environment:
-      vars:
-        - BASE_URL=your_api_key
+      groups:
+        - environment
       flutter: stable
     triggering:
       events:
@@ -17,6 +17,8 @@ workflows:
           include: true
           source: true
     scripts:
+      - name: Check variables environment
+        script: echo $BASE_URL
       - name: Configuration environments
         script: |
           - mkdir -p assets/env
