@@ -5,6 +5,8 @@ workflows:
     max_build_duration: 120
     environment:
       flutter: stable
+      groups:
+        - Environment
     triggering:
       events:
         - pull_request
@@ -15,6 +17,12 @@ workflows:
           include: true
           source: true
     scripts:
+      - name: Configuration environments
+        script: |
+          - mkdir assets
+          - echo "BASE_URL=$BASE_URL_DEV" > assets/.env.dev
+          - echo "BASE_URL=$BASE_URL_PROD" > assets/.env.prod
+          - echo "BASE_URL=$BASE_URL_STAG > assets/.env.staging
       - name: Get Flutter Packages
         script: |
           flutter clean

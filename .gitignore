@@ -181,6 +181,7 @@ lib/res/l10n/intl/messages_en.dart
 doc/api/
 
 # dotenv environment variables file
+.env*
 
 # Avoid committing generated Javascript files:
 *.dart.js
