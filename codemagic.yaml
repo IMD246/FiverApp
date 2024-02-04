@@ -19,7 +19,7 @@ workflows:
     scripts:
       - name: Configuration environments
         script: |
-          - mkdir -p $CM_BUILD_DIR/assets/env
+          - mkdir -p assets/env
       - name: Get Flutter Packages
         script: |
           flutter clean
