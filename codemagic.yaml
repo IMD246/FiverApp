@@ -19,7 +19,6 @@ workflows:
     scripts:
       - name: Configuration environments
         script: |
-          - mkdir -p assets/env
           - echo "BASE_URL=$BASE_URL" > assets/env/.env.dev
           - echo "BASE_URL=$BASE_URL" >> assets/env/.env.prod
           - echo "BASE_URL=$BASE_URL" >> assets/env/.env.staging
