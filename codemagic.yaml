@@ -18,7 +18,7 @@ workflows:
           source: true
     scripts:
       - name: Configuration environments
-        script:
+        script: |
           - mkdir -p assets/env
           - echo "BASE_URL=$BASE_URL" > assets/env/.env.dev
           - echo "BASE_URL=$BASE_URL" > assets/env/.env.prod
