@@ -19,9 +19,8 @@ workflows:
     scripts:
       - name: Configuration .env files
         script: |
-          echo 'BASE_URL=$BASE_URL' >> $CM_BUILD_DIR/assets/env/.env.prod
+          echo "baseurl: $BASE_URL_DEV"
           echo 'BASE_URL=$BASE_URL_DEV' >> $CM_BUILD_DIR/assets/env/.env.dev
-          echo 'BASE_URL=$BASE_URL_STAG' >> $CM_BUILD_DIR/assets/env/.env.staging
       - name: Get Flutter Packages
         script: |
           flutter clean
@@ -32,8 +31,6 @@ workflows:
       - name: Flutter build apk with flavors
         script: |
           flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
-          flutter build apk -t lib/flavors/main_production.dart --flavor=prod --release --no-tree-shake-icons
-          flutter build apk -t lib/flavors/main_staging.dart --flavor=staging --release --no-tree-shake-icons
     artifacts:
       - ./build/app/outputs/flutter-apk/app-dev-release.apk
       - ./build/app/outputs/flutter-apk/app-prod-release.apk
