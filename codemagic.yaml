@@ -4,8 +4,10 @@ workflows:
     instance_type: mac_mini_m1
     max_build_duration: 120
     environment:
-      groups:
-        - environment
+      vars:
+        - ASSETS_DIR=assets
+        - ENV_FILE_PATH=$ASSETS_DIR/env
+        - BASE_URL=ecommerce.api
       flutter: stable
     triggering:
       events:
@@ -19,7 +21,8 @@ workflows:
     scripts:
       - name: Configuration environments
         script: |
-          - echo "BASE_URL=$BASE_URL" >> assets/env/.env.dev
+          - echo "Project directory: $FCI_BUILD_DIR"
+          - echo "BASE_URL=$BASE_URL" > assets/env/.env.dev
       - name: Get Flutter Packages
         script: |
           flutter clean
@@ -41,7 +44,7 @@ workflows:
           - Boigaming1411@gmail.com
         notify:
           success: true
-          failure: true
+          failure: false
       # app_store_connect:
       #   api_key: $APP_STORE_CONNECT_PRIVATE_KEY # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
       #   key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
