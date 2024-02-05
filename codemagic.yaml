@@ -19,7 +19,7 @@ workflows:
     scripts:
       - name: Configuration environments
         script: |
-          echo "BASE_URL=$BASE_URL > "$CM_BUILD_DIR/assets/env.dev"
+          echo "BASE_URL=$BASE_URL >> "$CM_BUILD_DIR/assets/env/.env.dev"
       - name: Get Flutter Packages
         script: |
           flutter clean
