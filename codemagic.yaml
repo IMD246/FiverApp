@@ -4,10 +4,6 @@ workflows:
     instance_type: mac_mini_m1
     max_build_duration: 120
     environment:
-      vars:
-        - ASSETS_DIR=assets
-        - ENV_FILE_PATH=$ASSETS_DIR/env
-        - BASE_URL=ecommerce.api
       flutter: stable
     triggering:
       events:
