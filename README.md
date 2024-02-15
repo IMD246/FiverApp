@@ -24,6 +24,14 @@ flutter build apk -t lib/flavors/main_staging.dart --flavor=staging --release --
 
 flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
 
+## flutter run with flavor
+
+flutter run -t lib/flavors/main_production.dart --flavor=prod --release
+
+flutter run -t lib/flavors/main_staging.dart --flavor=staging --release
+
+flutter run -t lib/flavors/main_development.dart --flavor=dev --release
+
 ## build runner cmd
 
 dart run build_runner clean
