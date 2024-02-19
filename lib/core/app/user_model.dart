@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fiver/core/config/env_config.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
-import '../../data/data_source/remote/network/network_url.dart';
 import '../../data/model/info_user_access_token.dart';
 import '../../domain/repositories/system_repository.dart';
 import '../../domain/repositories/user_repository.dart';
@@ -43,21 +42,10 @@ class UserModel extends ChangeNotifier {
   }
 
   Future<void> _initAPI({String? token}) async {
-    String baseUrl;
-    switch (environment) {
-      case Environment.staging:
-        baseUrl = baseURLSTG;
-        break;
-      case Environment.prod:
-        baseUrl = baseURLPROD;
-        break;
-      case Environment.dev:
-      default:
-        baseUrl = baseURLDEV;
-    }
+    EnvConfig.getInstance().init(environment);
     final packageInfo = await PackageInfo.fromPlatform();
     RestClient.instance.init(
-      baseUrl,
+      EnvConfig.getInstance().BASEURL ?? "",
       accessToken: token ?? "",
       // platform: Platform.isAndroid ? "android" : "ios",
       appVersion: packageInfo.version,

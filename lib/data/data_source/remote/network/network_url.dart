@@ -1,16 +1,6 @@
 // ignore_for_file: constant_identifier_names
 const int PAGE_SIZE = 20;
 
-const String baseURL = "";
-
-const String urlProd = "https://ecomereapps.lol";
-const String urlDev = "https://ecomereapps.lol";
-const String urlStg = "https://ecomereapps.lol";
-
-const String baseURLPROD = "$urlProd/api/";
-const String baseURLDEV = "$urlDev/api/";
-const String baseURLSTG = "$urlStg/api/";
-
 const String UPLOAD_PHOTO_URL = "";
 
 // endpoints

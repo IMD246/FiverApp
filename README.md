@@ -1,5 +1,8 @@
 # fiver
 
+# Description
+  
+
 ## run files .sh
 
 ./images-gen.sh
@@ -24,7 +27,7 @@ flutter build apk -t lib/flavors/main_staging.dart --flavor=staging --release --
 
 flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
 
-## flutter run with flavor
+## flutter run release with flavor
 
 flutter run -t lib/flavors/main_production.dart --flavor=prod --release
 

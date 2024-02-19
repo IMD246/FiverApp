@@ -4,6 +4,8 @@ workflows:
     instance_type: mac_mini_m1
     max_build_duration: 120
     environment:
+      groups:
+        - environment
       flutter: stable
     triggering:
       events:
@@ -11,22 +13,31 @@ workflows:
         - tag
         - push
       branch_patterns:
-        - pattern: "dev"
+        - pattern: "duy/config-security-environment-with-cicd"
           include: true
           source: true
     scripts:
+      - name: Configuration .env files
+        script: |
+          echo "BASE_URL=$BASE_URL" >> assets/env/.env
+          echo "BASE_URL=$BASE_URL_DEV" >> assets/env/.env.dev
+          echo "BASE_URL=$BASE_URL_STAG" >> assets/env/.env.staging
       - name: Get Flutter Packages
         script: |
           flutter clean
           flutter pub get
-      - name: Run Flutter Test
-        script: |
-          flutter test
+      # - name: Run Flutter Test
+      #   script: |
+      #     flutter test
       - name: Flutter build apk with flavors
         script: |
+          flutter build apk -t lib/flavors/main_production.dart --flavor=prod --release --no-tree-shake-icons
           flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
+          flutter build apk -t lib/flavors/main_staging.dart --flavor=staging --release --no-tree-shake-icons
     artifacts:
       - ./build/app/outputs/flutter-apk/app-dev-release.apk
+      - ./build/app/outputs/flutter-apk/app-prod-release.apk
+      - ./build/app/outputs/flutter-apk/app-staging-release.apk
     publishing:
       email:
         recipients:
@@ -36,7 +47,7 @@ workflows:
           - Boigaming1411@gmail.com
         notify:
           success: true
-          failure: true
+          failure: false
       # app_store_connect:
       #   api_key: $APP_STORE_CONNECT_PRIVATE_KEY # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
       #   key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
