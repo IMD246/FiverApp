@@ -17,10 +17,12 @@ workflows:
           include: true
           source: true
     scripts:
+      - name: Check environment variable
+         script: |
+            echo BaseURL: $BASE_URL
       - name: Configuration .env files
         script: |
-          echo 'BaseURL: $BASE_URL'
-          echo 'BASE_URL=$BASE_URL' > assets/env/.env.dev
+          echo BASE_URL=$BASE_URL > assets/env/.env.dev
       - name: Get Flutter Packages
         script: |
           flutter clean
