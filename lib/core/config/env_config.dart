@@ -20,7 +20,7 @@ class EnvConfig {
         await dotenv.load(fileName: "assets/env/.env.dev");
         break;
       case Environment.prod:
-        await dotenv.load(fileName: "assets/env/.env.prod");
+        await dotenv.load(fileName: "assets/env/.env");
         break;
       case Environment.staging:
         await dotenv.load(fileName: "assets/env/.env.staging");
