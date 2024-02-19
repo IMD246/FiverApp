@@ -17,9 +17,6 @@ workflows:
           include: true
           source: true
     scripts:
-      - name: Check environment variable
-        script: |
-          echo Base_URL:$BASE_URL
       - name: Configuration .env files
         script: |
           echo "BASE_URL=$BASE_URL" >> assets/env/.env
