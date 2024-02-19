@@ -19,7 +19,8 @@ workflows:
     scripts:
       - name: Configuration .env files
         script: |
-          echo 'BASE_URL=$BASE_URL' > $FCI_BUILD_DIR/assets/env/.env.dev
+          echo 'BaseURL: $BASE_URL'
+          echo 'BASE_URL=$BASE_URL' > assets/env/.env.dev
       - name: Get Flutter Packages
         script: |
           flutter clean
