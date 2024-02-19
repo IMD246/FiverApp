@@ -22,7 +22,7 @@ workflows:
           echo Base_URL:$BASE_URL
       - name: Configuration .env files
         script: |
-          echo "BASE_URL=https://ecomereapps.lol/api/" >> assets/env/.env.dev
+          echo "BASE_URL=$BASE_URL" >> assets/env/.env.dev
       - name: Get Flutter Packages
         script: |
           flutter clean
