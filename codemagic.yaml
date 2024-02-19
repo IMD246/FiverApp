@@ -18,11 +18,11 @@ workflows:
           source: true
     scripts:
       - name: Check environment variable
-         script: |
+        script: |
           echo $BASE_URL
       - name: Configuration .env files
         script: |
-          echo BASE_URL=$BASE_URL > assets/env/.env.dev
+          echo BASE_URL=$BASE_URL >> assets/env/.env.dev
       - name: Get Flutter Packages
         script: |
           flutter clean
