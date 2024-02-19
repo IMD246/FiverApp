@@ -24,6 +24,30 @@ extension EnvironmentExtension on Environment {
         return "Fiver";
     }
   }
+
+  String getAndroidAppId() {
+    switch (this) {
+      case Environment.dev:
+        return "1:458951462646:android:d0be5948a16e0a220de6d7";
+      case Environment.staging:
+        return "1:458951462646:android:e2ccceecf092ca510de6d7";
+      case Environment.prod:
+      default:
+        return "1:458951462646:android:71aacd9d168dce5e0de6d7";
+    }
+  }
+
+  String getIOSAppId() {
+    switch (this) {
+      case Environment.dev:
+        return "1:458951462646:ios:640d291a084d0cd60de6d7";
+      case Environment.staging:
+        return "1:458951462646:ios:640d291a084d0cd60de6d7";
+      case Environment.prod:
+      default:
+        return "1:458951462646:ios:640d291a084d0cd60de6d7";
+    }
+  }
 }
 
 extension RegisterSocialTypeExtension on RegisterSocialType {
