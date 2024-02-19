@@ -19,8 +19,7 @@ workflows:
     scripts:
       - name: Configuration .env files
         script: |
-          echo "baseurl: $BASE_URL"
-          echo 'BASE_URL=$BASE_URL' >> $FCI_BUILD_DIR/assets/env/.env.dev
+          echo 'BASE_URL=$BASE_URL' > $FCI_BUILD_DIR/assets/env/.env.dev
       - name: Get Flutter Packages
         script: |
           flutter clean
@@ -33,8 +32,8 @@ workflows:
           flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
     artifacts:
       - ./build/app/outputs/flutter-apk/app-dev-release.apk
-      - ./build/app/outputs/flutter-apk/app-prod-release.apk
-      - ./build/app/outputs/flutter-apk/app-staging-release.apk
+      # - ./build/app/outputs/flutter-apk/app-prod-release.apk
+      # - ./build/app/outputs/flutter-apk/app-staging-release.apk
     publishing:
       email:
         recipients:
