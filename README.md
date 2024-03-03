@@ -1,7 +1,5 @@
 # fiver
-
-# Description
-  
+  Description : Fiver is an online shop that allows people to view/buy products from company
 
 ## run files .sh
 
@@ -14,10 +12,6 @@
 flutter clean
 
 flutter pub get
-
-## flutter build apk release
-
-flutter build apk --release
 
 ## flutter build apk release with flavor
 
