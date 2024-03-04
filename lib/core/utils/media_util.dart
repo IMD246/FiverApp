@@ -11,11 +11,22 @@ import 'package:photo_manager/photo_manager.dart';
 class MediaUtils {
   MediaUtils._();
 
-  static FormData settingFormDataForAvatarUpload(
-      String filePath, String fileName) {
+  static Future<bool> checkFileSizeIsInvalid(XFile file) async {
+    final size = await file.readAsBytes();
+
+    if (size.lengthInBytes > 100) {
+      return true;
+    }
+    return false;
+  }
+
+  static Future<FormData> settingFormDataForAvatarUpload(
+    String filePath,
+    String fileName,
+  ) async {
     return FormData.fromMap(
       {
-        "avatar": MultipartFile.fromFile(
+        "avatar": await MultipartFile.fromFile(
           filePath,
           filename: fileName,
           contentType: MediaType(
@@ -28,7 +39,8 @@ class MediaUtils {
   }
 
   static Future<FormData> settingFormDataForMultipleImagesUpload(
-      List<XFile> files) async {
+    List<XFile> files,
+  ) async {
     List<MultipartFile> multipartFileList = [];
     for (int i = 0; i < files.length; i++) {
       multipartFileList.add(
@@ -45,7 +57,7 @@ class MediaUtils {
     );
   }
 
-  static getExtensionFile(String filePath) {
+  static String getExtensionFile(String filePath) {
     return filePath.split(".").last;
   }
 

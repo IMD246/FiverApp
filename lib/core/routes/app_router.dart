@@ -1,4 +1,4 @@
-import 'package:fiver/presentation/product_detail.dart/product_detail_page.dart';
+import '../../presentation/product_detail.dart/product_detail_page.dart';
 
 import '../../presentation/rating_and_review/rating_and_review_page.dart';
 import 'package:flutter/widgets.dart';
@@ -173,7 +173,7 @@ class AppRouter extends ChangeNotifier {
       );
     },
     refreshListenable: locator<UserModel>(),
-    initialLocation: mainPath,
+    initialLocation: loginPath,
   );
 
   static String? _handleRedirectRouter({
@@ -217,20 +217,19 @@ class AppRouter extends ChangeNotifier {
     BuildContext context,
     GoRouterState state,
   ) {
-    return state.fullPath;
-    // if (userModel.isLogin()) {
-    //   if (appModel.router == RouterRedirect.main) {
-    //     appModel.changeRouterRedirect(RouterRedirect.other);
-    //     return mainPath;
-    //   }
-    //   return state.fullPath;
-    // } else {
-    //   if (appModel.router == RouterRedirect.login) {
-    //     appModel.changeRouterRedirect(RouterRedirect.other);
-    //     return loginPath;
-    //   }
-    //   return state.fullPath;
-    // }
+    if (userModel.isLogin()) {
+      if (appModel.router == RouterRedirect.main) {
+        appModel.changeRouterRedirect(RouterRedirect.other);
+        return mainPath;
+      }
+      return state.fullPath;
+    } else {
+      if (appModel.router == RouterRedirect.login) {
+        appModel.changeRouterRedirect(RouterRedirect.other);
+        return loginPath;
+      }
+      return state.fullPath;
+    }
   }
 
   static String? _verifyEmailNavigation(

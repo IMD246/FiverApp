@@ -1,6 +1,6 @@
 import 'dart:isolate';
 
-import 'package:fiver/core/utils/collection_util.dart';
+import '../../../core/utils/collection_util.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/app/app_model.dart';

@@ -22,5 +22,5 @@ abstract class UserRepository {
   Future<void> registerDeviceToken({required String deviceToken});
   Future<void> updateDeviceToken({required String deviceToken});
   String? getDeviceToken();
-  Future<String> uploadAvatar({required FormData formData});
+  Future<bool> uploadAvatar({required FormData formData});
 }

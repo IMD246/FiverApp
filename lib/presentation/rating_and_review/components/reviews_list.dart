@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fiver/core/utils/collection_util.dart';
+import '../../../core/utils/collection_util.dart';
 import '../../../core/extensions/ext_datetime.dart';
 import '../../../core/extensions/ext_localization.dart';
 import '../../../core/res/colors.dart';

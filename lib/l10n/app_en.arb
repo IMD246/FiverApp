@@ -133,5 +133,14 @@
             }
         }
     },
-    "subtitle_settings" : "Notifications, password"
+    "subtitle_settings" : "Notifications, password",
+    "logout" : "Logout",
+    "error_size_file" : "Your file size must be lower or equal {mb}mb",
+    "@error_size_file": {
+        "placeholders": {
+            "mb": {
+                "type": "int"
+            }
+        }
+    }
 }

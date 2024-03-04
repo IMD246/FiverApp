@@ -1,5 +1,5 @@
-import 'package:fiver/core/utils/collection_util.dart';
-import 'package:fiver/presentation/widgets/add_to_favorite_button.dart';
+import '../../../../core/utils/collection_util.dart';
+import '../../../widgets/add_to_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

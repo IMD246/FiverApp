@@ -1,6 +1,6 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/presentation/product_detail.dart/product_detail_model.dart';
-import 'package:fiver/presentation/widgets/add_to_favorite_button.dart';
+import '../../../core/extensions/ext_localization.dart';
+import '../product_detail_model.dart';
+import '../../widgets/add_to_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

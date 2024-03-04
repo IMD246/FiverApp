@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fiver/core/utils/collection_util.dart';
+import 'collection_util.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/data_source/remote/api_reponse/exceptions/api_exception.dart';

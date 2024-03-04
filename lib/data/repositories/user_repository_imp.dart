@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:fiver/core/utils/collection_util.dart';
+import '../../core/utils/collection_util.dart';
+// ignore: unused_import
+import 'package:share_plus/share_plus.dart';
 
 import '../../core/utils/device_info_util.dart';
 import '../data_source/local/isar_db.dart';
@@ -90,6 +92,7 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
 
   Future<void> _setToken(String accessToken) async {
     RestClient.instance.setToken(accessToken);
+    locator<UserModel>().accessToken = accessToken;
     await setAccessToken(token: accessToken);
   }
 
@@ -103,14 +106,10 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   @override
   Future<void> logout({bool isNeedCallApiLogout = false}) async {
     locator<UserModel>().logout();
-    Future.wait(
-      [
-        _optinalCallAPILogout(isNeedCallApiLogout),
-        _pref.logout(),
-        locator<AuthGoogleProvider>().logout(),
-        locator<IsarDb>().clear(),
-      ],
-    );
+    _optinalCallAPILogout(isNeedCallApiLogout);
+    _pref.logout();
+    locator<AuthGoogleProvider>().logout();
+    locator<IsarDb>().clear();
   }
 
   @override
@@ -164,12 +163,13 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   }
 
   @override
-  Future<String> uploadAvatar({required FormData formData}) async {
+  Future<bool> uploadAvatar({
+    required FormData formData,
+  }) async {
     final res = await uploadMedia(
       UPLOAD_AVATAR,
       formData,
     );
-
-    return res.data;
+    return res.success;
   }
 }

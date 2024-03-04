@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:fiver/core/utils/collection_util.dart';
+import '../../../core/utils/collection_util.dart';
 
 import '../../../core/base/base_service.dart';
 import '../../model/rating_model.dart';

@@ -1,4 +1,4 @@
-import 'package:fiver/core/config/run_app_config.dart';
+import '../core/config/run_app_config.dart';
 import 'package:flutter/material.dart';
 import '../core/app/fiver_app.dart';
 import '../core/enum.dart';

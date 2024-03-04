@@ -16,16 +16,15 @@ abstract class BaseSerivce {
     return response.data;
   }
 
-  Future<dynamic> uploadMedia(
+  Future<DataResponse> uploadMedia(
     String path,
     FormData formData,
   ) async {
-    final response = await RestClient.getDio().post(
+    final response = await RestClient.getDio(isUpload: true).post(
       path,
       data: formData,
     );
-
-    return response.data;
+    return _handleResponse(response);
   }
 
   Future<DataResponse> get(String path, {Map<String, dynamic>? params}) async {

@@ -1,9 +1,7 @@
-import 'dart:io';
-
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/res/images.dart';
-import 'package:fiver/core/utils/package_info_util.dart';
-import 'package:fiver/presentation/main/profile/components/setting_list.dart';
+import '../../../core/extensions/ext_localization.dart';
+import '../../../core/res/images.dart';
+import '../../../core/utils/package_info_util.dart';
+import 'components/setting_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -43,7 +41,7 @@ class _ProfilePageState extends BaseState<ProfileModel, ProfilePage>
           SizedBox(height: 24.w),
           _profile(model),
           SizedBox(height: 28.w),
-          const SettingList(),
+          SettingList(model: model),
           _versionWidget(),
         ],
       ),
@@ -76,25 +74,37 @@ class _ProfilePageState extends BaseState<ProfileModel, ProfilePage>
         Stack(
           clipBehavior: Clip.none,
           children: [
-            ValueListenableBuilder(
-              valueListenable: model.avatar,
-              builder: (context, avatar, child) {
-                return CircleAvatar(
-                  radius: 50.r,
-                  backgroundImage:
-                      avatar == null ? AssetImage(DImages.defaultAvatar) : null,
-                  child: avatar != null ? Image.file(File(avatar.path)) : null,
-                );
-              },
-            ),
+            if (model.user?.avatar != null)
+              SizedBox(
+                width: 64.w,
+                height: 64.w,
+                child: model.user?.avatar != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(64.r),
+                        child: model.user?.avatar != null
+                            ? Image.network(
+                                model.user?.avatar ?? "",
+                                cacheWidth: 64.w.toInt(),
+                                cacheHeight: 64.w.toInt(),
+                              )
+                            : null,
+                      )
+                    : Image.asset(
+                        DImages.defaultAvatar,
+                        fit: BoxFit.cover,
+                        width: 64.w,
+                        height: 64.w,
+                      ),
+              ),
             Positioned(
               bottom: 0,
-              right: 0,
+              right: -6,
               child: IconButton(
                 onPressed: model.onUpdateAvatar,
                 icon: Icon(
                   Icons.edit,
-                  size: 24.w,
+                  size: 20.w,
+                  color: Colors.yellow,
                 ),
               ),
             ),
@@ -105,13 +115,13 @@ class _ProfilePageState extends BaseState<ProfileModel, ProfilePage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Matilda Brown",
+              model.user?.fullName ?? "",
               style: text18.medium.copyWith(
                 color: getColor().themeColor222222White,
               ),
             ),
             Text(
-              "matildabrown@mail.com",
+              model.user?.email ?? "",
               style: text14.copyWith(
                 color: getColor().themeColorGrey,
               ),
