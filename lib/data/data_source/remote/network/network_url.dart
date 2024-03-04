@@ -16,3 +16,4 @@ const String GET_BANNER = "get-home-banner";
 const String GET_CATEGORY = "get-category";
 const String GET_CATEGORY_BY_ID = "get-category-by-id";
 const String REGISTER_DEVICE_TOKEN = 'device';
+const String UPLOAD_AVATAR = '/user/update-avatar';

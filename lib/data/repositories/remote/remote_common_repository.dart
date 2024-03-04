@@ -1,12 +1,13 @@
 import 'dart:ui';
 
+import 'package:fiver/core/utils/collection_util.dart';
+
 import '../../../core/base/base_service.dart';
 import '../../model/rating_model.dart';
 
 import '../../../core/constant/constants.dart';
 import '../../../core/di/locator_service.dart';
 import '../../../core/res/colors.dart';
-import '../../../core/utils/util.dart';
 import '../../../domain/repositories/common_repository.dart';
 import '../../data_source/remote/network/network_url.dart';
 import '../../model/banner_model.dart';
@@ -150,14 +151,14 @@ class RemoteCommonRepository extends BaseSerivce implements CommonRepository {
         name: "s.Oliver",
       ),
     ];
-    if (query.isNullOrEmpty) {
+    if (query!.isNullOrEmpty) {
       return brands;
     }
     List<MBrand> brandsFiltered = [];
     for (var brand in brands) {
       for (var i = 0; i < brand.name.length; i++) {
         final charName = brand.name[i].toLowerCase();
-        if (query!.contains(charName)) {
+        if (query.contains(charName)) {
           brandsFiltered.add(brand);
           break;
         }

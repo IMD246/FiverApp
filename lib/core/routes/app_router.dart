@@ -173,7 +173,7 @@ class AppRouter extends ChangeNotifier {
       );
     },
     refreshListenable: locator<UserModel>(),
-    initialLocation: loginPath,
+    initialLocation: mainPath,
   );
 
   static String? _handleRedirectRouter({
@@ -217,19 +217,20 @@ class AppRouter extends ChangeNotifier {
     BuildContext context,
     GoRouterState state,
   ) {
-    if (userModel.isLogin()) {
-      if (appModel.router == RouterRedirect.main) {
-        appModel.changeRouterRedirect(RouterRedirect.other);
-        return mainPath;
-      }
-      return state.fullPath;
-    } else {
-      if (appModel.router == RouterRedirect.login) {
-        appModel.changeRouterRedirect(RouterRedirect.other);
-        return loginPath;
-      }
-      return state.fullPath;
-    }
+    return state.fullPath;
+    // if (userModel.isLogin()) {
+    //   if (appModel.router == RouterRedirect.main) {
+    //     appModel.changeRouterRedirect(RouterRedirect.other);
+    //     return mainPath;
+    //   }
+    //   return state.fullPath;
+    // } else {
+    //   if (appModel.router == RouterRedirect.login) {
+    //     appModel.changeRouterRedirect(RouterRedirect.other);
+    //     return loginPath;
+    //   }
+    //   return state.fullPath;
+    // }
   }
 
   static String? _verifyEmailNavigation(

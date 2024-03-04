@@ -100,5 +100,38 @@
     "only_select_3_images": "(Only select 3 images)",
     "you_can_also_like_this" : "You can also like this",
     "add_to_cart" : "Add to cart",
-    "items" : "Items"
+    "items" : "Items",
+    "my_profile" : "My Profile",
+    "my_orders" : "My Orders",
+    "shipping_adresses" : "Shipping adresses",
+    "subtitle_shipping_addresses" : "{address} addresses",
+      "@subtitle_shipping_addresses": {
+        "placeholders": {
+            "address": {
+                "type": "int"
+            }
+        }
+    },
+    "payment_methods" : "Payment methods",
+    "promocodes" : "Promocodes",
+    "my_reviews" : "My reviews",
+    "settings" : "Settings",
+    "subtitle_orders": "Already have {order} orders",
+     "@subtitle_orders": {
+        "placeholders": {
+            "order": {
+                "type": "int"
+            }
+        }
+    },
+    "subtitle_promocodes" : "You have special promocodes",
+    "subtitle_my_reviews" : "Reviews for {review} items",
+     "@subtitle_my_reviews": {
+        "placeholders": {
+            "review": {
+                "type": "int"
+            }
+        }
+    },
+    "subtitle_settings" : "Notifications, password"
 }

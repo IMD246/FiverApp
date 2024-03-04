@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 import '../../data/model/info_user_access_token.dart';
 
 abstract class UserRepository {
@@ -20,4 +22,5 @@ abstract class UserRepository {
   Future<void> registerDeviceToken({required String deviceToken});
   Future<void> updateDeviceToken({required String deviceToken});
   String? getDeviceToken();
+  Future<String> uploadAvatar({required FormData formData});
 }

@@ -57,7 +57,11 @@ class RestClient {
 
   static Dio getDio({String? customUrl, bool isUpload = false}) {
     var dio = Dio(
-        instance.getDioBaseOption(customUrl: customUrl, isUpload: isUpload));
+      instance.getDioBaseOption(
+        customUrl: customUrl,
+        isUpload: isUpload,
+      ),
+    );
 
     if (ENABLE_LOG) {
       dio.interceptors.add(

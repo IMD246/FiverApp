@@ -22,11 +22,11 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends BaseState<MainModel, MainPage> {
   List<Widget> pages = const [
+    ProfilePage(),
     HomePage(),
     ShopPage(),
     BagPage(),
     FavoritesPage(),
-    ProfilePage(),
   ];
   @override
   void initState() {

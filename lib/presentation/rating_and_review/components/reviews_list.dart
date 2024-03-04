@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fiver/core/utils/collection_util.dart';
 import '../../../core/extensions/ext_datetime.dart';
 import '../../../core/extensions/ext_localization.dart';
 import '../../../core/res/colors.dart';
 import '../../../core/res/theme/text_theme.dart';
-import '../../../core/utils/util.dart';
 import '../../../data/model/review_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
