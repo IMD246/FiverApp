@@ -39,8 +39,8 @@ class _ProductDetailPageState
 
   @override
   Widget buildContent() {
-    return WillPopScope(
-      onWillPop: model.onBack,
+    return PopScope(
+      onPopInvoked: model.onBack,
       child: super.buildContent(),
     );
   }
@@ -230,7 +230,7 @@ class _ProductDetailPageState
   @override
   CommonAppbar? get appbar => CommonAppbar(
         title: widget.name,
-        action: model.onBack,
+        action: () => model.onBack(true),
         trailing: [
           InkWell(
             onTap: () => model.onShare(context),

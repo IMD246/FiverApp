@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:fiver/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -39,11 +40,15 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
             return Consumer<M>(
               builder: (context, model, child) {
                 if (Platform.isAndroid) {
-                  return WillPopScope(
-                    child: buildViewByState(context, model),
-                    onWillPop: () async {
-                      return await Future.value(model.onWillPop);
+                  return PopScope(
+                    canPop: model.onWillPop,
+                    onPopInvoked: (didPop) {
+                      if (didPop) {
+                        return;
+                      }
+                      AppRouter.router.pop();
                     },
+                    child: buildViewByState(context, model),
                   );
                 }
                 return buildViewByState(context, model);

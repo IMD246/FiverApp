@@ -39,7 +39,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
    android {
     namespace "com.nicebuild.fiver"
-    compileSdkVersion 33
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -65,7 +65,7 @@ apply plugin: 'com.google.firebase.crashlytics'
     }
     signingConfigs {
        release {
-           keyAlias keystoreProperties['keyAlias']
+        keyAlias keystoreProperties['keyAlias']
            keyPassword keystoreProperties['keyPassword']
            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
            storePassword keystoreProperties['storePassword']

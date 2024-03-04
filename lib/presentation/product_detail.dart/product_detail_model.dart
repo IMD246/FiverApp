@@ -193,7 +193,7 @@ class ProductDetailModel extends BaseModel {
     }
   }
 
-  Future<bool> onBack() async {
+  bool onBack(bool didPop) {
     if (AppRouter.router.canPop()) {
       AppRouter.router.pop();
       return true;

@@ -53,10 +53,13 @@ class ViewBy extends StatelessWidget {
       ),
       backgroundColor: getColor().bgColorWhiteBlack,
       context: context,
-      builder: (context) => WillPopScope(
-        onWillPop: () async {
+      builder: (context) => PopScope(
+        canPop: true,
+        onPopInvoked: (didPop) {
+          if (didPop) {
+            return;
+          }
           Navigator.pop(context, currentSortBy);
-          return true;
         },
         child: SafeArea(
           child: StatefulBuilder(

@@ -26,9 +26,9 @@ workflows:
         script: |
           flutter clean
           flutter pub get
-      # - name: Run Flutter Test
-      #   script: |
-      #     flutter test
+      - name: Run Flutter Test
+        script: |
+          flutter test
       - name: Flutter build apk with flavors
         script: |
           flutter build apk -t lib/flavors/main_production.dart --flavor=prod --release --no-tree-shake-icons

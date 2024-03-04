@@ -43,18 +43,18 @@ abstract class BaseModel extends ChangeNotifier {
     if (viewState == ViewState.error && error != null) {}
   }
 
-  String getErrorMessage(dynamic error) {
+  String _getErrorMessage(dynamic error) {
     if (error is HandleError) {
       return error.message;
     }
     if (error is DioException && error.response?.statusCode != 422) {
-      return error.response?.data['message'] ?? "";
+      return error.response?.data['message'].toString() ?? "";
     }
     return "unknown";
   }
 
-  showErrorException(dynamic error) {
-    final getError = getErrorMessage(error);
+  void showErrorException(dynamic error) {
+    final getError = _getErrorMessage(error);
     EasyLoading.showError(getError);
   }
 

@@ -29,8 +29,14 @@ class _LoginPageState extends BaseState<LoginModel, LoginPage> {
 
   @override
   Widget buildContentView(BuildContext context, LoginModel model) {
-    return WillPopScope(
-      onWillPop: model.onBack,
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        model.onBack();
+      },
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),

@@ -34,8 +34,8 @@ class _ResetPasswordPageState
 
   @override
   Widget buildContent() {
-    return WillPopScope(
-      onWillPop: model.onMoveToLogin,
+    return PopScope(
+      onPopInvoked: (didPop) => model.onMoveToLogin,
       child: super.buildContent(),
     );
   }
