@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:fiver/core/enum.dart';
+import '../enum.dart';
 import 'package:flutter/foundation.dart';
 import '../app/user_model.dart';
 import '../di/locator_service.dart';

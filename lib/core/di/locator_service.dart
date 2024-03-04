@@ -1,5 +1,5 @@
-import 'package:fiver/core/app/push_notification_manager.dart';
-import 'package:fiver/presentation/product_detail.dart/product_detail_model.dart';
+import '../app/push_notification_manager.dart';
+import '../../presentation/product_detail.dart/product_detail_model.dart';
 
 import '../../data/repositories/remote/remote_review_repository.dart';
 import '../../data/repositories/review_repository_imp.dart';

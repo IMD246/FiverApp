@@ -1,4 +1,4 @@
-import 'package:fiver/presentation/product_detail.dart/product_detail_page.dart';
+import '../../presentation/product_detail.dart/product_detail_page.dart';
 
 import '../../presentation/rating_and_review/rating_and_review_page.dart';
 import 'package:flutter/widgets.dart';

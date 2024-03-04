@@ -1,3 +1,8 @@
+import 'package:dio/dio.dart';
+import '../../core/utils/collection_util.dart';
+// ignore: unused_import
+import 'package:share_plus/share_plus.dart';
+
 import '../../core/utils/device_info_util.dart';
 import '../data_source/local/isar_db.dart';
 
@@ -6,7 +11,6 @@ import '../../core/base/base_service.dart';
 import '../../core/base/rest_client.dart';
 import '../../core/di/locator_service.dart';
 import '../../core/provider/auth_provider.dart';
-import '../../core/utils/util.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../data_source/local/preferences.dart';
 import '../data_source/remote/network/network_url.dart';
@@ -88,6 +92,7 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
 
   Future<void> _setToken(String accessToken) async {
     RestClient.instance.setToken(accessToken);
+    locator<UserModel>().accessToken = accessToken;
     await setAccessToken(token: accessToken);
   }
 
@@ -101,14 +106,10 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   @override
   Future<void> logout({bool isNeedCallApiLogout = false}) async {
     locator<UserModel>().logout();
-    Future.wait(
-      [
-        _optinalCallAPILogout(isNeedCallApiLogout),
-        _pref.logout(),
-        locator<AuthGoogleProvider>().logout(),
-        locator<IsarDb>().clear(),
-      ],
-    );
+    _optinalCallAPILogout(isNeedCallApiLogout);
+    _pref.logout();
+    locator<AuthGoogleProvider>().logout();
+    locator<IsarDb>().clear();
   }
 
   @override
@@ -159,5 +160,16 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   @override
   Future<void> updateDeviceToken({required String deviceToken}) async {
     await _pref.setDeviceToken(deviceToken);
+  }
+
+  @override
+  Future<bool> uploadAvatar({
+    required FormData formData,
+  }) async {
+    final res = await uploadMedia(
+      UPLOAD_AVATAR,
+      formData,
+    );
+    return res.success;
   }
 }

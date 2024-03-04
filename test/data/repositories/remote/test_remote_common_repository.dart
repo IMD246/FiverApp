@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:fiver/core/constant/constants.dart';
 import 'package:fiver/core/di/locator_service.dart';
 import 'package:fiver/core/res/colors.dart';
-import 'package:fiver/core/utils/util.dart';
+import 'package:fiver/core/utils/collection_util.dart';
 import 'package:fiver/data/model/banner_model.dart';
 import 'package:fiver/data/model/brand_model.dart';
 import 'package:fiver/data/model/gender_model.dart';
@@ -205,14 +205,14 @@ class TestRemoteCommonRepository implements CommonRepository {
         name: "s.Oliver",
       ),
     ];
-    if (query.isNullOrEmpty) {
+    if (query!.isNullOrEmpty) {
       return brands;
     }
     List<MBrand> brandsFiltered = [];
     for (var brand in brands) {
       for (var i = 0; i < brand.name.length; i++) {
         final charName = brand.name[i].toLowerCase();
-        if (query!.contains(charName)) {
+        if (query.contains(charName)) {
           brandsFiltered.add(brand);
           break;
         }

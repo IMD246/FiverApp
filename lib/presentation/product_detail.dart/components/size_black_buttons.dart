@@ -1,5 +1,5 @@
-import 'package:fiver/presentation/product_detail.dart/product_detail_model.dart';
-import 'package:fiver/presentation/widgets/add_to_favorite_button.dart';
+import '../product_detail_model.dart';
+import '../../widgets/add_to_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';

@@ -5,7 +5,6 @@ import 'package:fiver/core/di/locator_service.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../../data/data_source/remote/network/network_url.dart';
 import '../../domain/repositories/user_repository.dart';
 
 class RestClient {
@@ -57,7 +56,11 @@ class RestClient {
 
   static Dio getDio({String? customUrl, bool isUpload = false}) {
     var dio = Dio(
-        instance.getDioBaseOption(customUrl: customUrl, isUpload: isUpload));
+      instance.getDioBaseOption(
+        customUrl: customUrl,
+        isUpload: isUpload,
+      ),
+    );
 
     if (ENABLE_LOG) {
       dio.interceptors.add(
@@ -89,7 +92,7 @@ class RestClient {
 
   BaseOptions getDioBaseOption({String? customUrl, bool isUpload = false}) {
     return BaseOptions(
-      baseUrl: isUpload ? UPLOAD_PHOTO_URL : customUrl ?? instance.baseUrl,
+      baseUrl: instance.baseUrl,
       connectTimeout: const Duration(milliseconds: TIMEOUT),
       receiveTimeout: const Duration(milliseconds: TIMEOUT),
       headers: instance.headers,

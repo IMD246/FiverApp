@@ -1,8 +1,9 @@
-import 'package:fiver/core/base/base_model.dart';
-import 'package:fiver/core/routes/app_router.dart';
-import 'package:fiver/core/utils/dynamic_link_util.dart';
-import 'package:fiver/core/utils/util.dart';
-import 'package:fiver/data/model/product_model.dart';
+import '../../core/base/base_model.dart';
+import '../../core/routes/app_router.dart';
+import '../../core/utils/dynamic_link_util.dart';
+import '../../core/utils/media_util.dart';
+import '../../core/utils/util.dart';
+import '../../data/model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:share_plus/share_plus.dart';
@@ -172,7 +173,7 @@ class ProductDetailModel extends BaseModel {
 
   void onShare(BuildContext context) async {
     try {
-      final file = await urlImageToFile(
+      final file = await MediaUtils.urlImageToFile(
         url: images.first,
       );
       final uri = await createDynamicLink(

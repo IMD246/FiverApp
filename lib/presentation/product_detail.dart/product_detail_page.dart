@@ -1,15 +1,15 @@
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/res/colors.dart';
+import '../../core/extensions/ext_localization.dart';
+import '../../core/res/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:fiver/core/base/base_state.dart';
-import 'package:fiver/core/res/theme/text_theme.dart';
-import 'package:fiver/core/res/theme/theme_manager.dart';
-import 'package:fiver/presentation/product_detail.dart/product_detail_model.dart';
-import 'package:fiver/presentation/widgets/common_appbar.dart';
-import 'package:fiver/presentation/widgets/custom_button.dart';
+import '../../core/base/base_state.dart';
+import '../../core/res/theme/text_theme.dart';
+import '../../core/res/theme/theme_manager.dart';
+import 'product_detail_model.dart';
+import '../widgets/common_appbar.dart';
+import '../widgets/custom_button.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'components/components.dart';

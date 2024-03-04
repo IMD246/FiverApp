@@ -7,6 +7,7 @@ import 'dart:isolate';
 import 'package:customize_picker/customize_picker.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
+import 'package:fiver/core/utils/media_util.dart';
 import 'package:fiver/core/utils/util.dart';
 import 'package:fiver/data/model/rating_model.dart';
 import 'package:fiver/data/model/review_model.dart';
@@ -163,7 +164,7 @@ class RatingAndReviewModel extends BaseModel {
       final images = imagesPicker.value;
       Isolate? imagesIsolate;
       final getImages = await IsolateUtil.isolateFunction(
-        actionFuture: () => compressImages(images),
+        actionFuture: () => MediaUtils. compressImages(images),
         isolate: imagesIsolate,
       ) as List<File>;
 
@@ -171,7 +172,7 @@ class RatingAndReviewModel extends BaseModel {
 
       Isolate? base64Isolate;
       final base64Files = await IsolateUtil.isolateFunction(
-        actionFuture: () => toBase64Strings(getImages),
+        actionFuture: () => MediaUtils.toBase64Strings(getImages),
         isolate: base64Isolate,
       ) as List<String>;
 

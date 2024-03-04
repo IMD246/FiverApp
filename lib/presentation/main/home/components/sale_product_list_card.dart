@@ -1,4 +1,5 @@
-import 'package:fiver/presentation/widgets/add_to_favorite_button.dart';
+import '../../../../core/utils/collection_util.dart';
+import '../../../widgets/add_to_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,6 @@ import '../../../../core/enum.dart';
 import '../../../../core/extensions/ext_localization.dart';
 import '../../../../core/res/theme/text_theme.dart';
 import '../../../../core/res/theme/theme_manager.dart';
-import '../../../../core/utils/util.dart';
 import '../../../../data/model/product_model.dart';
 import '../../../widgets/extra_product_display_widget.dart';
 import '../../../widgets/price_display_widget.dart';

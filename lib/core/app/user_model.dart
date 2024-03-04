@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fiver/core/config/env_config.dart';
-import 'package:fiver/core/utils/util.dart';
+import '../config/env_config.dart';
+import '../utils/collection_util.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../../data/model/info_user_access_token.dart';
@@ -32,7 +32,6 @@ class UserModel extends ChangeNotifier {
     this.environment = environment;
     final accessToken = _userRepository.getAccessToken();
     this.accessToken = accessToken;
-
     await Future.wait([
       initFirebase(),
       _initAPI(token: accessToken),

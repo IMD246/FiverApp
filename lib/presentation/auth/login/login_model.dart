@@ -96,15 +96,16 @@ class LoginModel extends BaseModel {
       );
       locator<UserModel>().onUpdateUserInfo(userInfo: result);
       onWillPop = true;
-      EasyLoading.dismiss();
     } catch (e) {
       if (e is DioException && e.response?.statusCode == 422) {
         _handleValidateError(e);
       } else {
         showErrorException(e);
       }
-      EasyLoading.dismiss();
+
       onWillPop = true;
+    } finally {
+      EasyLoading.dismiss();
     }
   }
 
@@ -138,6 +139,8 @@ class LoginModel extends BaseModel {
       EasyLoading.dismiss();
       showErrorException(e);
       onWillPop = true;
+    } finally {
+      EasyLoading.dismiss();
     }
   }
 
