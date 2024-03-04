@@ -30,10 +30,13 @@ class _BrandPageState extends BaseListState<MBrand, BrandModel, BrandPage> {
 
   @override
   Widget buildContentView(BuildContext context, BrandModel model) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
         model.onBack(newUpdate: false);
-        return true;
       },
       child: Column(
         children: [

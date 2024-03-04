@@ -36,8 +36,14 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
 
   @override
   Widget buildContentView(BuildContext context, MainModel model) {
-    return WillPopScope(
-      onWillPop: model.doubleTapToExistApp,
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        model.doubleTapToExistApp();
+      },
       child: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: model.pageController,

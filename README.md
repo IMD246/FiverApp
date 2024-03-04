@@ -1,5 +1,12 @@
 # fiver
-  Description : Fiver is an online shop that allows people to view/buy products from company
+
+Description : Fiver is an online shop that allows people to view/buy products from company
+
+## SDK Version
+
+dart: ">=3.2.3 <4.0.0"
+
+flutter: ">=3.16.6"
 
 ## run files .sh
 

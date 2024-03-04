@@ -170,7 +170,6 @@ class _WriteReviewState extends State<WriteReview> {
                   widget.model.onFiles(context);
                 },
                 child: Container(
-                  height: 104.w,
                   width: 104.w,
                   padding: EdgeInsets.symmetric(
                     horizontal: 8.w,

@@ -113,7 +113,9 @@ class LocalNotificationHelper {
       data = NotificationItem.fromJson(jsonData);
       return data;
     } catch (error) {
-      print("INVEST_JSON_ERROR: $error ");
+      if (kDebugMode) {
+        print("INVEST_JSON_ERROR: $error ");
+      }
       return null;
     }
   }
