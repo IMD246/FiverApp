@@ -13,7 +13,7 @@ workflows:
         - tag
         - push
       branch_patterns:
-        - pattern: "duy/27-fix-upgrade-to-sdk-version-34-to-meet-requirements-customizable-picker-image-package"
+        - pattern: "dev"
           include: true
           source: true
     scripts:
