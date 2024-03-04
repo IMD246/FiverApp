@@ -2,17 +2,17 @@ import 'dart:developer';
 
 import 'package:google_sign_in/google_sign_in.dart';
 
-final GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: [
-    'email',
-  ],
-);
-
 abstract class AuthProvider {
   Future<dynamic> signIn();
 }
 
 class AuthGoogleProvider implements AuthProvider {
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+    ],
+  );
+
   @override
   Future<GoogleSignInAccount?> signIn() async {
     try {
