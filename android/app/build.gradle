@@ -38,7 +38,7 @@ apply plugin: 'com.google.firebase.crashlytics'
    }
 
    android {
-    namespace "com.example.fiver"
+    namespace "com.nicebuild.fiver"
     compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
@@ -52,11 +52,20 @@ apply plugin: 'com.google.firebase.crashlytics'
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        prod {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+        staging {
+            manifest.srcFile 'src/dev/AndroidManifest.xml'
+        }
+        dev {
+            manifest.srcFile 'src/staging/AndroidManifest.xml'
+        }
+        // main.java.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
-        applicationId "com.example.fiver"
+        applicationId "com.nicebuild.fiver"
         minSdkVersion localProperties.minSdkVersion
         targetSdkVersion localProperties.targetSdkVersion
         versionCode flutterVersionCode.toInteger()

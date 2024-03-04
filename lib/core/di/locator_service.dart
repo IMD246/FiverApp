@@ -1,3 +1,4 @@
+import 'package:fiver/core/app/push_notification_manager.dart';
 import 'package:fiver/presentation/product_detail.dart/product_detail_model.dart';
 
 import '../../data/repositories/remote/remote_review_repository.dart';
@@ -50,6 +51,9 @@ Future<void> initLocatorSerivce() async {
   locator.registerLazySingleton<AppModel>(() => AppModel());
   locator.registerLazySingleton<UserModel>(() => UserModel());
   locator.registerLazySingleton<AuthGoogleProvider>(() => AuthGoogleProvider());
+  locator.registerLazySingleton<PushNotificationManager>(
+    () => PushNotificationManager(),
+  );
 
   // Repositories
   locator.registerLazySingleton<SystemRepository>(

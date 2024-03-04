@@ -1,6 +1,6 @@
 import '../../data/model/info_user_access_token.dart';
 
-abstract class UserRepository{
+abstract class UserRepository {
   Future<bool> register({required Map<String, dynamic> postData});
   String getAccessToken();
   Future<void> setAccessToken({required String token});
@@ -17,4 +17,7 @@ abstract class UserRepository{
     required String token,
     required String newPassword,
   });
+  Future<void> registerDeviceToken({required String deviceToken});
+  Future<void> updateDeviceToken({required String deviceToken});
+  String? getDeviceToken();
 }
