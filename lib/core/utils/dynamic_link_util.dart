@@ -59,7 +59,7 @@ Future<Uri?> createDynamicLink({
 }) async {
   try {
     const baseUrlPrefix = "https://examplefiver2.page.link";
-    String packageName = "com.example.fiver";
+    String packageName = "com.nicebuild.fiver";
     final userModel = locator<UserModel>();
     if (userModel.environment != Environment.prod) {
       packageName += ".dev";

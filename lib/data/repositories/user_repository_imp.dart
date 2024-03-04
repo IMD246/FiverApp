@@ -1,3 +1,4 @@
+import '../../core/utils/device_info_util.dart';
 import '../data_source/local/isar_db.dart';
 
 import '../../core/app/user_model.dart';
@@ -134,5 +135,29 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
       },
     );
     return res.success;
+  }
+
+  @override
+  Future<void> registerDeviceToken({required String deviceToken}) async {
+    final String deviceId = await getDeviceId();
+    final String os = getDeviceOS();
+
+    Map<String, dynamic> dataPost = {
+      "os": os,
+      "deviceId": deviceId,
+      "deviceToken": deviceToken
+    };
+
+    // await post(REGISTER_DEVICE_TOKEN, data: dataPost);
+  }
+
+  @override
+  String? getDeviceToken() {
+    return _pref.getDeviceToken();
+  }
+
+  @override
+  Future<void> updateDeviceToken({required String deviceToken}) async {
+    await _pref.setDeviceToken(deviceToken);
   }
 }

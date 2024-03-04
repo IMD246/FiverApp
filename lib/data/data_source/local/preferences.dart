@@ -10,6 +10,7 @@ class Preferences {
   static const ACCESS_TOKEN = "access_token";
   static const PRICE_RANGE = "price_range";
   static const COLORS = "colors";
+  static const DEVICE_TOKEN = "device_token";
 
   late final SharedPreferences prefs;
 
@@ -79,5 +80,13 @@ class Preferences {
 
   Future<void> clear() async {
     await prefs.clear();
+  }
+
+  Future<void> setDeviceToken(String deviceToken) async {
+    await prefs.setString(DEVICE_TOKEN, deviceToken);
+  }
+
+  String? getDeviceToken() {
+    return prefs.getString(DEVICE_TOKEN);
   }
 }
