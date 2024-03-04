@@ -13,7 +13,7 @@ workflows:
         - tag
         - push
       branch_patterns:
-        - pattern: "duy/config-security-environment-with-cicd"
+        - pattern: "duy/27-fix-upgrade-to-sdk-version-34-to-meet-requirements-customizable-picker-image-package"
           include: true
           source: true
     scripts:
