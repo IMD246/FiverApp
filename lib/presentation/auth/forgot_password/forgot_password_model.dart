@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../core/routes/app_router.dart';
-import '../../../core/utils/validation.dart';
+import '../../../core/utils/validator_util.dart';
 
 class ForgotPasswordModel extends BaseModel {
   final emailCtr = TextEditingControllerCustom();
@@ -22,12 +22,12 @@ class ForgotPasswordModel extends BaseModel {
 
   void init() {
     emailCtr.listener(action: () {
-      emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
+      emailValidatorCtr.value = ValidatorUtil.emailValidateCtr(emailCtr.text);
     });
   }
 
   String emailValidateCtr(String value) {
-    final result = Validator.isValidEmail(value);
+    final result = ValidatorUtil.isValidEmail(value);
     if (!result) {
       return currentContext.loc.format_email_notice;
     }

@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-import '../../model/rating_model.dart';
-
 import '../../../core/di/locator_service.dart';
 import '../../../domain/repositories/common_repository.dart';
 import '../../data_source/local/isar_db.dart';
@@ -9,6 +7,7 @@ import '../../data_source/local/preferences.dart';
 import '../../model/banner_model.dart';
 import '../../model/brand_model.dart';
 import '../../model/gender_model.dart';
+import '../../model/rating_model.dart';
 import '../../model/size_model.dart';
 import '../../model/sort_by_model.dart';
 

@@ -11,13 +11,13 @@ class Debouncer {
       timer?.cancel();
     }
     timer = Timer(
-      Duration(milliseconds: milliseconds ?? 300),
+      Duration(milliseconds: milliseconds ?? 100),
       () {
         action.call();
       },
     );
     Future.delayed(
-      Duration(milliseconds: (milliseconds ?? 300) * 3),
+      Duration(milliseconds: (milliseconds ?? 100) * 3),
       () {
         timeOut?.call();
       },

@@ -1,3 +1,5 @@
+import '../../../../core/routes/app_router.dart';
+
 import '../../../../core/extensions/ext_localization.dart';
 import '../profile_model.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +48,7 @@ class SettingList extends StatelessWidget {
         isLogout: false,
         title: context.loc.settings,
         subtitle: context.loc.subtitle_settings,
-        ontap: () {},
+        ontap: () => AppRouter.router.push(AppRouter.settingPath),
       ),
       _SettingItemUI(
         isLogout: true,
@@ -95,38 +97,40 @@ class SettingList extends StatelessWidget {
                 ],
               ),
             )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  e.title,
-                  style: text16.medium.copyWith(
-                    color: getColor().themeColor222222White,
+          : InkWell(
+              onTap: e.ontap,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    e.title,
+                    style: text16.medium.copyWith(
+                      color: getColor().themeColor222222White,
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Spacer(),
-                    InkWell(
-                      onTap: e.ontap,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        fill: 1,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: e.ontap,
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          fill: 1,
+                          color: getColor().themeColorGrey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (e.subtitle.isNotEmpty)
+                    Text(
+                      e.subtitle,
+                      style: text11.copyWith(
                         color: getColor().themeColorGrey,
                       ),
                     ),
-                  ],
-                ),
-                if (e.subtitle.isNotEmpty)
-                  Text(
-                    e.subtitle,
-                    style: text11.copyWith(
-                      color: getColor().themeColorGrey,
-                    ),
-                  ),
-              ],
+                ],
+              ),
             ),
     );
   }

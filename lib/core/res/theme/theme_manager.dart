@@ -18,6 +18,10 @@ final appThemeData = {
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: colordb3022,
     ),
+    switchTheme: SwitchThemeData(
+      trackColor: MaterialStateProperty.all(color2AA952),
+      trackOutlineColor: MaterialStateProperty.all(colorWhite),
+    ),
     appBarTheme: AppBarTheme(
       elevation: 0,
       color: colorWhite,
@@ -37,6 +41,10 @@ final appThemeData = {
     dividerColor: color9B9B9B,
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: colordb3022,
+    ),
+    switchTheme: SwitchThemeData(
+      trackColor: MaterialStateProperty.all(color2AA952),
+      trackOutlineColor: MaterialStateProperty.all(colorWhite), 
     ),
     appBarTheme: AppBarTheme(
       elevation: 0,

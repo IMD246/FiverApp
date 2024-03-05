@@ -17,7 +17,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/routes/app_router.dart';
-import '../../../core/utils/validation.dart';
+import '../../../core/utils/validator_util.dart';
 
 class LoginModel extends BaseModel {
   final emailCtr = TextEditingControllerCustom();
@@ -30,12 +30,12 @@ class LoginModel extends BaseModel {
 
   void init() {
     emailCtr.listener(action: () {
-      emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
+      emailValidatorCtr.value = ValidatorUtil.emailValidateCtr(emailCtr.text);
     });
 
     passwordCtr.listener(action: () {
       passwordValidatorCtr.value =
-          Validator.passwordValidateCtr(passwordCtr.text);
+          ValidatorUtil.passwordValidateCtr(passwordCtr.text);
     });
   }
 
@@ -57,7 +57,7 @@ class LoginModel extends BaseModel {
     if (value.isEmpty) {
       return currentContext.loc.field_required(currentContext.loc.email);
     }
-    final result = Validator.isValidEmail(value);
+    final result = ValidatorUtil.isValidEmail(value);
     if (!result) {
       return currentContext.loc.format_email_notice;
     }

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../core/routes/app_router.dart';
-import '../../../core/utils/validation.dart';
+import '../../../core/utils/validator_util.dart';
 
 class ResetPasswordModel extends BaseModel {
   final newPasswordCtr = TextEditingControllerCustom();
@@ -28,11 +28,12 @@ class ResetPasswordModel extends BaseModel {
 
     newPasswordCtr.listener(action: () {
       newPasswordValidatorCtr.value =
-          Validator.passwordValidateCtr(newPasswordCtr.text);
+          ValidatorUtil.passwordValidateCtr(newPasswordCtr.text);
     });
 
     confirmPasswordCtr.listener(action: () {
-      confirmPasswordValidatorCtr.value = Validator.confirmPasswordValidateCtr(
+      confirmPasswordValidatorCtr.value =
+          ValidatorUtil.confirmPasswordValidateCtr(
         newPasswordCtr.text,
         confirmPasswordCtr.text,
       );
