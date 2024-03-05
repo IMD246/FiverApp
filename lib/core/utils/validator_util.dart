@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../extensions/ext_localization.dart';
 import 'navigation_service.dart';
 
-class Validator {
+class ValidatorUtil {
   static final GlobalKey<ScaffoldMessengerState> _appKey =
       NavigationService.scaffoldKey;
   static BuildContext get _currentContext => _appKey.currentContext!;
@@ -27,7 +27,7 @@ class Validator {
   }
 
   static String emailValidateCtr(String value) {
-    final result = Validator.isValidEmail(value);
+    final result = ValidatorUtil.isValidEmail(value);
     if (!result) {
       return _currentContext.loc.format_email_notice;
     }
@@ -45,7 +45,9 @@ class Validator {
   }
 
   static String confirmPasswordValidateCtr(
-      String newPassword, String confirmPassword) {
+    String newPassword,
+    String confirmPassword,
+  ) {
     if (confirmPassword != newPassword) {
       return _currentContext.loc.confirm_password_validation;
     }

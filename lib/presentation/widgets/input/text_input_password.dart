@@ -9,7 +9,7 @@ class TextInputPassword extends StatefulWidget {
   const TextInputPassword({
     super.key,
     required this.controller,
-    required this.label,
+    this.label,
     this.hintText,
     this.hintStyle,
     this.inputFormatters,
@@ -93,12 +93,14 @@ class _TextInputPasswordState extends State<TextInputPassword> {
                   text14.copyWith(
                     color: getColor().textColorGray,
                   ),
-              label: Text(
-                widget.label ?? "",
-                style: text11.copyWith(
-                  color: getColor().textColorGray,
-                ),
-              ),
+              label: widget.label != null
+                  ? Text(
+                      widget.label ?? "",
+                      style: text14.copyWith(
+                        color: getColor().textColorGray,
+                      ),
+                    )
+                  : null,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
               filled: true,

@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../core/routes/app_router.dart';
-import '../../../core/utils/validation.dart';
+import '../../../core/utils/validator_util.dart';
 
 class RegisterModel extends BaseModel {
   final nameCtr = TextEditingControllerCustom();
@@ -31,16 +31,16 @@ class RegisterModel extends BaseModel {
 
   void init() {
     nameCtr.listener(action: () {
-      nameValidatorCtr.value = Validator.nameValidation(nameCtr.text);
+      nameValidatorCtr.value = ValidatorUtil.nameValidation(nameCtr.text);
     });
 
     emailCtr.listener(action: () {
-      emailValidatorCtr.value = Validator.emailValidateCtr(emailCtr.text);
+      emailValidatorCtr.value = ValidatorUtil.emailValidateCtr(emailCtr.text);
     });
 
     passwordCtr.listener(action: () {
       passwordValidatorCtr.value =
-          Validator.passwordValidateCtr(passwordCtr.text);
+          ValidatorUtil.passwordValidateCtr(passwordCtr.text);
     });
   }
 

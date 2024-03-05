@@ -35,9 +35,10 @@ class CommonAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: elevation ?? 0,
-      backgroundColor: bgColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       automaticallyImplyLeading: false,
       centerTitle: centerTitle,
+      surfaceTintColor: Colors.transparent,
       leading: leading ??
           (!isHideBackButton ? BackButtonWidget(action: action) : null),
       title: Text(

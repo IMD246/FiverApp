@@ -28,7 +28,7 @@
     "format_email_notice" : "Not a valid email address. Should be your@email.com",
     "format_name_notice" : "The length of name must be at least 2 characters",
     "password" : "Password",
-    "forgot_your_password" : "Forgot your password?",
+    "forgot_your_password" : "Forgot password?",
     "login" : "Login",
     "send" : "Send",
     "forgot_password" : "Forgot password",
@@ -142,5 +142,19 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "setting": "Setting",
+    "personal_infomation":"Personal Information",
+    "date_of_birth":"Date of Birth",
+    "change":"Change",
+    "notifications":"Notifications",
+    "sales":"Sales",
+    "new_arrivals":"New arrivals",
+    "delivery_status_changes":"Delivery status changes",
+    "full_name":"Full Name",
+    "password_change":"Password change",
+    "old_password":"Old Password",
+    "repeat_new_password":"Repeat new password",
+    "save_password":"Save password",
+    "password_update_success": "Password update successfully!"
 }

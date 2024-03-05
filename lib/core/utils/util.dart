@@ -23,10 +23,13 @@ void setValueValidator(
   if (validator.isNullOrEmpty) {
     return;
   }
+
   String message = "";
+
   for (String element in validator) {
     message += "$element\n";
   }
+
   valueNotifier.value = message;
 }
 

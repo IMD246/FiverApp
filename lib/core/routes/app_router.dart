@@ -13,6 +13,7 @@ import '../../presentation/auth/reset_password/reset_password_page.dart';
 import '../../presentation/brand/brand_page.dart';
 import '../../presentation/filter/filter_page.dart';
 import '../../presentation/main/main_page.dart';
+import '../../presentation/setting/setting_page.dart';
 import '../../presentation/view_all_product/view_all_products_page.dart';
 import '../app/app_model.dart';
 import '../app/user_model.dart';
@@ -57,6 +58,9 @@ class AppRouter extends ChangeNotifier {
 
   static const String productDetailName = 'productDetail';
   static const String productDetailPath = '/productDetail';
+
+  static const String settingName = 'setting';
+  static const String settingPath = '/setting';
 
   static GoRouter get router => _router;
   static final _router = GoRouter(
@@ -150,6 +154,13 @@ class AppRouter extends ChangeNotifier {
           final String name =
               state.uri.queryParameters["name"] ?? "Short dress";
           return ProductDetailPage(id: id, name: name);
+        },
+      ),
+       GoRoute(
+        path: settingPath,
+        name: settingName,
+        builder: (context, state) {
+          return const SettingPage();
         },
       ),
     ],

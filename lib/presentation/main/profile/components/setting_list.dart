@@ -1,3 +1,5 @@
+import 'package:fiver/core/routes/app_router.dart';
+
 import '../../../../core/extensions/ext_localization.dart';
 import '../profile_model.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +48,7 @@ class SettingList extends StatelessWidget {
         isLogout: false,
         title: context.loc.settings,
         subtitle: context.loc.subtitle_settings,
-        ontap: () {},
+        ontap: () => AppRouter.router.push(AppRouter.settingPath),
       ),
       _SettingItemUI(
         isLogout: true,

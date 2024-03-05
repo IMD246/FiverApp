@@ -1,3 +1,5 @@
+import 'package:fiver/presentation/setting/setting_model.dart';
+
 import '../app/push_notification_manager.dart';
 import '../../presentation/product_detail.dart/product_detail_model.dart';
 
@@ -110,4 +112,5 @@ Future<void> initLocatorSerivce() async {
   locator.registerFactory(() => BrandModel());
   locator.registerFactory(() => RatingAndReviewModel());
   locator.registerFactory(() => ProductDetailModel());
+  locator.registerFactory(() => SettingModel());
 }
