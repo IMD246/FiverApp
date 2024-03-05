@@ -1,13 +1,15 @@
-import 'package:fiver/core/base/base_state.dart';
-import 'package:fiver/core/extensions/ext_localization.dart';
-import 'package:fiver/core/helper/bottom_sheet_helper.dart';
-import 'package:fiver/core/res/colors.dart';
-import 'package:fiver/core/routes/app_router.dart';
-import 'package:fiver/core/utils/collection_util.dart';
-import 'package:fiver/presentation/setting/setting_model.dart';
-import 'package:fiver/presentation/widgets/common_appbar.dart';
-import 'package:fiver/presentation/widgets/default_button.dart';
-import 'package:fiver/presentation/widgets/input/text_input_password.dart';
+import '../../core/base/base_state.dart';
+import '../../core/extensions/ext_localization.dart';
+import '../../core/helper/bottom_sheet_helper.dart';
+import '../../core/res/colors.dart';
+import '../../core/routes/app_router.dart';
+import '../../core/utils/collection_util.dart';
+import 'setting_model.dart';
+import '../widgets/common_appbar.dart';
+import '../widgets/default_button.dart';
+import '../widgets/input/text_input_datetime.dart';
+import '../widgets/input/text_input_default.dart';
+import '../widgets/input/text_input_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -56,7 +58,48 @@ class _SettingPageState extends BaseState<SettingModel, SettingPage> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    commonBottomSheet(
+                      context: context,
+                      widget: SizedBox(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                context.loc.infomation_change,
+                                style: text18.medium.copyWith(
+                                  color: getColor().themeColorBlack,
+                                ),
+                              ),
+                              SizedBox(height: 18.w),
+                              TextInputDefault(
+                                controller: model.fullNameCtr,
+                                label: context.loc.full_name,
+                                validator: model.validatorFullNameCtr,
+                                textInputAction: TextInputAction.next,
+                              ),
+                              SizedBox(height: 18.w),
+                              TextInputDateTime(
+                                controller: model.dateOfBirthCtr,
+                                label: context.loc.date_of_birth,
+                                validator: model.validatorDateOfBirthCtr,
+                                onChangedDatePicker: model.onChangedDatePicker,
+                              ),
+                              SizedBox(height: 32.w),
+                              DefaultButton(
+                                title: context.loc.save_infomation,
+                                onTap: model.onSaveInfomation,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                   child: Text(
                     context.loc.change,
                     style: text16.medium.copyWith(
@@ -77,75 +120,7 @@ class _SettingPageState extends BaseState<SettingModel, SettingPage> {
               "1/2/1999",
             ),
             SizedBox(height: 54.w),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  context.loc.password,
-                  style: text16.medium.copyWith(
-                    color: getColor().themeColorBlack,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    commonBottomSheet(
-                      context: context,
-                      widget: SizedBox(
-                        width: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                context.loc.password_change,
-                                style: text18.medium.copyWith(
-                                  color: getColor().themeColorBlack,
-                                ),
-                              ),
-                              SizedBox(height: 18.w),
-                              TextInputPassword(
-                                controller: model.oldPasswordCtr,
-                                label: context.loc.old_password,
-                                validator: model.validatorOldPassword,
-                                textInputAction: TextInputAction.next,
-                              ),
-                              SizedBox(height: 14.w),
-                              _toForgotPasswordButton(),
-                              SizedBox(height: 18.w),
-                              TextInputPassword(
-                                controller: model.newPasswordCtr,
-                                label: context.loc.new_password,
-                                validator: model.validatorNewPassword,
-                                textInputAction: TextInputAction.next,
-                              ),
-                              SizedBox(height: 24.w),
-                              TextInputPassword(
-                                controller: model.repeatPasswordCtr,
-                                label: context.loc.repeat_new_password,
-                                validator: model.validatorRepeatPassword,
-                              ),
-                              SizedBox(height: 32.w),
-                              DefaultButton(
-                                title: context.loc.save_password,
-                                onTap: model.onSavePassword,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    context.loc.change,
-                    style: text16.medium.copyWith(
-                      color: getColor().themeColorGrey,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            _passwordAndChange(context, model),
             SizedBox(height: 21.w),
             _containerInput(
               context.loc.password,
@@ -182,6 +157,78 @@ class _SettingPageState extends BaseState<SettingModel, SettingPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _passwordAndChange(BuildContext context, SettingModel model) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          context.loc.password,
+          style: text16.medium.copyWith(
+            color: getColor().themeColorBlack,
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            commonBottomSheet(
+              context: context,
+              widget: SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        context.loc.password_change,
+                        style: text18.medium.copyWith(
+                          color: getColor().themeColorBlack,
+                        ),
+                      ),
+                      SizedBox(height: 18.w),
+                      TextInputPassword(
+                        controller: model.oldPasswordCtr,
+                        label: context.loc.old_password,
+                        validator: model.validatorOldPassword,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      SizedBox(height: 14.w),
+                      _toForgotPasswordButton(),
+                      SizedBox(height: 18.w),
+                      TextInputPassword(
+                        controller: model.newPasswordCtr,
+                        label: context.loc.new_password,
+                        validator: model.validatorNewPassword,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      SizedBox(height: 24.w),
+                      TextInputPassword(
+                        controller: model.repeatPasswordCtr,
+                        label: context.loc.repeat_new_password,
+                        validator: model.validatorRepeatPassword,
+                      ),
+                      SizedBox(height: 32.w),
+                      DefaultButton(
+                        title: context.loc.save_password,
+                        onTap: model.onSavePassword,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+          child: Text(
+            context.loc.change,
+            style: text16.medium.copyWith(
+              color: getColor().themeColorGrey,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

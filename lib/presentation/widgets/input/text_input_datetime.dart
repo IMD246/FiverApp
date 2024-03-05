@@ -1,39 +1,39 @@
+import '../../../core/helper/show_date_picker_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/res/theme/text_theme.dart';
 import '../../../core/res/theme/theme_manager.dart';
+import '../../../core/utils/input_formatter_utils.dart';
 
-class TextInputPassword extends StatefulWidget {
-  const TextInputPassword({
+class TextInputDateTime extends StatefulWidget {
+  const TextInputDateTime({
     super.key,
     required this.controller,
-    this.label,
+    required this.label,
     this.hintText,
     this.hintStyle,
-    this.inputFormatters,
     this.validator,
     this.textInputAction,
-    this.keyboardType,
+    this.onChangedDatePicker,
   });
   final TextEditingController controller;
   final String? label;
   final String? hintText;
   final TextStyle? hintStyle;
-  final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
-  final TextInputType? keyboardType;
   final ValueNotifier<String>? validator;
+  final void Function(DateTime? value)? onChangedDatePicker;
   @override
-  State<TextInputPassword> createState() => _TextInputPasswordState();
+  State<TextInputDateTime> createState() => _TextInputDateTimeState();
 }
 
-class _TextInputPasswordState extends State<TextInputPassword> {
+class _TextInputDateTimeState extends State<TextInputDateTime> {
   String _errorText = "";
-  bool _obsecureText = true;
-
   final FocusNode _focusNode = FocusNode();
+  bool focused = false;
+
   void _init() {
     if (widget.validator != null) {
       widget.validator!.addListener(() {
@@ -42,11 +42,10 @@ class _TextInputPasswordState extends State<TextInputPassword> {
         });
       });
     }
-  }
-
-  void _updateObsecureText() {
-    setState(() {
-      _obsecureText = !_obsecureText;
+    _focusNode.addListener(() {
+      setState(() {
+        focused = _focusNode.hasFocus;
+      });
     });
   }
 
@@ -88,27 +87,27 @@ class _TextInputPasswordState extends State<TextInputPassword> {
             focusNode: _focusNode,
             textAlignVertical: TextAlignVertical.center,
             controller: widget.controller,
-            inputFormatters: widget.inputFormatters,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              DateTextFormatter(),
+            ],
             style: text14.medium.copyWith(
               color: getColor().textColorBlackWhiteInput,
             ),
             textInputAction: widget.textInputAction,
-            keyboardType: widget.keyboardType ?? TextInputType.visiblePassword,
-            obscureText: _obsecureText,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
               hintText: widget.hintText,
               hintStyle: widget.hintStyle ??
                   text14.copyWith(
                     color: getColor().textColorGray,
                   ),
-              label: widget.label != null
-                  ? Text(
-                      widget.label ?? "",
-                      style: text14.copyWith(
-                        color: getColor().textColorGray,
-                      ),
-                    )
-                  : null,
+              label: Text(
+                widget.label ?? "",
+                style: text11.copyWith(
+                  color: getColor().textColorGray,
+                ),
+              ),
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
               filled: true,
@@ -118,15 +117,36 @@ class _TextInputPasswordState extends State<TextInputPassword> {
               fillColor: getColor().themeColorWhiteBlack,
               border: InputBorder.none,
               contentPadding: EdgeInsets.zero,
-              suffix: widget.controller.text.isEmpty
-                  ? null
-                  : InkWell(
-                      onTap: _updateObsecureText,
-                      child: Icon(
-                        _obsecureText ? Icons.visibility : Icons.visibility_off,
-                        color: getColor().themeColorBlackWhite,
-                      ),
+              suffix: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _errorText.isEmpty
+                      ? Icon(
+                          Icons.check,
+                          color: focused
+                              ? getColor().themeColorGreen
+                              : Colors.transparent,
+                        )
+                      : Icon(
+                          Icons.close,
+                          color: getColor().themeColorRed,
+                        ),
+                  SizedBox(width: 4.w),
+                  InkWell(
+                    onTap: () => commonShowDatePicker(context: context).then(
+                      (value) {
+                        if (widget.onChangedDatePicker != null) {
+                          widget.onChangedDatePicker!(value);
+                        }
+                      },
                     ),
+                    child: const Icon(
+                      Icons.date_range_outlined,
+                      color: Colors.red,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

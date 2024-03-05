@@ -1,10 +1,11 @@
 import 'dart:developer';
 
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import '../enum.dart';
 import 'package:flutter/foundation.dart';
+
 import '../app/user_model.dart';
 import '../di/locator_service.dart';
+import '../enum.dart';
 import '../routes/app_router.dart';
 
 Future<void> initDynamicLink() async {

@@ -1,4 +1,4 @@
-import 'package:fiver/presentation/setting/setting_model.dart';
+import '../../presentation/setting/setting_model.dart';
 
 import '../app/push_notification_manager.dart';
 import '../../presentation/product_detail.dart/product_detail_model.dart';

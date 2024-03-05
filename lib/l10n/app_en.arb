@@ -1,5 +1,6 @@
 {
     "@@locale": "en",
+    "language_code": "en",
     "sign_up": "Sign up",
     "name": "Name",
     "email": "Email",
@@ -153,8 +154,14 @@
     "delivery_status_changes":"Delivery status changes",
     "full_name":"Full Name",
     "password_change":"Password change",
+    "infomation_change":"Infomation change",
     "old_password":"Old Password",
     "repeat_new_password":"Repeat new password",
     "save_password":"Save password",
-    "password_update_success": "Password update successfully!"
+    "password_update_success": "Password update successfully!",
+    "save_infomation" : "Save infomation",
+    "format_date_of_birth_notice" : "Your input is not valid. It should be example: 20/8/1945",
+    "infomation_update_success": "Infomation update successfully!",
+    "ok" : "OK",
+    "cancel" : "Cancel"
 }

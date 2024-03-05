@@ -179,10 +179,26 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
     required String newPassword,
   }) async {
     final res = await post(
-      UPLOAD_PASSWORD,
+      UPDATE_PASSWORD,
       data: {
         "old_password": oldPassword,
         "new_password": newPassword,
+      },
+    );
+
+    return res.success;
+  }
+
+  @override
+  Future<bool> updateProfile({
+    required String fullName,
+    required int dateOfBirth,
+  }) async {
+    final res = await post(
+      UPDATE_INFO,
+      data: {
+        "full_name": fullName,
+        "date_of_birth": dateOfBirth,
       },
     );
 

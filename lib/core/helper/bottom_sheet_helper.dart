@@ -51,7 +51,11 @@ Future<void> commonBottomSheet({
     isScrollControlled: true,
     context: context,
     builder: (BuildContext context) {
-      return widget;
+      return AnimatedPadding(
+        padding: MediaQuery.of(context).viewInsets,
+        duration: const Duration(milliseconds: 50),
+        child: SingleChildScrollView(child: widget),
+      );
     },
   );
 }

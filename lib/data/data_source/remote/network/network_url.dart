@@ -17,4 +17,5 @@ const String GET_CATEGORY = "get-category";
 const String GET_CATEGORY_BY_ID = "get-category-by-id";
 const String REGISTER_DEVICE_TOKEN = 'device';
 const String UPLOAD_AVATAR = '/user/update-avatar';
-const String UPLOAD_PASSWORD = '/user/update-password';
+const String UPDATE_PASSWORD = '/user/update-password';
+const String UPDATE_INFO = '/user/update-info';

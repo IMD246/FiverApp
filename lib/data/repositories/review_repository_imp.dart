@@ -1,10 +1,9 @@
 import '../../core/base/base_service.dart';
-import '../model/review_model.dart';
-import 'remote/remote_review_repository.dart';
-import '../../domain/repositories/review_repository.dart';
-
 import '../../core/constant/constants.dart';
 import '../../core/di/locator_service.dart';
+import '../../domain/repositories/review_repository.dart';
+import '../model/review_model.dart';
+import 'remote/remote_review_repository.dart';
 
 class ReviewRepositoryImp extends BaseSerivce implements ReviewRepository {
   final _remoteReviewRepo = locator<ReviewRepository>(
