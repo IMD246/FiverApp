@@ -47,7 +47,12 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
       data: postData,
     );
     final res = InfoUserAccessTokenModel.fromJson(response.data);
-    await _setToken(res.accessToken ?? "");
+    await Future.wait(
+      [
+        _setToken(res.accessToken ?? ""),
+        _pref.saveUser(res.userInfo!),
+      ],
+    );
     return res.userInfo!;
   }
 
@@ -58,6 +63,7 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
     if (!accessToken.isNullOrEmpty) {
       final res = await get(USER_INFO);
       final user = UserInfoModel.fromJson(res.data["user_info"]);
+      await _pref.saveUser(user);
       userModel.onUpdateUserInfo(
         userInfo: user,
         isNotifyChange: isNotifyChange,
@@ -85,8 +91,12 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
     );
 
     final info = InfoUserAccessTokenModel.fromJson(res.data);
-
-    await _setToken(info.accessToken ?? "");
+    Future.wait(
+      [
+        _pref.saveUser(info.userInfo!),
+        _setToken(info.accessToken ?? ""),
+      ],
+    );
     return info.userInfo!;
   }
 
