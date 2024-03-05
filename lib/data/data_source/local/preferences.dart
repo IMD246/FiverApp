@@ -1,7 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
+import 'dart:convert';
 import 'dart:ui';
 
+import 'package:fiver/data/model/info_user_access_token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
@@ -11,6 +13,7 @@ class Preferences {
   static const PRICE_RANGE = "price_range";
   static const COLORS = "colors";
   static const DEVICE_TOKEN = "device_token";
+  static const USER = "user";
 
   late final SharedPreferences prefs;
 
@@ -44,7 +47,12 @@ class Preferences {
 
   Future<void> logout() async {
     await Future.wait(
-      [prefs.remove(THEME), prefs.remove(LANGUAGE), prefs.remove(ACCESS_TOKEN)],
+      [
+        prefs.remove(THEME),
+        prefs.remove(LANGUAGE),
+        prefs.remove(ACCESS_TOKEN),
+        prefs.remove(USER),
+      ],
     );
   }
 
@@ -88,5 +96,17 @@ class Preferences {
 
   String? getDeviceToken() {
     return prefs.getString(DEVICE_TOKEN);
+  }
+
+  Future<void> saveUser(UserInfoModel user) async {
+    await prefs.setString(USER, jsonEncode(user.toJson()));
+  }
+
+  UserInfoModel? getUser() {
+    final value = prefs.getString(USER);
+
+    if (value == null) return null;
+
+    return UserInfoModel.fromJson(json.decode(value));
   }
 }
