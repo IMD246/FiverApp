@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import '../../core/utils/collection_util.dart';
 // ignore: unused_import
 import 'package:share_plus/share_plus.dart';
 
@@ -20,6 +19,13 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   final Preferences _pref;
 
   UserRepositoryImp(this._pref);
+
+  @override
+  Future<void> init(bool isLogin) async {
+    if (isLogin) {
+      getMe(isNotifyChange: true);
+    }
+  }
 
   @override
   String getAccessToken() {
@@ -58,17 +64,13 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
 
   @override
   Future<void> getMe({bool isNotifyChange = false}) async {
-    final userModel = locator<UserModel>();
-    final accessToken = locator<Preferences>().getAccessToken();
-    if (!accessToken.isNullOrEmpty) {
-      final res = await get(USER_INFO);
-      final user = UserInfoModel.fromJson(res.data["user_info"]);
-      await _pref.saveUser(user);
-      userModel.onUpdateUserInfo(
-        userInfo: user,
-        isNotifyChange: isNotifyChange,
-      );
-    }
+    final res = await get(USER_INFO);
+    final user = UserInfoModel.fromJson(res.data["user_info"]);
+    await _pref.saveUser(user);
+    locator<UserModel>().onUpdateUserInfo(
+      userInfo: user,
+      isNotifyChange: isNotifyChange,
+    );
   }
 
   @override
@@ -213,5 +215,10 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
     );
 
     return res.success;
+  }
+
+  @override
+  UserInfoModel? getUser() {
+    return _pref.getUser();
   }
 }

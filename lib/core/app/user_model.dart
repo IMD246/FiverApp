@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fiver/data/data_source/local/preferences.dart';
 import '../config/env_config.dart';
 import '../utils/collection_util.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,6 @@ class UserModel extends ChangeNotifier {
   late Environment environment;
 
   final _userRepository = locator<UserRepository>();
-  final _pref = locator<Preferences>();
 
   UserInfoModel? userInfo;
 
@@ -36,8 +34,13 @@ class UserModel extends ChangeNotifier {
 
   Future<void> init(Environment environment) async {
     this.environment = environment;
+
     final accessToken = _userRepository.getAccessToken();
+
+    userInfo = _userRepository.getUser();
+
     this.accessToken = accessToken;
+
     await Future.wait([
       initFirebase(),
       _initAPI(token: accessToken),
@@ -46,13 +49,15 @@ class UserModel extends ChangeNotifier {
     await Future.wait([
       initDynamicLink(),
     ]);
+
     initFirebaseCrashlytics();
-    if (!accessToken.isNullOrEmpty) {
-      final user = _pref.getUser();
-      if (user != null) {
-        onUpdateUserInfo(userInfo: user);
-      }
+
+    locator<UserRepository>().init(isLogin());
+
+    if (isLogin()) {
+      appModel.changeRouterRedirect(RouterRedirect.main);
     }
+
     notifyListeners();
   }
 

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../../data/model/info_user_access_token.dart';
 
 abstract class UserRepository {
+  Future<void> init(bool isLogin);
   Future<bool> register({required Map<String, dynamic> postData});
   String getAccessToken();
   Future<void> setAccessToken({required String token});
@@ -31,4 +32,5 @@ abstract class UserRepository {
     required String fullName,
     required int dateOfBirth,
   });
+  UserInfoModel? getUser();
 }
