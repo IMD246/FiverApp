@@ -2,6 +2,15 @@
 
 Description : Fiver is an online shop that allows people to view/buy products from company
 
+# Tech-stack
+  BE: PHP + Laravel:
+      .  Repository - pattern 
+  FE-Mobile: FLutter + Dart:
+             . Clean Architecture
+             . State-Management: Provider
+             . Restful-API: Dio
+             . Local-Database: Shared-Preference, Isar
+
 ## SDK Version
 
 dart: ">=3.2.3 <4.0.0"
