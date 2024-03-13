@@ -48,7 +48,8 @@ abstract class BaseModel extends ChangeNotifier {
       return error.message;
     }
     if (error is DioException && error.response?.statusCode != 422) {
-      return error.response?.data['message'].toString() ?? "";
+      // return error.response?.data['message'].toString() ?? "";
+      return "";
     }
     return "unknown";
   }

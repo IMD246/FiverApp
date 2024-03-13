@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:fiver/core/constant/api_constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http_parser/http_parser.dart';
@@ -14,7 +15,7 @@ class MediaUtils {
   static Future<bool> checkFileSizeIsInvalid(XFile file) async {
     final size = await file.readAsBytes();
 
-    if (size.lengthInBytes > 100) {
+    if (size.lengthInBytes > ApiConstant.SIZE_IMAGE_REQUIRED) {
       return true;
     }
     return false;

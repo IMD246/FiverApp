@@ -175,14 +175,16 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   }
 
   @override
-  Future<bool> uploadAvatar({
+  Future<UserInfoModel> uploadAvatar({
     required FormData formData,
   }) async {
     final res = await uploadMedia(
       UPLOAD_AVATAR,
       formData,
     );
-    return res.success;
+    final user = InfoUserAccessTokenModel.fromJson(res.data);
+
+    return user.userInfo!;
   }
 
   @override
