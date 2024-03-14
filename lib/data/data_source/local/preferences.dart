@@ -3,8 +3,9 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:fiver/data/model/info_user_access_token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../model/user_info_model.dart';
 
 class Preferences {
   static const THEME = "theme";

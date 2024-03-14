@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:share_plus/share_plus.dart';
 
@@ -14,6 +15,7 @@ import '../../domain/repositories/user_repository.dart';
 import '../data_source/local/preferences.dart';
 import '../data_source/remote/network/network_url.dart';
 import '../model/info_user_access_token.dart';
+import '../model/user_info_model.dart';
 
 class UserRepositoryImp extends BaseSerivce implements UserRepository {
   final Preferences _pref;
@@ -175,14 +177,17 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   }
 
   @override
-  Future<bool> uploadAvatar({
+  Future<UserInfoModel> uploadAvatar({
     required FormData formData,
   }) async {
     final res = await uploadMedia(
       UPLOAD_AVATAR,
       formData,
     );
-    return res.success;
+
+    final user = UserInfoModel.fromJson(res.data['user_info']);
+
+    return user;
   }
 
   @override

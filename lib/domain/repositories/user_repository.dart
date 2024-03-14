@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-
-import '../../data/model/info_user_access_token.dart';
+import '../../data/model/user_info_model.dart';
 
 abstract class UserRepository {
   Future<void> init(bool isLogin);
@@ -23,7 +22,7 @@ abstract class UserRepository {
   Future<void> registerDeviceToken({required String deviceToken});
   Future<void> updateDeviceToken({required String deviceToken});
   String? getDeviceToken();
-  Future<bool> uploadAvatar({required FormData formData});
+  Future<UserInfoModel> uploadAvatar({required FormData formData});
   Future<bool> updatePassword({
     required String oldPassword,
     required String newPassword,

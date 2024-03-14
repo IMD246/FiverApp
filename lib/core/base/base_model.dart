@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../../data/model/info_user_access_token.dart';
+import '../../data/model/user_info_model.dart';
 import '../app/app_model.dart';
 import '../app/user_model.dart';
 import '../di/locator_service.dart';
@@ -28,6 +28,7 @@ abstract class BaseModel extends ChangeNotifier {
   BaseModel() {
     viewState = initState;
   }
+
   void initData() {
     user = locator<UserModel>().userInfo;
     updateProfileStream =
@@ -37,7 +38,7 @@ abstract class BaseModel extends ChangeNotifier {
     });
   }
 
-  setState(ViewState newState, {forceUpdate = false, dynamic error}) {
+  void setState(ViewState newState, {forceUpdate = false, dynamic error}) {
     if (viewState == newState && !forceUpdate) return;
     viewState = newState;
     if (viewState == ViewState.error && error != null) {}
@@ -48,7 +49,7 @@ abstract class BaseModel extends ChangeNotifier {
       return error.message;
     }
     if (error is DioException && error.response?.statusCode != 422) {
-      return error.response?.data['message'].toString() ?? "";
+      return "${error.response?.data?['message'] ?? ""}";
     }
     return "unknown";
   }

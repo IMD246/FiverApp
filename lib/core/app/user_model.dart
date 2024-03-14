@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
+import '../../data/model/user_info_model.dart';
 import '../config/env_config.dart';
 import '../utils/collection_util.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import '../../data/model/info_user_access_token.dart';
 import '../../domain/repositories/system_repository.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../utils/firebase_utils.dart';

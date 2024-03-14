@@ -113,14 +113,22 @@ class ProductDetailModel extends BaseModel {
 
   void _scrollReviewListener() {
     final isScrollUp = scrollController.position.userScrollDirection ==
-        ScrollDirection.reverse;
-    if (isScrollUp) {
-      if (opacity.value > 0) {
+        ScrollDirection.forward;
+    if (!isScrollUp) {
+      if (opacity.value > 0.05) {
         setValueNotifier(opacity, opacity.value -= 0.01);
       }
+      else
+      {
+        setValueNotifier(opacity, 0.05);
+      }
     } else {
-      if (opacity.value < 1) {
+      if (opacity.value < 0.9) {
         setValueNotifier(opacity, opacity.value += 0.01);
+      }
+      else
+      {
+        setValueNotifier(opacity, 1.0);
       }
     }
     if (scrollController.position.atEdge) {
@@ -128,7 +136,7 @@ class ProductDetailModel extends BaseModel {
       if (isTop) {
         setValueNotifier(opacity, 1.0);
       } else {
-        setValueNotifier(opacity, 0.5);
+        setValueNotifier(opacity, 0.05);
       }
     }
   }

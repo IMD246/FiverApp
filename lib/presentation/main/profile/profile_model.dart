@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
+import 'package:fiver/core/utils/collection_util.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -32,15 +34,19 @@ class ProfileModel extends BaseModel {
       return;
     }
 
-    final result = await _userRepository.uploadAvatar(
+    final userInfo = await _userRepository.uploadAvatar(
       formData: await MediaUtils.settingFormDataForAvatarUpload(
         resultPicker.path,
         resultPicker.name,
       ),
     );
 
-    if (result) {
-      _userRepository.getMe(isNotifyChange: false);
+    if (!userInfo.isNullOrEmpty) {
+      // _userRepository.getMe(isNotifyChange: false);
+      locator<UserModel>().onUpdateUserInfo(
+        userInfo: userInfo,
+        isNotifyChange: false,
+      );
     }
   }
 }
