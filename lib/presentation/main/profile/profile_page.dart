@@ -12,6 +12,7 @@ import 'profile_model.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -74,28 +75,24 @@ class _ProfilePageState extends BaseState<ProfileModel, ProfilePage>
         Stack(
           clipBehavior: Clip.none,
           children: [
-            if (model.user?.avatar != null)
-              SizedBox(
+            SizedBox(
                 width: 64.w,
                 height: 64.w,
-                child: model.user?.avatar != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(64.r),
-                        child: model.user?.avatar != null
-                            ? Image.network(
-                                model.user?.avatar ?? "",
-                                cacheWidth: 64.w.toInt(),
-                                cacheHeight: 64.w.toInt(),
-                              )
-                            : null,
-                      )
-                    : Image.asset(
-                        DImages.defaultAvatar,
-                        fit: BoxFit.cover,
-                        width: 64.w,
-                        height: 64.w,
-                      ),
-              ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(64.r),
+                  child: model.user?.avatar != null
+                      ? Image.network(
+                          model.user?.avatar ?? "",
+                          cacheWidth: 64.w.toInt(),
+                          cacheHeight: 64.w.toInt(),
+                        )
+                      : Image.asset(
+                          DImages.defaultAvatar,
+                          fit: BoxFit.cover,
+                          width: 64.w,
+                          height: 64.w,
+                        ),
+                )),
             Positioned(
               bottom: 0,
               right: -6,

@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../../data/model/info_user_access_token.dart';
+import '../../data/model/user_info_model.dart';
 import '../app/app_model.dart';
 import '../app/user_model.dart';
 import '../di/locator_service.dart';

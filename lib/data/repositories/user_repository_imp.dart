@@ -15,6 +15,7 @@ import '../../domain/repositories/user_repository.dart';
 import '../data_source/local/preferences.dart';
 import '../data_source/remote/network/network_url.dart';
 import '../model/info_user_access_token.dart';
+import '../model/user_info_model.dart';
 
 class UserRepositoryImp extends BaseSerivce implements UserRepository {
   final Preferences _pref;
@@ -183,9 +184,8 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
       UPLOAD_AVATAR,
       formData,
     );
-    debugPrint("res update avatar: ${res.data['user_info']}");
-    final user = UserInfoModel.fromJson(res.data);
-    debugPrint("res update avatar user: $user");
+
+    final user = UserInfoModel.fromJson(res.data['user_info']);
 
     return user;
   }

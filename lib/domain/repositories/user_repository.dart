@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fiver/data/model/info_user_access_token.dart';
+import '../../data/model/user_info_model.dart';
 
 abstract class UserRepository {
   Future<void> init(bool isLogin);
