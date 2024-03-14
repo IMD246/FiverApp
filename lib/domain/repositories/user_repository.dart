@@ -27,7 +27,7 @@ abstract class UserRepository {
     required String oldPassword,
     required String newPassword,
   });
-  Future<bool> updateProfile({
+  Future<UserInfoModel> updateProfile({
     required String fullName,
     required int dateOfBirth,
   });
