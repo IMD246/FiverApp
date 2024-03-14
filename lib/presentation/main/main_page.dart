@@ -15,7 +15,9 @@ import 'shop/shop_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.tabIndex});
+
   final int tabIndex;
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -28,6 +30,10 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
     FavoritesPage(),
     ProfilePage(),
   ];
+
+  @override
+  bool get isNeedPopScopeOnTop => false;
+
   @override
   void initState() {
     super.initState();
@@ -36,13 +42,18 @@ class _MainPageState extends BaseState<MainModel, MainPage> {
 
   @override
   Widget buildContentView(BuildContext context, MainModel model) {
-    return PopScope(
-      canPop: true,
-      onPopInvoked: (didPop) {
-        if (didPop) {
-          return;
-        }
-        model.doubleTapToExistApp();
+    return ValueListenableBuilder(
+      valueListenable: model.isPopScope,
+      builder: (context, isPopScope, child) {
+        return PopScope(
+          canPop: isPopScope,
+          onPopInvoked: model.onPopScope,
+          child: child ??  PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: model.pageController,
+            children: pages,
+          ),
+        );
       },
       child: PageView(
         physics: const NeverScrollableScrollPhysics(),

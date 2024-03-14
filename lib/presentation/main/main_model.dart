@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fiver/core/utils/util.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -10,6 +11,7 @@ class MainModel extends BaseModel {
   late final PageController pageController;
 
   ValueNotifier<int> tabValue = ValueNotifier(0);
+  ValueNotifier<bool> isPopScope = ValueNotifier(false);
 
   void init(int tabIndex) {
     pageController = PageController();
@@ -45,30 +47,40 @@ class MainModel extends BaseModel {
 
   DateTime? currentBackPressTime;
 
-  Future<bool> doubleTapToExistApp() {
+  void onPopScope(bool didPop) {
+    debugPrint(didPop.toString());
     DateTime now = DateTime.now();
     int requiredSeconds = 2;
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime!) >
-            Duration(seconds: requiredSeconds)) {
+            Duration(
+              seconds: requiredSeconds,
+            )) {
       currentBackPressTime = now;
+
       Fluttertoast.showToast(
         msg: currentContext.loc.tap_again_to_exit,
         toastLength: Toast.LENGTH_LONG,
       );
+
+      setValueNotifier(isPopScope, true);
+
       Future.delayed(
         Duration(seconds: requiredSeconds),
-        () => Fluttertoast.cancel(),
+        () {
+          Fluttertoast.cancel();
+          setValueNotifier(isPopScope, false);
+          currentBackPressTime = null;
+        },
       );
-      return Future.value(false);
     }
-    return Future.value(true);
   }
 
   @override
   void disposeModel() {
     pageController.dispose();
     tabValue.dispose();
+    isPopScope.dispose();
     super.disposeModel();
   }
 }

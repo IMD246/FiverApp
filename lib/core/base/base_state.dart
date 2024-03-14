@@ -15,12 +15,14 @@ import 'base_model.dart';
 abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
     extends State<W> {
   late M model;
+
   @override
   Widget build(BuildContext context) {
     return buildContent();
   }
 
   M _createModel() => locator<M>();
+
   @override
   void initState() {
     super.initState();
@@ -34,29 +36,35 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
     Widget content;
     content = Consumer<ThemeManager>(
       builder: (context, theme, child) {
-        return ChangeNotifierProvider<M>.value(
-          value: model,
-          builder: (context, child) {
-            return Consumer<M>(
-              builder: (context, model, child) {
-                if (Platform.isAndroid) {
-                  return PopScope(
-                    canPop: model.onWillPop,
-                    onPopInvoked: (didPop) {
-                      if (didPop) {
-                        return;
-                      }
-                      AppRouter.router.pop();
-                    },
-                    child: buildViewByState(context, model),
-                  );
-                }
-                return buildViewByState(context, model);
-              },
-            );
-          },
-        );
+        return child!;
       },
+      child: ChangeNotifierProvider<M>.value(
+        value: model,
+        builder: (context, child) {
+          return child!;
+        },
+        child: Consumer<M>(
+          builder: (context, model, child) {
+            Widget content = child!;
+
+            if (isNeedPopScopeOnTop && Platform.isAndroid) {
+              content = PopScope(
+                canPop: model.onWillPop,
+                onPopInvoked: (didPop) {
+                  if (didPop) {
+                    return;
+                  }
+                  AppRouter.router.pop();
+                },
+                child: content,
+              );
+            }
+
+            return content;
+          },
+          child: buildViewByState(context, model),
+        ),
+      ),
     );
     if (isNeedSafeAreaBuildContent) {
       return SafeArea(child: content);
@@ -121,6 +129,8 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
   FloatingActionButtonLocation? floatingActionButtonLocation;
 
   Widget? floatingActionButton;
+
+  bool isNeedPopScopeOnTop = true;
 
   @override
   void dispose() {
