@@ -28,6 +28,7 @@ abstract class BaseModel extends ChangeNotifier {
   BaseModel() {
     viewState = initState;
   }
+
   void initData() {
     user = locator<UserModel>().userInfo;
     updateProfileStream =
@@ -37,7 +38,7 @@ abstract class BaseModel extends ChangeNotifier {
     });
   }
 
-  setState(ViewState newState, {forceUpdate = false, dynamic error}) {
+  void setState(ViewState newState, {forceUpdate = false, dynamic error}) {
     if (viewState == newState && !forceUpdate) return;
     viewState = newState;
     if (viewState == ViewState.error && error != null) {}
@@ -48,8 +49,7 @@ abstract class BaseModel extends ChangeNotifier {
       return error.message;
     }
     if (error is DioException && error.response?.statusCode != 422) {
-      // return error.response?.data['message'].toString() ?? "";
-      return "";
+      return "${error.response?.data?['message'] ?? ""}";
     }
     return "unknown";
   }
