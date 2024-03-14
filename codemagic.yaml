@@ -20,8 +20,8 @@ workflows:
       - name: Configuration .env files
         script: |
           echo "BASE_URL=$BASE_URL" >> assets/env/.env
-          echo "BASE_URL=$BASE_URL_DEV" >> assets/env/.env.dev
-          echo "BASE_URL=$BASE_URL_STAG" >> assets/env/.env.staging
+#          echo "BASE_URL=$BASE_URL_DEV" >> assets/env/.env.dev
+#          echo "BASE_URL=$BASE_URL_STAG" >> assets/env/.env.staging
       - name: Get Flutter Packages
         script: |
           flutter clean
@@ -32,12 +32,12 @@ workflows:
       - name: Flutter build apk with flavors
         script: |
           flutter build apk -t lib/flavors/main_production.dart --flavor=prod --release --no-tree-shake-icons
-          flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
-          flutter build apk -t lib/flavors/main_staging.dart --flavor=staging --release --no-tree-shake-icons
+#          flutter build apk -t lib/flavors/main_development.dart --flavor=dev --release --no-tree-shake-icons
+#          flutter build apk -t lib/flavors/main_staging.dart --flavor=staging --release --no-tree-shake-icons
     artifacts:
-      - ./build/app/outputs/flutter-apk/app-dev-release.apk
       - ./build/app/outputs/flutter-apk/app-prod-release.apk
-      - ./build/app/outputs/flutter-apk/app-staging-release.apk
+#      - ./build/app/outputs/flutter-apk/app-dev-release.apk
+#      - ./build/app/outputs/flutter-apk/app-staging-release.apk
     publishing:
       email:
         recipients:
@@ -45,6 +45,7 @@ workflows:
           - gianghobagai@gmail.com
           - ntsinh.dev@gmail.com
           - Boigaming1411@gmail.com
+          - phuchlh.job@gmail.com
         notify:
           success: true
           failure: false
