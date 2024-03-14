@@ -44,6 +44,7 @@ class MainModel extends BaseModel {
   }
 
   DateTime? currentBackPressTime;
+
   Future<bool> doubleTapToExistApp() {
     DateTime now = DateTime.now();
     int requiredSeconds = 2;

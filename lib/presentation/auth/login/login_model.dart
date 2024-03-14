@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:dio/dio.dart';
 import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
@@ -74,74 +73,57 @@ class LoginModel extends BaseModel {
     return "";
   }
 
-  Future<void> onLogin() async {
-    try {
-      onWillPop = false;
-      EasyLoading.show(
-        status: currentContext.loc.loading,
-        maskType: EasyLoadingMaskType.black,
-      );
-      if (!_validate()) {
-        onWillPop = true;
-        EasyLoading.dismiss();
-        return;
-      }
-      final email = emailCtr.text;
-      final password = passwordCtr.text;
-      final result = await _repo.login(
-        postData: {
-          "email": email,
-          "password": password,
-        },
-      );
-      locator<UserModel>().onUpdateUserInfo(userInfo: result);
-      onWillPop = true;
-    } catch (e) {
-      if (e is DioException && e.response?.statusCode == 422) {
-        _handleValidateError(e);
-      } else {
-        showErrorException(e);
-      }
-
-      onWillPop = true;
-    } finally {
-      EasyLoading.dismiss();
-    }
+  void onLogin() {
+    execute(
+      () async {
+        if (!_validate()) {
+          return;
+        }
+        final email = emailCtr.text;
+        final password = passwordCtr.text;
+        final result = await _repo.login(
+          postData: {
+            "email": email,
+            "password": password,
+          },
+        );
+        locator<UserModel>().onUpdateUserInfo(userInfo: result);
+      },
+      callBackValidator: (validator) {
+        setValueValidator(validator.email, emailValidatorCtr);
+        setValueValidator(validator.password, passwordValidatorCtr);
+      },
+    );
   }
 
-  Future<void> onLoginWithGoogle() async {
-    try {
-      onWillPop = false;
-      EasyLoading.show(
-        status: currentContext.loc.loading,
-        maskType: EasyLoadingMaskType.black,
-      );
-      final AuthGoogleProvider authProvider = AuthGoogleProvider();
-      final accountSignIn = await (authProvider.signIn());
-      if (accountSignIn == null) {
-        EasyLoading.showError(currentContext.loc.something_went_wrong);
-        return;
-      }
-      final authentication = await accountSignIn.authentication;
+  void onLoginWithGoogle() {
+    execute(
+      () async {
+        final AuthGoogleProvider authProvider = AuthGoogleProvider();
+        final accountSignIn = await (authProvider.signIn());
 
-      final result = await _repo.registerOrLoginSocial(
-        accessToken: authentication.accessToken ?? "",
-        registerType: RegisterSocialType.google.getTitle(),
-      );
+        if (accountSignIn == null) {
+          EasyLoading.showError(currentContext.loc.something_went_wrong);
+          return;
+        }
 
-      EasyLoading.dismiss();
-      locator<UserModel>().onUpdateUserInfo(userInfo: result);
-      onWillPop = true;
-    } catch (e) {
-      if (e is ApiException && e.code == 422) {
-        locator<AuthGoogleProvider>().logout();
-      }
-      EasyLoading.dismiss();
-      showErrorException(e);
-      onWillPop = true;
-    } finally {
-      EasyLoading.dismiss();
-    }
+        final authentication = await accountSignIn.authentication;
+
+        final result = await _repo.registerOrLoginSocial(
+          accessToken: authentication.accessToken ?? "",
+          registerType: RegisterSocialType.google.getTitle(),
+        );
+
+        locator<UserModel>().onUpdateUserInfo(userInfo: result);
+      },
+      customOnErrorFunction: (e) {
+        if (e is ApiException && e.code == 422) {
+          locator<AuthGoogleProvider>().logout();
+        } else {
+          showErrorException(e);
+        }
+      },
+    );
   }
 
   bool _validate() {
@@ -152,15 +134,6 @@ class LoginModel extends BaseModel {
       return false;
     }
     return true;
-  }
-
-  void _handleValidateError(DioException object) {
-    final validator = getValidatorFromDioException(object);
-    if (validator == null) {
-      return;
-    }
-    setValueValidator(validator.email, emailValidatorCtr);
-    setValueValidator(validator.password, passwordValidatorCtr);
   }
 
   @override

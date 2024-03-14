@@ -117,7 +117,7 @@ class _SettingPageState extends BaseState<SettingModel, SettingPage> {
             SizedBox(height: 24.w),
             _containerInput(
               context.loc.date_of_birth,
-              "1/2/1999",
+              model.user?.dateOfBirth ?? "",
             ),
             SizedBox(height: 54.w),
             _passwordAndChange(context, model),

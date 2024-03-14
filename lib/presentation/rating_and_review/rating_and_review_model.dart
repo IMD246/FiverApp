@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 import 'dart:io';
 import 'dart:isolate';
 
@@ -157,43 +156,39 @@ class RatingAndReviewModel extends BaseModel {
     _resetSendReview();
   }
 
-  Future<void> onRequestReview() async {
-    try {
-      final content = reviewCtr.text;
-      final rate = rateStar;
-      final images = imagesPicker.value;
-      Isolate? imagesIsolate;
-      final getImages = await IsolateUtil.isolateFunction(
-        actionFuture: () => MediaUtils. compressImages(images),
-        isolate: imagesIsolate,
-      ) as List<File>;
+  void onRequestReview() {
+    execute(
+      () async {
+        final content = reviewCtr.text;
+        final rate = rateStar;
+        final images = imagesPicker.value;
 
-      log("compressd images: ${getImages.length}");
+        Isolate? imagesIsolate;
 
-      Isolate? base64Isolate;
-      final base64Files = await IsolateUtil.isolateFunction(
-        actionFuture: () => MediaUtils.toBase64Strings(getImages),
-        isolate: base64Isolate,
-      ) as List<String>;
+        final getImages = await IsolateUtil.isolateFunction(
+          actionFuture: () => MediaUtils.compressImages(images),
+          isolate: imagesIsolate,
+        ) as List<File>;
 
-      log("toBase64 files: ${base64Files.length}");
-      log(content);
-      log(rate.toString());
+        Isolate? base64Isolate;
+        final base64Files = await IsolateUtil.isolateFunction(
+          actionFuture: () => MediaUtils.toBase64Strings(getImages),
+          isolate: base64Isolate,
+        ) as List<String>;
 
-      final res = await _reviewRepo.sendReview(
-        content: content,
-        rate: rate,
-        images: base64Files,
-      );
+        final res = await _reviewRepo.sendReview(
+          content: content,
+          rate: rate,
+          images: base64Files,
+        );
 
-      if (res) {
-        EasyLoading.showSuccess("Send review successfully!");
-      } else {
-        EasyLoading.showSuccess("Send review failed!");
-      }
-    } catch (e) {
-      showErrorException(e);
-    }
+        if (res) {
+          EasyLoading.showSuccess(currentContext.loc.send_review_success);
+        } else {
+          EasyLoading.showSuccess(currentContext.loc.send_review_fail);
+        }
+      },
+    );
   }
 
   void onRatingUpdate(double value) {
@@ -228,7 +223,9 @@ class RatingAndReviewModel extends BaseModel {
   void _onGallery(BuildContext context) async {
     final permission =
         await PermissionHandlerUtil.checkAndRequestPermissionPhoto();
+
     if (!permission) return;
+
     final filesResult = await PickerHelper.pickAssets(
       requestType: RequestType.image,
       context: context,
@@ -236,6 +233,7 @@ class RatingAndReviewModel extends BaseModel {
       maxSelect: 3,
       selectedAssetlist: imagesPicker.value,
     );
+
     if (filesResult != null) {
       setValueNotifier(imagesPicker, filesResult);
     }

@@ -44,19 +44,24 @@ class ResetPasswordModel extends BaseModel {
     if (token.isEmpty) {
       onMoveToLogin();
     }
-    try {
-      await _repo.verifyResetPasswordToken(token: token);
-    } catch (e) {
-      if (e is DioException) {
-        EasyLoading.showError(
-          currentContext.loc.verify_reset_password_token_error,
-          duration: const Duration(seconds: 2),
-        );
-      } else {
-        showErrorException(e);
-      }
-      onMoveToLogin();
-    }
+
+    execute(
+      () async {
+        await _repo.verifyResetPasswordToken(token: token);
+      },
+      needShowLoading: false,
+      customOnErrorFunction: (e) {
+        if (e is DioException) {
+          EasyLoading.showError(
+            currentContext.loc.verify_reset_password_token_error,
+            duration: const Duration(seconds: 2),
+          );
+        } else {
+          showErrorException(e);
+        }
+        onMoveToLogin();
+      },
+    );
   }
 
   Future<bool> onMoveToLogin() async {
@@ -70,35 +75,32 @@ class ResetPasswordModel extends BaseModel {
   }
 
   Future<void> onResetPassword() async {
-    try {
-      onWillPop = false;
-      EasyLoading.show(
-        status: currentContext.loc.loading,
-        maskType: EasyLoadingMaskType.black,
-      );
+    execute(
+      () async {
+        if (!_validate()) {
+          return;
+        }
+        final newPassword = newPasswordCtr.text;
 
-      if (!_validate()) {
-        onWillPop = true;
-        EasyLoading.dismiss();
-        return;
-      }
+        final result = await _repo.resetPassword(
+          token: token,
+          newPassword: newPassword,
+        );
 
-      final newPassword = newPasswordCtr.text;
-      await _repo.resetPassword(
-        token: token,
-        newPassword: newPassword,
-      );
-      EasyLoading.showSuccess(
-        currentContext.loc.reset_password_success_notification,
-        duration: const Duration(seconds: 1),
-      );
-      onMoveToLogin();
-      onWillPop = true;
-    } catch (e) {
-      showErrorException(e);
-      EasyLoading.dismiss();
-      onWillPop = true;
-    }
+        if (result) {
+          EasyLoading.showSuccess(
+            currentContext.loc.reset_password_success_notification,
+            duration: const Duration(seconds: 1),
+          );
+
+          onMoveToLogin();
+        } else {
+          EasyLoading.showError(
+            currentContext.loc.reset_password_failed_notification,
+          );
+        }
+      },
+    );
   }
 
   bool _validate() {

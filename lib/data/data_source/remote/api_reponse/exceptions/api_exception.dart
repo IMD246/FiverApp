@@ -20,12 +20,14 @@ class ValidatorModel {
   List<String> password = [];
   List<String> fullName = [];
   String oldPassword = "";
+  List<String> dateOfBirth = [];
 
   ValidatorModel({
     required this.email,
     required this.password,
     required this.fullName,
     required this.oldPassword,
+    required this.dateOfBirth,
   });
 
   ValidatorModel.fromMap(Map<String, dynamic> map) {
@@ -33,5 +35,6 @@ class ValidatorModel {
     password = List<String>.from(map['password'] ?? []);
     fullName = List<String>.from(map['full_name'] ?? []);
     oldPassword = map['old_password'] ?? "";
+    dateOfBirth = List<String>.from(map['date_of_birth'] ?? []);
   }
 }

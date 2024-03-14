@@ -52,7 +52,7 @@ class UserModel extends ChangeNotifier {
 
     initFirebaseCrashlytics();
 
-    locator<UserRepository>().init(isLogin());
+    locator<UserRepository>().init(isLogin(),accessToken);
 
     if (isLogin()) {
       appModel.changeRouterRedirect(RouterRedirect.main);

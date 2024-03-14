@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:dio/dio.dart';
 import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
@@ -33,6 +32,7 @@ class SettingModel extends BaseModel {
 
   void init() {
     fullNameCtr.text = user?.fullName ?? "";
+    dateOfBirthCtr.text = user?.dateOfBirth ?? "";
 
     oldPasswordCtr.listener(
       action: () => setValueNotifier(
@@ -114,91 +114,70 @@ class SettingModel extends BaseModel {
   }
 
   void onSavePassword() async {
-    if (!_canSavePassword()) return;
+    execute(
+      () async {
+        if (!_canSavePassword()) return;
 
-    onWillPop = false;
-
-    try {
-      EasyLoading.show(
-        status: currentContext.loc.loading,
-        maskType: EasyLoadingMaskType.black,
-      );
-
-      final result = await _userRepo.updatePassword(
-        oldPassword: oldPasswordCtr.text,
-        newPassword: newPasswordCtr.text,
-      );
-
-      if (result) {
-        EasyLoading.showSuccess(
-          currentContext.loc.password_update_success,
-          duration: const Duration(seconds: 1),
+        final result = await _userRepo.updatePassword(
+          oldPassword: oldPasswordCtr.text,
+          newPassword: newPasswordCtr.text,
         );
-        _userRepo.logout(isNeedCallApiLogout: true);
-      }
-    } catch (e) {
-      if (e is DioException && e.response?.statusCode == 422) {
-        _handleValidateError(e);
-      } else {
-        showErrorException(e);
-      }
-    } finally {
-      onWillPop = true;
-      EasyLoading.dismiss();
-    }
+
+        if (result) {
+          EasyLoading.showSuccess(
+            currentContext.loc.password_update_success,
+            duration: const Duration(seconds: 1),
+          );
+          _userRepo.logout(isNeedCallApiLogout: true);
+        }
+      },
+      callBackValidator: (validator) {
+        setValueValidator(
+          [validator.oldPassword],
+          validatorOldPassword,
+        );
+      },
+    );
   }
 
   void onSaveInfomation() async {
-    if (!_canSaveInfo()) return;
+    execute(
+      () async {
+        if (!_canSaveInfo()) return;
 
-    onWillPop = false;
+        final date = DateTimeUtils.parseFormatToDate(dateOfBirthCtr.text);
 
-    try {
-      EasyLoading.show(
-        status: currentContext.loc.loading,
-        maskType: EasyLoadingMaskType.black,
-      );
-
-      final date = DateTimeUtils.parseFormatToDate(dateOfBirthCtr.text);
-
-      final result = await _userRepo.updateProfile(
-        fullName: fullNameCtr.text,
-        dateOfBirth: date.millisecondsSinceEpoch,
-      );
+        final result = await _userRepo.updateProfile(
+          fullName: fullNameCtr.text,
+          dateOfBirth: date.millisecondsSinceEpoch,
+        );
 
         EasyLoading.showSuccess(
           currentContext.loc.infomation_update_success,
           duration: const Duration(seconds: 1),
         );
 
-      locator<UserModel>().onUpdateUserInfo(
-        userInfo: result,
-        isNotifyChange: false,
-      );
-
-    } catch (e) {
-      if (e is DioException && e.response?.statusCode == 422) {
-        _handleValidateError(e);
-      } else {
-        showErrorException(e);
-      }
-    } finally {
-      onWillPop = true;
-      EasyLoading.dismiss();
-    }
+        locator<UserModel>().onUpdateUserInfo(
+          userInfo: result,
+          isNotifyChange: false,
+        );
+      },
+      callBackValidator: (validator) {
+        setValueValidator(
+          validator.dateOfBirth,
+          validatorDateOfBirthCtr,
+        );
+        setValueValidator(
+          validator.fullName,
+          validatorFullNameCtr,
+        );
+      },
+    );
   }
 
   void onChangedDatePicker(DateTime? value) {
     if (value == null) return;
 
     dateOfBirthCtr.text = DateTimeUtils.setFormatDate(value);
-  }
-
-  void _handleValidateError(DioException object) {
-    final validator = getValidatorFromDioException(object);
-    if (validator == null) {
-      return;
-    }
-    setValueValidator([validator.oldPassword], validatorOldPassword);
   }
 }

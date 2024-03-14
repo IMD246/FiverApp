@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import '../../data/model/user_info_model.dart';
 
 abstract class UserRepository {
-  Future<void> init(bool isLogin);
+  Future<void> init(bool isLogin,String? accessToken);
   Future<bool> register({required Map<String, dynamic> postData});
   String getAccessToken();
   Future<void> setAccessToken({required String token});

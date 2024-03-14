@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:fiver/core/utils/collection_util.dart';
 // ignore: unused_import
 import 'package:share_plus/share_plus.dart';
 
@@ -23,8 +23,8 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   UserRepositoryImp(this._pref);
 
   @override
-  Future<void> init(bool isLogin) async {
-    if (isLogin) {
+  Future<void> init(bool isLogin, String? accessToken) async {
+    if (!isLogin && !accessToken.isNullOrEmpty) {
       getMe(isNotifyChange: true);
     }
   }
@@ -67,7 +67,7 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   @override
   Future<void> getMe({bool isNotifyChange = false}) async {
     final res = await get(USER_INFO);
-    final user = UserInfoModel.fromJson(res.data["user_info"]);
+    final user = UserInfoModel.fromJson(res.data);
     await _pref.saveUser(user);
     locator<UserModel>().onUpdateUserInfo(
       userInfo: user,
@@ -185,7 +185,7 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
       formData,
     );
 
-    final user = UserInfoModel.fromJson(res.data['user_info']);
+    final user = UserInfoModel.fromJson(res.data);
 
     await _pref.saveUser(user);
 

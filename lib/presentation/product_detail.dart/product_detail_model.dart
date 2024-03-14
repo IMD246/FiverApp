@@ -117,17 +117,13 @@ class ProductDetailModel extends BaseModel {
     if (!isScrollUp) {
       if (opacity.value > 0.05) {
         setValueNotifier(opacity, opacity.value -= 0.01);
-      }
-      else
-      {
+      } else {
         setValueNotifier(opacity, 0.05);
       }
     } else {
       if (opacity.value < 0.9) {
         setValueNotifier(opacity, opacity.value += 0.01);
-      }
-      else
-      {
+      } else {
         setValueNotifier(opacity, 1.0);
       }
     }
@@ -180,26 +176,27 @@ class ProductDetailModel extends BaseModel {
   void addToCart() {}
 
   void onShare(BuildContext context) async {
-    try {
-      final file = await MediaUtils.urlImageToFile(
-        url: images.first,
-      );
-      final uri = await createDynamicLink(
-        path: "/product-detail",
-        queryParameters: {
-          "id": id,
-          "name": name,
-        },
-      );
-      await Share.shareXFiles(
-        [
-          XFile(file.path),
-        ],
-        text: "${uri.toString()} \n $name",
-      );
-    } catch (e) {
-      showErrorException(e);
-    }
+    execute(
+      () async {
+        final file = await MediaUtils.urlImageToFile(
+          url: images.first,
+        );
+        final uri = await createDynamicLink(
+          path: "/product-detail",
+          queryParameters: {
+            "id": id,
+            "name": name,
+          },
+        );
+        await Share.shareXFiles(
+          [
+            XFile(file.path),
+          ],
+          text: "${uri.toString()} \n $name",
+        );
+      },
+      needShowLoading: false,
+    );
   }
 
   bool onBack(bool didPop) {

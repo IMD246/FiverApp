@@ -17,7 +17,7 @@
             }
         }
     },
-    "field_required" : "{field} is required",
+    "field_required": "{field} is required",
     "@field_required": {
         "placeholders": {
             "field": {
@@ -25,15 +25,15 @@
             }
         }
     },
-    "format_password_notice" : "The length of password must be at least 6 characters",
-    "format_email_notice" : "Not a valid email address. Should be your@email.com",
-    "format_name_notice" : "The length of name must be at least 2 characters",
-    "password" : "Password",
-    "forgot_your_password" : "Forgot password?",
-    "login" : "Login",
-    "send" : "Send",
-    "forgot_password" : "Forgot password",
-    "notice_forgot_password" : "Please, enter your email address. You will receive a link to create a new password via email.",
+    "format_password_notice": "The length of password must be at least 6 characters",
+    "format_email_notice": "Not a valid email address. Should be your@email.com",
+    "format_name_notice": "The length of name must be at least 2 characters",
+    "password": "Password",
+    "forgot_your_password": "Forgot password?",
+    "login": "Login",
+    "send": "Send",
+    "forgot_password": "Forgot password",
+    "notice_forgot_password": "Please, enter your email address. You will receive a link to create a new password via email.",
     "email_forgot_password_notifcation": "Check your email: {email} for reset password!",
     "@email_forgot_password_notifcation": {
         "placeholders": {
@@ -44,11 +44,11 @@
     },
     "change_password": "Change Password",
     "reset_password": "Reset Password",
-    "reset_password_success_notification" : "Reset password successfully!",
-    "confirm_password_validation" : "Confirm password must be matches with the password",
-    "verify_reset_password_token_error" : "Your token was expired, try make new one!",
-    "new_password" : "New password",
-    "confirm_password" : "Confirm password",
+    "reset_password_success_notification": "Reset password successfully!",
+    "confirm_password_validation": "Confirm password must be matches with the password",
+    "verify_reset_password_token_error": "Your token was expired, try make new one!",
+    "new_password": "New password",
+    "confirm_password": "Confirm password",
     "home": "Home",
     "shop": "Shop",
     "bag": "Bag",
@@ -57,36 +57,36 @@
     "sale": "Sale",
     "view_all": "View all",
     "new_title": "New",
-    "tap_again_to_exit" : "Tap again to exit",
-    "no_data" : "No data",
+    "tap_again_to_exit": "Tap again to exit",
+    "no_data": "No data",
     "category": "Category",
     "categories": "Categories",
-    "filter" : "Filter",
+    "filter": "Filter",
     "sort_by": "Sort by",
     "filters": "Filters",
     "price_range": "Price range",
     "colors": "Colors",
     "sizes": "Sizes",
     "brand": "Brand",
-    "discard" : "Discard",
-    "apply" : "Apply",
-    "search" : "Search",
-    "no_brands_selected" : "No brands selected",
-    "searching" : "Searching...",
-    "there_is_no_data_matched" : "There is no data matched",
-    "rating_and_reviews_title" : "Rating&Reviews",
-    "rating_and_reviews" : "Rating and reviews",
-    "write_a_review":"Write a review",
-    "ratings" : "ratings",
-    "reviews" : "reviews",
-    "with_photo" : "With photo",
-    "helpful" : "Helpful",
-    "what_is_your_rate" : "What is your rate?",
-    "please_share_your_opinion_about_the_product" : "Please share your opinion about the product",
-    "your_review" : "Your review",
-    "add_your_photos" : "Add your photos",
-    "send_review" : "Send review",
-    "permission_message" :"You are not allowed to {permission} access!",
+    "discard": "Discard",
+    "apply": "Apply",
+    "search": "Search",
+    "no_brands_selected": "No brands selected",
+    "searching": "Searching...",
+    "there_is_no_data_matched": "There is no data matched",
+    "rating_and_reviews_title": "Rating&Reviews",
+    "rating_and_reviews": "Rating and reviews",
+    "write_a_review": "Write a review",
+    "ratings": "ratings",
+    "reviews": "reviews",
+    "with_photo": "With photo",
+    "helpful": "Helpful",
+    "what_is_your_rate": "What is your rate?",
+    "please_share_your_opinion_about_the_product": "Please share your opinion about the product",
+    "your_review": "Your review",
+    "add_your_photos": "Add your photos",
+    "send_review": "Send review",
+    "permission_message": "You are not allowed to {permission} access!",
     "@permission_message": {
         "placeholders": {
             "permission": {
@@ -95,48 +95,48 @@
         }
     },
     "to_settings": "To settings",
-    "camera" : "Camera",
-    "gallery" : "Galerry",
-    "no_review":"There is no review!",
+    "camera": "Camera",
+    "gallery": "Galerry",
+    "no_review": "There is no review!",
     "only_select_3_images": "(Only select 3 images)",
-    "you_can_also_like_this" : "You can also like this",
-    "add_to_cart" : "Add to cart",
-    "items" : "Items",
-    "my_profile" : "My Profile",
-    "my_orders" : "My Orders",
-    "shipping_adresses" : "Shipping adresses",
-    "subtitle_shipping_addresses" : "{address} addresses",
-      "@subtitle_shipping_addresses": {
+    "you_can_also_like_this": "You can also like this",
+    "add_to_cart": "Add to cart",
+    "items": "Items",
+    "my_profile": "My Profile",
+    "my_orders": "My Orders",
+    "shipping_adresses": "Shipping adresses",
+    "subtitle_shipping_addresses": "{address} addresses",
+    "@subtitle_shipping_addresses": {
         "placeholders": {
             "address": {
                 "type": "int"
             }
         }
     },
-    "payment_methods" : "Payment methods",
-    "promocodes" : "Promocodes",
-    "my_reviews" : "My reviews",
-    "settings" : "Settings",
+    "payment_methods": "Payment methods",
+    "promocodes": "Promocodes",
+    "my_reviews": "My reviews",
+    "settings": "Settings",
     "subtitle_orders": "Already have {order} orders",
-     "@subtitle_orders": {
+    "@subtitle_orders": {
         "placeholders": {
             "order": {
                 "type": "int"
             }
         }
     },
-    "subtitle_promocodes" : "You have special promocodes",
-    "subtitle_my_reviews" : "Reviews for {review} items",
-     "@subtitle_my_reviews": {
+    "subtitle_promocodes": "You have special promocodes",
+    "subtitle_my_reviews": "Reviews for {review} items",
+    "@subtitle_my_reviews": {
         "placeholders": {
             "review": {
                 "type": "int"
             }
         }
     },
-    "subtitle_settings" : "Notifications, password",
-    "logout" : "Logout",
-    "error_size_file" : "Your file size must be lower or equal {mb}mb",
+    "subtitle_settings": "Notifications, password",
+    "logout": "Logout",
+    "error_size_file": "Your file size must be lower or equal {mb}mb",
     "@error_size_file": {
         "placeholders": {
             "mb": {
@@ -145,23 +145,27 @@
         }
     },
     "setting": "Setting",
-    "personal_infomation":"Personal Information",
-    "date_of_birth":"Date of Birth",
-    "change":"Change",
-    "notifications":"Notifications",
-    "sales":"Sales",
-    "new_arrivals":"New arrivals",
-    "delivery_status_changes":"Delivery status changes",
-    "full_name":"Full Name",
-    "password_change":"Password change",
-    "infomation_change":"Infomation change",
-    "old_password":"Old Password",
-    "repeat_new_password":"Repeat new password",
-    "save_password":"Save password",
+    "personal_infomation": "Personal Information",
+    "date_of_birth": "Date of Birth",
+    "change": "Change",
+    "notifications": "Notifications",
+    "sales": "Sales",
+    "new_arrivals": "New arrivals",
+    "delivery_status_changes": "Delivery status changes",
+    "full_name": "Full Name",
+    "password_change": "Password change",
+    "infomation_change": "Infomation change",
+    "old_password": "Old Password",
+    "repeat_new_password": "Repeat new password",
+    "save_password": "Save password",
     "password_update_success": "Password update successfully!",
-    "save_infomation" : "Save infomation",
-    "format_date_of_birth_notice" : "Your input is not valid. It should be example: 20/8/1945",
+    "save_infomation": "Save infomation",
+    "format_date_of_birth_notice": "Your input is not valid. It should be example: 20/8/1945",
     "infomation_update_success": "Infomation update successfully!",
-    "ok" : "OK",
-    "cancel" : "Cancel"
+    "ok": "OK",
+    "cancel": "Cancel",
+    "reset_password_failed_notification": "Reset password failed!",
+    "send_review_success" : "Send review successfully!",
+    "send_review_fail" : "Send review failed!",
+    "forgot_password_fail" : "Forgot password failed!"
 }

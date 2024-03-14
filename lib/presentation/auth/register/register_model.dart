@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:dio/dio.dart';
 import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/di/locator_service.dart';
@@ -53,77 +52,61 @@ class RegisterModel extends BaseModel {
   }
 
   Future<void> onRegister() async {
-    try {
-      onWillPop = false;
-      EasyLoading.show(
-        status: currentContext.loc.loading,
-        maskType: EasyLoadingMaskType.black,
-      );
+    execute(
+      () async {
+        if (!_validate()) {
+          return;
+        }
 
-      if (!_validate()) {
-        onWillPop = true;
-        EasyLoading.dismiss();
-        return;
-      }
+        final name = nameCtr.text;
+        final email = emailCtr.text;
+        final password = passwordCtr.text;
 
-      final name = nameCtr.text;
-      final email = emailCtr.text;
-      final password = passwordCtr.text;
+        final postData = RegisterInfoModel(
+          name: name,
+          email: email,
+          password: password,
+        ).toJson();
 
-      final postData = RegisterInfoModel(
-        name: name,
-        email: email,
-        password: password,
-      ).toJson();
-
-      final result = await _repo.register(
-        postData: postData,
-      );
-      if (result) {
-        _reset();
-        EasyLoading.showSuccess(
-          currentContext.loc.email_verification_notifcation(email),
-          duration: const Duration(seconds: 3),
+        final result = await _repo.register(
+          postData: postData,
         );
-      }
-      onWillPop = true;
-    } catch (e) {
-      if (e is DioException && e.response?.statusCode == 422) {
-        _handleValidateError(e);
-      } else {
-        showErrorException(e);
-      }
-      EasyLoading.dismiss();
-      onWillPop = true;
-    }
+        if (result) {
+          _reset();
+          EasyLoading.showSuccess(
+            currentContext.loc.email_verification_notifcation(email),
+            duration: const Duration(seconds: 3),
+          );
+        }
+      },
+      callBackValidator: (validator) {
+        setValueValidator(validator.email, emailValidatorCtr);
+        setValueValidator(validator.fullName, nameValidatorCtr);
+        setValueValidator(validator.password, passwordValidatorCtr);
+      },
+    );
   }
 
   Future<void> onRegisterWithGoogle() async {
-    try {
-      onWillPop = false;
-      EasyLoading.show(
-        status: currentContext.loc.loading,
-        maskType: EasyLoadingMaskType.black,
-      );
-      await _authGoogleProvider.logout();
-      final accountSignIn = await _authGoogleProvider.signIn();
-      if (accountSignIn == null) {
-        EasyLoading.showError(currentContext.loc.something_went_wrong);
-        return;
-      }
-      final authentication = await accountSignIn.authentication;
-      final result = await _repo.registerOrLoginSocial(
-        accessToken: authentication.accessToken ?? "",
-        registerType: RegisterSocialType.google.getTitle(),
-      );
-      locator<UserModel>().onUpdateUserInfo(userInfo: result);
-      onWillPop = true;
-      EasyLoading.dismiss();
-    } catch (e) {
-      EasyLoading.dismiss();
-      showErrorException(e);
-      onWillPop = true;
-    }
+    execute(
+      () async {
+        await _authGoogleProvider.logout();
+        final accountSignIn = await _authGoogleProvider.signIn();
+
+        if (accountSignIn == null) {
+          EasyLoading.showError(currentContext.loc.something_went_wrong);
+          return;
+        }
+
+        final authentication = await accountSignIn.authentication;
+        final result = await _repo.registerOrLoginSocial(
+          accessToken: authentication.accessToken ?? "",
+          registerType: RegisterSocialType.google.getTitle(),
+        );
+
+        locator<UserModel>().onUpdateUserInfo(userInfo: result);
+      },
+    );
   }
 
   bool _validate() {
@@ -142,16 +125,6 @@ class RegisterModel extends BaseModel {
     emailCtr.clear();
     nameCtr.clear();
     passwordCtr.clear();
-  }
-
-  void _handleValidateError(DioException object) {
-    final validator = getValidatorFromDioException(object);
-    if (validator == null) {
-      return;
-    }
-    setValueValidator(validator.email, emailValidatorCtr);
-    setValueValidator(validator.fullName, nameValidatorCtr);
-    setValueValidator(validator.password, passwordValidatorCtr);
   }
 
   @override

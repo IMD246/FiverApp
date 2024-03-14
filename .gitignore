@@ -871,4 +871,9 @@ Temporary Items
 .vscode/settings.json
 
 # FVM Version Cache
-.fvm/
+/.fvmrc
+
+# environment files
+.env
+.env.dev
+.env.staging
