@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:share_plus/share_plus.dart';
 
@@ -182,9 +183,11 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
       UPLOAD_AVATAR,
       formData,
     );
-    final user = InfoUserAccessTokenModel.fromJson(res.data);
+    debugPrint("res update avatar: ${res.data['user_info']}");
+    final user = UserInfoModel.fromJson(res.data);
+    debugPrint("res update avatar user: $user");
 
-    return user.userInfo!;
+    return user;
   }
 
   @override
