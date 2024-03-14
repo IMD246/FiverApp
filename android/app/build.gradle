@@ -1,5 +1,3 @@
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -109,33 +107,6 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 flutter {
     source '../..'
-    def flavourName = getCurrentFlavour()
-    if (flavourName == 'dev') {
-        target = 'lib/flavors/main_development.dart'
-    } else if (flavourName == 'staging') {
-        target = 'lib/flavors/main_staging.dart'
-    } else {
-        target = 'lib/flavors/main_production.dart'
-    }
-}
-
-def getCurrentFlavour() {
-    Gradle gradle = getGradle()
-    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
-    print(tskReqStr.toString())
-
-    Pattern pattern
-    if (tskReqStr.contains("assemble"))
-        pattern = Pattern.compile("assemble(\\w+)(Release|Staging|Debug)")
-    else
-        pattern = Pattern.compile("generate(\\w+)(Release|Staging|Debug)")
-    Matcher matcher = pattern.matcher(tskReqStr)
-    if (matcher.find()) {
-        def value = matcher.group(1).toLowerCase()
-        return value
-    } else {
-        return ""
-    }
 }
 
 dependencies {

@@ -84,7 +84,7 @@ class UserModel extends ChangeNotifier {
 
   Future<void> initFirebase() async {
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
+      options: DefaultFirebaseOptions.currentPlatform(environment),
     );
   }
 

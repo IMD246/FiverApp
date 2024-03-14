@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "458951462646-c1q8fibka120o284qj8qnhp6acmqf5b5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nicebuild.fiver",
+            "certificate_hash": "4819913d3338473b960d89f1fec9a312e4162848"
+          }
+        },
+        {
           "client_id": "458951462646-cccujjtpq4bjn86p7eg2o076m4ona2bk.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -71,6 +79,14 @@
           "android_info": {
             "package_name": "com.nicebuild.fiver.dev",
             "certificate_hash": "d8503aa82a53d300fffd5d6019a609a92d48016a"
+          }
+        },
+        {
+          "client_id": "458951462646-lppta1fp6ccjt70k23e7rglpd2mnd7ee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nicebuild.fiver.dev",
+            "certificate_hash": "4819913d3338473b960d89f1fec9a312e4162848"
           }
         },
         {
@@ -131,6 +147,14 @@
           "android_info": {
             "package_name": "com.nicebuild.fiver.stg",
             "certificate_hash": "f824a3e3569cfa20ef6334508a19a37fbe45eed6"
+          }
+        },
+        {
+          "client_id": "458951462646-vnavv8ql0l352711u3or4uq178pgu0ml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nicebuild.fiver.stg",
+            "certificate_hash": "4819913d3338473b960d89f1fec9a312e4162848"
           }
         },
         {
