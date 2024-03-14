@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:dio/dio.dart';
+import 'package:fiver/core/app/user_model.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/utils/date_utils.dart';
@@ -165,14 +166,16 @@ class SettingModel extends BaseModel {
         dateOfBirth: date.millisecondsSinceEpoch,
       );
 
-      if (result) {
         EasyLoading.showSuccess(
           currentContext.loc.infomation_update_success,
           duration: const Duration(seconds: 1),
         );
 
-        _userRepo.getMe();
-      }
+      locator<UserModel>().onUpdateUserInfo(
+        userInfo: result,
+        isNotifyChange: false,
+      );
+
     } catch (e) {
       if (e is DioException && e.response?.statusCode == 422) {
         _handleValidateError(e);

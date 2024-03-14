@@ -42,7 +42,6 @@ class ProfileModel extends BaseModel {
     );
 
     if (!userInfo.isNullOrEmpty) {
-      // _userRepository.getMe(isNotifyChange: false);
       locator<UserModel>().onUpdateUserInfo(
         userInfo: userInfo,
         isNotifyChange: false,

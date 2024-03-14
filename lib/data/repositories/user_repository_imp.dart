@@ -187,6 +187,8 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
 
     final user = UserInfoModel.fromJson(res.data['user_info']);
 
+    await _pref.saveUser(user);
+
     return user;
   }
 
@@ -207,7 +209,7 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   }
 
   @override
-  Future<bool> updateProfile({
+  Future<UserInfoModel> updateProfile({
     required String fullName,
     required int dateOfBirth,
   }) async {
@@ -219,7 +221,11 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
       },
     );
 
-    return res.success;
+    final userInfo = UserInfoModel.fromJson(res.data);
+
+    await _pref.saveUser(userInfo);
+
+    return userInfo;
   }
 
   @override
