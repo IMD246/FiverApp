@@ -7,7 +7,6 @@ import '../../data_source/local/preferences.dart';
 import '../../model/banner_model.dart';
 import '../../model/brand_model.dart';
 import '../../model/gender_model.dart';
-import '../../model/rating_model.dart';
 import '../../model/size_model.dart';
 import '../../model/sort_by_model.dart';
 
@@ -77,11 +76,5 @@ class LocalCommonRepository extends CommonRepository {
     required int pageSize,
   }) async {
     return [];
-  }
-
-  @override
-  Future<RatingModel> getRating() {
-    // TODO: implement getRating
-    throw UnimplementedError();
   }
 }

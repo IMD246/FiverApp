@@ -8,7 +8,6 @@ import 'package:fiver/core/utils/collection_util.dart';
 import 'package:fiver/data/model/banner_model.dart';
 import 'package:fiver/data/model/brand_model.dart';
 import 'package:fiver/data/model/gender_model.dart';
-import 'package:fiver/data/model/rating_model.dart';
 import 'package:fiver/data/model/size_model.dart';
 import 'package:fiver/data/model/sort_by_model.dart';
 import 'package:fiver/data/repositories/local/local_common_repository.dart';
@@ -219,26 +218,5 @@ class TestRemoteCommonRepository implements CommonRepository {
       }
     }
     return brandsFiltered;
-  }
-
-  @override
-  Future<RatingModel> getRating() async {
-    final rating = RatingModel(
-      percentRatings: 4.3,
-      ratings: 23,
-      starList: [
-        StarModel(starNumber: 5, starRating: 12),
-        StarModel(starNumber: 4, starRating: 5),
-        StarModel(starNumber: 3, starRating: 4),
-        StarModel(starNumber: 2, starRating: 2),
-        StarModel(starNumber: 1, starRating: 0),
-      ],
-    );
-
-    final toJsonData = jsonEncode(rating.toJson());
-
-    final convertedToRatingModel = RatingModel.fromJson(jsonDecode(toJsonData));
-
-    return convertedToRatingModel;
   }
 }

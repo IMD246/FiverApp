@@ -126,7 +126,7 @@ class _WriteReviewState extends State<WriteReview> {
         onRatingUpdate: widget.model.onRatingUpdate,
         maxRating: 5,
         minRating: 0,
-        allowHalfRating: true,
+        allowHalfRating: false,
         glow: false,
         initialRating: widget.model.rateStar,
         itemSize: 36.w,

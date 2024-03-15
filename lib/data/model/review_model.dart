@@ -1,47 +1,77 @@
-import 'package:uuidv6/uuidv6.dart';
+class ReviewProductModel {
+  int? id;
+  int? userId;
+  int? rating;
+  String? content;
+  int? productId;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  bool? isHelpful;
+  Author? author;
 
-class ReviewModel {
-  final String uid = uuidv6();
-  final String name;
-  final num rateStar;
-  final DateTime createdDate;
-  final String content;
-  final List<String> images;
-  bool isHelpful;
-  final String avatar;
-
-  ReviewModel({
-    required this.name,
-    required this.rateStar,
-    required this.createdDate,
-    required this.content,
-    required this.images,
-    required this.isHelpful,
-    required this.avatar,
+  ReviewProductModel({
+    this.id,
+    this.userId,
+    this.rating,
+    this.content,
+    this.productId,
+    this.createdAt,
+    this.updatedAt,
+    this.isHelpful,
+    this.author,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'uid': uid,
-      'name': name,
-      'rateStar': rateStar,
-      'createdDate': createdDate.millisecondsSinceEpoch,
-      'content': content,
-      'images': images,
-      'isHelpful': isHelpful,
-      'avatar': avatar,
-    };
+  ReviewProductModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'] ?? -1;
+    userId = json['user_id'] ?? -1;
+    rating = json['rating'] ?? 0;
+    content = json['content'] ?? "";
+    productId = json['product_id'] ?? -1;
+    createdAt = json['created_at'] != null ? DateTime.parse(json['created_at']) : null;
+    updatedAt = json['updated_at'] != null ? DateTime.parse(json['updated_at']) : null;
+    isHelpful = json['is_helpful'] ?? false;
+    if (json['user'] != null) {
+      author = Author.fromJson(json['user']);
+    } else {
+      author = null;
+    }
   }
 
-  factory ReviewModel.fromMap(Map<String, dynamic> map) {
-    return ReviewModel(
-      name: map['name'] ?? '',
-      rateStar: map['rateStar'] ?? 0,
-      createdDate: DateTime.fromMillisecondsSinceEpoch(map['createdDate']),
-      content: map['content'] ?? '',
-      images: List<String>.from(map['images']),
-      isHelpful: map['isHelpful'] ?? false,
-      avatar: map['avatar'] ?? '',
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['rating'] = rating;
+    data['content'] = content;
+    data['product_id'] = productId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['is_helpful'] = isHelpful;
+    if (author != null) {
+      data['user'] = author!.toJson();
+    }
+    return data;
+  }
+}
+
+class Author {
+  int? id;
+  String? fullName;
+  String? avatar;
+
+  Author({this.id, this.fullName, this.avatar});
+
+  Author.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    fullName = json['full_name'];
+    avatar = json['avatar'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['full_name'] = fullName;
+    data['avatar'] = avatar;
+    return data;
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
@@ -80,9 +82,14 @@ abstract class BaseSerivce {
       response.data,
       response.statusCode ?? 0,
     );
+
     switch (apiResponse.code) {
       case 200:
-        return DataResponse(apiResponse.data, code: apiResponse.code);
+        return DataResponse(
+          apiResponse.data,
+          code: apiResponse.code,
+          paginationModel: apiResponse.paginationModel,
+        );
       default:
         throw ApiException(
           code: apiResponse.code,

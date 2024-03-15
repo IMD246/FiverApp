@@ -1,5 +1,3 @@
-import '../model/rating_model.dart';
-
 import '../model/brand_model.dart';
 import 'package:flutter/material.dart';
 import '../../core/base/base_service.dart';
@@ -92,10 +90,5 @@ class CommonRepositoryImp extends BaseSerivce implements CommonRepository {
       page: page,
       pageSize: pageSize,
     );
-  }
-
-  @override
-  Future<RatingModel> getRating() async {
-    return await _remoteCommonRepository.getRating();
   }
 }

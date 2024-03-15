@@ -3,7 +3,6 @@ import 'dart:ui';
 import '../../../core/utils/collection_util.dart';
 
 import '../../../core/base/base_service.dart';
-import '../../model/rating_model.dart';
 
 import '../../../core/constant/constants.dart';
 import '../../../core/di/locator_service.dart';
@@ -165,22 +164,5 @@ class RemoteCommonRepository extends BaseSerivce implements CommonRepository {
       }
     }
     return brandsFiltered;
-  }
-
-  @override
-  Future<RatingModel> getRating() async {
-    final rating = RatingModel(
-      percentRatings: 4.3,
-      ratings: 23,
-      starList: [
-        StarModel(starNumber: 5, starRating: 12),
-        StarModel(starNumber: 4, starRating: 5),
-        StarModel(starNumber: 3, starRating: 4),
-        StarModel(starNumber: 2, starRating: 2),
-        StarModel(starNumber: 1, starRating: 0),
-      ],
-    );
-
-    return rating;
   }
 }
