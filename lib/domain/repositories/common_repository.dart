@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../data/model/banner_model.dart';
 import '../../data/model/brand_model.dart';
 import '../../data/model/gender_model.dart';
-import '../../data/model/rating_model.dart';
 import '../../data/model/size_model.dart';
 import '../../data/model/sort_by_model.dart';
 
@@ -27,6 +26,4 @@ abstract class CommonRepository {
     required int page,
     required int pageSize,
   });
-
-  Future<RatingModel> getRating();
 }

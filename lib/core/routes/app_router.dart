@@ -142,8 +142,8 @@ class AppRouter extends ChangeNotifier {
         path: ratingAndReviewPath,
         name: ratingAndReviewName,
         builder: (context, state) {
-          final String? productId = state.extra as String?;
-          return RatingAndReviewPage(productId: productId ?? "");
+          // final productId = state.extra as int?;
+          return const RatingAndReviewPage(productId: 1);
         },
       ),
       GoRoute(

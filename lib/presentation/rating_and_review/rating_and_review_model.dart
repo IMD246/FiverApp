@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:isolate';
 
@@ -8,9 +9,8 @@ import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/utils/media_util.dart';
 import 'package:fiver/core/utils/util.dart';
-import 'package:fiver/data/model/rating_model.dart';
+import 'package:fiver/data/model/rating_product_model.dart';
 import 'package:fiver/data/model/review_model.dart';
-import 'package:fiver/domain/repositories/common_repository.dart';
 import 'package:fiver/domain/repositories/review_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,23 +19,23 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:photo_manager/photo_manager.dart';
 
+import '../../core/constant/api_constants.dart';
 import '../../core/di/locator_service.dart';
 import '../../core/utils/isolate_util.dart';
 import '../../core/utils/permission_handler_util.dart';
 
 class RatingAndReviewModel extends BaseModel {
-  late final String productId;
-  final _commonRepo = locator<CommonRepository>();
+  late final int productId;
   final _reviewRepo = locator<ReviewRepository>();
 
   final ScrollController scrollController = ScrollController();
   final ScrollController reviewsScrollController = ScrollController();
 
-  ValueNotifier<RatingModel?> rating = ValueNotifier(null);
+  ValueNotifier<RatingProductModel?> ratingProduct = ValueNotifier(null);
 
-  ValueNotifier<List<ReviewModel>> reviews = ValueNotifier([]);
+  ValueNotifier<List<ReviewProductModel>> reviews = ValueNotifier([]);
 
-  final List<ReviewModel> _reviews = [];
+  final List<ReviewProductModel> _reviews = [];
 
   ValueNotifier<bool> isScrollToAppbar = ValueNotifier(false);
 
@@ -55,7 +55,11 @@ class RatingAndReviewModel extends BaseModel {
 
   ValueNotifier<bool> loadingReview = ValueNotifier(false);
 
-  void init(String productId) {
+  int? lastPage;
+
+  ValueNotifier<int?> totalReview = ValueNotifier(null);
+
+  void init(int productId) {
     this.productId = productId;
     scrollController.addListener(_handlerShowTitleAppbar);
     reviewsScrollController.addListener(_scrollReviewListener);
@@ -79,9 +83,14 @@ class RatingAndReviewModel extends BaseModel {
         _reviews.clear();
         page = 1;
       }
-      _reviews.addAll(await _reviewRepo.getReviews(page: page));
+
+      if (lastPage != null && page > lastPage!) {
+        return;
+      }
+
+      _reviews.addAll(await _onHandleGetReviews());
       page++;
-      setValueNotifier(reviews, _reviews);
+      setValueNotifier(reviews, [..._reviews]);
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
@@ -91,8 +100,25 @@ class RatingAndReviewModel extends BaseModel {
     if (isLoading) {
       setValueNotifier(loadingReview, false);
     }
-    notifyListeners();
     isLoadingMoreData = false;
+  }
+
+  Future<List<ReviewProductModel>> _onHandleGetReviews() async {
+    if(lastPage != null && page > lastPage!)
+    {
+        return [];
+    }
+    final pagedList = await _reviewRepo.getReviews(
+      productId: productId,
+      page: page,
+      limit: ApiConstant.PAGE_SIZE,
+      lastPage: lastPage ?? 10000,
+    );
+
+    lastPage = pagedList.paginationModel?.lastPage;
+    setValueNotifier(totalReview, pagedList.paginationModel?.total);
+
+    return pagedList.data;
   }
 
   Future<void> refresh() async {
@@ -117,8 +143,10 @@ class RatingAndReviewModel extends BaseModel {
 
   void _getRating() async {
     try {
-      final getRating = await _commonRepo.getRating();
-      setValueNotifier(rating, getRating);
+      final getRating = await _reviewRepo.getRatingReviews(
+        product_id: productId,
+      );
+      setValueNotifier(ratingProduct, getRating);
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
@@ -143,12 +171,13 @@ class RatingAndReviewModel extends BaseModel {
     setValueNotifier(withPhotoReview, value);
   }
 
-  Future<bool> onHelpful(String uid) async {
-    final review = _reviews.firstWhere((element) => element.uid == uid);
-    review.isHelpful = !review.isHelpful;
-    await _reviewRepo.sendHelpfulReview(isHelpful: review.isHelpful);
-    notifyListeners();
-    return review.isHelpful;
+  Future<bool> onHelpful(int id) async {
+    // final review = _reviews.firstWhere((element) => element.uid == uid);
+    // review.isHelpful = !review.isHelpful;
+    // await _reviewRepo.sendHelpfulReview(isHelpful: review.isHelpful);
+    // notifyListeners();
+    // return review.isHelpful;
+    return true;
   }
 
   void onSendReview() async {
@@ -203,7 +232,7 @@ class RatingAndReviewModel extends BaseModel {
     scrollController.dispose();
     reviewsScrollController.removeListener(_scrollReviewListener);
     reviewsScrollController.dispose();
-    rating.dispose();
+    ratingProduct.dispose();
     reviews.dispose();
     isScrollToAppbar.dispose();
     withPhotoReview.dispose();
@@ -211,6 +240,7 @@ class RatingAndReviewModel extends BaseModel {
     enableSendReview.dispose();
     imagesPicker.dispose();
     loadingReview.dispose();
+    totalReview.dispose();
     super.disposeModel();
   }
 

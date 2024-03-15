@@ -19,3 +19,5 @@ const String REGISTER_DEVICE_TOKEN = 'device';
 const String UPLOAD_AVATAR = '/user/update-avatar';
 const String UPDATE_PASSWORD = '/user/update-password';
 const String UPDATE_INFO = '/user/update-info';
+const String GET_PRODUCT_REVIEW = 'review/get-product-review';
+const String GET_PRODUCT_RATING = 'review/get-product-rating';

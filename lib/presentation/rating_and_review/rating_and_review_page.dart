@@ -12,7 +12,7 @@ import 'components/components.dart';
 
 class RatingAndReviewPage extends StatefulWidget {
   const RatingAndReviewPage({super.key, required this.productId});
-  final String productId;
+  final int productId;
   @override
   State<RatingAndReviewPage> createState() => _RatingAndReviewPageState();
 }
@@ -42,7 +42,8 @@ class _RatingAndReviewPageState
                       padding: EdgeInsets.fromLTRB(14.w, 14.w, 30.w, 14.w),
                       child: Rating(model: model),
                     ),
-                    ReviewList(model: model)
+                    ReviewList(model: model),
+                    SizedBox(height: 80.w),
                   ],
                 ),
               ),

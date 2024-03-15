@@ -172,9 +172,9 @@ class ReviewList extends StatelessWidget {
     );
   }
 
-  Widget _reviewItem(ReviewModel item, BuildContext context) {
+  Widget _reviewItem(ReviewProductModel item, BuildContext context) {
     return Stack(
-      key: ValueKey(item.uid),
+      key: ValueKey(item.id),
       clipBehavior: Clip.none,
       children: [
         Container(
@@ -199,7 +199,7 @@ class ReviewList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                item.name,
+                item.author?.fullName ?? "",
                 style: text14.bold.copyWith(
                   color: getColor().themeColor222222White,
                 ),
@@ -207,14 +207,14 @@ class ReviewList extends StatelessWidget {
               SizedBox(height: 8.w),
               _ratingAndDate(item),
               SizedBox(height: 11.w),
-              _content(item.content),
+              _content(item.content ?? ""),
               SizedBox(height: 20.w),
-              _reviewPhotos(item.images),
+              // _reviewPhotos(item.images),
               _helpful(context, item),
             ],
           ),
         ),
-        _avatar(item.avatar),
+        _avatar(item.author?.avatar ?? ""),
       ],
     );
   }
@@ -264,7 +264,7 @@ class ReviewList extends StatelessWidget {
     );
   }
 
-  Widget _ratingAndDate(ReviewModel item) {
+  Widget _ratingAndDate(ReviewProductModel item) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -276,12 +276,12 @@ class ReviewList extends StatelessWidget {
             );
           },
           ignoreGestures: true,
-          initialRating: item.rateStar.toDouble(),
+          initialRating: (item.rating ?? 0).toDouble(),
           itemSize: 14.w,
           onRatingUpdate: (value) {},
         ),
         Text(
-          item.createdDate.formatToDateString(type: 'MMMM dd, yyyy'),
+          item.createdAt != null ? item.createdAt!.formatToDateString(type: 'MMMM dd, yyyy') : "",
           style: text11.copyWith(
             color: getColor().themeColorGrey,
           ),
@@ -290,24 +290,24 @@ class ReviewList extends StatelessWidget {
     );
   }
 
-  Widget _helpful(BuildContext context, ReviewModel item) {
+  Widget _helpful(BuildContext context, ReviewProductModel item) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         GestureDetector(
-          onTap: () => model.onHelpful(item.uid),
+          onTap: () => model.onHelpful(item.id ?? -1),
           child: Text(
             context.loc.helpful,
             style: text11.copyWith(
-              color: item.isHelpful ? colordb3022 : getColor().themeColorGrey,
+              color: (item.isHelpful ?? false) ? colordb3022 : getColor().themeColorGrey,
             ),
           ),
         ),
         SizedBox(width: 3.w),
         LikeButton(
           size: 20.w,
-          onTap: (isLiked) => model.onHelpful(item.uid),
+          onTap: (isLiked) => model.onHelpful(item.id ?? -1),
           isLiked: item.isHelpful,
           likeBuilder: (bool isLiked) {
             return Icon(
@@ -357,10 +357,10 @@ class ReviewList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ValueListenableBuilder(
-                valueListenable: model.reviews,
-                builder: (context, reviews, child) {
+                valueListenable: model.totalReview,
+                builder: (context, totalReview, child) {
                   return Text(
-                    "${reviews.length} ${context.loc.reviews}",
+                    "$totalReview ${context.loc.reviews}",
                     style: text22.copyWith(
                       color: getColor().themeColor222222White,
                     ),

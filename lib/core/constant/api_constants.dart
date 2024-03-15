@@ -4,4 +4,6 @@ class ApiConstant {
   ApiConstant._();
 
   static int SIZE_IMAGE_REQUIRED = 10000000;
+
+  static int PAGE_SIZE = 20;
 }
