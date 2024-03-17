@@ -16,7 +16,9 @@ import 'components/components.dart';
 
 class BrandPage extends StatefulWidget {
   const BrandPage({super.key, required this.brands});
+
   final List<MBrand> brands;
+
   @override
   State<BrandPage> createState() => _BrandPageState();
 }
@@ -98,9 +100,7 @@ class _BrandPageState extends BaseListState<MBrand, BrandModel, BrandPage> {
       key: ValueKey(item.id),
       padding: EdgeInsets.only(bottom: 32.w),
       child: InkWell(
-        onTap: () {
-          model.updateBrand(item);
-        },
+        onTap: () => model.updateBrand(item),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -112,13 +112,16 @@ class _BrandPageState extends BaseListState<MBrand, BrandModel, BrandPage> {
                     : getColor().themeColor222222White,
               ),
             ),
-            CheckBoxWidget(
-              onChanged: (value) {
-                model.updateBrand(item);
+            ValueListenableBuilder(
+              valueListenable: model.brandsSelected,
+              builder: (context, _, child) {
+                return CheckBoxWidget(
+                  onChanged: (value) => model.updateBrand(item),
+                  value: model.checkMatchedBrand(item),
+                  activeColor: colorEF3651,
+                  checkColor: colorWhite,
+                );
               },
-              value: model.checkMatchedBrand(item),
-              activeColor: colorEF3651,
-              checkColor: colorWhite,
             ),
           ],
         ),

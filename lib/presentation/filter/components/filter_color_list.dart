@@ -9,18 +9,14 @@ import '../../../core/res/theme/theme_manager.dart';
 import '../filter_model.dart';
 import 'filter_container.dart';
 
-class FilterColorList extends StatefulWidget {
+class FilterColorList extends StatelessWidget {
   const FilterColorList({
     super.key,
     required this.model,
   });
+
   final FilterModel model;
 
-  @override
-  State<FilterColorList> createState() => _FilterColorListState();
-}
-
-class _FilterColorListState extends State<FilterColorList> {
   @override
   Widget build(BuildContext context) {
     return FilterContainer(
@@ -37,7 +33,7 @@ class _FilterColorListState extends State<FilterColorList> {
           SizedBox(
             height: 44.w,
             child: ValueListenableBuilder(
-              valueListenable: widget.model.colors,
+              valueListenable: model.colors,
               builder: (context, colors, child) {
                 if (colors.isEmpty) {
                   return _shimmerListColor();
@@ -48,11 +44,8 @@ class _FilterColorListState extends State<FilterColorList> {
                   itemBuilder: (context, index) {
                     final color = colors[index];
                     return GestureDetector(
-                      onTap: () {
-                        widget.model.updateColor(color);
-                        setState(() {});
-                      },
-                      child: _colorItem(color),
+                      onTap: () => model.updateColorsSelected(color),
+                      child: _colorItem(color, model),
                     );
                   },
                 );
@@ -95,21 +88,27 @@ class _FilterColorListState extends State<FilterColorList> {
     );
   }
 
-  Widget _colorItem(Color color) {
-    return Container(
-      key: ValueKey(color.value),
-      height: 44.w,
-      width: 44.w,
-      margin: EdgeInsets.only(right: 20.w),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: widget.model.checkMatchedColors(color)
-              ? getColor().themeColor222222White
-              : Colors.transparent,
-        ),
-      ),
-      alignment: Alignment.center,
+  Widget _colorItem(Color color, FilterModel model) {
+    return ValueListenableBuilder(
+      valueListenable: model.colorsSelected,
+      builder: (context, _, child) {
+        return Container(
+          key: ValueKey(color.value),
+          height: 44.w,
+          width: 44.w,
+          margin: EdgeInsets.only(right: 20.w),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: model.checkMatchedColors(color)
+                  ? getColor().themeColor222222White
+                  : Colors.transparent,
+            ),
+          ),
+          alignment: Alignment.center,
+          child: child!,
+        );
+      },
       child: Container(
         width: 36.w,
         height: 36.w,

@@ -112,6 +112,7 @@ class FilterModel extends BaseModel {
     } else {
       sizes.add(sizeId);
     }
+    setValueNotifier(sizesSelected, [...sizes]);
   }
 
   void _updateCategory(CategoryModel? category) {
@@ -137,14 +138,14 @@ class FilterModel extends BaseModel {
     }
   }
 
-  void updateColor(Color color) {
+  void updateColorsSelected(Color color) {
     final colors = colorsSelected.value;
     if (colors.any((element) => element == color)) {
       colorsSelected.value.remove(color);
     } else {
       colorsSelected.value.add(color);
     }
-    setValueNotifier(colorsSelected, colors);
+    setValueNotifier(colorsSelected, [...colors]);
   }
 
   void onBack({bool newUpdate = true}) {
@@ -201,11 +202,13 @@ class FilterModel extends BaseModel {
       AppRouter.brandPath,
       extra: brandsSelected.value,
     )
-        .then((value) {
-      if (value != null) {
-        _updateBrands(value as List<MBrand>);
-      }
-    });
+        .then(
+      (value) {
+        if (value != null) {
+          _updateBrands(value as List<MBrand>);
+        }
+      },
+    );
   }
 
   void clearAll() {

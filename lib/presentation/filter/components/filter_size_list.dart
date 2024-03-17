@@ -10,7 +10,7 @@ import '../../../data/model/size_model.dart';
 import '../filter_model.dart';
 import 'filter_container.dart';
 
-class FilterSizeList extends StatefulWidget {
+class FilterSizeList extends StatelessWidget {
   const FilterSizeList({
     super.key,
     required this.model,
@@ -18,11 +18,6 @@ class FilterSizeList extends StatefulWidget {
 
   final FilterModel model;
 
-  @override
-  State<FilterSizeList> createState() => _FilterSizeListState();
-}
-
-class _FilterSizeListState extends State<FilterSizeList> {
   @override
   Widget build(BuildContext context) {
     return FilterContainer(
@@ -39,7 +34,7 @@ class _FilterSizeListState extends State<FilterSizeList> {
           SizedBox(
             height: 40.w,
             child: ValueListenableBuilder(
-              valueListenable: widget.model.sizes,
+              valueListenable: model.sizes,
               builder: (context, sizes, child) {
                 if (sizes.isEmpty) {
                   return _shimmerSizeList();
@@ -50,11 +45,8 @@ class _FilterSizeListState extends State<FilterSizeList> {
                   itemBuilder: (context, index) {
                     final size = sizes[index];
                     return GestureDetector(
-                      onTap: () {
-                        widget.model.updateSize(size.id);
-                        setState(() {});
-                      },
-                      child: _sizeItem(size),
+                      onTap: () => model.updateSize(size.id),
+                      child: _sizeItem(size, model),
                     );
                   },
                 );
@@ -95,30 +87,38 @@ class _FilterSizeListState extends State<FilterSizeList> {
     );
   }
 
-  Widget _sizeItem(SizeModel size) {
-    return Container(
-      key: ValueKey(size.id),
-      width: 40.w,
-      height: 40.w,
-      margin: EdgeInsets.only(right: 16.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(
-          color: getColor().themeColorBlackWhite,
-        ),
-        color: widget.model.checkMatchedSizes(size.id)
-            ? colordb3022
-            : getColor().bgColorWhiteBlack,
-      ),
-      alignment: Alignment.center,
-      child: Text(
-        size.sizeName,
-        style: text14.medium.copyWith(
-          color: widget.model.checkMatchedSizes(size.id)
-              ? getColor().themeColorWhiteBlack
-              : getColor().themeColor222222White,
-        ),
-      ),
+  Widget _sizeItem(SizeModel size, FilterModel model) {
+    return ValueListenableBuilder(
+      valueListenable: model.sizesSelected,
+      builder: (context, _, child) {
+        return GestureDetector(
+          onTap: () => model.updateSize(size.id),
+          child: Container(
+            key: ValueKey(size.id),
+            width: 40.w,
+            height: 40.w,
+            margin: EdgeInsets.only(right: 16.w),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.r),
+              border: Border.all(
+                color: getColor().themeColorBlackWhite,
+              ),
+              color: model.checkMatchedSizes(size.id)
+                  ? colordb3022
+                  : getColor().bgColorWhiteBlack,
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              size.sizeName,
+              style: text14.medium.copyWith(
+                color: model.checkMatchedSizes(size.id)
+                    ? getColor().themeColorWhiteBlack
+                    : getColor().themeColor222222White,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

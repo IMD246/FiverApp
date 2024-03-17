@@ -47,8 +47,7 @@ class BrandModel extends BaseListModel<MBrand> {
     } else {
       brandsSelected.value.add(brand);
     }
-    setValueNotifier(brandsSelected, brands);
-    notifyListeners();
+    setValueNotifier(brandsSelected, [...brands]);
   }
 
   void onBack({bool newUpdate = true}) {
