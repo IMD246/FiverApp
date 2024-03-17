@@ -149,7 +149,7 @@ class SettingModel extends BaseModel {
 
         final result = await _userRepo.updateProfile(
           fullName: fullNameCtr.text,
-          dateOfBirth: date.millisecondsSinceEpoch,
+          dateOfBirth: DateTimeUtils.formatDateTimeToServer(date),
         );
 
         EasyLoading.showSuccess(

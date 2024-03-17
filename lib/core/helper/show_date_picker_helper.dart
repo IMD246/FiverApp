@@ -22,7 +22,7 @@ Future<DateTime?> commonShowDatePicker({
       return Theme(
         data: ThemeData.light().copyWith(
           colorScheme: ColorScheme.light(
-            primary: color2AA952,
+            primary: colorEF3651,
             onPrimary: colorWhite,
           ),
         ),

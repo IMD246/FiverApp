@@ -29,7 +29,7 @@ abstract class UserRepository {
   });
   Future<UserInfoModel> updateProfile({
     required String fullName,
-    required int dateOfBirth,
+    required String? dateOfBirth,
   });
   UserInfoModel? getUser();
 }

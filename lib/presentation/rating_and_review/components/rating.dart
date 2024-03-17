@@ -1,3 +1,5 @@
+import 'package:fiver/core/utils/number_util.dart';
+
 import '../../../core/extensions/ext_localization.dart';
 import '../../../data/model/rating_product_model.dart';
 import '../rating_and_review_model.dart';
@@ -81,7 +83,7 @@ class Rating extends StatelessWidget {
     return Column(
       children: [
         Text(
-          ratingProduct.totalRatingAvg.toString(),
+          NumberUtil.formatNumber((ratingProduct.totalRatingAvg ?? 0).toDouble()),
           style: text34.bold.copyWith(
             color: getColor().themeColor222222White,
           ),

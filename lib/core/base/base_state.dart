@@ -45,7 +45,7 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
         },
         child: Consumer<M>(
           builder: (context, model, child) {
-            Widget content = child!;
+            Widget content = buildViewByState(context, model);
 
             if (isNeedPopScopeOnTop && Platform.isAndroid) {
               content = PopScope(
@@ -62,7 +62,6 @@ abstract class BaseState<M extends BaseModel, W extends StatefulWidget>
 
             return content;
           },
-          child: buildViewByState(context, model),
         ),
       ),
     );

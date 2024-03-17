@@ -30,16 +30,24 @@ abstract class BaseListModel<T> extends BaseModel {
     }
     try {
       final data = await getData(params: params, isClear: isClear);
+
       if (isClear) items.clear();
+
       disableLoadMore = data == null || data.isEmpty;
+
       if (data?.isNotEmpty == true) {
         items.addAll(data!);
         page++;
       }
-      viewState = ViewState.loaded;
+
     } catch (e) {
+      debugPrint("error load data: $e");
+      viewState = ViewState.error;
+    }
+    finally {
       viewState = ViewState.loaded;
     }
+
     loadMoreValue.value = false;
     if (!isDisposed) notifyListeners();
     onModelReady();

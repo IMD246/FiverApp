@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fiver/data/data_source/remote/network/network_url.dart';
 import 'package:fiver/data/model/rating_product_model.dart';
 

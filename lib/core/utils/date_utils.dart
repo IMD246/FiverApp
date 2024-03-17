@@ -1,3 +1,7 @@
+import 'package:fiver/core/extensions/ext_datetime.dart';
+
+import '../constant/date_time_constants.dart';
+
 class DateTimeUtils {
   DateTimeUtils._();
 
@@ -14,5 +18,13 @@ class DateTimeUtils {
     final year = int.parse(splits[2]) ;
     
     return DateTime(year,month,day);
+  }
+
+  static String? formatDateTimeToServer(DateTime? dateTime){
+    if(dateTime == null){
+      return null;
+    }
+
+    return dateTime.formatToDateString(type: DateTimeConstants.DATE_FORMAT);
   }
 }

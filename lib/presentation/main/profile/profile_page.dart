@@ -76,23 +76,21 @@ class _ProfilePageState extends BaseState<ProfileModel, ProfilePage>
           clipBehavior: Clip.none,
           children: [
             SizedBox(
-                width: 64.w,
-                height: 64.w,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(64.r),
-                  child: model.user?.avatar != null
-                      ? Image.network(
-                          model.user?.avatar ?? "",
-                          cacheWidth: 64.w.toInt(),
-                          cacheHeight: 64.w.toInt(),
-                        )
-                      : Image.asset(
-                          DImages.defaultAvatar,
-                          fit: BoxFit.cover,
-                          width: 64.w,
-                          height: 64.w,
-                        ),
-                )),
+              width: 64.w,
+              height: 64.w,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(64.r),
+                child: model.user?.avatar != null
+                    ? Image.network(
+                        model.user?.avatar ?? "",
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        DImages.defaultAvatar,
+                        fit: BoxFit.cover,
+                      ),
+              ),
+            ),
             Positioned(
               bottom: 0,
               right: -6,

@@ -11,6 +11,7 @@ import '../../domain/repositories/product_repository.dart';
 class ViewAllProductsModel extends BaseListModel<ProductModel> {
   final _productRepo = locator<ProductRepository>();
   int typeProduct = 0;
+
   void init(TypeProduct typeProduct) {
     this.typeProduct = typeProduct.getValue();
   }

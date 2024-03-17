@@ -160,7 +160,7 @@
     "save_password": "Save password",
     "password_update_success": "Password update successfully!",
     "save_infomation": "Save infomation",
-    "format_date_of_birth_notice": "Your input is not valid. It should be example: 20/8/1945",
+    "format_date_of_birth_notice": "Your input is not valid. It should be example: 01/01/2000",
     "infomation_update_success": "Infomation update successfully!",
     "ok": "OK",
     "cancel": "Cancel",

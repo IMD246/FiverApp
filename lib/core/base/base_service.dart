@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
@@ -9,8 +7,11 @@ import '../../data/data_source/remote/api_reponse/exceptions/api_exception.dart'
 import 'rest_client.dart';
 
 abstract class BaseSerivce {
-  Future<dynamic> getWithCustomUrl(String customUrl, String path,
-      {Map<String, dynamic>? params}) async {
+  Future<dynamic> getWithCustomUrl(
+    String customUrl,
+    String path, {
+    Map<String, dynamic>? params,
+  }) async {
     final response = await RestClient.getDio(customUrl: customUrl).get(
       path,
       queryParameters: params,

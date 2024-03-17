@@ -22,6 +22,7 @@ abstract class BaseModel extends ChangeNotifier {
   ViewState? viewState;
 
   ViewState get initState => ViewState.loaded;
+
   bool isDisposed = false;
   bool onWillPop = true;
   UserInfoModel? user;

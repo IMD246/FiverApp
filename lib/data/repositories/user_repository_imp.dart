@@ -211,7 +211,7 @@ class UserRepositoryImp extends BaseSerivce implements UserRepository {
   @override
   Future<UserInfoModel> updateProfile({
     required String fullName,
-    required int dateOfBirth,
+    required String? dateOfBirth,
   }) async {
     final res = await post(
       UPDATE_INFO,

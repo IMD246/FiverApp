@@ -48,6 +48,10 @@ class MediaUtils {
         await MultipartFile.fromFile(
           files[i].path,
           filename: files[i].name,
+          contentType: MediaType(
+            'image',
+            getExtensionFile(files[i].path),
+          ),
         ),
       );
     }
@@ -154,8 +158,10 @@ class MediaUtils {
       final originalFile = (await originalImageFile.file)!;
       final originalSizeInBytes = await originalFile.readAsBytes();
       final List<int> finalCompressedImageData =
-          await FlutterImageCompress.compressWithList(originalSizeInBytes,
-              quality: _getQuality(originalSizeInBytes.length));
+          await FlutterImageCompress.compressWithList(
+        originalSizeInBytes,
+        quality: _getQuality(originalSizeInBytes.length),
+      );
       final pdfName =
           "${originalFile.path}.${originalFile.path.split(".").last}";
       File newFile = File(pdfName);
