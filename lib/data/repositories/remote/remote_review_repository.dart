@@ -8,8 +8,14 @@ import '../../../domain/repositories/review_repository.dart';
 
 class RemoteReviewRepository extends BaseSerivce implements ReviewRepository {
   @override
-  Future<bool> sendHelpfulReview({required bool isHelpful}) async {
-    return true;
+  Future<bool> sendHelpfulReview({required int reviewId}) async {
+    final res = await post(
+      REVIEW_HELPFUL,
+      data: {
+        'review_id': reviewId,
+      },
+    );
+    return res.data;
   }
 
   @override

@@ -171,12 +171,10 @@ class RatingAndReviewModel extends BaseModel {
   }
 
   Future<bool> onHelpful(int id) async {
-    // final review = _reviews.firstWhere((element) => element.uid == uid);
-    // review.isHelpful = !review.isHelpful;
-    // await _reviewRepo.sendHelpfulReview(isHelpful: review.isHelpful);
-    // notifyListeners();
-    // return review.isHelpful;
-    return true;
+    final review = _reviews.firstWhere((element) => element.id == id);
+    review.isHelpful = await _reviewRepo.sendHelpfulReview(reviewId: id);
+    setValueNotifier(reviews, [..._reviews]);
+    return review.isHelpful ?? false;
   }
 
   void onSendReview() async {

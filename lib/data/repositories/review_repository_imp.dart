@@ -29,8 +29,8 @@ class ReviewRepositoryImp extends BaseSerivce implements ReviewRepository {
   }
 
   @override
-  Future<bool> sendHelpfulReview({required bool isHelpful}) async {
-    return await _remoteReviewRepo.sendHelpfulReview(isHelpful: isHelpful);
+  Future<bool> sendHelpfulReview({required int reviewId}) async {
+    return await _remoteReviewRepo.sendHelpfulReview(reviewId: reviewId);
   }
 
   @override
