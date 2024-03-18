@@ -11,7 +11,9 @@ abstract class ReviewRepository {
     required int lastPage,
   });
 
-  Future<bool> sendHelpfulReview({required bool isHelpful});
+  Future<bool> sendHelpfulReview({
+    required int reviewId,
+  });
 
   Future<bool> sendReview({
     required String content,
