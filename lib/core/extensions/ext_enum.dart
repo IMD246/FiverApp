@@ -40,12 +40,12 @@ extension EnvironmentExtension on Environment {
   String getAppIOSId() {
     switch (this) {
       case Environment.dev:
-        return "1:458951462646:ios:640d291a084d0cd60de6d7";
+        return "1:458951462646:ios:df4569447896f3240de6d7";
       case Environment.staging:
-        return "1:458951462646:ios:640d291a084d0cd60de6d7";
+        return "1:458951462646:ios:df4569447896f3240de6d7";
       case Environment.prod:
       default:
-        return "1:458951462646:ios:640d291a084d0cd60de6d7";
+        return "1:458951462646:ios:df4569447896f3240de6d7";
     }
   }
 }

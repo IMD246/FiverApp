@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../data/model/user_info_model.dart';
 import '../config/env_config.dart';
 import '../utils/collection_util.dart';
@@ -41,12 +42,10 @@ class UserModel extends ChangeNotifier {
 
     this.accessToken = accessToken;
 
-    await Future.wait([
-      initFirebase(),
-      _initAPI(token: accessToken),
-    ]);
+    await initFirebase();
 
     await Future.wait([
+      _initAPI(token: accessToken),
       initDynamicLink(),
     ]);
 
@@ -86,6 +85,7 @@ class UserModel extends ChangeNotifier {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform(environment),
     );
+    await FirebaseMessaging.instance.setAutoInitEnabled(false);
   }
 
   bool isLogin() => userInfo != null && !accessToken.isNullOrEmpty;
