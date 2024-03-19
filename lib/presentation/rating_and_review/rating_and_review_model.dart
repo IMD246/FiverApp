@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
 import 'dart:io';
 import 'dart:isolate';
 
 import 'package:customize_picker/customize_picker.dart';
+import 'package:dio/dio.dart';
 import 'package:fiver/core/base/base_model.dart';
 import 'package:fiver/core/extensions/ext_localization.dart';
 import 'package:fiver/core/utils/media_util.dart';
@@ -103,9 +105,8 @@ class RatingAndReviewModel extends BaseModel {
   }
 
   Future<List<ReviewProductModel>> _onHandleGetReviews() async {
-    if(lastPage != null && page > lastPage!)
-    {
-        return [];
+    if (lastPage != null && page > lastPage!) {
+      return [];
     }
     final pagedList = await _reviewRepo.getReviews(
       productId: productId,
@@ -179,14 +180,13 @@ class RatingAndReviewModel extends BaseModel {
 
   void onSendReview() async {
     onRequestReview();
-    _resetSendReview();
   }
 
   void onRequestReview() {
     execute(
-      () async {
+      needShowLoading: false,
+          () async {
         final content = reviewCtr.text;
-        final rate = rateStar;
         final images = imagesPicker.value;
 
         Isolate? imagesIsolate;
@@ -196,23 +196,27 @@ class RatingAndReviewModel extends BaseModel {
           isolate: imagesIsolate,
         ) as List<File>;
 
-        Isolate? base64Isolate;
-        final base64Files = await IsolateUtil.isolateFunction(
-          actionFuture: () => MediaUtils.toBase64Strings(getImages),
-          isolate: base64Isolate,
-        ) as List<String>;
+        Isolate? formDataIsolate;
 
-        final res = await _reviewRepo.sendReview(
+        final multipartImages = await IsolateUtil.isolateFunction(
+          actionFuture: () => MediaUtils.settingMultipartFiles(
+             getImages
+          ),
+          isolate: formDataIsolate,
+        ) as List<MultipartFile>;
+
+        final result = await _reviewRepo.sendReview(
+          productId: productId,
           content: content,
-          rate: rate,
-          images: base64Files,
+          rating: rateStar.toInt(),
+          images: multipartImages,
         );
 
-        if (res) {
-          EasyLoading.showSuccess(currentContext.loc.send_review_success);
-        } else {
-          EasyLoading.showSuccess(currentContext.loc.send_review_fail);
-        }
+        _onAddReviewToTop(result);
+
+        EasyLoading.showSuccess(currentContext.loc.send_review_success);
+
+        _resetSendReview();
       },
     );
   }
@@ -249,7 +253,7 @@ class RatingAndReviewModel extends BaseModel {
 
   void _onGallery(BuildContext context) async {
     final permission =
-        await PermissionHandlerUtil.checkAndRequestPermissionPhoto();
+    await PermissionHandlerUtil.checkAndRequestPermissionPhoto();
 
     if (!permission) return;
 
@@ -259,11 +263,20 @@ class RatingAndReviewModel extends BaseModel {
       locale: currentContext.loc.localeName,
       maxSelect: 3,
       selectedAssetlist: imagesPicker.value,
-    );
+    ) as List<AssetEntity>;
 
-    if (filesResult != null) {
-      setValueNotifier(imagesPicker, filesResult);
+
+    for (final fileResult in filesResult) {
+      final file = await fileResult.file;
+      final checkFileIsInvalid = await MediaUtils.checkFileSizeIsInvalid(file);
+      if(checkFileIsInvalid)
+      {
+        EasyLoading.showError(currentContext.loc.error_size_file(10));
+        return;
+      }
     }
+
+    setValueNotifier(imagesPicker, filesResult);
   }
 
   void onDeleteFileItem(int index) {
@@ -282,6 +295,12 @@ class RatingAndReviewModel extends BaseModel {
     }
   }
 
+  void _onAddReviewToTop(ReviewProductModel review) {
+    _reviews.insert(0, review);
+    setValueNotifier(reviews, [..._reviews]);
+    setValueNotifier(totalReview, totalReview.value! + 1);
+    _getRating();
+  }
   void _resetSendReview() {
     setValueNotifier(imagesPicker, <AssetEntity>[]);
     reviewCtr.clear();

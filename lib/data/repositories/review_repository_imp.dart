@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:fiver/data/model/rating_product_model.dart';
 
 import '../../core/base/base_service.dart';
@@ -34,13 +35,18 @@ class ReviewRepositoryImp extends BaseSerivce implements ReviewRepository {
   }
 
   @override
-  Future<bool> sendReview({
+  Future<ReviewProductModel> sendReview({
+    required int productId,
     required String content,
-    required num rate,
-    required List<String> images,
+    required int rating,
+    required List<MultipartFile> images,
   }) async {
-    // TODO: implement sendReview
-    throw UnimplementedError();
+    return await _remoteReviewRepo.sendReview(
+      productId: productId,
+      content: content,
+      rating: rating,
+      images: images,
+    );
   }
 
   @override

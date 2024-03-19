@@ -43,10 +43,12 @@ abstract class BaseSerivce {
     String path, {
     data,
     bool enableCache = false,
+    Options? options,
   }) async {
     final response = await RestClient.getDio().post(
       path,
       data: data,
+      options: options,
     );
 
     return _handleResponse(response);

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -12,12 +13,24 @@ import 'package:photo_manager/photo_manager.dart';
 class MediaUtils {
   MediaUtils._();
 
-  static Future<bool> checkFileSizeIsInvalid(XFile file) async {
+  static Future<bool> checkXFileSizeIsInvalid(XFile file) async {
     final size = await file.readAsBytes();
 
     if (size.lengthInBytes > ApiConstant.SIZE_IMAGE_REQUIRED) {
       return true;
     }
+    return false;
+  }
+
+  static Future<bool> checkFileSizeIsInvalid(File? file) async {
+    if (file == null) return true;
+
+    final size = await file.length();
+
+    if (size > ApiConstant.SIZE_IMAGE_REQUIRED) {
+      return true;
+    }
+
     return false;
   }
 
@@ -39,7 +52,7 @@ class MediaUtils {
     );
   }
 
-  static Future<FormData> settingFormDataForMultipleImagesUpload(
+  static Future<FormData> settingFormDataForMultipleXImagesUpload(
     List<XFile> files,
   ) async {
     List<MultipartFile> multipartFileList = [];
@@ -57,13 +70,38 @@ class MediaUtils {
     }
     return FormData.fromMap(
       {
-        "files": multipartFileList,
+        "images": multipartFileList,
       },
     );
   }
 
+  static Future<List<MultipartFile>> settingMultipartFiles(
+    List<File> files,
+  ) async {
+    List<MultipartFile> multipartFileList = [];
+    for (int i = 0; i < files.length; i++) {
+      String fileName = getFileName(files[i].path);
+
+      multipartFileList.add(
+        await MultipartFile.fromFile(
+          files[i].path,
+          filename: fileName,
+          contentType: MediaType(
+            'image',
+            getExtensionFile(files[i].path),
+          ),
+        ),
+      );
+    }
+    return multipartFileList;
+  }
+
   static String getExtensionFile(String filePath) {
     return filePath.split(".").last;
+  }
+
+  static String getFileName(String filePath) {
+    return filePath.split("/").last;
   }
 
   static Future<File> urlImageToFile({required String url}) async {
@@ -162,8 +200,11 @@ class MediaUtils {
         originalSizeInBytes,
         quality: _getQuality(originalSizeInBytes.length),
       );
-      final pdfName =
-          "${originalFile.path}.${originalFile.path.split(".").last}";
+
+      final pdfName = "${originalFile.path}.${getExtensionFile(
+        originalFile.path,
+      )}";
+
       File newFile = File(pdfName);
       newFile.writeAsBytesSync(List<int>.from(finalCompressedImageData));
       return newFile;
