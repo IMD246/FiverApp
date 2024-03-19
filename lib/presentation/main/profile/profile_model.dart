@@ -26,7 +26,7 @@ class ProfileModel extends BaseModel {
 
     if (resultPicker == null) return;
 
-    if (await MediaUtils.checkFileSizeIsInvalid(resultPicker)) {
+    if (await MediaUtils.checkXFileSizeIsInvalid(resultPicker)) {
       EasyLoading.showError(
         currentContext.loc.error_size_file(10),
         duration: const Duration(seconds: 1),

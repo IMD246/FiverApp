@@ -71,6 +71,7 @@ class _WriteReviewState extends State<WriteReview> {
                 controller: widget.model.reviewCtr,
                 height: 154.w,
                 hintText: context.loc.your_review,
+                maxLength: 255,
                 radius: 4.r,
               ),
               SizedBox(

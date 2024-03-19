@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:fiver/data/model/rating_product_model.dart';
 
 import '../../data/model/paged_list_model.dart';
@@ -15,10 +16,11 @@ abstract class ReviewRepository {
     required int reviewId,
   });
 
-  Future<bool> sendReview({
+  Future<ReviewProductModel> sendReview({
+    required int productId,
     required String content,
-    required num rate,
-    required List<String> images,
+    required int rating,
+    required List<MultipartFile> images,
   });
 
   Future<RatingProductModel> getRatingReviews({

@@ -209,7 +209,7 @@ class ReviewList extends StatelessWidget {
               SizedBox(height: 11.w),
               _content(item.content ?? ""),
               SizedBox(height: 20.w),
-              // _reviewPhotos(item.images),
+              _reviewPhotos(item.images ?? []),
               _helpful(context, item),
             ],
           ),

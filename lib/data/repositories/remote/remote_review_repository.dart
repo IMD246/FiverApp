@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
+import 'package:fiver/core/utils/collection_util.dart';
 import 'package:fiver/data/data_source/remote/network/network_url.dart';
 import 'package:fiver/data/model/rating_product_model.dart';
 
@@ -19,13 +23,33 @@ class RemoteReviewRepository extends BaseSerivce implements ReviewRepository {
   }
 
   @override
-  Future<bool> sendReview({
+  Future<ReviewProductModel> sendReview({
+    required int productId,
     required String content,
-    required num rate,
-    required List<String> images,
+    required int rating,
+    required List<MultipartFile> images,
   }) async {
-    // TODO: implement sendReview
-    throw UnimplementedError();
+    final formData = FormData.fromMap({
+      'product_id': productId,
+      'rating': rating,
+    });
+
+    if (!content.isNullOrEmpty) {
+      formData.fields.add(MapEntry('content', content));
+    }
+
+    if (images.isNotEmpty) {
+      for (var element in images) {
+        formData.files.add(MapEntry('images', element));
+      }
+    }
+
+    final res = await post(
+      SEND_REVIEW,
+      data: formData,
+    );
+
+    return ReviewProductModel.fromJson(res.data);
   }
 
   @override

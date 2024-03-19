@@ -22,3 +22,4 @@ const String UPDATE_INFO = '/user/update-info';
 const String GET_PRODUCT_REVIEW = 'review/get-product-review';
 const String GET_PRODUCT_RATING = 'review/get-product-rating';
 const String REVIEW_HELPFUL = 'review/helpful-review';
+const String SEND_REVIEW = 'review/send-review';
