@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/utils/collection_util.dart';
-import '../../../core/extensions/ext_datetime.dart';
 import '../../../core/extensions/ext_localization.dart';
 import '../../../core/res/colors.dart';
 import '../../../core/res/theme/text_theme.dart';
@@ -281,7 +280,7 @@ class ReviewList extends StatelessWidget {
           onRatingUpdate: (value) {},
         ),
         Text(
-          item.createdAt != null ? item.createdAt!.formatToDateString(type: 'MMMM dd, yyyy') : "",
+          item.createdAt ?? "",
           style: text11.copyWith(
             color: getColor().themeColorGrey,
           ),

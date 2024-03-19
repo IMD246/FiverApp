@@ -6,8 +6,8 @@ class ReviewProductModel {
   int? rating;
   String? content;
   int? productId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  String? createdAt;
+  String? updatedAt;
   bool? isHelpful;
   Author? author;
   List<String>? images;
@@ -31,18 +31,16 @@ class ReviewProductModel {
     rating = json['rating'] ?? 0;
     content = json['content'] ?? "";
     productId = json['product_id'] ?? -1;
-    createdAt =
-        json['created_at'] != null ? DateTime.parse(json['created_at']) : null;
-    updatedAt =
-        json['updated_at'] != null ? DateTime.parse(json['updated_at']) : null;
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
     isHelpful = json['is_helpful'] ?? false;
     if (json['user'] != null) {
       author = Author.fromJson(json['user']);
     } else {
       author = null;
     }
-    if (json['final_images'] != null) {
-      images = json['final_images'].cast<String>();
+    if (json['images'] != null) {
+      images = json['images'].cast<String>();
     } else {
       images = [];
     }
@@ -74,7 +72,7 @@ class ReviewProductModel {
     if (author != null) {
       data['user'] = author!.toJson();
     }
-    data['final_images'] = images;
+    data['images'] = images;
     return data;
   }
 

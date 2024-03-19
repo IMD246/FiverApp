@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:fiver/core/utils/collection_util.dart';
@@ -38,11 +37,11 @@ class RemoteReviewRepository extends BaseSerivce implements ReviewRepository {
       formData.fields.add(MapEntry('content', content));
     }
 
-    if (images.isNotEmpty) {
-      for (var element in images) {
-        formData.files.add(MapEntry('images', element));
-      }
-    }
+    formData.files.addAll(
+      images.map(
+        (image) => MapEntry('images[]', image),
+      ),
+    );
 
     final res = await post(
       SEND_REVIEW,
